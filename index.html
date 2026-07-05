@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#312e81">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دفترچه نویسندگی</title>
+    <style>
+        /* --- اتمسفر رنگی جاندار، عمیق و با اصالت --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9; /* خاکستری-آبی بسیار محو و استاندار برای چشم */
+            color: #1e1b4b; /* متن اصلی بنفش-مشکی عمیق */
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        /* --- هدر اصلی با شکوه و دکمه خرید فیزیکی --- */
+        header {
+            background-color: #312e81; /* بنفش عمیق، جاندار و سلطنتی */
+            color: #ffffff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header-btns {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-pdf {
+            background-color: #10b981; /* سبز نعنایی تند و درخشان */
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .btn-pdf:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+        }
+
+        .btn-buy-book {
+            background-color: #f59e0b; /* کهربایی جاندار */
+            color: #ffffff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: inherit;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-buy-book:hover {
+            background-color: #d97706;
+            transform: translateY(-2px);
+        }
+
+        /* --- منوی افقی ناوبری (حل قطعی سرگیجه و آشفتگی ستونی) --- */
+        nav {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+
+        .nav-link {
+            background: none;
+            border: 2px solid transparent;
+            color: #4b5563;
+            padding: 12px 26px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #4f46e5;
+            background-color: #f3f4f6;
+        }
+
+        .nav-link.active {
+            background-color: #e0e7ff;
+            color: #4f46e5;
+            border-color: #4f46e5;
+        }
+
+        /* --- بوم محتوای متمرکز تک‌صفحه‌ای --- */
+        .main-wrapper {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .tab-content {
+            display: none; 
+            animation: fadeIn 0.35s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- کارت‌های لایه‌ها با نوار سبز نعنایی جاندار کناری --- */
+        .layer-card {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+            border-right: 6px solid #10b981; /* امضای سبز نعنایی زنده */
+        }
+
+        .layer-card h3 {
+            margin-top: 0;
+            margin-bottom: 22px;
+            color: #1e1b4b; /* تیترهای عمیق و خوانا */
+            font-size: 1.25rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        /* --- فیلدها، برچسب‌ها و زیرنویس‌های کمکی شفاف --- */
+        .field-group {
+            margin-bottom: 24px;
+        }
+
+        .field-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            font-size: 0.95rem;
+            color: #1e1b4b;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .sub-label {
+            display: block;
+            font-size: 0.82rem;
+            color: #6b7280; /* خاکستری ملایم برای راهنمایی بدون شلوغ کردن فضا */
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 95px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 14px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            background-color: #ffffff;
+            color: #0f172a;
+            box-sizing: border-box;
+            transition: all 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #4f46e5; 
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+        }
+
+        textarea::placeholder {
+            color: #94a3b8;
+            font-size: 0.88rem;
+            font-style: italic;
+        }
+
+        /* --- فوتر شاهکار و بزرگ پکیج آموزشی در پایین سایت --- */
+        footer {
+            background-color: #ffffff;
+            margin-top: 80px;
+            padding: 50px 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-shop-box {
+            width: 100%;
+            max-width: 750px;
+            text-align: center;
+            padding: 35px;
+            border: 2px dashed #10b981;
+            border-radius: 16px;
+            background-color: #f4fbf7;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.05);
+        }
+
+        .footer-shop-box h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #312e81;
+            margin-bottom: 12px;
+        }
+
+        .footer-shop-box p {
+            font-size: 0.95rem;
+            color: #4b5563;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .btn-shop-download {
+            background-color: #4338ca;
+            color: #ffffff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2);
+        }
+
+        .btn-shop-download:hover {
+            background-color: #3730a3;
+            transform: translateY(-2px);
+        }
+		/* --- تنظیمات اختصاصی برای خروجی PDF تمیز --- */
+    @media print {
+        header, nav, footer, .btn-pdf, .btn-buy-book {
+            display: none !important;
+        }
+        .tab-content {
+            display: block !important;
+            break-inside: avoid;
+            margin-bottom: 20px;
+        }
+        body {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .layer-card {
+            box-shadow: none;
+            border: 1px solid #e2e8f0;
+        }
+        textarea {
+            border: none;
+            overflow: visible;
+        }
+    }
+    </style>
+</head>
+<body>
+   <header>
+    <h1>دفترچه استودیو نویسندگی</h1>
+    <div class="header-btns">
+        <a href="https://t.me/fatemehamiri1381" target="_blank" class="btn-buy-book">🛒 خرید نسخه فیزیکی دفترچه</a>
+  <button class="btn-pdf" onclick="printAllContent()">📥 خروجی PDF کامل</button>
+    </div>
+</header>
+
+    <nav>
+        <button class="nav-link active" onclick="openTab(event, 'tab-chars')">👤 ۱. شخصیت‌ها</button>
+        <button class="nav-link" onclick="openTab(event, 'tab-world')">🌍 ۲. جهان‌سازی</button>
+        <button class="nav-link" onclick="openTab(event, 'tab-story')">📖 ۳. داستان و ماجرا</button>
+        <button class="nav-link" onclick="openTab(event, 'tab-time')">⏳ ۴. زمان و ریتم</button>
+        <button class="nav-link" onclick="openTab(event, 'tab-hub')">🎬 ۵. پشت صحنه اثر</button>
+    </nav>
+
+    <div class="main-wrapper">
+
+        <div id="tab-chars" class="tab-content active">
+            <div class="layer-card">
+                <h3>لایه اول: شناسنامه و اطرافیان</h3>
+                <div class="field-group">
+                    <label>نام و سن شخصیت</label>
+                    <textarea id="char-name-age" placeholder="مثلاً: آراد، ۲۸ ساله..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>نقش در داستان</label>
+                    <textarea id="char-role" placeholder="مثلاً: قهرمان پنهان‌کار، یا ضدقهرمانی که فکر می‌کند کارش درست است..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>خانواده و اطرافیان</label>
+                    <textarea id="char-family" placeholder="چه کسانی دور او هستند؟ روابط نزدیک یا بارهای عاطفی به‌جا مانده از خانواده..."></textarea>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <h3>لایه دوم: پوست، ظاهر و فیزیک رفتاری</h3>
+                <div class="field-group">
+                    <label>ظاهر، زخم‌ها و تتوها</label>
+                    <span class="sub-label">فرم اعضای بدن، لنگ زدن، نشانه‌های متمایز ظاهری یا جسمانی که هویتش را می‌سازند.</span>
+                    <textarea id="char-appearance" placeholder="مثلاً: یک جای زخم عمیق روی مچ دست چپ که همیشه با آستین می‌پوشاند..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>تیک‌های رفتاری، تکیه‌کلام‌ها و زبانِ بدن</label>
+                    <span class="sub-label">موقع پنهان کردن یک راز، یا افتادن در تنگنای دروغ، فیزیکِ کلام یا بدنش چه تغییری می‌کند؟</span>
+                    <textarea id="char-habits" placeholder="مثلاً: بازی کردن با دکمه پیراهن موقع دروغ گفتن؛ یا گزنده و تند شدن ناگهانی کلماتش..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>لحن، لهجه یا امضای کلامی</label>
+                    <textarea id="char-tone" placeholder="آیا خونسرد و کش‌دار صحبت می‌کند یا کلمات را بریده و تهاجمی پرتاب می‌کند؟"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>علایق و سرگرمی‌ها</label>
+                    <span class="sub-label">کتاب، فیلم، آهنگ، سبک لباس پوشیدن، حیوان موردعلاقه یا نحوه گذران خلوت شخصیت.</span>
+                    <textarea id="char-interests" placeholder="مثلاً: گوش دادن به قطعات کلاسیک کلاوین در اتاق تاریک..."></textarea>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <h3>لایه سوم: روح، باطن و اتاق تاریک روانشناسی</h3>
+                <div class="field-group">
+                    <label>هدف، ضعف اصلی و فوبیاها</label>
+                    <textarea id="char-goals-fears" placeholder="شخصیت از چه چیزی فرار می‌کند و حاضر است برای رسیدن به چه چیزی همه‌چیز را فدا کند؟"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>نقاب اجتماعی در برابر باطنِ عریان</label>
+                    <span class="sub-label">در حضور ناظران و جامعه چه تصویری از خود نشان می‌دهد و وقتی تنهاست چه آشفته‌بازاری است؟</span>
+                    <textarea id="char-mask" placeholder="مثلاً: در محیط کار یک مدیر خونسرد و منطقی است، اما در خلوتش با جنون و بی‌معنایی دست‌وپنجه نرم می‌کند..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>بزرگ‌ترین تناقض شخصیت</label>
+                    <span class="sub-label">جایی که عقل و غریزه‌اش در تضاد مطلق قرار می‌گیرند و رفتار غیرمنتظره رقم می‌زنند.</span>
+                    <textarea id="char-contradiction" placeholder="مثلاً: در عین بی‌رحمی زیاد در کارش، مخفیانه تمام درآمداش را خرج درمان یک حیوان خیابانی می‌کند..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>راز پنهان، گذشته و ریشه رفتارها</label>
+                    <textarea id="char-secret" placeholder="چه اتفاقی در گذشته رخ داده که سپرهای دفاعی امروز او را شکل داده است؟"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>عقاید، فلسفه و دیدگاه شخصی به معنای زندگی</label>
+                    <textarea id="char-beliefs" placeholder="او با چه فرمول یا توجیه درونی دارد به دردهایش معنا می‌دهد و به زندگی می‌چسبد؟"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>دوراهی‌های اخلاقی و مرزهای فروپاشی</label>
+                    <span class="sub-label">در چه موقعیتی مجبور به انتخاب بین دو گزینه بد می‌شود؟ چه محرکی نقابش را کاملاً می‌شکند؟</span>
+                    <textarea id="char-dilemmas" placeholder="اگر مجبور شود بین نجات جان دوستش یا افشا نشدن رازش یکی را انتخاب کند، کجای داستان قفل می‌شود؟"></textarea>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <h3>لایه چهارم: شبکه روابط</h3>
+                <div class="field-group">
+                    <label>ارتباط با دیگر شخصیت‌ها و تغییرات آن</label>
+                    <span class="sub-label">وضعیت اولیه رابطه چه بوده، در طول رمان چطور تغییر می‌کند و دلیل این دگرگونی چیست؟</span>
+                    <textarea id="char-relations" placeholder="مثلاً: ابتدا دشمنی عمیق بر سر سوءتفاهم قدیمی، اما فصل ۶ تبدیل به یک اتحاد ناگزیر و گزنده می‌شود..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-world" class="tab-content">
+            <div class="layer-card">
+                <h3>لایه اول: جغرافیا و حواس پنج‌گانه دنیا</h3>
+                <div class="field-group">
+                    <label>مکان داستان و اتمسفر حسی جهان</label>
+                    <span class="sub-label">نورها، بوها، رنگ‌های غالب و صداهای تکرارشونده شهر یا محیط.</span>
+                    <textarea id="world-atmosphere" placeholder="مثلاً: شهری بارانی با دیوارهای دوده گرفته، بوی مداوم نم و نورهای نئونی خفه که اتمسفر را گزنده می‌کنند..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>جامعه، خرده‌روایت‌ها و خرافات آدم‌های شهر</label>
+                    <span class="sub-label">مردم عادی کوچه و بازار چه شایعات یا قصه‌های ترسناکی را بین خود زمزمه می‌کنند؟</span>
+                    <textarea id="world-society" placeholder="مثلاً: شایعه وجود تالارهای مخفی زیر پوست شهر که هیچ‌کس جرات ورود به آن‌ها را ندارد..."></textarea>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <h3>لایه دوم: زمان، امکانات و تاریخچه</h3>
+                <div class="field-group">
+                    <label>موقعیت زمانی و سطح تکنولوژی</label>
+                    <textarea id="world-tech" placeholder="تو آینده‌ایم؟ گذشته؟ یا دنیای امروز اما با ابزارها و تکنولوژی‌های خاص من‌درآوردی؟"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>تاریخچه مختصر و زخم‌های کهنه جهان</label>
+                    <span class="sub-label">چه جنگ، اتفاق یا قحطی بزرگی در گذشته این شهر رخ داده که هنوز اثرش روی در و دیوار و روحیه مردم مانده؟</span>
+                    <textarea id="world-history" placeholder="مثلاً: زلزله عظیمی که ده سال پیش نیمی از شهر را بلعید و حالا آن بخش متروکه به پناهگاه خلافکاران تبدیل شده..."></textarea>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <h3>لایه سوم: قوانین دنیا، سیاست و ماوراء</h3>
+                <div class="field-group">
+                    <label>قوانین ماورایی و جادویی</label>
+                    <span class="sub-label">چه چیزهایی در این جهان ممنوع، غیرممکن یا خطرناک است؟</span>
+                    <textarea id="world-magic" placeholder="مثلاً: استفاده از جادو بها دارد و تکه‌ای از حافظه نویسنده یا جادوگر را نابود می‌کند..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>سلسله‌مراتب قدرت، سیاست و اقتصاد</label>
+                    <span class="sub-label">چه کسی حکومت می‌کند؟ فقر و ثروت چطور در ظاهر شهر خودنمایی کرده و مردم چطور پول درمی‌آورند؟</span>
+                    <textarea id="world-politics" placeholder="کنترل شهر دست باندهای مخفی تکیه داده به ثروت‌های کلان است و پلیس فقط یک ناظر منفعل است..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>قوانین نانوشته خیابان‌ها (تابوهای اجتماعی)</label>
+                    <span class="sub-label">چه کارهایی قانوناً جرم نیست، اما اگر کسی انجامش دهد توسط جامعه طرد یا مجازات پنهان می‌شود؟</span>
+                    <textarea id="world-taboos" placeholder="مثلاً: نگاه کردن به چشمان ماموران ارشد در خیابان، نشانه‌ای از نافرمانی تلقی می‌شود..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-story" class="tab-content">
+            <div class="layer-card">
+                <h3>لایه اول: امضای خلاقانه و مهندسی حس</h3>
+                <div class="field-group">
+                    <label>ایده اصلی و ارزش متفاوت آن در یک جمله</label>
+                    <textarea id="story-core" placeholder="داستان درباره چیست و من چه تغییر خلاقانه‌ای در آن داده‌ام تا کلیشه‌ای نباشد؟"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>اتاق ضدکلیشه و ساختارشکنی</label>
+                    <span class="sub-label">کدام اسطوره‌ها، کهن‌الگوها یا باورهای رایج داستان‌نویسی را قرار است در این رمان نفی کنی و برعکس جلوه دهی؟</span>
+                    <textarea id="story-break-cliche" placeholder="مثلاً: برخلاف تمام فانتزی‌ها، پیشگوییِ نجات‌دهنده کاملاً دروغین است و قهرمان باید خودش بدون هیچ جادویی مسیر را بسازد..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>نمادها، نشانه‌ها و الهامات تکرارشونده در اتمسفر</label>
+                    <textarea id="story-symbols" placeholder="ساعت‌های جیبی خراب، آینه‌های شکسته، یا تکرار مداوم یک رنگ خاص در صحنه‌ها..."></textarea>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <h3>لایه دوم: صدای داستان و هدایت لحن</h3>
+                <div class="field-group">
+                    <label>راوی و زاویه دید داستان</label>
+                    <textarea id="story-narrator" placeholder="اول شخصِ گزنده، یا دانای کلِ خونسرد؟"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>نقشه هدایت لحن و اتمسفر کلام</label>
+                    <span class="sub-label">لحن و ضرب‌آهنگ کلمات در صحنه‌های اکشن، تعلیق یا فانتزی چطور مهندسی می‌شود؟ کجاها شاعرانه و کجاها تلخ است؟</span>
+                    <textarea id="story-tone-flow" placeholder="مثلاً: در صحنه‌های مواجهه با ترس، جملات به‌شدت کوتاه، مقطع و گزنده می‌شوند تا ریتم تند شود..."></textarea>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <h3>لایه سوم: انتخاب ساختار روایت</h3>
+                <div class="field-group">
+                    <label>ساختار کلاسیک ارسطویی یا ساختارهای غیرخطی مدرن</label>
+                    <textarea id="story-structure" placeholder="روایت خطی است یا مثل پازل تکه‌های آن جابه‌جا پرتاب می‌شوند؟"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>شوک‌های اصلی و نقاط عطف داستان</label>
+                    <span class="sub-label">اتفاقات ناگهانی بزرگی که مسیر حرکت شخصیت و پیش‌بینی مخاطب را کاملاً عوض می‌کنند.</span>
+                    <textarea id="story-shocks" placeholder="مثلاً: در اواسط داستان مشخص می‌شود راهنمایِ پیرِ شخصیت، تمام مدت برای دشمن کار می‌کرده است..."></textarea>
+                </div>
+            </div>
+
+            <div class="layer-card">
+                <h3>لایه چهارم: اتاق معما و گره‌افکنی (مخصوصِ به بازی گرفتن ذهن مخاطب)</h3>
+                <div class="field-group">
+                    <label>کاشته‌ها و برداشت‌ها</label>
+                    <span class="sub-label">چه راز یا سرنخی را کجا کاشتم و کجا قرار است فاش شود؟</span>
+                    <textarea id="story-setup-payoff" placeholder="مثلاً: در فصل ۲ فندکی قدیمی روی میز جا می‌ماند (کاشتن)، در فصل ۸ مشخص می‌شود فندک متعلق به قاتل بوده (برداشت)..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>چه سرنخ‌هایی به مخاطب می‌دهیم و چه بذرهایی در ذهنش می‌کاریم؟</label>
+                    <textarea id="story-clues" placeholder="نشانه‌های ریز پنهان در دیالوگ‌ها یا حرکات دست شخصیت‌ها..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>مهندسیِ فریبِ مخاطب (سوءتفاهم‌ها و ردگم‌کنی)</label>
+                    <span class="sub-label">چه سوءتفاهم‌هایی برای مخاطب می‌سازیم که ذهنش نتواند اصل ماجرا را حدس بزند؟</span>
+                    <textarea id="story-misdirection" placeholder="مثلاً: شواهد را طوری می‌چینیم که همه به برادر مقتول شک کنند، در حالی که او بی‌گناه است..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>چه معماهایی در طول مسیر پیش روی مخاطب و شخصیت‌ها قرار می‌گیرد؟</label>
+                    <textarea id="story-mysteries" placeholder="اتاق‌های قفل‌شده، نامه‌های بدون امضا، یا معماهای هویتی پنهان..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>مسیرها یا پایان‌های جایگزین و تغییرات داستان</label>
+                    <span class="sub-label">داستان می‌تواند چه چیزهایی را عوض کند، چه تغییراتی بدهد و چه مسیرهای دیگری برود؟</span>
+                    <textarea id="story-alternatives" placeholder="اگر در فصل آخر شخصیت تصمیم متفاوتی بگیرد، رمان به چه پایان تاریک یا روشنی ختم می‌شود؟"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-time" class="tab-content">
+            <div class="layer-card">
+                <h3>مهندسی زمان، ریتم و اتصالات</h3>
+                <div class="field-group">
+                    <label>نقشه زنجیره‌ای اتفاقات و رویدادهای موازی</label>
+                    <span class="sub-label">وقتی شخصیت اصلی در اتاقش معما حل می‌کند، دشمنش در آن سر شهر دارد چه بلایی سر نقشه‌ها می‌آورد؟</span>
+                    <textarea id="time-timeline" placeholder="خطوط رویداد موازی الف و ب که در انتهای فصل به هم تلاقی می‌کنند..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>شکست‌های زمانی، فلش‌بک‌ها و پویایی خط زمان</label>
+                    <span class="sub-label">زمان ایستاده در برابر زمان شتابان؛ کجاها نیاز به ذره‌بین روایت است و کجاها باید ماه‌ها را در یک خط پرتاب کرد؟</span>
+                    <textarea id="time-pacing" placeholder="مثلاً: صحنه تصادف در ۳ صفحه با جزئیات حسی کند روایت می‌شود، اما دوران نقاهتِ ۶ ماهه در یک جمله رد می‌شود..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>اتصالات اتفاقی (جرقه‌های اتصال صحنه)</label>
+                    <span class="sub-label">چطور پایان حسی یا کلامی یک صحنه، نمای شروع صحنه بعدی را می‌سازد تا متن پیوسته روان باشد؟</span>
+                    <textarea id="time-connections" placeholder="مثلاً: فصل اول با تصویر دود سیگار تمام می‌شود، فصل دوم با مه غلیظ خیابان شروع می‌شود..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-hub" class="tab-content">
+            <div class="layer-card">
+                <h3>کارگاه و پناهگاه خلاقیت نویسنده</h3>
+                <div class="field-group">
+                    <label>تخلیه احساسات و بارقه‌های ناگهانی (شعر سپید / دیالوگ‌های الهام‌شده)</label>
+                    <span class="sub-label">فضای آزاد و بدون قانون؛ هرچه همین حالا غریزی به ذهنت الهام شد را اینجا پرتاب کن تا افکارت تخلیه شوند.</span>
+                    <textarea id="hub-free-writing" style="min-height: 140px;" placeholder="بدون چارچوب بنویس... شعر، تک‌دیالوگ غریزی یا ایده‌های وحشی ناگهانی..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>محرک‌های حسی نویسنده (مود بورد کلامی و الهام‌بخش‌ها)</label>
+                    <span class="sub-label">چه آهنگ‌ها، قطعات موسیقی، فیلم‌ها یا کلماتی تو را در مود (Mood) اتمسفر این رمان نگه می‌دارند؟</span>
+                    <textarea id="hub-mood" placeholder="مثلاً: قطعه فلان موسیقی، تصاویر نقاشی‌های امپرسیونیستی تاریک..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>تحقیقات لازم و بانک اسامی پیشنهادی</label>
+                    <textarea id="hub-research" placeholder="نکات روانشناسی فوبیاها، اطلاعات فنی درباره سم‌ها یا لیست نام شخصیت‌ها..."></textarea>
+                </div>
+                <div class="field-group">
+                    <label>چک‌لیستِ مچ‌گیری از تناقضات داستان (سوتی‌گیر)</label>
+                    <span class="sub-label">حواست باشد چه چیزی را کجای داستان نوشته‌ای تا بعداً دچار سوتی‌های ساختاری نشوی.</span>
+                    <textarea id="hub-bugs" placeholder="مثلاً: حواست باشد دست راست آراد در فصل ۲ زخمی شد، در فصل ۴ با دست چپ شمشیر بازی کند!"></textarea>
+                </div>
+                <div class="field-group">
+                    <label>هدف‌گذاری روزانه و پیشرفت پروژه</label>
+                    <textarea id="hub-goals" placeholder="تعداد کلمات رمان، تعداد صفحات نوشته شده و اهداف هفتگی..."></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<footer>
+    <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 20px;">
+        
+        <div class="footer-shop-box" style="border: 2px dashed #10b981; padding: 20px; border-radius: 16px; background-color: #f9fafb; margin-bottom: 30px;">
+            <h3>💡 پکیج جامع آموزشی «چگونه بنویسیم؟» (نسخه کاملاً فصل‌بندی شده)</h3>
+            <p>راهنمای ارگانیک و کاربردی برای تسلط روی خلق تناقضات باطنی شخصیت‌ها، مهندسی اتاق معما و ساخت اتمسفرهای گزنده داستانی بدون اسارت در فرمول‌های خشک هندسی.</p>
+            <a href="https://t.me/fatemehamiri1381" target="_blank" class="btn-shop-download" style="text-decoration: none; display: inline-block;">دانلود پکیج آموزشی (نسخه کامل PDF)</a>
+        </div>
+
+        <div class="footer-credit" style="color: #4b5563; font-size: 0.9rem;">
+            <p style="margin: 5px 0;">سازنده: فاطمه قابلی امیری</p>
+            <p style="margin: 5px 0;">ارتباط با ما: <a href="mailto:Fatemehamiri801@gmail.com" style="color: #4338ca; text-decoration: none; font-weight: bold;">Fatemehamiri801@gmail.com</a></p>
+        </div>
+
+    </div>
+</footer>
+<script>
+    // ۱. سیستم سوئیچ تب‌ها
+    function openTab(evt, tabId) {
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+        evt.currentTarget.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ۲. حافظه خودکار هوشمند
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        const saved = localStorage.getItem(textarea.id);
+        if (saved) textarea.value = saved;
+
+        textarea.addEventListener('input', () => {
+            localStorage.setItem(textarea.id, textarea.value);
+        });
+    });
+
+    // ۳. تابع جدید برای پرینتِ کلِ محتوایِ تب‌ها
+    function printAllContent() {
+        const allTabs = document.querySelectorAll('.tab-content');
+        
+        // نمایش تمام تب‌ها برای لحظه پرینت
+        allTabs.forEach(tab => tab.style.display = 'block');
+        
+        // اجرای پرینت مرورگر
+        window.print();
+        
+        // بازگشت به حالت قبلی (مخفی کردن تب‌های غیرفعال)
+        allTabs.forEach(tab => tab.style.display = '');
+        // دوباره تبِ فعال را مشخص می‌کند
+        document.querySelector('.tab-content.active').style.display = 'block';
+    }
+
+    // ۴. امنیت (جلوگیری از کپی و راست‌کلیک)
+    document.oncontextmenu = () => false;
+    document.onkeydown = (e) => {
+        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false;
+    };
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+</body>
+</html>

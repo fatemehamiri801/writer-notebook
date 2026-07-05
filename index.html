@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دفترچه نویسندگی</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#312e81">
     <style>
         /* --- اتمسفر رنگی جاندار، عمیق و با اصالت --- */
         body {
@@ -252,34 +250,49 @@
             transition: all 0.2s;
             box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2);
         }
-
-        .btn-shop-download:hover {
+.btn-shop-download:hover {
             background-color: #3730a3;
             transform: translateY(-2px);
         }
-		/* --- تنظیمات اختصاصی برای خروجی PDF تمیز --- */
-    @media print {
-        header, nav, footer, .btn-pdf, .btn-buy-book {
-            display: none !important;
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+            }
+            .header-btns {
+                margin-top: 15px;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+            .btn-pdf, .btn-buy-book {
+                width: 100%;
+            }
+
+            nav {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 10px 5px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-link {
+                white-space: nowrap;
+                padding: 10px 15px;
+                font-size: 0.85rem;
+            }
+
+            .main-wrapper {
+                margin: 20px auto;
+                padding: 0 10px;
+            }
+            .layer-card {
+                padding: 20px;
+            }
         }
-        .tab-content {
-            display: block !important;
-            break-inside: avoid;
-            margin-bottom: 20px;
-        }
-        body {
-            background-color: #ffffff;
-            color: #000000;
-        }
-        .layer-card {
-            box-shadow: none;
-            border: 1px solid #e2e8f0;
-        }
-        textarea {
-            border: none;
-            overflow: visible;
-        }
-    }
+    </style>
     </style>
 </head>
 <body>
@@ -287,7 +300,7 @@
     <h1>دفترچه استودیو نویسندگی</h1>
     <div class="header-btns">
         <a href="https://t.me/fatemehamiri1381" target="_blank" class="btn-buy-book">🛒 خرید نسخه فیزیکی دفترچه</a>
-  <button class="btn-pdf" onclick="printAllContent()">📥 خروجی PDF کامل</button>
+        <button class="btn-pdf" onclick="window.print()">📥 خروجی PDF تمیز</button>
     </div>
 </header>
 
@@ -570,54 +583,33 @@
 
     </div>
 </footer>
-<script>
-    // ۱. پاکسازی کامل سرویس‌ورکرِ قدیمی (برای رفع مشکل عدم نمایش تغییرات)
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-            for (let registration of registrations) {
-                registration.unregister();
-            }
+
+    <script>
+        // سوئیچ تب‌ها
+        function openTab(evt, tabId) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+            
+            // اسکرول نرم به بالای صفحه فیلدها برای جلوگیری از خستگی چشم
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // حافظه خودکار هوشمند بدون قفل شدن ذهن
+        const textareas = document.querySelectorAll('textarea');
+        textareas.forEach(textarea => {
+            const saved = localStorage.getItem(textarea.id);
+            if (saved) textarea.value = saved;
+
+            textarea.addEventListener('input', () => {
+                localStorage.setItem(textarea.id, textarea.value);
+            });
         });
-    }
-
-    // ۲. سیستم سوئیچ تب‌ها
-    function openTab(evt, tabId) {
-        const tabContents = document.querySelectorAll('.tab-content');
-        tabContents.forEach(content => content.classList.remove('active'));
-
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => link.classList.remove('active'));
-
-        document.getElementById(tabId).classList.add('active');
-        evt.currentTarget.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ۳. حافظه خودکار هوشمند
-    const textareas = document.querySelectorAll('textarea');
-    textareas.forEach(textarea => {
-        const saved = localStorage.getItem(textarea.id);
-        if (saved) textarea.value = saved;
-
-        textarea.addEventListener('input', () => {
-            localStorage.setItem(textarea.id, textarea.value);
-        });
-    });
-
-    // ۴. تابع پرینت
-    function printAllContent() {
-        const allTabs = document.querySelectorAll('.tab-content');
-        allTabs.forEach(tab => tab.style.display = 'block');
-        window.print();
-        allTabs.forEach(tab => tab.style.display = '');
-        document.querySelector('.tab-content.active').style.display = 'block';
-    }
-
-    // ۵. امنیت
-    document.oncontextmenu = () => false;
-    document.onkeydown = (e) => {
-        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false;
-    };
-</script>
+    </script>
 </body>
 </html>

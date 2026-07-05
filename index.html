@@ -572,7 +572,16 @@
     </div>
 </footer>
 <script>
-    // ۱. سیستم سوئیچ تب‌ها
+    // ۱. پاکسازی کامل سرویس‌ورکرِ قدیمی (برای رفع مشکل عدم نمایش تغییرات)
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for (let registration of registrations) {
+                registration.unregister();
+            }
+        });
+    }
+
+    // ۲. سیستم سوئیچ تب‌ها
     function openTab(evt, tabId) {
         const tabContents = document.querySelectorAll('.tab-content');
         tabContents.forEach(content => content.classList.remove('active'));
@@ -585,7 +594,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ۲. حافظه خودکار هوشمند
+    // ۳. حافظه خودکار هوشمند
     const textareas = document.querySelectorAll('textarea');
     textareas.forEach(textarea => {
         const saved = localStorage.getItem(textarea.id);
@@ -596,32 +605,20 @@
         });
     });
 
-    // ۳. تابع جدید برای پرینتِ کلِ محتوایِ تب‌ها
+    // ۴. تابع پرینت
     function printAllContent() {
         const allTabs = document.querySelectorAll('.tab-content');
-        
-        // نمایش تمام تب‌ها برای لحظه پرینت
         allTabs.forEach(tab => tab.style.display = 'block');
-        
-        // اجرای پرینت مرورگر
         window.print();
-        
-        // بازگشت به حالت قبلی (مخفی کردن تب‌های غیرفعال)
         allTabs.forEach(tab => tab.style.display = '');
-        // دوباره تبِ فعال را مشخص می‌کند
         document.querySelector('.tab-content.active').style.display = 'block';
     }
 
-    // ۴. امنیت (جلوگیری از کپی و راست‌کلیک)
+    // ۵. امنیت
     document.oncontextmenu = () => false;
     document.onkeydown = (e) => {
         if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false;
     };
-</script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
 </script>
 </body>
 </html>

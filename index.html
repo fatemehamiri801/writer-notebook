@@ -73,7 +73,36 @@
             transform: translateY(-2px);
         }
 
-        /* --- منوی افقی ناوبری (حل قطعی سرگیجه و آشفتگی ستونی) --- */
+      /* --- استایل‌های اصلی --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f5f9;
+            color: #1e1b4b;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: #312e81;
+            color: #ffffff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header-btns { display: flex; gap: 15px; align-items: center; }
+
+        .btn-pdf, .btn-buy-book {
+            border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer;
+            font-weight: bold; transition: all 0.2s;
+        }
+        .btn-pdf { background-color: #10b981; color: #ffffff; }
+        .btn-buy-book { background-color: #f59e0b; color: #ffffff; text-decoration: none; }
+
+        /* --- منوی ناوبری اصلاح شده --- */
         nav {
             background-color: #ffffff;
             display: flex;
@@ -87,27 +116,45 @@
         }
 
         .nav-link {
-            background: none;
-            border: 2px solid transparent;
-            color: #4b5563;
-            padding: 12px 26px;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.2s;
+            background: none; border: 2px solid transparent; color: #4b5563;
+            padding: 12px 26px; font-weight: 700; border-radius: 8px; cursor: pointer;
         }
 
-        .nav-link:hover {
-            color: #4f46e5;
-            background-color: #f3f4f6;
+        .nav-link.active { background-color: #e0e7ff; color: #4f46e5; border-color: #4f46e5; }
+
+        .main-wrapper { max-width: 950px; margin: 40px auto; padding: 0 20px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .layer-card {
+            background-color: #ffffff; border-radius: 16px; padding: 30px;
+            margin-bottom: 30px; border-right: 6px solid #10b981;
         }
 
-        .nav-link.active {
-            background-color: #e0e7ff;
-            color: #4f46e5;
-            border-color: #4f46e5;
+        textarea {
+            width: 100%; min-height: 95px; border: 2px solid #cbd5e1;
+            padding: 14px; border-radius: 10px; box-sizing: border-box;
+        }
+
+        /* --- فوتر اصلاح شده --- */
+        footer { margin-top: 80px; padding: 50px 20px; border-top: 1px solid #e2e8f0; display: flex; justify-content: center; }
+        .footer-shop-box { width: 100%; max-width: 750px; text-align: center; padding: 35px; border: 2px dashed #10b981; border-radius: 16px; background-color: #f4fbf7; }
+
+        /* --- تنظیمات موبایل --- */
+        @media (max-width: 600px) {
+            header { flex-direction: column; padding: 15px; text-align: center; }
+            .header-btns { margin-top: 15px; flex-direction: column; width: 100%; }
+            .btn-pdf, .btn-buy-book { width: 100%; }
+
+            nav {
+                position: relative; /* در موبایل اسکرول می‌شود و روی متن نمی‌افتد */
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 10px;
+            }
+
+            footer { padding: 20px 10px; }
+            .footer-shop-box { width: 95%; padding: 15px; }
         }
 
         /* --- بوم محتوای متمرکز تک‌صفحه‌ای --- */
@@ -292,7 +339,6 @@
                 padding: 20px;
             }
         }
-    </style>
     </style>
 </head>
 <body>

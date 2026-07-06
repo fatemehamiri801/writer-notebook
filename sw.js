@@ -1,5 +1,5 @@
 // ۱. با هر تغییر مهم در سایت، فقط این عدد را به v4، v5 و... تغییر دهید
-const CACHE_NAME = 'writer-notebook-v4،'; 
+const CACHE_NAME = 'writer-notebook-v4';
 
 // لیست فایل‌هایی که باید همیشه در حافظه باشند (فایل‌های اصلی سایتتان)
 const ASSETS = [

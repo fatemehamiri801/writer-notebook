@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="دفترچه من">
+    <title>دفترچه کتاب‌خوان</title>
+<style>
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #e0f2fe;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #1e1b4b;
+    line-height: 1.7;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+    background-color: #312e81;
+    color: #ffffff;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.header-btns {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-pdf {
+    background-color: #10b981;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.btn-pdf:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   NAV (UNIFIED SCROLL SYSTEM)
+========================= */
+nav {
+    background-color: #fff;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.nav-link {
+    flex: 0 0 auto;
+    background: none;
+    border: 2px solid transparent;
+    color: #4b5563;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    color: #4f46e5;
+    background-color: #f3f4f6;
+}
+
+.nav-link.active {
+    background-color: #e0e7ff;
+    color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+/* =========================
+   MAIN LAYOUT (IMPORTANT FIX)
+========================= */
+.main-wrapper {
+    width: 100%;
+    max-width: 950px;
+    margin: 24px auto;
+    padding: 0 16px; /* 🔥 این کل راز یکسان بودن حاشیه‌هاست */
+}
+
+/* =========================
+   TAB SYSTEM
+========================= */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* =========================
+   CARD (UNIFIED SPACING)
+========================= */
+.layer-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    border-right: 6px solid #10b981;
+}
+
+.layer-card h3 {
+    margin-bottom: 16px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 10px;
+}
+
+/* =========================
+   FORMS (CONSISTENT SYSTEM)
+========================= */
+.field-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #1e1b4b;
+}
+
+.sub-label {
+    font-size: 0.82rem;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px 14px;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: #fff;
+    resize: vertical;
+    transition: 0.2s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+}
+
+/* =========================
+   MOBILE FIX (CRITICAL)
+========================= */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 14px;
+    }
+
+    .main-wrapper {
+        padding: 0 12px;
+        margin: 16px auto;
+    }
+
+    .layer-card {
+        padding: 16px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+}
+
+/* =========================
+   PRINT
+========================= */
+@media print {
+    .tab-content {
+        display: block !important;
+        page-break-after: always;
+    }
+
+    header, nav, footer, .mascot-box {
+        display: none !important;
+    }
+}
+</style>
+</head>
+<body>
+
+<header style="background-color: #312e81; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box;">
+    
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
+            🏠 بازگشت
+        </a>
+        <h1 style="margin: 0; font-size: 1.8rem; font-family: Tahoma, sans-serif; font-weight: 900; color: #facc15;">
+            📖 دفترچه کتابخوان
+        </h1>
+    </div>
+    
+    <div style="display: flex; gap: 15px; align-items: center;">
+        <button onclick="printAllTabs()" style="background-color: #10b981; color: #ffffff; padding: 10px 20px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer;">
+            📥 خروجی PDF
+        </button>
+        <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
+            👤 ارتباط با سازنده
+        </a>
+    </div>
+</header>
+
+<!-- کادر خوش‌آمدگویی (مشابه دفترچه نویسنده) -->
+<div class="mascot-box" style="display: flex; align-items: center; justify-content: center; gap: 15px; padding: 25px; background: #f3f4f6; border-radius: 12px; margin: 20px auto; max-width: 1000px; box-sizing: border-box;">
+    <span style="font-size: 40px;">📖 ✍️</span>
+    <p style="font-size: 1.3rem; color: #312e81; margin: 0; font-weight: bold;">
+        سلام کتاب‌خوان! امروز چه کتابی رو ثبت می‌کنی؟
+    </p>
+</div>
+
+<!-- منوی ناوبری (مشابه دفترچه نویسنده با استایل‌های درشت‌تر) -->
+<nav>
+    <button class="nav-link active" onclick="openTab(event, 'tab1')">🏷️ شناسنامه</button>
+    <button class="nav-link" onclick="openTab(event, 'tab2')">🎯 پیش‌شروع</button>
+    <button class="nav-link" onclick="openTab(event, 'tab3')">👤 شخصیت‌ها</button>
+    <button class="nav-link" onclick="openTab(event, 'tab4')">🌍 جهان و سبک</button>
+    <button class="nav-link" onclick="openTab(event, 'tab5')">🔍 تحلیل و معما</button>
+    <button class="nav-link" onclick="openTab(event, 'tab6')">✍️ نگاه نویسنده</button>
+    <button class="nav-link" onclick="openTab(event, 'tab7')">💎 گنجینه</button>
+    <button class="nav-link" onclick="openTab(event, 'tab8')">🎬 اقتباس و پایان</button>
+</nav>
+
+<!-- تب ۱: شناسنامه -->
+<div id="tab1" class="tab-content active">
+    <div class="layer-card">
+        <h3>📖 هویت این کتاب</h3>
+
+        <label>📚 این کتاب چیست؟</label>
+        <textarea id="read-info"
+            placeholder="نام کتاب، نویسنده، ژانر، ناشر و هر اطلاعاتی که لازم می‌دانی..."></textarea>
+
+        <label>⭐ تجربه تو از این کتاب (امتیاز + حس کلی)</label>
+        <textarea id="read-score-main"
+            placeholder="فقط عدد نیست؛ حس کلی، رضایت، خستگی، هیجان یا هر چیزی که بعد از خواندن ماند..."></textarea>
+    </div>
+</div>
+
+ <!-- تب ۲: قبل از ورود به داستان -->
+<div id="tab2" class="tab-content">
+    <div class="layer-card">
+        <h3>🚪 قبل از ورود به داستان</h3>
+
+        <label>🎯 چرا این کتاب را انتخاب کردی؟</label>
+        <textarea id="read-why"
+            placeholder="چه چیزی باعث شد سراغ این کتاب بیایی؟ حس، کنجکاوی، پیشنهاد یا اتفاقی خاص..."></textarea>
+
+        <label>🔮 چه چیزی از این کتاب انتظار داشتی؟</label>
+        <textarea id="read-expect"
+            placeholder="تصور اولیه‌ات از داستان، سبک یا پایان آن..."></textarea>
+
+        <label>👁️ اولین برداشتت از کتاب چه بود؟</label>
+        <textarea id="read-first-look"
+            placeholder="جلد، خلاصه، نام کتاب یا حس اولیه قبل از شروع..."></textarea>
+
+        <label>💭 اگر کتاب همان چیزی که فکر می‌کردی نبود، چه شد؟</label>
+        <textarea id="read-preconception-gap"
+            placeholder="چقدر پیش‌بینی‌هایت درست یا غلط از آب درآمد؟"></textarea>
+    </div>
+</div>
+
+<!-- تب ۳: شخصیت‌ها -->
+<div id="tab3" class="tab-content">
+    <div class="layer-card">
+        <h3>👤 آدم‌های این داستان</h3>
+
+        <label>✨ چه کسانی در ذهنت ماندند؟</label>
+        <textarea id="read-chars-main"
+            placeholder="شخصیت‌های محبوب، منفور، پیچیده یا واقعی... چیزی که باعث شد در ذهنت بمانند"></textarea>
+
+        <label>🫀 اگر جای او بودی چه کار می‌کردی؟</label>
+        <textarea id="read-empathy"
+            placeholder="حس، انتخاب‌ها، تصمیم‌ها و همذات‌پنداری تو با شخصیت‌ها"></textarea>
+
+        <label>🔗 رابطه‌ها و برخوردها</label>
+        <textarea id="read-relations"
+            placeholder="بهترین رابطه‌ها، بدترین‌ها، تنش‌ها، عشق‌ها، خیانت‌ها یا پیوندها"></textarea>
+
+        <label>💡 کدام شخصیت می‌تواند وارد داستان‌های تو شود؟</label>
+        <textarea id="read-character-transfer"
+            placeholder="کدام شخصیت الهام‌بخش یک کاراکتر جدید در نوشته‌های توست؟"></textarea>
+    </div>
+</div>
+
+<!-- تب ۴: جهان و سبک -->
+<div id="tab4" class="tab-content">
+    <div class="layer-card">
+        <h3>🌍 جهان و زبان داستان</h3>
+
+        <label>🌌 جهانی که در این کتاب ساخته شده</label>
+        <textarea id="read-world-detail"
+            placeholder="قوانین دنیا، حس و حال فضا، میزان باورپذیری، مکان‌ها، سیستم قدرت یا جادو..."></textarea>
+
+        <label>✍️ سبک روایت نویسنده</label>
+        <textarea id="read-style-detail"
+            placeholder="ریتم داستان، دیالوگ‌ها، توصیف‌ها، زاویه دید، تعلیق و نوع روایت..."></textarea>
+
+        <label>💡 چیزی که دوست داری از این جهان یا سبک در نوشته‌های خودت قرض بگیری</label>
+        <textarea id="read-style-takeaway"
+            placeholder="ایده، حس، تکنیک یا فضایی که می‌خواهی در داستان‌های خودت استفاده کنی..."></textarea>
+    </div>
+</div>
+
+   <!-- تب ۵: تحلیل و کشف -->
+<div id="tab5" class="tab-content">
+    <div class="layer-card">
+        <h3>🔍 تحلیل و کشف</h3>
+
+        <label>🧩 چه رازها یا معماهایی را حدس زدی؟</label>
+        <textarea id="read-guesses-detail"
+            placeholder="پیش‌بینی‌ها، قاتل، پایان، هویت شخصیت‌ها یا هر حدسی که داشتی..."></textarea>
+
+        <label>🧐 چه چیزهایی نظرت را جلب کرد؟</label>
+        <textarea id="read-analysis-detail"
+            placeholder="نقاط قوت، ضعف، سوتی‌ها، غافلگیری‌ها یا جزئیاتی که توجهت را جلب کردند..."></textarea>
+
+        <label>❓ هنوز چه سؤال‌هایی در ذهنت مانده؟</label>
+        <textarea id="read-questions-detail"
+            placeholder="ابهام‌ها، پایان باز یا سؤال‌هایی که کتاب برایت باقی گذاشت..."></textarea>
+    </div>
+</div>
+	<!-- تب ۶: نگاه نویسنده -->
+<div id="tab6" class="tab-content">
+    <div class="layer-card">
+        <h3>✍️ کارگاه نویسنده</h3>
+
+        <label>📖 از این نویسنده چه چیزی یاد گرفتی؟</label>
+        <textarea id="read-lessons-detail" placeholder="مثلاً شخصیت‌پردازی، دیالوگ، تعلیق، روایت، فضاسازی یا هر تکنیکی که از این کتاب آموختی..."></textarea>
+
+        <label>🎯 دوست داری چه چیزی را در نوشته‌های خودت استفاده کنی؟</label>
+        <textarea id="read-my-ideas-detail" placeholder="سبک، تکنیک یا ایده‌ای که می‌خواهی در آثار خودت به کار ببری..."></textarea>
+
+        <label>💡 این کتاب چه ایده‌هایی به ذهنت رساند؟</label>
+        <textarea id="read-writing-ideas" placeholder="ایده‌ی داستان، شخصیت، صحنه، جهان‌سازی یا هر جرقه‌ای که موقع خواندن به ذهنت رسید..."></textarea>
+    </div>
+</div>
+
+
+<!-- تب ۷: گنجینه -->
+<div id="tab7" class="tab-content">
+    <div class="layer-card">
+
+        <h3>📚 چه چیزی از این کتاب با تو ماند؟</h3>
+
+        <label>👤 شخصیتی که یادت نمی‌رود</label>
+        <textarea id="read-memory-character" placeholder="نام شخصیت یا دلیل ماندگاری..."></textarea>
+
+        <label>🎬 صحنه‌ای که یادت نمی‌رود</label>
+        <textarea id="read-memory-scene" placeholder="صحنه را توصیف کن..."></textarea>
+
+        <label>💬 دیالوگ ماندگار</label>
+        <textarea id="read-memory-dialogue" placeholder="دیالوگ را بنویس..."></textarea>
+
+        <label>🌫️ توصیفی که یادت نمی‌رود</label>
+        <textarea id="read-memory-description" placeholder="توصیف را بنویس..."></textarea>
+
+        <label>❤️ احساسی که این کتاب در تو بیدار کرد</label>
+        <textarea id="read-memory-feeling" placeholder="چه احساسی داشتی؟"></textarea>
+
+    </div>
+</div>
+
+<!-- تب ۸: بعد از آخرین صفحه -->
+<div id="tab8" class="tab-content">
+    <div class="layer-card">
+
+        <h3>🌙 بعد از آخرین صفحه</h3>
+
+        <label>🎬 اگر فیلم یا سریال می‌شد...</label>
+        <textarea id="read-adapt-detail" placeholder="بازیگر، کارگردان، موسیقی یا حتی سبک فیلم..."></textarea>
+
+        <label>💭 چیزی که بعد از تمام شدن کتاب با تو ماند</label>
+        <textarea id="read-end-detail" placeholder="فکر، احساس، پیام یا حرفی که دوست داشتی به نویسنده بزنی..."></textarea>
+
+        <label>📚 اگر این کتاب را دوست داشتی، بعدش چه بخوانی؟</label>
+        <textarea id="read-archive-detail" placeholder="کتاب‌های مشابه، پیشنهادها یا کتاب‌هایی که یاد این اثر انداختند..."></textarea>
+
+    </div>
+</div>
+
+<script>
+    // ۱. سوئیچ تب‌ها
+    function openTab(evt, tabId) {
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+        evt.currentTarget.classList.add('active');
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ۲. حافظه خودکار هوشمند
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        const saved = localStorage.getItem(textarea.id);
+        if (saved) textarea.value = saved;
+
+        textarea.addEventListener('input', () => {
+            localStorage.setItem(textarea.id, textarea.value);
+        });
+    });
+
+    // ۳. موتور چاپ (با روش کلاسِ CSS)
+    function printAllTabs() {
+        // اضافه کردن کلاس به کل صفحه برای نمایش تب‌ها
+        document.body.classList.add('print-mode');
+
+        // اجرای پرینت
+        // از setTimeout استفاده می‌کنیم تا مرورگر فرصت کند استایل جدید را اعمال کند
+        setTimeout(() => {
+            window.print();
+
+            // حذف کلاس بعد از بسته شدن پنجره چاپ
+            setTimeout(() => {
+                document.body.classList.remove('print-mode');
+            }, 1000);
+        }, 300);
+    }
+</script>
+<footer style="margin-top: 60px; padding: 20px; text-align: center;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f5f3ff; border: 2px solid #8b5cf6; border-radius: 16px;">
+        
+        <h3 style="color: #4c1d95; font-size: 1.3rem; margin: 0 0 10px 0;">
+            📖 دفترچه کتابخوان: <strong style="color: #6d28d9;">خانه جهان‌های داستانی تو</strong>
+        </h3>
+        
+        <p style="color: #374151; font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+            با سفارش <strong>دفترچه فیزیکی</strong>، تحلیل‌هایت را ماندگار کن و <strong>«PDF اختصاصی معرفی کتاب»</strong> را به‌عنوان هدیه دریافت کن تا همیشه بهترین مقصد را برای مطالعه انتخاب کنی.
+        </p>
+        
+        <a href="https://t.me/fatemehamiri1381" target="_blank" 
+           style="background-color: #6d28d9; color: #ffffff; padding: 10px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1rem; display: inline-block; transition: 0.3s;">
+            سفارش دفترچه + هدیه 🚀
+        </a>
+    </div>
+</footer>
+</body>
+</html>

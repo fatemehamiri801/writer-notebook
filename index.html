@@ -1,0 +1,246 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+
+<meta name="theme-color" content="#312e81">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="دفترچه من">
+
+<title>خانه دفترچه‌ها</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body { 
+
+    font-family: 'Segoe UI', Tahoma, sans-serif; 
+
+    background: #f8fafc; 
+
+    margin: 0; 
+
+    padding: 20px;
+
+    display: flex; 
+
+    flex-direction: column; 
+
+    align-items: center; 
+
+    min-height: 100vh;
+
+}
+
+
+h1 { 
+
+    color: #312e81; 
+
+    margin: 40px 0; 
+
+    text-align: center; 
+
+}
+
+
+.container { 
+
+    display: flex; 
+
+    gap: 20px; 
+
+    width: 100%; 
+
+    max-width: 600px; 
+
+    justify-content: center;
+
+}
+
+
+.box { 
+
+    background: white; 
+
+    padding: 30px; 
+
+    border-radius: 20px; 
+
+    text-align: center;
+
+    width: 100%; 
+
+    max-width: 250px;
+
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+
+    transition: 0.3s;
+
+    border: 2px solid #e2e8f0; 
+
+    text-decoration: none; 
+
+    display: block; 
+
+    color: #1e1b4b;
+
+}
+
+
+.box:hover { 
+
+    border-color: #5b21b6; 
+
+    transform: translateY(-5px); 
+
+}
+
+
+.emoji { 
+
+    font-size: 60px; 
+
+    margin-bottom: 10px; 
+
+    display: block; 
+
+}
+
+
+
+@media (max-width:600px) {
+
+
+    .container { 
+
+        flex-direction: column; 
+
+        align-items: center; 
+
+    }
+
+
+    .box { 
+
+        max-width: 100%; 
+
+        padding: 25px; 
+
+    }
+
+
+    h1 { 
+
+        font-size: 1.4rem; 
+
+        margin: 20px 0; 
+
+    }
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<h1>
+    کدام دفترچه را باز کنیم؟
+</h1>
+
+
+
+<div class="container">
+
+
+    <a href="nevisandegi.html" class="box">
+
+        <span class="emoji">🖋️</span>
+
+        <h2>
+            دفترچه نویسندگی
+        </h2>
+
+    </a>
+
+
+
+    <a href="reader.html" class="box">
+
+        <span class="emoji">📖</span>
+
+        <h2>
+            دفترچه کتاب‌خوان
+        </h2>
+
+    </a>
+
+
+</div>
+
+
+
+<script>
+
+
+if ('serviceWorker' in navigator) {
+
+    window.addEventListener('load', () => {
+
+
+        navigator.serviceWorker.register('sw.js')
+
+
+        .then(registration => {
+
+            console.log('Service Worker فعال شد');
+
+            registration.update();
+
+
+        })
+
+
+        .catch(error => {
+
+            console.log('Service Worker خطا:', error);
+
+        });
+
+
+    });
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
+```

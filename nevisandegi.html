@@ -1,355 +1,64 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    
     <title>دفترچه نویسندگی</title>
-    
     <style>
-	
-        * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #e0f2fe; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e1b4b; line-height: 1.7; }
+        
+        header { background-color: #312e81; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .header-btns { display: flex; gap: 15px; align-items: center; }
+        .btn-pdf { background-color: #10b981; color: #ffffff; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; font-weight: bold; font-family: inherit; transition: all 0.2s; }
+        .btn-pdf:hover { background-color: #059669; transform: translateY(-2px); }
+        
+        nav { background-color: #ffffff; display: flex; justify-content: center; gap: 12px; padding: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 99; }
+        .nav-link { background: none; border: 2px solid transparent; color: #4b5563; padding: 12px 26px; font-size: 1rem; font-weight: 700; border-radius: 8px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .nav-link:hover { color: #4f46e5; background-color: #f3f4f6; }
+        .nav-link.active { background-color: #e0e7ff; color: #4f46e5; border-color: #4f46e5; }
+        
+        .main-wrapper { max-width: 950px; margin: 40px auto; padding: 0 20px; }
+        .tab-content { display: none; animation: fadeIn 0.35s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .layer-card { background-color: #ffffff; border-radius: 16px; padding: 30px; margin-bottom: 30px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); border-right: 6px solid #10b981; }
+        .layer-card h3 { margin-top: 0; margin-bottom: 22px; color: #1e1b4b; font-size: 1.25rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; }
+        .field-group { margin-bottom: 24px; }
+        label { display: block; font-size: 0.95rem; color: #1e1b4b; margin-bottom: 4px; font-weight: 700; }
+        .sub-label { display: block; font-size: 0.82rem; color: #6b7280; margin-bottom: 8px; font-weight: 500; }
+        textarea { width: 100%; min-height: 95px; border: 2px solid #cbd5e1; border-radius: 10px; padding: 14px; font-family: inherit; font-size: 0.95rem; resize: vertical; background-color: #ffffff; color: #0f172a; transition: all 0.2s; }
+        textarea:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15); }
+        
+        @media print {
+            .tab-content { display: block !important; page-break-after: always; }
+            header, nav, footer, .mascot-box { display: none !important; }
+        }
+		/* اصلاح نهایی برای چسبیدن تب‌ها در موبایل */
+.tab-content {
+    display: none;
+    height: 70vh; /* ارتفاع تب‌ها را محدود می‌کند */
+    overflow-y: auto; /* فقط داخل تب اسکرول می‌شود */
+}
+.tab-content.active {
+    display: block;
 }
 body {
-    background-color: #e3f2fd;
-}
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            ...
-  /* --- اتمسفر رنگی جاندار، عمیق و با اصالت --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e0f2fe; /* آبی آسمانیِ روشن و واضح */
-            color: #1e1b4b; /* متن اصلی بنفش-مشکی عمیق برای تضاد عالی */
-            margin: 0;
-            padding: 0;
-            line-height: 1.7;
-        }
-
-        /* --- هدر اصلی با شکوه و دکمه خرید فیزیکی --- */
-        header {
-            background-color: #312e81; /* بنفش عمیق، جاندار و سلطنتی */
-            color: #ffffff;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        .header-btns {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .btn-pdf {
-            background-color: #10b981; /* سبز نعنایی تند و درخشان */
-            color: #ffffff;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        .btn-pdf:hover {
-            background-color: #059669;
-            transform: translateY(-2px);
-        }
-
-        .btn-buy-book {
-            background-color: #f59e0b; /* کهربایی جاندار */
-            color: #ffffff;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-family: inherit;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-
-        .btn-buy-book:hover {
-            background-color: #d97706;
-            transform: translateY(-2px);
-        }
-
-        /* --- منوی افقی ناوبری (حل قطعی سرگیجه و آشفتگی ستونی) --- */
-        nav {
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            padding: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            position: sticky;
-            top: 0;
-            z-index: 99;
-        }
-
-        .nav-link {
-            background: none;
-            border: 2px solid transparent;
-            color: #4b5563;
-            padding: 12px 26px;
-            font-size: 1rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        .nav-link:hover {
-            color: #4f46e5;
-            background-color: #f3f4f6;
-        }
-
-        .nav-link.active {
-            background-color: #e0e7ff;
-            color: #4f46e5;
-            border-color: #4f46e5;
-        }
-
-        /* --- بوم محتوای متمرکز تک‌صفحه‌ای --- */
-        .main-wrapper {
-            max-width: 950px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .tab-content {
-            display: none; 
-            animation: fadeIn 0.35s ease-in-out;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- کارت‌های لایه‌ها با نوار سبز نعنایی جاندار کناری --- */
-        .layer-card {
-            background-color: #ffffff;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
-            border-right: 6px solid #10b981; /* امضای سبز نعنایی زنده */
-        }
-
-        .layer-card h3 {
-            margin-top: 0;
-            margin-bottom: 22px;
-            color: #1e1b4b; /* تیترهای عمیق و خوانا */
-            font-size: 1.25rem;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 12px;
-        }
-
-        /* --- فیلدها، برچسب‌ها و زیرنویس‌های کمکی شفاف --- */
-        .field-group {
-            margin-bottom: 24px;
-        }
-
-        .field-group:last-child {
-            margin-bottom: 0;
-        }
-
-        label {
-            display: block;
-            font-size: 0.95rem;
-            color: #1e1b4b;
-            margin-bottom: 4px;
-            font-weight: 700;
-        }
-
-        .sub-label {
-            display: block;
-            font-size: 0.82rem;
-            color: #6b7280; /* خاکستری ملایم برای راهنمایی بدون شلوغ کردن فضا */
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 95px;
-            border: 2px solid #cbd5e1;
-            border-radius: 10px;
-            padding: 14px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            resize: vertical;
-            background-color: #ffffff;
-            color: #0f172a;
-            box-sizing: border-box;
-            transition: all 0.2s;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #4f46e5; 
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
-        }
-
-        textarea::placeholder {
-            color: #94a3b8;
-            font-size: 0.88rem;
-            font-style: italic;
-        }
-
-        /* --- فوتر شاهکار و بزرگ پکیج آموزشی در پایین سایت --- */
-        footer {
-            background-color: #ffffff;
-            margin-top: 80px;
-            padding: 50px 20px;
-            border-top: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .footer-shop-box {
-            width: 100%;
-            max-width: 750px;
-            text-align: center;
-            padding: 35px;
-            border: 2px dashed #10b981;
-            border-radius: 16px;
-            background-color: #f4fbf7;
-            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.05);
-        }
-
-        .footer-shop-box h3 {
-            margin-top: 0;
-            font-size: 1.3rem;
-            color: #312e81;
-            margin-bottom: 12px;
-        }
-
-        .footer-shop-box p {
-            font-size: 0.95rem;
-            color: #4b5563;
-            margin-bottom: 25px;
-            line-height: 1.8;
-        }
-
-        .btn-shop-download {
-            background-color: #4338ca;
-            color: #ffffff;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.2s;
-            box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2);
-        }
-.btn-shop-download:hover {
-            background-color: #3730a3;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 600px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
-                text-align: center;
-            }
-            .header-btns {
-                margin-top: 15px;
-                flex-direction: column;
-                width: 100%;
-                gap: 10px;
-            }
-            .btn-pdf, .btn-buy-book {
-                width: 100%;
-            }
-
-            nav {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                padding: 10px 5px;
-                -webkit-overflow-scrolling: touch;
-            }
-            .nav-link {
-                white-space: nowrap;
-                padding: 10px 15px;
-                font-size: 0.85rem;
-            }
-
-            .main-wrapper {
-                margin: 20px auto;
-                padding: 0 10px;
-            }
-            .layer-card {
-                padding: 20px;
-            }
-        }
-		@media print {
-        /* نمایش تمام تب‌ها هنگام پرینت */
-        .tab-content {
-            display: block !important;
-            page-break-after: always; /* هر تب می‌رود صفحه بعد */
-        }
-        
-        /* مخفی کردن منوها و هدر برای اینکه پرینت تمیز باشد */
-        header, nav, footer, .mascot-box {
-            display: none !important;
-        }
-    }
-	@media (max-width: 600px) {
-    header {
-        flex-direction: column !important; /* ستونی کردن هدر */
-        padding: 15px !important;
-        height: auto !important; /* اجازه دادن به ارتفاع برای باز شدن */
-    }
-    .header-btns {
-        flex-direction: column !important; /* ستونی کردن دکمه‌ها */
-        width: 100% !important;
-        margin-top: 10px !important;
-    }
-    .btn-pdf, .header-btns a {
-        width: 100% !important; /* پر کردن عرض */
-        margin: 5px 0 !important;
-    }
-    h1 {
-        font-size: 1.5rem !important; /* کوچک‌تر کردن فونت عنوان برای جلوگیری از شکستن خط */
-    }
+    overflow: hidden; /* جلوگیری از اسکرول کل صفحه */
 }
     </style>
+</head>
 <body>
 
  <header style="background-color: #5b21b6; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(88, 28, 135, 0.2); width: 100%; box-sizing: border-box; margin: 0; position: relative; left: 0; top: 0;">
     
     <div style="display: flex; align-items: center; gap: 20px;">
-        <a href="index.html" style="color: #facc15; text-decoration: none; font-size: 0.9rem; font-weight: bold; border: 1px solid #facc15; padding: 6px 12px; border-radius: 6px; transition: 0.3s;">
+        <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
             🏠 بازگشت
         </a>
         
@@ -609,38 +318,39 @@ body {
             </div>
         </div>
 
-       <div id="tab-hub" class="tab-content">
+ <div id="tab-hub" class="tab-content">
     <div class="layer-card">
         <h3>کارگاه و پناهگاه خلاقیت نویسنده</h3>
+        
         <div class="field-group">
             <label>تخلیه احساسات و بارقه‌های ناگهانی (دیالوگ‌های الهام‌شده)</label>
             <span class="sub-label">فضای آزاد و بدون قانون؛ هرچه همین حالا غریزی به ذهنت الهام شد را اینجا پرتاب کن تا افکارت تخلیه شوند.</span>
             <textarea id="hub-free-writing" style="min-height: 140px;" placeholder="بدون چارچوب بنویس... دیالوگ غریزی یا ایده‌های ناگهانی..."></textarea>
         </div>
-    </div>
-</div>
-                <div class="field-group">
-                    <label>محرک‌های حسی نویسنده (مود بورد کلامی و الهام‌بخش‌ها)</label>
-                    <span class="sub-label">چه آهنگ‌ها، قطعات موسیقی، فیلم‌ها یا کلماتی تو را در مود (Mood) اتمسفر این رمان نگه می‌دارند؟</span>
-                    <textarea id="hub-mood" placeholder="مثلاً: قطعه فلان موسیقی، تصاویر نقاشی‌های امپرسیونیستی تاریک..."></textarea>
-                </div>
-                <div class="field-group">
-                    <label>تحقیقات لازم و بانک اسامی پیشنهادی</label>
-                    <textarea id="hub-research" placeholder="نکات روانشناسی فوبیاها، اطلاعات فنی درباره سم‌ها یا لیست نام شخصیت‌ها..."></textarea>
-                </div>
-                <div class="field-group">
-                    <label>چک‌لیستِ مچ‌گیری از تناقضات داستان (سوتی‌گیر)</label>
-                    <span class="sub-label">حواست باشد چه چیزی را کجای داستان نوشته‌ای تا بعداً دچار سوتی‌های ساختاری نشوی.</span>
-                    <textarea id="hub-bugs" placeholder="مثلاً: حواست باشد دست راست آراد در فصل ۲ زخمی شد، در فصل ۴ با دست چپ شمشیر بازی کند!"></textarea>
-                </div>
-                <div class="field-group">
-                    <label>هدف‌گذاری روزانه و پیشرفت پروژه</label>
-                    <textarea id="hub-goals" placeholder="تعداد کلمات رمان، تعداد صفحات نوشته شده و اهداف هفتگی..."></textarea>
-                </div>
-            </div>
+
+        <div class="field-group">
+            <label>محرک‌های حسی نویسنده (مود بورد کلامی و الهام‌بخش‌ها)</label>
+            <span class="sub-label">چه آهنگ‌ها، قطعات موسیقی، فیلم‌ها یا کلماتی تو را در مود (Mood) اتمسفر این رمان نگه می‌دارند؟</span>
+            <textarea id="hub-mood" placeholder="مثلاً: قطعه فلان موسیقی، تصاویر نقاشی‌های امپرسیونیستی تاریک..."></textarea>
         </div>
 
-    </div>
+        <div class="field-group">
+            <label>تحقیقات لازم و بانک اسامی پیشنهادی</label>
+            <textarea id="hub-research" placeholder="نکات روانشناسی فوبیاها، اطلاعات فنی درباره سم‌ها یا لیست نام شخصیت‌ها..."></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>چک‌لیستِ مچ‌گیری از تناقضات داستان (سوتی‌گیر)</label>
+            <span class="sub-label">حواست باشد چه چیزی را کجای داستان نوشته‌ای تا بعداً دچار سوتی‌های ساختاری نشوی.</span>
+            <textarea id="hub-bugs" placeholder="مثلاً: حواست باشد دست راست آراد در فصل ۲ زخمی شد، در فصل ۴ با دست چپ شمشیر بازی کند!"></textarea>
+        </div>
+
+        <div class="field-group">
+            <label>هدف‌گذاری روزانه و پیشرفت پروژه</label>
+            <textarea id="hub-goals" placeholder="تعداد کلمات رمان، تعداد صفحات نوشته شده و اهداف هفتگی..."></textarea>
+        </div>
+    </div> <!-- این تنها دایوی است که layer-card را می‌بندد -->
+</div> <!-- این تنها دایوی است که tab-hub را می‌بندد -->
 
     <script>
         // ۱. سوئیچ تب‌ها
@@ -677,6 +387,7 @@ body {
             window.print();
         }
     </script>
+	</div>
 	<footer style="margin-top: 60px; padding: 20px; text-align: center;">
     <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f0f7ff; border: 2px solid #3b82f6; border-radius: 16px;">
         

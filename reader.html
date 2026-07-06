@@ -11,17 +11,17 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="دفترچه من">
     <title>دفترچه کتاب‌خوان</title>
- <style>
-    /* 1. استایل‌های پایه و عمومی */
-    body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #e0f2fe; color: #1e1b4b; margin: 0; }
-    header { background-color: #312e81; color: #fff; padding: 20px; text-align: center; }
-    
-    /* 2. مدیریت منو و دکمه‌ها (یکپارچه) */
+<style>
+    /* 1. تنظیمات پایه */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #e0f2fe; color: #1e1b4b; line-height: 1.6; }
+
+    /* 2. مدیریت منو */
     nav { 
         background: #fff; 
         display: flex; 
         justify-content: center; 
-        gap: 5px; 
+        gap: 8px; 
         padding: 10px; 
         position: sticky; 
         top: 0; 
@@ -29,96 +29,98 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
         overflow-x: auto; 
         white-space: nowrap; 
+        -webkit-overflow-scrolling: touch;
     }
 
     .nav-link { 
-        padding: 12px 20px !important; 
-        font-size: 1.1rem !important; 
-        border-radius: 10px !important; 
-        cursor: pointer;
+        padding: 10px 15px; 
+        font-size: 0.9rem; 
+        border-radius: 8px; 
         border: 2px solid #e0e7ff; 
         background: #fff; 
         font-weight: bold; 
         color: #4b5563; 
-        transition: 0.3s ease; 
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: 0.3s;
     }
 
-    .nav-link.active { 
-        background-color: #5b21b6 !important; 
-        color: #ffffff !important; 
-        border-color: #5b21b6 !important;
-        font-weight: bold;
-    }
+    .nav-link.active { background-color: #5b21b6 !important; color: #ffffff !important; border-color: #5b21b6 !important; }
 
-    /* 3. ساختار محتوا */
-    .main-wrapper { max-width: 950px; margin: 30px auto; padding: 0 20px; }
+    /* 3. مدیریت محتوا و فرم (اصلاح قطعی مشکل روی هم افتادن) */
+    .main-wrapper { max-width: 950px; margin: 20px auto; padding: 0 15px; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .layer-card { background: #fff; border-radius: 16px; padding: 25px; margin-bottom: 25px; border-right: 6px solid #10b981; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    h3 { color: #312e81; margin-top: 0; }
-    label { display: block; font-weight: bold; margin: 15px 0 5px; color: #1e1b4b; font-size: 0.9rem; }
-    textarea { width: 100%; min-height: 60px; border: 2px solid #cbd5e1; border-radius: 10px; padding: 12px; box-sizing: border-box; }
-    textarea:focus { border-color: #4f46e5; outline: none; }
-
-    /* 4. استایل چاپ (Print) */
-    @media print {
-        header, nav, footer, .mascot-box, .header-btns { display: none !important; }
-        .tab-content { display: block !important; margin-bottom: 20px; page-break-after: always; }
-        body { background-color: white !important; color: black !important; }
-        .main-wrapper { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
+    
+    .layer-card { 
+        background: #fff; 
+        border-radius: 16px; 
+        padding: 20px; 
+        margin-bottom: 20px; 
+        border-right: 6px solid #10b981; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    /* 5. تنظیمات موبایل (Responsive) */
+    /* این بخش ستون‌بندی فرم را تضمین می‌کند */
+    .field-group { 
+        display: flex; 
+        flex-direction: column; 
+        width: 100% !important; 
+        margin-bottom: 15px; 
+    }
+
+    label { 
+        font-weight: bold; 
+        margin-bottom: 5px; 
+        color: #1e1b4b; 
+        font-size: 0.9rem;
+        display: block;
+    }
+
+    textarea { 
+        width: 100% !important; 
+        min-height: 100px; 
+        border: 2px solid #cbd5e1; 
+        border-radius: 10px; 
+        padding: 12px; 
+        resize: vertical;
+        font-family: inherit;
+        background-color: #ffffff;
+        display: block;
+    }
+
+    /* 4. اصلاح واکنش‌گرایی برای موبایل */
     @media (max-width: 600px) {
-        .mascot-box { padding: 15px !important; margin: 10px !important; }
-        .mascot-box p { font-size: 1rem !important; }
-        nav { padding: 5px !important; gap: 5px !important; }
-        .nav-link { padding: 8px 12px !important; font-size: 0.85rem !important; }
-        .main-wrapper { padding: 0 10px !important; margin: 10px auto !important; }
-        .layer-card { padding: 15px !important; }
+        .layer-card { padding: 15px; }
+        .nav-link { padding: 8px 12px !important; font-size: 0.8rem !important; }
+        nav { justify-content: flex-start; }
     }
-	.print-mode .tab-content {
-        display: block !important;
+
+    /* 5. چاپ */
+    @media print {
+        header, nav, footer { display: none !important; }
+        .tab-content { display: block !important; }
     }
-	@media (max-width: 600px) {
-    header {
-        flex-direction: column !important; /* ستونی کردن هدر */
-        padding: 15px !important;
-        height: auto !important; /* اجازه دادن به ارتفاع برای باز شدن */
-    }
-    .header-btns {
-        flex-direction: column !important; /* ستونی کردن دکمه‌ها */
-        width: 100% !important;
-        margin-top: 10px !important;
-    }
-    .btn-pdf, .header-btns a {
-        width: 100% !important; /* پر کردن عرض */
-        margin: 5px 0 !important;
-    }
-    h1 {
-        font-size: 1.5rem !important; /* کوچک‌تر کردن فونت عنوان برای جلوگیری از شکستن خط */
-    }
-}
 </style>
 </head>
 <body>
 
-<header style="background-color: #5b21b6; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(88, 28, 135, 0.2); width: 100%; box-sizing: border-box; margin: 0; position: relative;">
+<header style="background-color: #5b21b6; color: #ffffff; padding: 15px; display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; box-sizing: border-box;">
     
-    <div style="display: flex; align-items: center; gap: 15px;">
-        <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
+    <div style="display: flex; align-items: center; gap: 10px; width: 100%; justify-content: center;">
+        <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: bold; border: 1px solid #c4b5fd;">
             🏠 بازگشت
         </a>
-        <h1 style="margin: 0; font-size: 2.2rem; font-family: Tahoma, sans-serif; font-weight: 900; color: #facc15; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); letter-spacing: 1px; transform: rotate(-1deg); cursor: default;">
+        <h1 style="margin: 0; font-size: 1.3rem; color: #facc15; font-weight: 900;">
             📖 دفترچه کتابخوان
         </h1>
     </div>
     
-    <div class="header-btns" style="display: flex; gap: 15px; align-items: center;">
-        <button onclick="printAllTabs()" style="background-color: #10b981; color: #ffffff; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s;">
+    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap; justify-content: center;">
+        <button onclick="printAllTabs()" style="background-color: #10b981; color: #ffffff; padding: 8px 16px; border-radius: 8px; border: none; font-weight: bold; font-size: 0.9rem; cursor: pointer;">
             📥 خروجی PDF
         </button>
-        <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s;">
+        <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
             👤 ارتباط با سازنده
         </a>
     </div>
@@ -133,31 +135,7 @@
 </div>
 
 <!-- منوی ناوبری (مشابه دفترچه نویسنده با استایل‌های درشت‌تر) -->
-<nav style="display: flex; justify-content: center; gap: 10px; padding: 10px; overflow-x: auto; white-space: nowrap;">
-    <style>
-        .nav-link { 
-            padding: 12px 20px !important; 
-            font-size: 1.1rem !important; 
-            border-radius: 10px !important; 
-            cursor: pointer;
-            border: none;
-            background: #fff;
-            transition: 0.3s;
-        }
-        .nav-link.active { background: #e5e7eb; font-weight: bold; }
-		/* اصلاح چیدمان برای موبایل */
-@media (max-width: 600px) {
-    nav {
-        justify-content: flex-start !important; /* منو را از سمت راست شروع می‌کند تا اسکرول راحت باشد */
-        padding: 10px 5px !important;
-    }
-    .nav-link {
-        padding: 8px 15px !important; /* کمی فشرده‌تر برای نمایش دکمه‌های بیشتر */
-        font-size: 0.9rem !important;
-        flex: 0 0 auto !important; /* جلوگیری از تغییر اندازه دکمه‌ها در موبایل */
-    }
-}
-    </style>
+<nav>
     <button class="nav-link active" onclick="openTab(event, 'tab1')">🏷️ شناسنامه</button>
     <button class="nav-link" onclick="openTab(event, 'tab2')">🎯 پیش‌شروع</button>
     <button class="nav-link" onclick="openTab(event, 'tab3')">👤 شخصیت‌ها</button>

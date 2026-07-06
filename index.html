@@ -2,57 +2,63 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="دفترچه من">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="دفترچه من">
     <title>خانه دفترچه‌ها</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        h1 { color: #312e81; margin-bottom: 50px; }
-        .container { display: flex; gap: 30px; }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: #f8fafc; 
+            margin: 0; 
+            padding: 20px;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; /* تغییر از height به min-height */
+        }
+        h1 { color: #312e81; margin: 40px 0; text-align: center; }
+        .container { 
+            display: flex; 
+            gap: 20px; 
+            width: 100%; 
+            max-width: 600px; 
+            justify-content: center;
+        }
         
         .box { 
-            background: white; padding: 40px; border-radius: 20px; text-align: center;
-            width: 250px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s;
-            border: 2px solid #e2e8f0; text-decoration: none; display: block; color: #1e1b4b;
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            text-align: center;
+            width: 100%; 
+            max-width: 250px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            transition: 0.3s;
+            border: 2px solid #e2e8f0; 
+            text-decoration: none; 
+            display: block; 
+            color: #1e1b4b;
         }
         .box:hover { border-color: #5b21b6; transform: translateY(-5px); }
-        .emoji { font-size: 80px; margin-bottom: 15px; display: block; }
-		@media (max-width: 600px) {
-    header {
-        flex-direction: column !important; /* ستونی کردن هدر */
-        padding: 15px !important;
-        height: auto !important; /* اجازه دادن به ارتفاع برای باز شدن */
-    }
-    .header-btns {
-        flex-direction: column !important; /* ستونی کردن دکمه‌ها */
-        width: 100% !important;
-        margin-top: 10px !important;
-    }
-    .btn-pdf, .header-btns a {
-        width: 100% !important; /* پر کردن عرض */
-        margin: 5px 0 !important;
-    }
-    h1 {
-        font-size: 1.5rem !important; /* کوچک‌تر کردن فونت عنوان برای جلوگیری از شکستن خط */
-    }
-}
-@media (max-width: 600px) {
-    .container {
-        flex-direction: column !important; /* ستونی کردن کارت‌ها */
-        gap: 15px !important;
-        width: 90% !important;
-    }
-    .box {
-        width: 100% !important; /* پر کردن عرض صفحه */
-        padding: 20px !important;
-    }
-}
+        .emoji { font-size: 60px; margin-bottom: 10px; display: block; }
+
+        /* تنظیمات موبایل */
+        @media (max-width: 600px) {
+            .container { 
+                flex-direction: column; 
+                align-items: center; 
+            }
+            .box { 
+                max-width: 100%; 
+                padding: 25px; 
+            }
+            h1 { font-size: 1.4rem; margin: 20px 0; }
+        }
     </style>
 </head>
 <body>

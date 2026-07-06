@@ -362,11 +362,12 @@ textarea:focus {
                 placeholder="گذشته‌ای که هنوز تمام نشده..."></textarea>
         </div>
 
-        <div class="field-group">
-            <label>🧠 باورهای شخصی</label>
-            <textarea id="char-beliefs"
-                placeholder="چطور خودش را زنده نگه می‌دارد؟"></textarea>
-        </div>
+      <div class="field-group">
+    <label>🧠 باورهای شخصی و خط قرمزها</label>
+    <span class="sub-label">آنچه شخصیت درباره زندگی، عشق، اعتماد، قدرت یا انسان‌ها باور دارد؛ حقیقت‌هایی که مسیر انتخاب‌هایش را هدایت می‌کنند، حتی اگر اشتباه باشند.</span>
+    <textarea id="char-beliefs"
+        placeholder="مثلاً: «هیچ‌کس واقعاً قابل اعتماد نیست»، «ضعیف بودن یعنی شکست»، «عشق آدم‌ها را نابود می‌کند» یا هر باوری که شخصیت با آن زندگی می‌کند..."></textarea>
+</div>
 
         <div class="field-group">
             <label>⚡ نقطه فروپاشی</label>
@@ -426,42 +427,60 @@ textarea:focus {
         </div>
     </div>
 
+<!-- TAB: WORLD -->
+<div id="tab-world" class="tab-content">
+
     <div class="layer-card">
         <h3>⏳ زمان و حافظه جهان</h3>
 
         <div class="field-group">
             <label>⚙️ زمان و تکنولوژی</label>
-            <textarea id="world-tech"></textarea>
+            <span class="sub-label">این دنیا در چه دوره‌ای جریان دارد؟ سطح تکنولوژی، ابزارها و سبک زندگی مردم چگونه است؟</span>
+            <textarea id="world-tech"
+            placeholder="مثلاً: شهری مدرن با تکنولوژی پیشرفته اما با باورهای قدیمی..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🩸 تاریخ زخمی جهان</label>
-            <textarea id="world-history"></textarea>
+            <span class="sub-label">چه اتفاقات بزرگی در گذشته این دنیا را تغییر داده‌اند؟ جنگ، فاجعه، انقلاب یا رازهای فراموش‌شده...</span>
+            <textarea id="world-history"
+            placeholder="مثلاً: بیست سال پیش جنگی رخ داد که باعث سقوط یک تمدن شد..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🧠 حافظه جمعی</label>
-            <textarea id="world-collective-memory"></textarea>
+            <span class="sub-label">مردم این دنیا چه چیزی را به یاد دارند؟ از چه چیزی می‌ترسند یا چه افسانه‌هایی نسل به نسل منتقل شده؟</span>
+            <textarea id="world-collective-memory"
+            placeholder="مثلاً: همه مردم هنوز داستان خیانت خاندان قدیمی را تعریف می‌کنند..."></textarea>
         </div>
+
     </div>
+
 
     <div class="layer-card">
         <h3>⚖️ قدرت و قانون</h3>
 
         <div class="field-group">
             <label>✨ قوانین ماورایی</label>
-            <textarea id="world-magic"></textarea>
+            <span class="sub-label">اگر نیروی خاصی وجود دارد، چه قوانینی دارد؟ محدودیت‌ها و هزینه استفاده از آن چیست؟</span>
+            <textarea id="world-magic"
+            placeholder="مثلاً: هر کسی می‌تواند ذهن دیگران را بخواند اما هر بار بخشی از خاطرات خودش را از دست می‌دهد..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🏛️ قدرت و سیاست</label>
-            <textarea id="world-politics"></textarea>
+            <span class="sub-label">چه کسانی کنترل جامعه را در دست دارند؟ حکومت، گروه‌ها، خاندان‌ها یا سازمان‌های پنهان؟</span>
+            <textarea id="world-politics"
+            placeholder="مثلاً: شورای پنج نفره‌ای که منابع اصلی شهر را کنترل می‌کند..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🚫 تابوها</label>
-            <textarea id="world-taboos"></textarea>
+            <span class="sub-label">چه کارهایی در این دنیا غیرقابل قبول یا ممنوع هستند؟ چه خط قرمزهایی وجود دارد؟</span>
+            <textarea id="world-taboos"
+            placeholder="مثلاً: صحبت درباره تمدن نابودشده گذشته جرم محسوب می‌شود..."></textarea>
         </div>
+
     </div>
 
 </div>
@@ -475,23 +494,32 @@ textarea:focus {
 
         <div class="field-group">
             <label>💡 ایده اصلی</label>
-            <textarea id="story-core"></textarea>
+            <span class="sub-label">هسته مرکزی داستان چیست؟ اگر بخواهی داستان را در یک جمله تعریف کنی، چه می‌گویی؟</span>
+            <textarea id="story-core"
+            placeholder="مثلاً: دختری که برای پیدا کردن حقیقت گذشته‌اش وارد شهری می‌شود که هیچ‌کس خاطراتش را باور نمی‌کند..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🧨 شکست کلیشه</label>
-            <textarea id="story-break-cliche"></textarea>
+            <span class="sub-label">داستان تو چه چیزی را متفاوت می‌کند؟ کدام انتظار مخاطب را تغییر می‌دهی؟</span>
+            <textarea id="story-break-cliche"
+            placeholder="مثلاً: قهرمان داستان برخلاف کلیشه‌ها نمی‌خواهد دنیا را نجات دهد؛ فقط دنبال نجات خودش است..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🧿 نشانه‌ها</label>
-            <textarea id="story-symbols"></textarea>
+            <span class="sub-label">چه نمادها، اشیا یا تصویرهایی در داستان تکرار می‌شوند و معنای پنهان دارند؟</span>
+            <textarea id="story-symbols"
+            placeholder="مثلاً: یک ساعت شکسته که همیشه یادآور گذشته شخصیت اصلی است..."></textarea>
         </div>
 
         <div class="field-group">
             <label>✍️ امضای نویسنده</label>
-            <textarea id="story-author-voice"></textarea>
+            <span class="sub-label">چه چیزی باعث می‌شود این داستان فقط متعلق به تو باشد؟ لحن، نگاه، موضوع یا نوع روایت؟</span>
+            <textarea id="story-author-voice"
+            placeholder="مثلاً: تمرکز روی تنهایی آدم‌ها، روابط پیچیده و انتخاب‌های اخلاقی سخت..."></textarea>
         </div>
+
     </div>
 
 </div>
@@ -543,45 +571,56 @@ textarea:focus {
 
         <div class="field-group">
             <label>⚡ تخلیه ذهن</label>
-            <textarea id="hub-free-writing"></textarea>
+            <span class="sub-label">هر چیزی که در ذهن داری بدون نظم اولیه بنویس؛ جرقه‌ها، تصویرها، دیالوگ‌ها یا حس‌هایی که هنوز شکل نگرفته‌اند.</span>
+            <textarea id="hub-free-writing"
+            placeholder="ایده‌های خام، صحنه‌ها، جمله‌ها، تصاویر یا هر چیزی که ناگهانی به ذهنت می‌رسد..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🧠 گسترش ایده</label>
-            <textarea id="hub-idea-expansion"></textarea>
+            <span class="sub-label">ایده اصلی را باز کن و ببین چه داستان‌ها، شخصیت‌ها یا موقعیت‌هایی از دل آن بیرون می‌آید.</span>
+            <textarea id="hub-idea-expansion"
+            placeholder="اگر این ایده بزرگ‌تر شود چه اتفاقی می‌افتد؟ داستان درباره چیست؟ چه مسیرهایی می‌تواند داشته باشد؟"></textarea>
         </div>
 
         <div class="field-group">
             <label>🧩 اتصال‌ها</label>
-            <textarea id="hub-connections"></textarea>
+            <span class="sub-label">بین ایده‌ها، شخصیت‌ها، اتفاقات یا موضوعات مختلف ارتباط پیدا کن.</span>
+            <textarea id="hub-connections"
+            placeholder="این ایده به چه چیزهایی شبیه است؟ چه شخصیت‌ها، مکان‌ها یا مفاهیمی به آن وصل می‌شوند؟"></textarea>
         </div>
 
         <div class="field-group">
             <label>🎧 مود نویسنده</label>
-            <textarea id="hub-mood"></textarea>
+            <span class="sub-label">فضای احساسی و ذهنی که هنگام نوشتن می‌خواهی حفظ شود.</span>
+            <textarea id="hub-mood"
+            placeholder="تاریک، آرام، هیجان‌انگیز، غمگین، رازآلود یا هر حسی که باید در داستان جریان داشته باشد..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🔬 تحقیق و نام‌سازی</label>
-            <textarea id="hub-research"></textarea>
+            <span class="sub-label">چیزهایی که نیاز به بررسی، پیدا کردن یا ساختن دارند.</span>
+            <textarea id="hub-research"
+            placeholder="نام شخصیت‌ها، مکان‌ها، اطلاعات تاریخی، علمی، فرهنگی یا جزئیاتی که باید تحقیق شوند..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🧠 کنترل تناقض‌ها</label>
-            <textarea id="hub-bugs"></textarea>
+            <span class="sub-label">جاهایی که ممکن است داستان با خودش هماهنگ نباشد را پیدا کن.</span>
+            <textarea id="hub-bugs"
+            placeholder="اشتباهات منطقی، تناقض شخصیت‌ها، مشکلات جهان داستان یا چیزهایی که باید اصلاح شوند..."></textarea>
         </div>
 
         <div class="field-group">
             <label>🚀 هدف‌گذاری</label>
-            <textarea id="hub-goals"></textarea>
+            <span class="sub-label">مسیر فعلی پروژه و قدم بعدی را مشخص کن.</span>
+            <textarea id="hub-goals"
+            placeholder="الان مهم‌ترین کاری که باید برای این داستان انجام دهم چیست؟ مرحله بعدی نوشتن چیست؟"></textarea>
         </div>
 
     </div>
 
 </div>
-
-</div>
-
     <script>
         // ۱. سوئیچ تب‌ها
         function openTab(evt, tabId) {

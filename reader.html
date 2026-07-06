@@ -80,6 +80,25 @@
 	.print-mode .tab-content {
         display: block !important;
     }
+	@media (max-width: 600px) {
+    header {
+        flex-direction: column !important; /* ستونی کردن هدر */
+        padding: 15px !important;
+        height: auto !important; /* اجازه دادن به ارتفاع برای باز شدن */
+    }
+    .header-btns {
+        flex-direction: column !important; /* ستونی کردن دکمه‌ها */
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+    .btn-pdf, .header-btns a {
+        width: 100% !important; /* پر کردن عرض */
+        margin: 5px 0 !important;
+    }
+    h1 {
+        font-size: 1.5rem !important; /* کوچک‌تر کردن فونت عنوان برای جلوگیری از شکستن خط */
+    }
+}
 </style>
 </head>
 <body>
@@ -126,6 +145,18 @@
             transition: 0.3s;
         }
         .nav-link.active { background: #e5e7eb; font-weight: bold; }
+		/* اصلاح چیدمان برای موبایل */
+@media (max-width: 600px) {
+    nav {
+        justify-content: flex-start !important; /* منو را از سمت راست شروع می‌کند تا اسکرول راحت باشد */
+        padding: 10px 5px !important;
+    }
+    .nav-link {
+        padding: 8px 15px !important; /* کمی فشرده‌تر برای نمایش دکمه‌های بیشتر */
+        font-size: 0.9rem !important;
+        flex: 0 0 auto !important; /* جلوگیری از تغییر اندازه دکمه‌ها در موبایل */
+    }
+}
     </style>
     <button class="nav-link active" onclick="openTab(event, 'tab1')">🏷️ شناسنامه</button>
     <button class="nav-link" onclick="openTab(event, 'tab2')">🎯 پیش‌شروع</button>

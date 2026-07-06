@@ -324,6 +324,25 @@ body {
             display: none !important;
         }
     }
+	@media (max-width: 600px) {
+    header {
+        flex-direction: column !important; /* ستونی کردن هدر */
+        padding: 15px !important;
+        height: auto !important; /* اجازه دادن به ارتفاع برای باز شدن */
+    }
+    .header-btns {
+        flex-direction: column !important; /* ستونی کردن دکمه‌ها */
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+    .btn-pdf, .header-btns a {
+        width: 100% !important; /* پر کردن عرض */
+        margin: 5px 0 !important;
+    }
+    h1 {
+        font-size: 1.5rem !important; /* کوچک‌تر کردن فونت عنوان برای جلوگیری از شکستن خط */
+    }
+}
     </style>
 <body>
 
@@ -358,13 +377,13 @@ body {
         
     </div>
 
-    <nav>
-        <button class="nav-link active" onclick="openTab(event, 'tab-chars')">👤 ۱. شخصیت‌ها</button>
-        <button class="nav-link" onclick="openTab(event, 'tab-world')">🌍 ۲. جهان‌سازی</button>
-        <button class="nav-link" onclick="openTab(event, 'tab-story')">📖 ۳. داستان و ماجرا</button>
-        <button class="nav-link" onclick="openTab(event, 'tab-time')">⏳ ۴. زمان و ریتم</button>
-        <button class="nav-link" onclick="openTab(event, 'tab-hub')">🎬 ۵. پشت صحنه اثر</button>
-    </nav>
+<nav style="display: flex; gap: 10px; padding: 10px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; justify-content: flex-start;">
+    <button class="nav-link active" onclick="openTab(event, 'tab-chars')">👤 ۱. شخصیت‌ها</button>
+    <button class="nav-link" onclick="openTab(event, 'tab-world')">🌍 ۲. جهان‌سازی</button>
+    <button class="nav-link" onclick="openTab(event, 'tab-story')">📖 ۳. داستان و ماجرا</button>
+    <button class="nav-link" onclick="openTab(event, 'tab-time')">⏳ ۴. زمان و ریتم</button>
+    <button class="nav-link" onclick="openTab(event, 'tab-hub')">🎬 ۵. پشت صحنه اثر</button>
+</nav>
 
     <div class="main-wrapper">
 

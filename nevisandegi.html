@@ -224,14 +224,33 @@ textarea:focus {
 /* =========================
    PRINT
 ========================= */
+
 @media print {
+
+    body {
+        overflow: visible !important;
+    }
+
     .tab-content {
         display: block !important;
+        visibility: visible !important;
+        height: auto !important;
+        overflow: visible !important;
         page-break-after: always;
     }
 
-    header, nav, footer, .mascot-box {
+    .tab-content:last-child {
+        page-break-after: auto;
+    }
+
+    header, nav, footer, .mascot-box,
+    button,
+    .no-print {
         display: none !important;
+    }
+
+    * {
+        overflow: visible !important;
     }
 }
     </style>
@@ -426,9 +445,6 @@ textarea:focus {
                 placeholder="شایعات و افسانه‌های خیابانی..."></textarea>
         </div>
     </div>
-
-<!-- TAB: WORLD -->
-<div id="tab-world" class="tab-content">
 
     <div class="layer-card">
         <h3>⏳ زمان و حافظه جهان</h3>
@@ -647,14 +663,28 @@ textarea:focus {
             });
         });
 
-        // ۳. موتور چاپ (باز کردن تب‌ها و پرینت)
-        function printAllTabs() {
-            const allTabs = document.querySelectorAll('.tab-content');
-            allTabs.forEach(tab => {
-                tab.style.display = 'block';
-            });
-            window.print();
-        }
+       // ۳. موتور چاپ (باز کردن همه تب‌ها و پرینت)
+function printAllTabs() {
+
+    const tabs = document.querySelectorAll('.tab-content');
+    const activeTab = document.querySelector('.tab-content.active');
+
+    // نمایش همه تب‌ها
+    tabs.forEach(tab => {
+        tab.classList.add('active');
+    });
+
+    window.print();
+
+    // برگرداندن به حالت اولیه
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
+}
     </script>
 	</div>
 	<footer style="margin-top: 60px; padding: 20px; text-align: center;">

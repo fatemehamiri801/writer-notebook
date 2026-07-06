@@ -229,15 +229,35 @@ textarea:focus {
 /* =========================
    PRINT
 ========================= */
+
 @media print {
-    .tab-content {
-        display: block !important;
-        page-break-after: always;
+
+    body {
+        overflow: visible !important;
     }
 
-    header, nav, footer, .mascot-box {
+    header,
+    nav,
+    footer,
+    .mascot-box,
+    button,
+    .no-print {
         display: none !important;
     }
+
+}
+/* نمایش همه تب‌ها هنگام چاپ */
+body.print-mode .tab-content {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    page-break-after: always;
+}
+
+body.print-mode .tab-content:last-child {
+    page-break-after: auto;
 }
 </style>
 </head>
@@ -467,22 +487,20 @@ textarea:focus {
         });
     });
 
-    // ۳. موتور چاپ (با روش کلاسِ CSS)
-    function printAllTabs() {
-        // اضافه کردن کلاس به کل صفحه برای نمایش تب‌ها
-        document.body.classList.add('print-mode');
+// ۳. موتور چاپ (نمایش همه تب‌ها)
+function printAllTabs() {
 
-        // اجرای پرینت
-        // از setTimeout استفاده می‌کنیم تا مرورگر فرصت کند استایل جدید را اعمال کند
-        setTimeout(() => {
-            window.print();
+    document.body.classList.add('print-mode');
 
-            // حذف کلاس بعد از بسته شدن پنجره چاپ
-            setTimeout(() => {
-                document.body.classList.remove('print-mode');
-            }, 1000);
-        }, 300);
-    }
+    setTimeout(() => {
+        window.print();
+    }, 300);
+}
+
+// بعد از بسته شدن پرینت
+window.onafterprint = function () {
+    document.body.classList.remove('print-mode');
+};
 </script>
 <footer style="margin-top: 60px; padding: 20px; text-align: center;">
     <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f5f3ff; border: 2px solid #8b5cf6; border-radius: 16px;">

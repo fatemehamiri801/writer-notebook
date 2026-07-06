@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="دفترچه من">
+    <title>دفترچه کتاب‌خوان</title>
+ <style>
+    /* 1. استایل‌های پایه و عمومی */
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #e0f2fe; color: #1e1b4b; margin: 0; }
+    header { background-color: #312e81; color: #fff; padding: 20px; text-align: center; }
+    
+    /* 2. مدیریت منو و دکمه‌ها (یکپارچه) */
+    nav { 
+        background: #fff; 
+        display: flex; 
+        justify-content: center; 
+        gap: 5px; 
+        padding: 10px; 
+        position: sticky; 
+        top: 0; 
+        z-index: 99; 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        overflow-x: auto; 
+        white-space: nowrap; 
+    }
+
+    .nav-link { 
+        padding: 12px 20px !important; 
+        font-size: 1.1rem !important; 
+        border-radius: 10px !important; 
+        cursor: pointer;
+        border: 2px solid #e0e7ff; 
+        background: #fff; 
+        font-weight: bold; 
+        color: #4b5563; 
+        transition: 0.3s ease; 
+    }
+
+    .nav-link.active { 
+        background-color: #5b21b6 !important; 
+        color: #ffffff !important; 
+        border-color: #5b21b6 !important;
+        font-weight: bold;
+    }
+
+    /* 3. ساختار محتوا */
+    .main-wrapper { max-width: 950px; margin: 30px auto; padding: 0 20px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .layer-card { background: #fff; border-radius: 16px; padding: 25px; margin-bottom: 25px; border-right: 6px solid #10b981; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    h3 { color: #312e81; margin-top: 0; }
+    label { display: block; font-weight: bold; margin: 15px 0 5px; color: #1e1b4b; font-size: 0.9rem; }
+    textarea { width: 100%; min-height: 60px; border: 2px solid #cbd5e1; border-radius: 10px; padding: 12px; box-sizing: border-box; }
+    textarea:focus { border-color: #4f46e5; outline: none; }
+
+    /* 4. استایل چاپ (Print) */
+    @media print {
+        header, nav, footer, .mascot-box, .header-btns { display: none !important; }
+        .tab-content { display: block !important; margin-bottom: 20px; page-break-after: always; }
+        body { background-color: white !important; color: black !important; }
+        .main-wrapper { margin: 0 !important; padding: 0 !important; max-width: 100% !important; }
+    }
+
+    /* 5. تنظیمات موبایل (Responsive) */
+    @media (max-width: 600px) {
+        .mascot-box { padding: 15px !important; margin: 10px !important; }
+        .mascot-box p { font-size: 1rem !important; }
+        nav { padding: 5px !important; gap: 5px !important; }
+        .nav-link { padding: 8px 12px !important; font-size: 0.85rem !important; }
+        .main-wrapper { padding: 0 10px !important; margin: 10px auto !important; }
+        .layer-card { padding: 15px !important; }
+    }
+	.print-mode .tab-content {
+        display: block !important;
+    }
+</style>
+</head>
+<body>
+
+<header style="background-color: #5b21b6; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(88, 28, 135, 0.2); width: 100%; box-sizing: border-box; margin: 0; position: relative;">
+    
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
+            🏠 بازگشت
+        </a>
+        <h1 style="margin: 0; font-size: 2.2rem; font-family: Tahoma, sans-serif; font-weight: 900; color: #facc15; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); letter-spacing: 1px; transform: rotate(-1deg); cursor: default;">
+            📖 دفترچه کتابخوان
+        </h1>
+    </div>
+    
+    <div class="header-btns" style="display: flex; gap: 15px; align-items: center;">
+        <button onclick="printAllTabs()" style="background-color: #10b981; color: #ffffff; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s;">
+            📥 خروجی PDF
+        </button>
+        <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s;">
+            👤 ارتباط با سازنده
+        </a>
+    </div>
+</header>
+
+<!-- کادر خوش‌آمدگویی (مشابه دفترچه نویسنده) -->
+<div class="mascot-box" style="display: flex; align-items: center; justify-content: center; gap: 15px; padding: 25px; background: #f3f4f6; border-radius: 12px; margin: 20px auto; max-width: 1000px; box-sizing: border-box;">
+    <span style="font-size: 40px;">📖 ✍️</span>
+    <p style="font-size: 1.3rem; color: #312e81; margin: 0; font-weight: bold;">
+        سلام کتاب‌خوان! امروز چه کتابی رو ثبت می‌کنی؟
+    </p>
+</div>
+
+<!-- منوی ناوبری (مشابه دفترچه نویسنده با استایل‌های درشت‌تر) -->
+<nav style="display: flex; justify-content: center; gap: 10px; padding: 10px; overflow-x: auto; white-space: nowrap;">
+    <style>
+        .nav-link { 
+            padding: 12px 20px !important; 
+            font-size: 1.1rem !important; 
+            border-radius: 10px !important; 
+            cursor: pointer;
+            border: none;
+            background: #fff;
+            transition: 0.3s;
+        }
+        .nav-link.active { background: #e5e7eb; font-weight: bold; }
+    </style>
+    <button class="nav-link active" onclick="openTab(event, 'tab1')">🏷️ شناسنامه</button>
+    <button class="nav-link" onclick="openTab(event, 'tab2')">🎯 پیش‌شروع</button>
+    <button class="nav-link" onclick="openTab(event, 'tab3')">👤 شخصیت‌ها</button>
+    <button class="nav-link" onclick="openTab(event, 'tab4')">🌍 جهان و سبک</button>
+    <button class="nav-link" onclick="openTab(event, 'tab5')">🔍 تحلیل و معما</button>
+    <button class="nav-link" onclick="openTab(event, 'tab6')">✍️ نگاه نویسنده</button>
+    <button class="nav-link" onclick="openTab(event, 'tab7')">💎 گنجینه</button>
+    <button class="nav-link" onclick="openTab(event, 'tab8')">🎬 اقتباس و پایان</button>
+</nav>
+
+<div class="main-wrapper">
+    <!-- تب ۱: شناسنامه -->
+    <div id="tab1" class="tab-content active">
+        <div class="layer-card">
+            <h3>شناسنامه کتاب</h3>
+            <label>نام کتاب، نویسنده، مترجم، ناشر، ژانر، زیرژانر، سال، صفحات، نسخه، زبان، کشور، جلد، تاریخ‌ها و وضعیت</label>
+            <textarea id="read-info"></textarea>
+            <label>امتیاز کلی</label><textarea id="read-score-main"></textarea>
+        </div>
+    </div>
+
+    <!-- تب ۲: پیش‌شروع -->
+    <div id="tab2" class="tab-content">
+        <div class="layer-card">
+            <h3>قبل از شروع</h3>
+            <label>چرا انتخابش کردم؟</label><textarea id="read-why"></textarea>
+            <label>انتظارات و حدسیات اولیه</label><textarea id="read-expect"></textarea>
+            <label>برداشت از جلد و خلاصه</label><textarea id="read-first-look"></textarea>
+        </div>
+    </div>
+
+    <!-- تب ۳: شخصیت‌ها -->
+    <div id="tab3" class="tab-content">
+        <div class="layer-card">
+            <h3>کالبدشکافی شخصیت‌ها</h3>
+            <label>محبوب، منفور، پیچیده، واقعی، رشد شخصیت</label><textarea id="read-chars-main"></textarea>
+            <label>همذات‌پنداری و اگر جای او بودم...</label><textarea id="read-empathy"></textarea>
+            <label>روابط (بهترین/بدترین)</label><textarea id="read-relations"></textarea>
+        </div>
+    </div>
+
+    <!-- تب ۴: جهان و سبک -->
+    <div id="tab4" class="tab-content">
+        <div class="layer-card">
+            <h3>جهان‌سازی و سبک نویسنده</h3>
+            <label>جهان (قوانین، باورپذیری، مکان، سیستم جادویی)</label><textarea id="read-world-detail"></textarea>
+            <label>سبک نویسندگی (روایت، دیالوگ، توصیف، ریتم، تعلیق)</label><textarea id="read-style-detail"></textarea>
+        </div>
+    </div>
+
+    <!-- تب ۵: تحلیل و معما -->
+    <div id="tab5" class="tab-content">
+        <div class="layer-card">
+            <h3>تحلیل فنی و پیش‌بینی</h3>
+            <label>کالبدشکافی (سوتی‌ها، حفره‌ها، نقاط قوت و ضعف)</label><textarea id="read-analysis-detail"></textarea>
+            <label>پیش‌بینی‌ها (قاتل، راز، غافلگیری‌ها)</label><textarea id="read-guesses-detail"></textarea>
+        </div>
+    </div>
+
+    <!-- تب ۶: نگاه نویسنده -->
+    <div id="tab6" class="tab-content">
+        <div class="layer-card">
+            <h3>کارگاه نویسندگی</h3>
+            <label>درس‌ها (تکنیک‌ها، شخصیت‌پردازی، دیالوگ‌نویسی، روایت)</label><textarea id="read-lessons-detail"></textarea>
+            <label>ایده‌های الهام‌بخش (شخصیت، معما، پایان)</label><textarea id="read-my-ideas-detail"></textarea>
+        </div>
+    </div>
+
+    <!-- تب ۷: گنجینه -->
+    <div id="tab7" class="tab-content">
+        <div class="layer-card">
+            <h3>گنجینه</h3>
+            <label>بهترین دیالوگ، جمله، پاراگراف، توصیف و صحنه</label><textarea id="read-treasure-detail"></textarea>
+            <label>نقل‌قول‌های مورد علاقه</label><textarea id="read-quotes-detail"></textarea>
+        </div>
+    </div>
+
+    <!-- تب ۸: اقتباس و پایان -->
+    <div id="tab8" class="tab-content">
+        <div class="layer-card">
+            <h3>اقتباس و پایان</h3>
+            <label>اگر فیلم می‌شد (بازیگر، کارگردانی، موسیقی)</label><textarea id="read-adapt-detail"></textarea>
+            <label>بعد از پایان (احساس نهایی، پیام کتاب، نامه‌ها به نویسنده)</label><textarea id="read-end-detail"></textarea>
+            <label>آرشیو (کتاب‌های مشابه، پیشنهاد بعدی)</label><textarea id="read-archive-detail"></textarea>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ۱. سوئیچ تب‌ها
+    function openTab(evt, tabId) {
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => content.classList.remove('active'));
+
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => link.classList.remove('active'));
+
+        document.getElementById(tabId).classList.add('active');
+        evt.currentTarget.classList.add('active');
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ۲. حافظه خودکار هوشمند
+    const textareas = document.querySelectorAll('textarea');
+    textareas.forEach(textarea => {
+        const saved = localStorage.getItem(textarea.id);
+        if (saved) textarea.value = saved;
+
+        textarea.addEventListener('input', () => {
+            localStorage.setItem(textarea.id, textarea.value);
+        });
+    });
+
+    // ۳. موتور چاپ (با روش کلاسِ CSS)
+    function printAllTabs() {
+        // اضافه کردن کلاس به کل صفحه برای نمایش تب‌ها
+        document.body.classList.add('print-mode');
+
+        // اجرای پرینت
+        // از setTimeout استفاده می‌کنیم تا مرورگر فرصت کند استایل جدید را اعمال کند
+        setTimeout(() => {
+            window.print();
+
+            // حذف کلاس بعد از بسته شدن پنجره چاپ
+            setTimeout(() => {
+                document.body.classList.remove('print-mode');
+            }, 1000);
+        }, 300);
+    }
+</script>
+<footer style="margin-top: 60px; padding: 20px; text-align: center;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f5f3ff; border: 2px solid #8b5cf6; border-radius: 16px;">
+        
+        <h3 style="color: #4c1d95; font-size: 1.3rem; margin: 0 0 10px 0;">
+            📖 دفترچه کتابخوان: <strong style="color: #6d28d9;">خانه جهان‌های داستانی تو</strong>
+        </h3>
+        
+        <p style="color: #374151; font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
+            با سفارش <strong>دفترچه فیزیکی</strong>، تحلیل‌هایت را ماندگار کن و <strong>«PDF اختصاصی معرفی کتاب»</strong> را به‌عنوان هدیه دریافت کن تا همیشه بهترین مقصد را برای مطالعه انتخاب کنی.
+        </p>
+        
+        <a href="https://t.me/fatemehamiri1381" target="_blank" 
+           style="background-color: #6d28d9; color: #ffffff; padding: 10px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1rem; display: inline-block; transition: 0.3s;">
+            سفارش دفترچه + هدیه 🚀
+        </a>
+    </div>
+</footer>
+</body>
+</html>

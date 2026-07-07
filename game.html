@@ -4,155 +4,464 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>بازی ۲۰۴۸ کتاب‌ها</title>
+
     <style>
-        :root { --bg-color: #fdfbf7; --board-color: #bbada0; --cell-color: #cdc1b4; }
-        * { box-sizing: border-box; font-family: tahoma, sans-serif; user-select: none; }
-        body { margin: 0; min-height: 100vh; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; padding: 20px 10px; }
-        .container { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; }
+        :root{
+            --bg-color:#fdfbf7;
+            --board-color:#bbada0;
+            --cell-color:#cdc1b4;
+        }
 
-        .home-btn { align-self: flex-end; background: #3730a3; color: white; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: bold; margin-bottom: 10px; font-size: 0.9rem; }
-        .controls { display: flex; gap: 8px; width: 100%; margin-bottom: 20px; }
-        .btn-start { background: #6a4c93; color: white; border: none; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; flex: 1; }
-        .score-box { padding: 10px; border-radius: 10px; color: white; font-weight: bold; text-align: center; flex: 1; font-size: 0.9rem; }
-        .blue { background: #4a90e2; }
-        .yellow { background: #d4ac0d; }
+        *{
+            box-sizing:border-box;
+            font-family:tahoma,sans-serif;
+            user-select:none;
+        }
 
-        #game-board { width: 100%; aspect-ratio: 1; background: var(--board-color); padding: 10px; border-radius: 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        .cell { background: var(--cell-color); border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: clamp(20px, 6vw, 40px); }
-        .number { font-size: clamp(10px, 3vw, 16px); font-weight: bold; color: #776e65; }
-        
-        /* پیام باخت - با فاصله از بورد */
-        .message { margin: 20px 0; color: #b91c1c; font-weight: bold; font-size: 1.2rem; min-height: 25px; }
+        body{
+            margin:0;
+            min-height:100vh;
+            background:var(--bg-color);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            padding:20px 10px;
+            touch-action:none;
+        }
 
-        /* فوتر راهنما */
-        footer { margin-top: auto; width: 100%; max-width: 400px; }
-        .help-box { background: #e6e6fa; padding: 15px; border-radius: 12px; color: #4b0082; text-align: center; cursor: pointer; }
+        .container{
+            width:100%;
+            max-width:400px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+
+        .home-btn{
+            align-self:flex-end;
+            background:#3730a3;
+            color:#fff;
+            padding:8px 16px;
+            border-radius:20px;
+            text-decoration:none;
+            font-weight:bold;
+            margin-bottom:10px;
+            font-size:.9rem;
+        }
+
+        .controls{
+            display:flex;
+            gap:8px;
+            width:100%;
+            margin-bottom:20px;
+        }
+
+        .btn-start{
+            background:#6a4c93;
+            color:#fff;
+            border:none;
+            padding:12px;
+            border-radius:10px;
+            font-weight:bold;
+            cursor:pointer;
+            flex:1;
+        }
+
+        .score-box{
+            padding:10px;
+            border-radius:10px;
+            color:#fff;
+            font-weight:bold;
+            text-align:center;
+            flex:1;
+            font-size:.9rem;
+        }
+
+        .blue{
+            background:#4a90e2;
+        }
+
+        .yellow{
+            background:#d4ac0d;
+        }
+
+        #game-board{
+            width:100%;
+            aspect-ratio:1;
+            background:var(--board-color);
+            padding:10px;
+            border-radius:10px;
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:10px;
+            touch-action:none;
+        }
+
+        .cell{
+            background:var(--cell-color);
+            border-radius:6px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            font-size:clamp(20px,6vw,40px);
+        }
+
+        .number{
+            font-size:clamp(10px,3vw,16px);
+            font-weight:bold;
+            color:#776e65;
+        }
+
+        .message{
+            margin:20px 0;
+            color:#b91c1c;
+            font-weight:bold;
+            font-size:1.2rem;
+            min-height:25px;
+        }
+
+        footer{
+            margin-top:auto;
+            width:100%;
+            max-width:400px;
+        }
+
+        .help-box{
+            background:#e6e6fa;
+            padding:15px;
+            border-radius:12px;
+            color:#4b0082;
+            text-align:center;
+            cursor:pointer;
+        }
     </style>
 </head>
+
 <body>
 
 <div class="container">
+
     <a href="index.html" class="home-btn">خانه 🏠</a>
-    <div style="font-size: clamp(40px, 10vw, 60px); margin-bottom: 15px;">📖</div>
+
+    <div style="font-size:clamp(40px,10vw,60px);margin-bottom:15px;">📖</div>
 
     <div class="controls">
         <button onclick="startNewGame()" class="btn-start">شروع</button>
-        <div class="score-box blue">امتیاز: <span id="score">0</span></div>
-        <div class="score-box yellow">رکورد: <span id="best">0</span></div>
+
+        <div class="score-box blue">
+            امتیاز:
+            <span id="score">0</span>
+        </div>
+
+        <div class="score-box yellow">
+            رکورد:
+            <span id="best">0</span>
+        </div>
     </div>
 
     <div id="game-board"></div>
+
     <div class="message" id="message"></div>
 
-   <footer>
+    <footer>
         <details class="help-box">
             <summary>راهنمای بازی</summary>
-            <p style="margin-top: 10px; font-size: 0.9rem;">در این بازی باید اعداد مشابه را ترکیب کنی تا به اعداد بزرگتری تبدیل شوند. هدف نهایی رسیدن به ۲۰۴۸ است.</p>
+
+            <p style="margin-top:10px;font-size:.9rem;">
+                در این بازی باید اعداد مشابه را ترکیب کنی تا به اعداد بزرگتری تبدیل شوند.
+                هدف نهایی رسیدن به ۲۰۴۸ است.
+            </p>
+
         </details>
     </footer>
+
 </div>
 
 <script>
-    let grid = [], score = 0, best = localStorage.getItem("bookBest") || 0;
-    const icons = { 2:"📕", 4:"📗", 8:"📘", 16:"📖", 32:"📒", 64:"📓", 128:"📔", 256:"📜", 512:"📝", 1024:"🖋️", 2048:"✒️" };
-    document.getElementById("best").innerText = best;
 
-    function startNewGame() {
-        grid = Array(4).fill().map(() => Array(4).fill(0));
-        score = 0;
-        document.getElementById("message").innerText = "";
-        addTile(); addTile();
-        updateView();
-    }
+let grid=[];
+let score=0;
+let best=localStorage.getItem("bookBest") || 0;
 
-    function addTile() {
-        let empty = [];
-        for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) if (grid[r][c] === 0) empty.push({r, c});
-        if (empty.length > 0) {
-            let {r, c} = empty[Math.floor(Math.random() * empty.length)];
-            grid[r][c] = Math.random() < 0.9 ? 2 : 4;
-        }
-    }
+const icons={
+2:"📕",
+4:"📗",
+8:"📘",
+16:"📖",
+32:"📒",
+64:"📓",
+128:"📔",
+256:"📜",
+512:"📝",
+1024:"🖋️",
+2048:"✒️"
+};
 
-    function slide(row) {
-        let arr = row.filter(val => val);
-        let newRow = [];
-        let skip = false;
-        for (let i = 0; i < arr.length; i++) {
-            if (skip) { skip = false; continue; }
-            if (i < arr.length - 1 && arr[i] === arr[i + 1]) {
-                let merged = arr[i] * 2;
-                newRow.push(merged);
-                score += merged;
-                skip = true;
-            } else {
-                newRow.push(arr[i]);
+document.getElementById("best").innerText=best;
+
+function startNewGame(){
+
+    grid=Array(4).fill().map(()=>Array(4).fill(0));
+
+    score=0;
+
+    document.getElementById("message").innerText="";
+
+    addTile();
+    addTile();
+
+    updateView();
+
+}
+
+function addTile(){
+
+    let empty=[];
+
+    for(let r=0;r<4;r++){
+
+        for(let c=0;c<4;c++){
+
+            if(grid[r][c]===0){
+
+                empty.push({r,c});
+
             }
+
         }
-        while (newRow.length < 4) newRow.push(0);
-        return newRow;
+
     }
 
-    function move(dir) {
-        let gridBeforeMove = JSON.stringify(grid);
-        if (dir === 'left' || dir === 'right') {
-            for (let r = 0; r < 4; r++) {
-                if (dir === 'right') grid[r].reverse();
-                grid[r] = slide(grid[r]);
-                if (dir === 'right') grid[r].reverse();
+    if(empty.length){
+
+        let {r,c}=empty[Math.floor(Math.random()*empty.length)];
+
+        grid[r][c]=Math.random()<0.9 ? 2 : 4;
+
+    }
+
+}
+
+function slide(row){
+
+    let arr=row.filter(v=>v);
+
+    let newRow=[];
+
+    let skip=false;
+	    for(let i=0;i<arr.length;i++){
+
+        if(skip){
+            skip=false;
+            continue;
+        }
+
+        if(i<arr.length-1 && arr[i]===arr[i+1]){
+
+            let merged=arr[i]*2;
+
+            newRow.push(merged);
+
+            score+=merged;
+
+            skip=true;
+
+        }else{
+
+            newRow.push(arr[i]);
+
+        }
+
+    }
+
+    while(newRow.length<4){
+
+        newRow.push(0);
+
+    }
+
+    return newRow;
+
+}
+
+function move(dir){
+
+    let before=JSON.stringify(grid);
+
+    if(dir==="left" || dir==="right"){
+
+        for(let r=0;r<4;r++){
+
+            if(dir==="right") grid[r].reverse();
+
+            grid[r]=slide(grid[r]);
+
+            if(dir==="right") grid[r].reverse();
+
+        }
+
+    }else{
+
+        for(let c=0;c<4;c++){
+
+            let col=[
+                grid[0][c],
+                grid[1][c],
+                grid[2][c],
+                grid[3][c]
+            ];
+
+            if(dir==="down") col.reverse();
+
+            let res=slide(col);
+
+            if(dir==="down") res.reverse();
+
+            for(let r=0;r<4;r++){
+
+                grid[r][c]=res[r];
+
             }
+
+        }
+
+    }
+
+    if(before!==JSON.stringify(grid)){
+
+        setTimeout(()=>{
+
+            addTile();
+
+            updateView();
+
+            if(score>best){
+
+                best=score;
+
+                localStorage.setItem("bookBest",best);
+
+                document.getElementById("best").innerText=best;
+
+            }
+
+            if(isGameOver()){
+
+                document.getElementById("message").innerText="باختید! 😔";
+
+            }
+
+        },100);
+
+    }
+
+}
+
+function isGameOver(){
+
+    for(let r=0;r<4;r++){
+
+        for(let c=0;c<4;c++){
+
+            if(
+                grid[r][c]===0 ||
+                (c<3 && grid[r][c]===grid[r][c+1]) ||
+                (r<3 && grid[r][c]===grid[r+1][c])
+            ){
+
+                return false;
+
+            }
+
+        }
+
+    }
+
+    return true;
+
+}
+
+function updateView(){
+
+    const board=document.getElementById("game-board");
+
+    board.innerHTML="";
+
+    grid.flat().forEach(val=>{
+
+        let cell=document.createElement("div");
+
+        cell.className="cell";
+
+        if(val){
+
+            cell.innerHTML=`${icons[val]}<div class='number'>${val}</div>`;
+
+        }
+
+        board.appendChild(cell);
+
+    });
+
+    document.getElementById("score").innerText=score;
+
+}
+
+/* ---------- کیبورد ---------- */
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key.includes("Arrow")){
+
+        move(e.key.replace("Arrow","").toLowerCase());
+
+    }
+
+});
+
+/* ---------- لمس و ماوس با Pointer Events ---------- */
+
+let startX=0;
+let startY=0;
+
+document.addEventListener("pointerdown",e=>{
+
+    startX=e.clientX;
+
+    startY=e.clientY;
+
+});
+document.addEventListener("pointerup", e => {
+
+    let dx = e.clientX - startX;
+    let dy = e.clientY - startY;
+
+    if (Math.abs(dx) < 30 && Math.abs(dy) < 30) return;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+
+        if (dx > 0) {
+            move("right");
         } else {
-            for (let c = 0; c < 4; c++) {
-                let col = [grid[0][c], grid[1][c], grid[2][c], grid[3][c]];
-                if (dir === 'down') col.reverse();
-                let res = slide(col);
-                if (dir === 'down') res.reverse();
-                for (let r = 0; r < 4; r++) grid[r][c] = res[r];
-            }
+            move("left");
         }
-        if (gridBeforeMove !== JSON.stringify(grid)) {
-            setTimeout(() => {
-                addTile(); 
-                updateView();
-                if (score > best) { best = score; localStorage.setItem("bookBest", best); document.getElementById("best").innerText = best; }
-                if (isGameOver()) document.getElementById("message").innerText = "باختید! 😔";
-            }, 100);
+
+    } else {
+
+        if (dy > 0) {
+            move("down");
+        } else {
+            move("up");
         }
+
     }
 
-    function isGameOver() {
-        for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) 
-            if (grid[r][c] === 0 || (c < 3 && grid[r][c] === grid[r][c+1]) || (r < 3 && grid[r][c] === grid[r+1][c])) return false;
-        return true;
-    }
+});
 
-    function updateView() {
-        const board = document.getElementById("game-board");
-        board.innerHTML = "";
-        grid.flat().forEach(val => {
-            let cell = document.createElement("div");
-            cell.className = "cell";
-            if (val) cell.innerHTML = `${icons[val]}<div class='number'>${val}</div>`;
-            board.appendChild(cell);
-        });
-        document.getElementById("score").innerText = score;
-    }
+startNewGame();
 
-    document.addEventListener("keydown", e => {
-        if(e.key.includes("Arrow")) move(e.key.replace("Arrow", "").toLowerCase());
-    });
-
-    let x1, y1;
-    document.addEventListener("mousedown", e => { x1 = e.clientX; y1 = e.clientY; });
-    document.addEventListener("mouseup", e => {
-        let dx = e.clientX - x1, dy = e.clientY - y1;
-        if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
-            if (Math.abs(dx) > Math.abs(dy)) move(dx > 0 ? "right" : "left");
-            else move(dy > 0 ? "down" : "up");
-        }
-    });
-
-    startNewGame();
 </script>
+
 </body>
 </html>

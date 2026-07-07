@@ -293,7 +293,7 @@ transform:scale(1);
         <div class="score-box">رکورد: <span id="best">32</span></div>
         <div class="score-box">امتیاز: <span id="score">0</span></div>
     </div>
-    <button onclick="restartGame()" class="start-btn">شروع</button>
+    <button onclick="restartGame()" class="start-btn">شروع دوباره</button>
 </div>
 
 
@@ -705,15 +705,19 @@ function move(direction){
 
 
 
-    if(old!==JSON.stringify(grid)){
-
-
+if (old !== JSON.stringify(grid)) {
         addRandomTile();
-
-
         draw();
-
-
+        
+        if (checkGameOver()) {
+            document.getElementById("message").innerHTML = 
+                "<span style='color: #b91c1c; font-weight: bold;'>بازی تمام شد!</span>";
+        }
+    } else {
+        if (checkGameOver()) {
+            document.getElementById("message").innerHTML = 
+                "<span style='color: #b91c1c; font-weight: bold;'>بازی تمام شد!</span>";
+        }
     }
 
 
@@ -913,7 +917,22 @@ document.addEventListener("mouseup",function(e){
 
 
 
+function checkGameOver() {
+    // اگر هنوز خانه خالی (0) داریم، بازی ادامه دارد
+    if (grid.includes(0)) return false;
 
+    // اگر خانه خالی نداریم، چک کنیم آیا ترکیب مجاوری وجود دارد؟
+    for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 4; c++) {
+            let current = grid[r * 4 + c];
+            // بررسی افقی (راست)
+            if (c < 3 && current === grid[r * 4 + c + 1]) return false;
+            // بررسی عمودی (پایین)
+            if (r < 3 && current === grid[r * 4 + c + 4]) return false;
+        }
+    }
+    return true;
+}
 
 function restartGame(){
 
@@ -928,8 +947,6 @@ function restartGame(){
 
 
 startGame();
-
-
 
 </script>
 

@@ -1,10 +1,11 @@
-const CACHE_NAME = "writer-notebook-v16";
+const CACHE_NAME = "writer-notebook-v17"; //عدد ورژن را تغییر بده تا کش قدیمی پاک شود
 
 const ASSETS = [
     "./",
     "./index.html",
     "./nevisandegi.html",
     "./reader.html",
+    "./game.html",    
     "./manifest.json"
 ];
 

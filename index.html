@@ -7,7 +7,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<!-- PWA -->
 <link rel="manifest" href="manifest.json">
 
 <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
@@ -29,133 +28,170 @@
 }
 
 
-body { 
+body {
 
-    font-family: 'Segoe UI', Tahoma, sans-serif; 
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 
-    background: #f8fafc; 
+    background:
+    radial-gradient(circle at top, #eef2ff, #f8fafc 45%);
 
-    margin: 0; 
+    margin: 0;
 
     padding: 20px;
 
-    display: flex; 
+    display: flex;
 
-    flex-direction: column; 
+    flex-direction: column;
 
-    align-items: center; 
+    align-items: center;
 
     min-height: 100vh;
 
 }
 
 
-h1 { 
+h1 {
 
-    color: #312e81; 
+    color: #312e81;
 
-    margin: 40px 0; 
-
-    text-align: center; 
-
-}
-
-
-.container { 
-
-    display: flex; 
-
-    gap: 20px; 
-
-    width: 100%; 
-
-    max-width: 600px; 
-
-    justify-content: center;
-
-}
-
-
-.box { 
-
-    background: white; 
-
-    padding: 30px; 
-
-    border-radius: 20px; 
+    margin: 45px 0 35px;
 
     text-align: center;
 
-    width: 100%; 
+    font-size: 1.8rem;
 
-    max-width: 250px;
+}
 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
 
-    transition: 0.3s;
+.container {
 
-    border: 2px solid #e2e8f0; 
+    display: flex;
 
-    text-decoration: none; 
+    gap: 22px;
 
-    display: block; 
+    width: 100%;
+
+    max-width: 850px;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+}
+
+
+.box {
+
+    background: rgba(255,255,255,0.85);
+
+    backdrop-filter: blur(8px);
+
+    padding: 30px 20px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    width: 100%;
+
+    max-width: 240px;
+
+    min-height: 220px;
+
+    box-shadow:
+    0 10px 25px rgba(49,46,129,0.08);
+
+    transition: all 0.3s ease;
+
+    border: 2px solid #e2e8f0;
+
+    text-decoration: none;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
 
     color: #1e1b4b;
 
 }
 
 
-.box:hover { 
+.box:hover {
 
-    border-color: #5b21b6; 
+    border-color: #5b21b6;
 
-    transform: translateY(-5px); 
+    transform: translateY(-8px);
 
-}
-
-
-.emoji { 
-
-    font-size: 60px; 
-
-    margin-bottom: 10px; 
-
-    display: block; 
+    box-shadow:
+    0 15px 30px rgba(91,33,182,0.15);
 
 }
 
 
+.emoji {
 
-@media (max-width:600px) {
+    font-size: 62px;
+
+    margin-bottom: 15px;
+
+    display: block;
+
+}
 
 
-    .container { 
+h2 {
 
-        flex-direction: column; 
+    font-size: 1.15rem;
 
-        align-items: center; 
+    margin: 0;
+
+}
+
+
+@media(max-width:600px) {
+
+
+    body {
+
+        padding: 15px;
 
     }
 
 
-    .box { 
+    h1 {
 
-        max-width: 100%; 
+        font-size: 1.4rem;
 
-        padding: 25px; 
+        margin: 25px 0;
 
     }
 
 
-    h1 { 
+    .container {
 
-        font-size: 1.4rem; 
+        flex-direction: column;
 
-        margin: 20px 0; 
+        align-items: center;
+
+        gap: 18px;
+
+    }
+
+
+    .box {
+
+        max-width: 100%;
+
+        min-height: 190px;
 
     }
 
 }
+
 
 </style>
 
@@ -167,7 +203,7 @@ h1 {
 
 
 <h1>
-    کدام دفترچه را باز کنیم؟
+کدام دفترچه را باز کنیم؟
 </h1>
 
 
@@ -175,28 +211,35 @@ h1 {
 <div class="container">
 
 
-    <a href="nevisandegi.html" class="box">
+<a href="nevisandegi.html" class="box">
 
-        <span class="emoji">🖋️</span>
+<span class="emoji">🖋️</span>
 
-        <h2>
-            دفترچه نویسندگی
-        </h2>
+<h2>
+دفترچه نویسندگی
+</h2>
 
-    </a>
+</a>
 
 
 
-    <a href="reader.html" class="box">
+<a href="reader.html" class="box">
 
-        <span class="emoji">📖</span>
+<span class="emoji">📖</span>
 
-        <h2>
-            دفترچه کتاب‌خوان
-        </h2>
+<h2>
+دفترچه کتاب‌خوان
+</h2>
 
-    </a>
+</a>
 
+
+
+<a href="game.html" class="box" style="text-decoration: none; color: inherit; display: block; text-align: center; padding: 20px; border: 2px solid #ccc; border-radius: 15px; transition: 0.3s;">
+    <span class="emoji">🎮</span>
+    <h2>بازی کتاب‌ها</h2>
+    <p>به کتاب ۲۰۴۸ برسید!</p>
+</a>
 
 </div>
 
@@ -207,30 +250,30 @@ h1 {
 
 if ('serviceWorker' in navigator) {
 
-    window.addEventListener('load', () => {
+window.addEventListener('load', () => {
 
 
-        navigator.serviceWorker.register('sw.js')
+navigator.serviceWorker.register('sw.js')
 
 
-        .then(registration => {
+.then(registration => {
 
-            console.log('Service Worker فعال شد');
+console.log('Service Worker فعال شد');
 
-            registration.update();
-
-
-        })
+registration.update();
 
 
-        .catch(error => {
-
-            console.log('Service Worker خطا:', error);
-
-        });
+})
 
 
-    });
+.catch(error => {
+
+console.log('Service Worker خطا:', error);
+
+});
+
+
+});
 
 }
 
@@ -238,8 +281,6 @@ if ('serviceWorker' in navigator) {
 </script>
 
 
-
 </body>
 
 </html>
-```

@@ -1,4 +1,4 @@
-const CACHE_NAME = "writer-notebook-v18"; //عدد ورژن را تغییر بده تا کش قدیمی پاک شود
+const CACHE_NAME = "writer-notebook-v19"; //عدد ورژن را تغییر بده تا کش قدیمی پاک شود
 
 const ASSETS = [
     "./",

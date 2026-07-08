@@ -1,467 +1,3468 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>بازی ۲۰۴۸ کتاب‌ها</title>
 
-    <style>
-        :root{
-            --bg-color:#fdfbf7;
-            --board-color:#bbada0;
-            --cell-color:#cdc1b4;
-        }
+<meta charset="UTF-8">
 
-        *{
-            box-sizing:border-box;
-            font-family:tahoma,sans-serif;
-            user-select:none;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body{
-            margin:0;
-            min-height:100vh;
-            background:var(--bg-color);
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            padding:20px 10px;
-            touch-action:none;
-        }
+<title>کتابخانه اسرارآمیز | بازی کتاب‌ها</title>
 
-        .container{
-            width:100%;
-            max-width:400px;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-        }
 
-        .home-btn{
-            align-self:flex-end;
-            background:#3730a3;
-            color:#fff;
-            padding:8px 16px;
-            border-radius:20px;
-            text-decoration:none;
-            font-weight:bold;
-            margin-bottom:10px;
-            font-size:.9rem;
-        }
+<style>
 
-        .controls{
-            display:flex;
-            gap:8px;
-            width:100%;
-            margin-bottom:20px;
-        }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Tahoma,Arial,sans-serif;
+}
 
-        .btn-start{
-            background:#6a4c93;
-            color:#fff;
-            border:none;
-            padding:12px;
-            border-radius:10px;
-            font-weight:bold;
-            cursor:pointer;
-            flex:1;
-        }
 
-        .score-box{
-            padding:10px;
-            border-radius:10px;
-            color:#fff;
-            font-weight:bold;
-            text-align:center;
-            flex:1;
-            font-size:.9rem;
-        }
 
-        .blue{
-            background:#4a90e2;
-        }
+body{
 
-        .yellow{
-            background:#d4ac0d;
-        }
+min-height:100vh;
 
-        #game-board{
-            width:100%;
-            aspect-ratio:1;
-            background:var(--board-color);
-            padding:10px;
-            border-radius:10px;
-            display:grid;
-            grid-template-columns:repeat(4,1fr);
-            gap:10px;
-            touch-action:none;
-        }
+display:flex;
 
-        .cell{
-            background:var(--cell-color);
-            border-radius:6px;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
-            justify-content:center;
-            font-size:clamp(20px,6vw,40px);
-        }
+justify-content:center;
 
-        .number{
-            font-size:clamp(10px,3vw,16px);
-            font-weight:bold;
-            color:#776e65;
-        }
+align-items:center;
 
-        .message{
-            margin:20px 0;
-            color:#b91c1c;
-            font-weight:bold;
-            font-size:1.2rem;
-            min-height:25px;
-        }
+background:
+linear-gradient(
+135deg,
+#eee7dc,
+#c8e6c9
+);
 
-        footer{
-            margin-top:auto;
-            width:100%;
-            max-width:400px;
-        }
+color:#3e2723;
 
-        .help-box{
-            background:#e6e6fa;
-            padding:15px;
-            border-radius:12px;
-            color:#4b0082;
-            text-align:center;
-            cursor:pointer;
-        }
-    </style>
+overflow-x:hidden;
+
+padding:15px;
+
+}
+
+
+/* کادر اصلی بازی */
+
+.game-container{
+
+width:min(95vw,520px);
+
+max-height:95vh;
+
+overflow-y:auto;
+
+overflow-x:hidden;
+
+background:
+
+linear-gradient(
+135deg,
+#fff8dc,
+#ffe082
+);
+
+border-radius:28px;
+
+padding:20px;
+
+box-shadow:
+
+0 15px 40px rgba(0,0,0,.2);
+
+text-align:center;
+
+}
+
+
+
+/* عنوان */
+
+.title{
+
+font-size:clamp(22px,5vw,32px);
+
+color:#5d4037;
+
+margin-bottom:8px;
+
+}
+
+
+
+.subtitle{
+
+font-size:14px;
+
+color:#795548;
+
+margin-bottom:15px;
+
+}
+
+
+
+/* اطلاعات بالا */
+
+.info-panel{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:8px;
+
+margin-bottom:12px;
+
+}
+
+
+
+.info-box{
+
+background:
+
+linear-gradient(
+135deg,
+#fff3cd,
+#ffcc80
+);
+
+border-radius:16px;
+
+padding:9px 5px;
+
+font-size:13px;
+
+box-shadow:
+
+0 4px 10px rgba(0,0,0,.1);
+
+}
+
+
+
+.info-box span{
+
+display:block;
+
+font-size:20px;
+
+font-weight:bold;
+
+margin-top:4px;
+
+}
+
+
+
+/* پنل کتابخانه */
+
+.library-panel{
+
+background:
+
+rgba(255,255,255,.55);
+
+border-radius:18px;
+
+padding:12px;
+
+margin-bottom:12px;
+
+font-size:14px;
+
+box-shadow:
+
+0 5px 15px rgba(0,0,0,.08);
+
+}
+
+
+.library-panel strong{
+
+color:#6d4c41;
+
+}
+
+
+
+/* دکمه شروع */
+
+.start-btn{
+
+border:none;
+
+background:
+
+linear-gradient(
+135deg,
+#8d6e63,
+#4e342e
+);
+
+color:white;
+
+padding:12px 35px;
+
+border-radius:30px;
+
+font-size:16px;
+
+cursor:pointer;
+
+margin-bottom:10px;
+
+transition:.3s;
+
+}
+
+
+
+.start-btn:hover{
+
+transform:scale(1.05);
+
+}
+
+
+
+/* پیام */
+
+#message{
+
+min-height:25px;
+
+margin:8px 0;
+
+font-weight:bold;
+
+color:#6d4c41;
+
+}
+
+
+
+/* صفحه بازی */
+
+#board{
+
+width:min(90vw,430px);
+
+aspect-ratio:1;
+
+margin:10px auto;
+
+display:grid;
+
+grid-template-columns:repeat(8,1fr);
+
+gap:6px;
+
+padding:10px;
+
+
+background:
+
+linear-gradient(
+135deg,
+#9e8b83,
+#6d4c41
+);
+
+
+border-radius:22px;
+
+
+box-shadow:
+
+inset 0 0 20px rgba(0,0,0,.25);
+
+
+touch-action:none;
+
+}
+
+
+
+/* خانه ها */
+
+.cell{
+
+aspect-ratio:1;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+
+font-size:clamp(15px,3.5vw,28px);
+
+
+background:
+
+linear-gradient(
+135deg,
+#fffdf5,
+#f3dfbd
+);
+
+
+border-radius:10px;
+
+cursor:pointer;
+
+user-select:none;
+
+
+transition:
+
+transform .25s ease,
+
+opacity .25s ease,
+
+box-shadow .25s ease;
+
+}
+
+
+
+.cell:hover{
+
+transform:scale(1.05);
+
+box-shadow:
+
+0 5px 12px rgba(0,0,0,.15);
+
+}
+
+
+
+.cell.selected{
+
+transform:scale(1.12);
+
+background:#fff3cd;
+
+box-shadow:
+
+0 0 15px rgba(255,193,7,.8);
+
+}
+
+
+
+/* حذف */
+
+.cell.removing{
+
+animation:bookRemove .35s forwards;
+
+}
+
+
+@keyframes bookRemove{
+
+0%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+50%{
+
+transform:scale(1.3) rotate(15deg);
+
+opacity:.5;
+
+}
+
+100%{
+
+transform:scale(0);
+
+opacity:0;
+
+}
+
+}
+
+
+
+/* سقوط */
+
+.cell.falling{
+
+animation:bookFall .35s;
+
+}
+
+
+@keyframes bookFall{
+
+from{
+
+transform:translateY(-40px);
+
+opacity:0;
+
+}
+
+to{
+
+transform:translateY(0);
+
+opacity:1;
+
+}
+
+}
+
+
+
+/* حرکت اشتباه */
+
+.cell.invalid{
+
+animation:shake .35s;
+
+}
+
+
+@keyframes shake{
+
+0%,100%{
+
+transform:translateX(0);
+
+}
+
+25%{
+
+transform:translateX(-7px);
+
+}
+
+50%{
+
+transform:translateX(7px);
+
+}
+
+75%{
+
+transform:translateX(-5px);
+
+}
+
+}
+
+
+
+/* کتاب ویژه */
+
+.cell.special{
+
+font-size:clamp(13px,3vw,22px);
+
+}
+
+
+/* طلایی */
+
+.cell.gold-book{
+
+background:
+
+linear-gradient(
+135deg,
+#fff176,
+#ffb300
+);
+
+box-shadow:
+
+0 0 20px #ffc107;
+
+animation:goldGlow 1s infinite alternate;
+
+}
+
+
+
+@keyframes goldGlow{
+
+from{
+
+transform:scale(1);
+
+}
+
+to{
+
+transform:scale(1.08);
+
+}
+
+}
+
+
+
+/* جادویی */
+
+.cell.magic-book{
+
+background:
+
+linear-gradient(
+135deg,
+#ce93d8,
+#7b1fa2
+);
+
+box-shadow:
+
+0 0 22px #9c27b0;
+
+animation:magicGlow 1.2s infinite alternate;
+
+}
+
+
+
+@keyframes magicGlow{
+
+from{
+
+filter:hue-rotate(0);
+
+}
+
+to{
+
+filter:hue-rotate(40deg);
+
+}
+
+}
+
+
+
+/* زمان */
+
+.cell.time-book{
+
+background:
+
+linear-gradient(
+135deg,
+#80deea,
+#0288d1
+);
+
+box-shadow:
+
+0 0 22px #03a9f4;
+
+animation:timeGlow 1s infinite alternate;
+
+}
+
+
+
+@keyframes timeGlow{
+
+from{
+
+transform:rotate(-3deg);
+
+}
+
+to{
+
+transform:rotate(3deg);
+
+}
+
+}
+
+
+
+/* ظاهر شدن ویژه */
+
+.cell.new-special{
+
+animation:specialAppear .6s;
+
+}
+
+
+
+@keyframes specialAppear{
+
+0%{
+
+transform:scale(0) rotate(180deg);
+
+opacity:0;
+
+}
+
+60%{
+
+transform:scale(1.3);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+
+
+/* مجموعه کتاب */
+
+.collection{
+
+display:flex;
+
+justify-content:center;
+
+gap:8px;
+
+flex-wrap:wrap;
+
+margin-top:10px;
+
+}
+
+
+
+.book-item{
+
+font-size:25px;
+
+opacity:.35;
+
+filter:grayscale(1);
+
+}
+
+
+
+.book-item.unlocked{
+
+opacity:1;
+
+filter:none;
+
+transform:scale(1.1);
+
+}
+
+
+
+/* دکمه ها */
+
+.library-btn{
+
+margin-top:10px;
+
+border:none;
+
+background:#795548;
+
+color:white;
+
+padding:10px 20px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+font-size:14px;
+
+}
+
+
+
+.library-btn:hover{
+
+transform:scale(1.05);
+
+}
+
+
+
+/* راهنما */
+
+.help-box{
+
+margin-top:12px;
+
+}
+
+
+.help-box summary{
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+
+
+.help-box p{
+
+max-height:160px;
+
+overflow-y:auto;
+
+line-height:1.8;
+
+font-size:.9rem;
+
+}
+
+
+
+/* افکت راهنما */
+
+.cell.hint{
+
+animation:hintGlow .8s infinite alternate;
+
+}
+
+
+@keyframes hintGlow{
+
+from{
+
+box-shadow:0 0 5px #ffd54f;
+
+}
+
+to{
+
+box-shadow:0 0 25px #ffb300;
+
+transform:scale(1.1);
+
+}
+
+}
+
+
+
+/* موبایل */
+
+@media(max-width:500px){
+
+.game-container{
+
+padding:15px;
+
+border-radius:22px;
+
+}
+
+
+#board{
+
+gap:5px;
+
+padding:8px;
+
+}
+
+
+.info-box{
+
+font-size:12px;
+
+}
+
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-<div class="container">
 
-    <a href="index.html" class="home-btn">خانه 🏠</a>
+<div class="game-container">
 
-    <div style="font-size:clamp(40px,10vw,60px);margin-bottom:15px;">📖</div>
+<div style="display: flex; align-items: center; gap: 20px;">
+    <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
+        🏠 بازگشت
+    </a>
+</div>
 
-    <div class="controls">
-        <button onclick="startNewGame()" class="btn-start">شروع</button>
+<h1 class="title">
 
-        <div class="score-box blue">
-            امتیاز:
-            <span id="score">0</span>
-        </div>
+📚 کتابخانه اسرارآمیز
 
-        <div class="score-box yellow">
-            رکورد:
-            <span id="best">0</span>
-        </div>
-    </div>
+</h1>
 
-    <div id="game-board"></div>
 
-    <div class="message" id="message"></div>
 
-    <footer>
-        <details class="help-box">
-            <summary>راهنمای بازی</summary>
 
-            <p style="margin-top:10px;font-size:.9rem;">
-                در این بازی باید اعداد مشابه را ترکیب کنی تا به اعداد بزرگتری تبدیل شوند.
-                هدف نهایی رسیدن به ۲۰۴۸ است.
-            </p>
 
-        </details>
-    </footer>
+
+
+
+<div class="info-panel">
+
+
+
+<div class="info-box">
+
+⭐ امتیاز
+
+<span id="score">
+
+0
+
+</span>
 
 </div>
 
+
+
+
+<div class="info-box">
+
+🏆 رکورد
+
+<span id="high-score">
+
+0
+
+</span>
+
+</div>
+
+
+
+
+<div class="info-box">
+
+⏳ زمان
+
+<span id="timer">
+
+180
+
+</span>
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="library-panel">
+
+
+<div class="library-panel">
+
+
+📖 سطح خواننده:
+
+<strong id="reader-level">
+
+🌱 تازه‌کار
+
+</strong>
+
+
+<br>
+
+
+آخرین کشف:
+
+<strong id="current-book">
+
+هنوز کتابی کشف نشده 📖
+
+</strong>
+
+
+<div class="collection" id="collection">
+
+
+<div class="book-item unlocked">
+
+📕
+
+</div>
+
+
+<div class="book-item">
+
+📗
+
+</div>
+
+
+<div class="book-item">
+
+📘
+
+</div>
+
+
+<div class="book-item">
+
+📙
+
+</div>
+
+
+<div class="book-item">
+
+📚
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<button class="start-btn" onclick="startGame()">
+
+
+شروع بازی 📖
+
+
+</button>
+
+
+
+
+
+<div id="message">
+
+
+</div>
+
+
+
+
+
+<div id="board">
+
+
+</div>
+
+
+
+
+<button class="library-btn" onclick="openLibrary()">
+
+
+📚 کتابخانه من
+
+
+</button>
+
+
+<footer>
+
+<details class="help-box">
+
+<summary>📖 راهنمای بازی</summary>
+
+
+<p style="margin-top:10px;font-size:.9rem;line-height:1.8;">
+
+
+📚 <b>هدف بازی:</b><br>
+سه کتاب مشابه را کنار هم قرار بده و امتیاز بگیر.
+
+
+<br><br>
+
+
+✨ <b>کتاب‌های ویژه:</b><br>
+
+👑📖 کتاب طلایی:
+یک ردیف کامل را پاک می‌کند.
+
+<br>
+
+✨📚 کتاب جادویی:
+تمام کتاب‌های مشابه را حذف می‌کند.
+
+<br>
+
+⏳📖 کتاب زمان:
+۲۰ ثانیه به زمان اضافه می‌کند.
+
+
+<br><br>
+
+
+🏆 <b>سطح‌های خواننده:</b><br>
+
+🌱 تازه‌کار<br>
+🌿 کتابخوان<br>
+📚 عاشق داستان<br>
+🔍 جستجوگر<br>
+🏛️ استاد کتاب
+
+
+<br><br>
+
+
+💡 راهنما فقط ۶ بار در هر بازی قابل استفاده است.
+
+
+</p>
+
+
+</details>
+</button>
+</footer>
+<button class="library-btn" onclick="showHint()">
+
+
+💡 پیدا کردن حرکت
+
+
+
 <script>
 
-let grid=[];
-let score=0;
-let best=localStorage.getItem("bookBest") || 0;
 
-const icons={
-2:"📕",
-4:"📗",
-8:"📘",
-16:"📖",
-32:"📒",
-64:"📓",
-128:"📔",
-256:"📜",
-512:"📝",
-1024:"🖋️",
-2048:"✒️"
+// =========================
+// اطلاعات کتاب‌ها
+// =========================
+
+
+const books = [
+
+"📕",
+
+"📗",
+
+"📘",
+
+"📙",
+
+"📖",
+
+"📓",
+
+"📔",
+
+"📒",
+
+"📚"
+
+];
+
+
+
+
+// =========================
+// سطح‌های قابل کشف
+// =========================
+
+
+const unlockBooks = [
+
+
+{
+
+score:0,
+
+icon:"📕",
+
+level:"🌱 تازه‌کار"
+
+},
+
+
+{
+
+score:300,
+
+icon:"📗",
+
+level:"🌿 کتابخوان"
+
+},
+
+
+{
+
+score:800,
+
+icon:"📘",
+
+level:"📚 عاشق داستان"
+
+},
+
+
+{
+
+score:1500,
+
+icon:"📙",
+
+level:"🔍 جستجوگر"
+
+},
+
+
+{
+
+score:3000,
+
+icon:"📚",
+
+level:"🏛️ استاد کتاب"
+
+}
+
+
+];
+
+
+
+
+
+
+const boardSize = 8;
+
+
+
+let board=[];
+
+
+let score=0;
+
+
+let highScore=0;
+
+
+let combo=0;
+
+
+let timer;
+
+
+let timeLeft=180;
+
+
+let gameStarted=false;
+
+
+let selectedCell=null;
+
+
+let oldBoard=null;
+
+
+// تعداد راهنما
+
+let hintCount=6;
+
+
+
+// کتاب‌های ویژه
+
+const specialBooks = {
+
+gold:"👑📖",
+
+magic:"✨📚",
+
+time:"⏳📖"
+
 };
 
-document.getElementById("best").innerText=best;
+// عناصر صفحه
 
-function startNewGame(){
+const boardElement = document.getElementById("board");
 
-    grid=Array(4).fill().map(()=>Array(4).fill(0));
+const scoreElement = document.getElementById("score");
 
-    score=0;
+const highScoreElement = document.getElementById("high-score");
 
-    document.getElementById("message").innerText="";
+const timerElement = document.getElementById("timer");
 
-    addTile();
-    addTile();
+const messageElement = document.getElementById("message");
 
-    updateView();
+const levelElement = document.getElementById("reader-level");
 
-}
+const currentBookElement = document.getElementById("current-book");
 
-function addTile(){
 
-    let empty=[];
 
-    for(let r=0;r<4;r++){
 
-        for(let c=0;c<4;c++){
+// شروع بازی
 
-            if(grid[r][c]===0){
 
-                empty.push({r,c});
+function startGame(){
 
-            }
 
-        }
 
-    }
+clearInterval(timer);
 
-    if(empty.length){
 
-        let {r,c}=empty[Math.floor(Math.random()*empty.length)];
 
-        grid[r][c]=Math.random()<0.9 ? 2 : 4;
+score=0;
+hintCount=6;
 
-    }
+combo=0;
 
-}
 
-function slide(row){
+timeLeft=180;
 
-    let arr=row.filter(v=>v);
 
-    let newRow=[];
+selectedCell=null;
 
-    let skip=false;
-	    for(let i=0;i<arr.length;i++){
 
-        if(skip){
-            skip=false;
-            continue;
-        }
+gameStarted=true;
 
-        if(i<arr.length-1 && arr[i]===arr[i+1]){
 
-            let merged=arr[i]*2;
 
-            newRow.push(merged);
+scoreElement.innerText=score;
 
-            score+=merged;
 
-            skip=true;
+timerElement.innerText=timeLeft;
 
-        }else{
 
-            newRow.push(arr[i]);
+messageElement.innerText="";
 
-        }
 
-    }
 
-    while(newRow.length<4){
+loadHighScore();
 
-        newRow.push(0);
 
-    }
+createBoard();
 
-    return newRow;
+
+updateLibrary();
+
+
+startTimer();
+
+
 
 }
 
-function move(dir){
+// =========================
+// بررسی وجود حرکت ممکن
+// =========================
 
-    let before=JSON.stringify(grid);
 
-    if(dir==="left" || dir==="right"){
+function hasPossibleMove(){
 
-        for(let r=0;r<4;r++){
 
-            if(dir==="right") grid[r].reverse();
+for(let row=0;row<boardSize;row++){
 
-            grid[r]=slide(grid[r]);
 
-            if(dir==="right") grid[r].reverse();
+for(let col=0;col<boardSize;col++){
 
-        }
 
-    }else{
 
-        for(let c=0;c<4;c++){
+// بررسی راست
 
-            let col=[
-                grid[0][c],
-                grid[1][c],
-                grid[2][c],
-                grid[3][c]
-            ];
+if(col<boardSize-1){
 
-            if(dir==="down") col.reverse();
 
-            let res=slide(col);
+swapTest(row,col,row,col+1);
 
-            if(dir==="down") res.reverse();
 
-            for(let r=0;r<4;r++){
 
-                grid[r][c]=res[r];
+if(findMatches().length>0){
 
-            }
 
-        }
+swapTest(row,col,row,col+1);
 
-    }
 
-    if(before!==JSON.stringify(grid)){
+return true;
 
-        setTimeout(()=>{
-
-            addTile();
-
-            updateView();
-
-            if(score>best){
-
-                best=score;
-
-                localStorage.setItem("bookBest",best);
-
-                document.getElementById("best").innerText=best;
-
-            }
-
-            if(isGameOver()){
-
-                document.getElementById("message").innerText="باختید! 😔";
-
-            }
-
-        },100);
-
-    }
 
 }
 
-function isGameOver(){
 
-    for(let r=0;r<4;r++){
 
-        for(let c=0;c<4;c++){
+swapTest(row,col,row,col+1);
 
-            if(
-                grid[r][c]===0 ||
-                (c<3 && grid[r][c]===grid[r][c+1]) ||
-                (r<3 && grid[r][c]===grid[r+1][c])
-            ){
 
-                return false;
-
-            }
-
-        }
-
-    }
-
-    return true;
 
 }
 
-function updateView(){
 
-    const board=document.getElementById("game-board");
 
-    board.innerHTML="";
 
-    grid.flat().forEach(val=>{
 
-        let cell=document.createElement("div");
+// بررسی پایین
 
-        cell.className="cell";
+if(row<boardSize-1){
 
-        if(val){
 
-            cell.innerHTML=`${icons[val]}<div class='number'>${val}</div>`;
+swapTest(row,col,row+1,col);
 
-        }
 
-        board.appendChild(cell);
 
-    });
+if(findMatches().length>0){
 
-    document.getElementById("score").innerText=score;
+
+swapTest(row,col,row+1,col);
+
+
+return true;
+
 
 }
 
-/* ---------- کیبورد ---------- */
 
-document.addEventListener("keydown",e=>{
 
-    if(e.key.includes("Arrow")){
+swapTest(row,col,row+1,col);
 
-        move(e.key.replace("Arrow","").toLowerCase());
 
-    }
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+return false;
+
+
+}
+
+
+
+
+
+
+// =========================
+// ساخت جدول
+// =========================
+
+
+function createBoard(){
+
+
+let attempts=0;
+
+
+
+do{
+
+
+board=[];
+
+
+boardElement.innerHTML="";
+
+
+
+for(let row=0;row<boardSize;row++){
+
+
+board[row]=[];
+
+
+
+for(let col=0;col<boardSize;col++){
+
+
+
+let book=randomBook();
+
+
+
+board[row][col]=book;
+
+
+
+createCell(row,col,book);
+
+
+
+}
+
+
+
+}
+
+
+
+attempts++;
+
+
+
+if(attempts>50){
+
+break;
+
+}
+
+
+
+}
+
+while(!hasPossibleMove());
+
+
+
+}
+
+
+// کتاب تصادفی
+
+
+function randomBook(){
+
+
+
+return books[
+
+Math.floor(Math.random()*books.length)
+
+];
+
+
+}
+//ساختن خانه بازی
+
+function createCell(row,col,book){
+
+const cell=document.createElement("div");
+
+cell.className="cell";
+
+if(
+book===specialBooks.gold ||
+book===specialBooks.magic ||
+book===specialBooks.time
+){
+
+cell.classList.add("special");
+
+
+if(book===specialBooks.gold){
+
+cell.classList.add("gold-book");
+
+}
+
+
+if(book===specialBooks.magic){
+
+cell.classList.add("magic-book");
+
+}
+
+
+if(book===specialBooks.time){
+
+cell.classList.add("time-book");
+
+}
+
+}
+
+cell.dataset.row=row;
+cell.dataset.col=col;
+
+cell.innerText=book;
+
+cell.addEventListener("click",(e)=>{
+
+if(
+cell.innerText===specialBooks.gold ||
+cell.innerText===specialBooks.magic ||
+cell.innerText===specialBooks.time
+){
+
+activateSpecial(cell);
+return;
+
+}
+
+
+selectCell(cell);
 
 });
 
-/* ---------- لمس و ماوس با Pointer Events ---------- */
+boardElement.appendChild(cell);
 
-let startX=0;
-let startY=0;
+}
 
-document.addEventListener("pointerdown",e=>{
 
-    startX=e.clientX;
 
-    startY=e.clientY;
+
+
+
+
+
+
+// انتخاب خانه
+
+
+function selectCell(cell){
+
+
+
+if(!gameStarted) return;
+
+
+
+if(selectedCell===null){
+
+
+
+selectedCell=cell;
+
+
+cell.classList.add("selected");
+
+
+
+}
+
+else{
+
+
+
+let first=selectedCell;
+
+
+
+first.classList.remove("selected");
+
+
+
+if(first===cell){
+
+
+selectedCell=null;
+
+
+return;
+
+
+}
+
+
+
+if(isAdjacent(first,cell)){
+
+
+
+saveOldBoard();
+
+
+
+swapCells(first,cell);
+
+
+
+}
+
+else{
+
+
+showMessage("📚 فقط کتاب‌های کنار هم را انتخاب کن");
+
+
+shakeCell(cell);
+
+
+}
+
+
+
+selectedCell=null;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+// ذخیره وضعیت قبل از حرکت
+
+
+function saveOldBoard(){
+
+
+
+oldBoard=JSON.parse(JSON.stringify(board));
+
+
+
+}
+
+
+
+
+
+
+
+// بررسی کنار هم بودن
+
+
+function isAdjacent(cell1,cell2){
+
+
+
+let r1=Number(cell1.dataset.row);
+
+
+let c1=Number(cell1.dataset.col);
+
+
+
+let r2=Number(cell2.dataset.row);
+
+
+let c2=Number(cell2.dataset.col);
+
+
+
+return Math.abs(r1-r2)+Math.abs(c1-c2)===1;
+
+
+
+}
+
+
+
+
+
+
+
+// جابه‌جایی
+
+function swapCells(cell1,cell2){
+if(!gameStarted) return;
+messageElement.innerText="";
+let r1=Number(cell1.dataset.row);
+let c1=Number(cell1.dataset.col);
+
+let r2=Number(cell2.dataset.row);
+let c2=Number(cell2.dataset.col);
+
+
+
+cell1.classList.add("moving");
+cell2.classList.add("moving");
+
+
+
+let rect1=cell1.getBoundingClientRect();
+let rect2=cell2.getBoundingClientRect();
+
+
+
+let x=rect2.left-rect1.left;
+let y=rect2.top-rect1.top;
+
+
+
+cell1.style.transform=`translate(${x}px,${y}px)`;
+
+cell2.style.transform=`translate(${-x}px,${-y}px)`;
+
+
+
+setTimeout(()=>{
+
+
+let temp=board[r1][c1];
+
+
+board[r1][c1]=board[r2][c2];
+
+
+board[r2][c2]=temp;
+
+
+
+renderBoard();
+
+
+checkMatchesAfterMove();
+
+
+
+},300);
+
+
+}
+
+
+
+
+
+
+
+// بازسازی صفحه
+
+
+function renderBoard(){
+
+
+
+boardElement.innerHTML="";
+
+
+
+for(let row=0;row<boardSize;row++){
+
+
+
+for(let col=0;col<boardSize;col++){
+
+
+
+createCell(
+
+row,
+
+col,
+
+board[row][col]
+
+);
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+// بررسی نتیجه حرکت
+
+
+function checkMatchesAfterMove(){
+
+
+
+let matches=findMatches();
+
+
+
+if(matches.length>0){
+
+
+
+removeBooks(matches);
+
+
+
+}
+
+else{
+
+
+
+board=oldBoard;
+
+
+
+renderBoard();
+
+
+
+showMessage("📖 این حرکت کتاب جدیدی پیدا نکرد");
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+// افکت حرکت اشتباه
+
+
+function shakeCell(cell){
+
+
+
+cell.classList.add("invalid");
+
+
+
+setTimeout(()=>{
+
+
+cell.classList.remove("invalid");
+
+
+},400);
+
+
+
+}
+
+
+
+
+
+
+
+// پیام
+
+
+function showMessage(text){
+
+
+
+messageElement.innerText=text;
+
+
+
+}
+
+// =========================
+// سیستم پیدا کردن سه‌تایی‌ها
+// =========================
+
+
+
+function findMatches(){
+
+
+
+let matches=[];
+
+
+
+// ردیف‌ها
+
+
+for(let row=0;row<boardSize;row++){
+
+
+
+let count=1;
+
+
+
+for(let col=1;col<boardSize;col++){
+
+
+
+if(board[row][col]===board[row][col-1]){
+
+
+
+count++;
+
+
+}
+
+else{
+
+
+
+if(count>=3){
+
+
+
+for(let k=col-count;k<col;k++){
+
+
+
+matches.push({
+
+row:row,
+
+col:k
 
 });
-document.addEventListener("pointerup", e => {
 
-    let dx = e.clientX - startX;
-    let dy = e.clientY - startY;
 
-    if (Math.abs(dx) < 30 && Math.abs(dy) < 30) return;
+}
 
-    if (Math.abs(dx) > Math.abs(dy)) {
 
-        if (dx > 0) {
-            move("right");
-        } else {
-            move("left");
-        }
 
-    } else {
+}
 
-        if (dy > 0) {
-            move("down");
-        } else {
-            move("up");
-        }
 
-    }
+
+count=1;
+
+
+
+}
+
+
+
+}
+
+
+
+if(count>=3){
+
+
+
+for(let k=boardSize-count;k<boardSize;k++){
+
+
+
+matches.push({
+
+row:row,
+
+col:k
 
 });
 
-startNewGame();
 
+}
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+// ستون‌ها
+
+
+for(let col=0;col<boardSize;col++){
+
+
+
+let count=1;
+
+
+
+for(let row=1;row<boardSize;row++){
+
+
+
+if(board[row][col]===board[row-1][col]){
+
+
+
+count++;
+
+
+}
+
+else{
+
+
+
+if(count>=3){
+
+
+
+for(let k=row-count;k<row;k++){
+
+
+
+matches.push({
+
+row:k,
+
+col:col
+
+});
+
+
+}
+
+
+
+}
+
+
+
+count=1;
+
+
+
+}
+
+
+
+}
+
+
+
+if(count>=3){
+
+
+
+for(let k=boardSize-count;k<boardSize;k++){
+
+
+
+matches.push({
+
+row:k,
+
+col:col
+
+});
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+return removeDuplicateMatches(matches);
+
+
+
+}
+
+
+
+
+
+
+
+// حذف تکراری‌ها
+
+
+function removeDuplicateMatches(matches){
+
+
+
+return matches.filter((item,index)=>{
+
+
+
+return matches.findIndex(other=>
+
+
+
+other.row===item.row &&
+
+other.col===item.col
+
+
+
+)===index;
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+// حذف کتاب‌ها
+
+
+function removeBooks(matches){
+
+
+combo++;
+
+
+let cells=document.querySelectorAll(".cell");
+
+
+
+matches.forEach(item=>{
+
+
+let index=item.row*boardSize+item.col;
+
+
+if(cells[index]){
+
+
+cells[index].classList.add("removing");
+
+
+}
+
+
+});
+
+
+
+
+
+setTimeout(()=>{
+
+
+
+matches.forEach(item=>{
+
+
+board[item.row][item.col]=null;
+
+
+});
+
+
+
+
+
+let points=matches.length*10*combo;
+
+
+
+score+=points;
+
+
+scoreElement.innerText=score;
+
+
+
+
+if(combo>1){
+
+
+showMessage(
+
+"🔥 کمبو x"+combo+" | +"+points
+
+);
+
+
+}
+
+
+
+
+
+createSpecial(matches);
+
+
+
+updateLibrary();
+
+
+
+updateHighScore();
+
+
+
+
+renderBoard();
+
+
+
+
+
+setTimeout(()=>{
+
+
+dropBooks();
+
+
+},300);
+
+
+
+
+},350);
+
+
+
+}
+
+
+
+
+
+
+// ساخت کتاب ویژه
+
+
+function createSpecial(matches){
+
+
+let item=matches[0];
+
+
+let created=null;
+
+
+
+if(matches.length>=6){
+
+created=specialBooks.time;
+
+}
+
+
+else if(matches.length===5){
+
+created=specialBooks.magic;
+
+}
+
+
+else if(matches.length===4){
+
+created=specialBooks.gold;
+
+}
+
+
+
+if(created){
+
+
+board[item.row][item.col]=created;
+
+
+setTimeout(()=>{
+
+
+let index=item.row*boardSize+item.col;
+
+
+let cells=document.querySelectorAll(".cell");
+
+
+if(cells[index]){
+
+cells[index].classList.add("new-special");
+
+}
+
+
+
+},50);
+
+
+
+showMessage(
+
+"✨ کتاب ویژه کشف شد: "+created
+
+);
+
+
+}
+
+
+}
+// =========================
+// سقوط کتاب‌ها
+// =========================
+
+
+
+function dropBooks(){
+
+
+for(let col=0;col<boardSize;col++){
+
+
+let empty=0;
+
+
+
+for(let row=boardSize-1;row>=0;row--){
+
+
+
+if(board[row][col]===null){
+
+
+empty++;
+
+
+}
+
+else if(empty>0){
+
+
+
+board[row+empty][col]=board[row][col];
+
+
+board[row][col]=null;
+
+
+
+}
+
+
+}
+
+
+
+
+
+for(let row=0;row<empty;row++){
+
+
+
+board[row][col]=randomBook();
+
+
+
+}
+
+
+
+}
+
+
+
+
+renderBoard();
+
+
+
+
+setTimeout(()=>{
+
+
+let again=findMatches();
+
+
+
+if(again.length>0){
+
+
+removeBooks(again);
+
+
+}
+
+else{
+
+
+combo=0;
+
+
+
+// اگر هیچ حرکت ممکنی باقی نمانده بود
+if(!hasPossibleMove()){
+
+
+
+showMessage("🔄 کتابخانه دوباره مرتب شد");
+
+
+
+setTimeout(()=>{
+
+
+createBoard();
+
+
+},800);
+
+
+
+}
+
+
+
+}
+
+
+
+},600);
+
+
+
+}
+
+
+
+
+// =========================
+// کلیک روی کتاب ویژه
+// =========================
+
+
+
+boardElement.addEventListener("click",(e)=>{
+
+
+
+if(!e.target.classList.contains("cell")) return;
+
+
+
+let value=e.target.innerText;
+
+
+
+if(
+value===specialBooks.gold ||
+value===specialBooks.magic ||
+value===specialBooks.time
+){
+
+activateSpecial(e.target);
+
+}
+
+
+
+});
+
+
+
+
+
+
+function activateSpecial(cell){
+
+
+let row=Number(cell.dataset.row);
+
+let col=Number(cell.dataset.col);
+
+let value=cell.innerText;
+
+
+
+// کتاب طلایی 👑📖
+
+if(value===specialBooks.gold){
+
+
+let removed=[];
+
+
+for(let c=0;c<boardSize;c++){
+
+
+removed.push({
+
+row:row,
+
+col:c
+
+});
+
+
+}
+
+
+
+removed.forEach(item=>{
+
+
+board[item.row][item.col]=null;
+
+
+});
+
+
+
+score+=150;
+
+
+scoreElement.innerText=score;
+
+
+showMessage("👑📖 کتاب طلایی یک ردیف را پاک کرد!");
+
+
+
+updateHighScore();
+
+
+renderBoard();
+
+
+setTimeout(()=>{
+
+
+dropBooks();
+
+
+},300);
+
+
+
+}
+// کتاب جادویی ✨📚
+
+else if(value===specialBooks.magic){
+
+
+let targetBook=null;
+
+
+// پیدا کردن یک کتاب معمولی روی صفحه
+
+for(let r=0;r<boardSize;r++){
+
+for(let c=0;c<boardSize;c++){
+
+
+if(
+board[r][c]!==null &&
+board[r][c]!==specialBooks.gold &&
+board[r][c]!==specialBooks.magic &&
+board[r][c]!==specialBooks.time
+){
+
+targetBook=board[r][c];
+
+break;
+
+}
+
+
+}
+
+if(targetBook) break;
+
+}
+
+
+
+// حذف تمام همان نوع کتاب
+
+for(let r=0;r<boardSize;r++){
+
+for(let c=0;c<boardSize;c++){
+
+
+if(board[r][c]===targetBook){
+
+board[r][c]=null;
+
+}
+
+
+}
+
+}
+
+
+score+=200;
+
+scoreElement.innerText=score;
+
+
+// خود کتاب جادویی هم مصرف شود
+board[row][col]=null;
+
+
+showMessage("✨📚 کتاب جادویی همه کتاب‌های مشابه را پاک کرد!");
+
+updateHighScore();
+
+
+renderBoard();
+
+
+setTimeout(()=>{
+
+dropBooks();
+
+},300);
+
+
+}
+
+// کتاب زمان ⏳📖
+
+else if(value===specialBooks.time){
+
+
+timeLeft+=20;
+
+timerElement.innerText=timeLeft;
+
+
+score+=100;
+
+scoreElement.innerText=score;
+
+
+board[row][col]=null;
+
+
+showMessage("⏳📖 بیست ثانیه به زمان اضافه شد!");
+
+
+renderBoard();
+
+
+setTimeout(()=>{
+
+dropBooks();
+
+},300);
+
+
+}
+
+}
+
+
+
+
+// =========================
+// سیستم راهنمای حرکت حرفه‌ای
+// =========================
+
+
+function showHint(){
+
+
+if(hintCount<=0){
+
+
+showMessage("📚 بودجه راهنمای شما ته کشید!");
+
+
+return;
+
+
+}
+
+
+hintCount--;
+
+
+
+document.querySelectorAll(".cell").forEach(cell=>{
+
+
+cell.classList.remove("hint");
+
+
+});
+
+
+let originalBoard = JSON.parse(JSON.stringify(board));
+
+
+
+let directions=[
+
+[0,1],
+[0,-1],
+[1,0],
+[-1,0]
+
+];
+
+
+
+for(let row=0;row<boardSize;row++){
+
+
+for(let col=0;col<boardSize;col++){
+
+
+
+for(let dir of directions){
+
+
+
+let newRow=row+dir[0];
+
+let newCol=col+dir[1];
+
+
+
+if(
+
+newRow>=0 &&
+newRow<boardSize &&
+newCol>=0 &&
+newCol<boardSize
+
+){
+
+
+
+swapTest(
+row,
+col,
+newRow,
+newCol
+);
+
+
+
+let possible=findMatches().length>0;
+
+
+
+board = JSON.parse(JSON.stringify(originalBoard));
+
+
+
+if(possible){
+
+
+highlightHint(
+row,
+col,
+newRow,
+newCol
+);
+
+
+return;
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+showMessage("🔍 هیچ حرکت ترکیبی پیدا نشد");
+
+
+}
+
+
+
+
+function swapTest(r1,c1,r2,c2){
+
+
+let temp=board[r1][c1];
+
+
+board[r1][c1]=board[r2][c2];
+
+
+board[r2][c2]=temp;
+
+
+}
+
+
+
+
+
+function highlightHint(r1,c1,r2,c2){
+
+
+let cells=document.querySelectorAll(".cell");
+
+
+
+cells[r1*boardSize+c1].classList.add("hint");
+
+
+cells[r2*boardSize+c2].classList.add("hint");
+
+
+
+showMessage("💡 این دو کتاب را جابه‌جا کن");
+
+
+}
+// =========================
+// تایمر
+// =========================
+
+
+
+function startTimer(){
+
+
+
+timer=setInterval(()=>{
+
+
+
+timeLeft--;
+
+
+
+timerElement.innerText=timeLeft;
+
+
+
+
+if(timeLeft<=0){
+
+
+
+clearInterval(timer);
+
+
+
+gameStarted=false;
+
+
+
+showMessage(
+
+"⏰ زمان تمام شد | امتیاز: "+score
+
+);
+
+
+
+saveHighScore();
+
+
+
+}
+
+
+
+},1000);
+
+
+
+}
+
+
+
+
+
+// =========================
+// سیستم کتابخانه و پیشرفت
+// =========================
+
+
+
+function updateLibrary(){
+
+
+
+let unlocked=unlockBooks[0];
+
+
+
+for(let book of unlockBooks){
+
+
+
+if(score>=book.score){
+
+
+
+unlocked=book;
+
+
+
+}
+
+
+
+}
+
+
+
+
+levelElement.innerText=unlocked.level;
+
+
+if(score===0){
+
+currentBookElement.innerText =
+"هنوز کتابی کشف نشده 📖";
+
+}
+else{
+
+currentBookElement.innerText =
+unlocked.icon;
+
+}
+if(score>=3000){
+
+levelElement.innerText=
+"🏛️ استاد کتاب";
+
+currentBookElement.innerText=
+"📚 نگهبان کتابخانه | ✨ رتبه نهایی";
+
+}
+
+
+
+
+let items=document.querySelectorAll(".book-item");
+
+
+
+unlockBooks.forEach((book,index)=>{
+
+
+
+if(score>=book.score && items[index]){
+
+
+
+items[index].classList.add("unlocked");
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+saveProgress();
+
+
+
+}
+
+
+
+
+
+
+
+
+// ذخیره پیشرفت
+
+
+function saveProgress(){
+
+
+
+localStorage.setItem(
+
+"bookLibraryScore",
+
+score
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+// باز کردن کتابخانه
+
+
+function openLibrary(){
+
+
+
+let unlockedCount=0;
+
+
+
+unlockBooks.forEach(book=>{
+
+
+
+if(score>=book.score){
+
+
+
+unlockedCount++;
+
+
+
+}
+
+
+
+});
+
+
+
+showMessage(
+
+"📚 شما "+unlockedCount+" کتاب از ۵ کتابخانه را کشف کرده‌اید"
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+
+// =========================
+// رکورد
+// =========================
+
+
+
+function loadHighScore(){
+
+
+
+highScore=
+
+Number(
+
+localStorage.getItem("bookMatchHigh")
+
+)||0;
+
+
+
+highScoreElement.innerText=highScore;
+
+
+
+}
+
+
+
+
+
+
+
+function updateHighScore(){
+
+
+
+if(score>highScore){
+
+
+
+highScore=score;
+
+
+highScoreElement.innerText=highScore;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+function saveHighScore(){
+
+
+
+localStorage.setItem(
+
+"bookMatchHigh",
+
+highScore
+
+);
+
+
+
+}
+
+
+
+
+
+
+
+// =========================
+// کنترل موس
+// =========================
+
+
+
+let dragStart=null;
+
+
+
+
+
+boardElement.addEventListener(
+
+"mousedown",
+
+(e)=>{
+
+
+
+if(e.target.classList.contains("cell")){
+
+
+
+dragStart=e.target;
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+boardElement.addEventListener(
+
+"mouseup",
+
+(e)=>{
+
+
+
+if(!dragStart)return;
+
+
+
+if(e.target.classList.contains("cell")){
+
+
+
+if(isAdjacent(dragStart,e.target)){
+
+
+
+saveOldBoard();
+
+
+
+swapCells(
+
+dragStart,
+
+e.target
+
+);
+
+
+
+}
+
+
+
+}
+
+
+
+dragStart=null;
+
+
+
+});
+
+
+
+
+
+
+// =========================
+// کنترل لمس موبایل
+// =========================
+
+
+
+let touchStart=null;
+
+
+
+
+
+boardElement.addEventListener(
+
+"touchstart",
+
+(e)=>{
+
+
+
+if(e.target.classList.contains("cell")){
+
+
+
+touchStart=e.target;
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+boardElement.addEventListener(
+
+"touchend",
+
+(e)=>{
+
+
+
+let touchEnd=e.target;
+
+
+
+if(
+
+touchStart &&
+
+touchEnd.classList.contains("cell")
+
+){
+
+
+
+if(isAdjacent(touchStart,touchEnd)){
+
+
+
+saveOldBoard();
+
+
+
+swapCells(
+
+touchStart,
+
+touchEnd
+
+);
+
+
+
+}
+
+
+
+}
+
+
+
+touchStart=null;
+
+
+
+});
+
+
+
+
+
+
+
+
+// =========================
+// بارگذاری اولیه
+// =========================
+
+
+
+window.onload=()=>{
+
+
+
+loadHighScore();
+
+
+
+createBoard();
+
+
+
+updateLibrary();
+
+
+
+startTimer();
+
+
+
+gameStarted=true;
+
+
+
+};
+
+
+
+
+
+
+
+
+// جلوگیری از انتخاب متن هنگام لمس
+
+
+document.addEventListener(
+
+"selectstart",
+
+(e)=>{
+
+
+
+if(e.target.closest("#board")){
+
+
+
+e.preventDefault();
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+// =========================
+// پایان توابع جاوااسکریپت
+// =========================
 </script>
 
+
+</div>
+
+
 </body>
+
+
 </html>

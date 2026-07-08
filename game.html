@@ -20,7 +20,6 @@ font-family:Tahoma,Arial,sans-serif;
 }
 
 
-
 body{
 
 min-height:100dvh;
@@ -55,12 +54,9 @@ width:100%;
 
 max-width:520px;
 
-min-height:0;
-
 overflow:hidden;
 
 background:
-
 linear-gradient(
 135deg,
 #fff8dc,
@@ -72,7 +68,6 @@ border-radius:28px;
 padding:20px;
 
 box-shadow:
-
 0 15px 40px rgba(0,0,0,.2);
 
 text-align:center;
@@ -90,18 +85,6 @@ font-size:clamp(22px,5vw,32px);
 color:#5d4037;
 
 margin-bottom:8px;
-
-}
-
-
-
-.subtitle{
-
-font-size:14px;
-
-color:#795548;
-
-margin-bottom:15px;
 
 }
 
@@ -126,7 +109,6 @@ margin-bottom:12px;
 .info-box{
 
 background:
-
 linear-gradient(
 135deg,
 #fff3cd,
@@ -140,7 +122,6 @@ padding:9px 5px;
 font-size:13px;
 
 box-shadow:
-
 0 4px 10px rgba(0,0,0,.1);
 
 }
@@ -166,7 +147,6 @@ margin-top:4px;
 .library-panel{
 
 background:
-
 rgba(255,255,255,.55);
 
 border-radius:18px;
@@ -178,10 +158,10 @@ margin-bottom:12px;
 font-size:14px;
 
 box-shadow:
-
 0 5px 15px rgba(0,0,0,.08);
 
 }
+
 
 
 .library-panel strong{
@@ -199,7 +179,6 @@ color:#6d4c41;
 border:none;
 
 background:
-
 linear-gradient(
 135deg,
 #8d6e63,
@@ -224,14 +203,6 @@ transition:.3s;
 
 
 
-.start-btn:hover{
-
-transform:scale(1.05);
-
-}
-
-
-
 /* پیام */
 
 #message{
@@ -249,6 +220,7 @@ color:#6d4c41;
 
 
 /* صفحه بازی */
+
 #board{
 
 width:100%;
@@ -271,14 +243,27 @@ cursor:pointer;
 
 user-select:none;
 
+-webkit-user-select:none;
 
-transition:
+touch-action:none;
 
-transform .25s ease,
+}
 
-opacity .25s ease,
 
-box-shadow .25s ease;
+
+/* کتاب‌ها */
+
+.cell{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+overflow:hidden;
+
+font-size:clamp(18px,5vw,32px);
 
 }
 
@@ -287,10 +272,6 @@ box-shadow .25s ease;
 .cell:hover{
 
 transform:scale(1.05);
-
-box-shadow:
-
-0 5px 12px rgba(0,0,0,.15);
 
 }
 
@@ -322,97 +303,18 @@ animation:bookRemove .35s forwards;
 @keyframes bookRemove{
 
 0%{
-
 transform:scale(1);
-
 opacity:1;
-
 }
 
 50%{
-
 transform:scale(1.3) rotate(15deg);
-
 opacity:.5;
-
 }
 
 100%{
-
 transform:scale(0);
-
 opacity:0;
-
-}
-
-}
-
-
-
-/* سقوط */
-
-.cell.falling{
-
-animation:bookFall .35s;
-
-}
-
-
-@keyframes bookFall{
-
-from{
-
-transform:translateY(-40px);
-
-opacity:0;
-
-}
-
-to{
-
-transform:translateY(0);
-
-opacity:1;
-
-}
-
-}
-
-
-
-/* حرکت اشتباه */
-
-.cell.invalid{
-
-animation:shake .35s;
-
-}
-
-
-@keyframes shake{
-
-0%,100%{
-
-transform:translateX(0);
-
-}
-
-25%{
-
-transform:translateX(-7px);
-
-}
-
-50%{
-
-transform:translateX(7px);
-
-}
-
-75%{
-
-transform:translateX(-5px);
-
 }
 
 }
@@ -428,12 +330,10 @@ font-size:clamp(12px,6vw,28px);
 }
 
 
-/* طلایی */
 
 .cell.gold-book{
 
 background:
-
 linear-gradient(
 135deg,
 #fff176,
@@ -441,39 +341,15 @@ linear-gradient(
 );
 
 box-shadow:
-
 0 0 20px #ffc107;
 
-animation:goldGlow 1s infinite alternate;
-
 }
 
 
-
-@keyframes goldGlow{
-
-from{
-
-transform:scale(1);
-
-}
-
-to{
-
-transform:scale(1.08);
-
-}
-
-}
-
-
-
-/* جادویی */
 
 .cell.magic-book{
 
 background:
-
 linear-gradient(
 135deg,
 #ce93d8,
@@ -481,39 +357,15 @@ linear-gradient(
 );
 
 box-shadow:
-
 0 0 22px #9c27b0;
 
-animation:magicGlow 1.2s infinite alternate;
-
 }
 
 
-
-@keyframes magicGlow{
-
-from{
-
-filter:hue-rotate(0);
-
-}
-
-to{
-
-filter:hue-rotate(40deg);
-
-}
-
-}
-
-
-
-/* زمان */
 
 .cell.time-book{
 
 background:
-
 linear-gradient(
 135deg,
 #80deea,
@@ -521,66 +373,7 @@ linear-gradient(
 );
 
 box-shadow:
-
 0 0 22px #03a9f4;
-
-animation:timeGlow 1s infinite alternate;
-
-}
-
-
-
-@keyframes timeGlow{
-
-from{
-
-transform:rotate(-3deg);
-
-}
-
-to{
-
-transform:rotate(3deg);
-
-}
-
-}
-
-
-
-/* ظاهر شدن ویژه */
-
-.cell.new-special{
-
-animation:specialAppear .6s;
-
-}
-
-
-
-@keyframes specialAppear{
-
-0%{
-
-transform:scale(0) rotate(180deg);
-
-opacity:0;
-
-}
-
-60%{
-
-transform:scale(1.3);
-
-opacity:1;
-
-}
-
-100%{
-
-transform:scale(1);
-
-}
 
 }
 
@@ -622,8 +415,6 @@ opacity:1;
 
 filter:none;
 
-transform:scale(1.1);
-
 }
 
 
@@ -652,14 +443,6 @@ font-size:14px;
 
 
 
-.library-btn:hover{
-
-transform:scale(1.05);
-
-}
-
-
-
 /* راهنما */
 
 .help-box{
@@ -669,93 +452,51 @@ margin-top:12px;
 }
 
 
-.help-box summary{
-
-cursor:pointer;
-
-font-weight:bold;
-
-}
-
-
-
-.help-box p{
-
-max-height:160px;
-
-overflow-y:auto;
-
-line-height:1.8;
-
-font-size:.9rem;
-
-}
-
-
-
-/* افکت راهنما */
-
-.cell.hint{
-
-animation:hintGlow .8s infinite alternate;
-
-}
-
-
-@keyframes hintGlow{
-
-from{
-
-box-shadow:0 0 5px #ffd54f;
-
-}
-
-to{
-
-box-shadow:0 0 25px #ffb300;
-
-transform:scale(1.1);
-
-}
-
-}
-
-
 
 /* موبایل */
 
 @media(max-width:500px){
 
+
+body{
+
+padding:5px;
+
+}
+
+
 .game-container{
+
+width:100%;
 
 padding:15px;
 
 border-radius:22px;
-.title{
-font-size:24px;
+
 }
 
-#board{
-gap:3px;
-padding:5px;
+
+.title{
+
+font-size:24px;
+
 }
+
+
+#board{
+
+gap:3px;
+
+padding:5px;
+
+width:100%;
+
+}
+
 
 .cell{
-border-radius:7px;
-}
 
-.start-btn{
-padding:10px 25px;
-}
-
-}
-
-
-#board{
-
-gap:5px;
-
-padding:8px;
+font-size:clamp(16px,7vw,28px);
 
 }
 
@@ -767,15 +508,16 @@ font-size:12px;
 }
 
 
+.start-btn{
+
+padding:10px 25px;
+
 }
 
 
+}
+
 </style>
-</head>
-
-
-<body>
-
 
 <div class="game-container">
 

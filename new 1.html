@@ -12,68 +12,79 @@
 
 <style>
 
+
 *{
+
 box-sizing:border-box;
+
 margin:0;
+
 padding:0;
-font-family:Tahoma,Arial,sans-serif;
+
+font-family:Tahoma, Arial, sans-serif;
+
 }
 
 
 
 body{
 
-min-height:100dvh;
+min-height:100vh;
 
 display:flex;
 
 justify-content:center;
 
-align-items:flex-start;
+align-items:center;
 
 background:
+
 linear-gradient(
+
 135deg,
-#eee7dc,
-#c8e6c9
+
+#f5f0e6,
+
+#dcedc8
+
 );
 
 color:#3e2723;
 
 overflow-x:hidden;
 
-padding:10px;
-
 }
 
 
-/* کادر اصلی بازی */
+
 
 .game-container{
 
-width:100%;
+width:min(95vw,520px);
 
-max-width:520px;
+max-height:95vh;
 
-min-height:0;
-
-overflow:hidden;
+overflow-y:auto;
 
 background:
 
 linear-gradient(
+
 135deg,
+
 #fff8dc,
+
 #ffe082
+
 );
 
-border-radius:28px;
+border-radius:30px;
 
-padding:20px;
+padding:clamp(15px,4vw,25px);
 
 box-shadow:
 
-0 15px 40px rgba(0,0,0,.2);
+0 15px 40px rgba(0,0,0,.18);
 
 text-align:center;
 
@@ -81,7 +92,7 @@ text-align:center;
 
 
 
-/* عنوان */
+
 
 .title{
 
@@ -95,19 +106,19 @@ margin-bottom:8px;
 
 
 
+
 .subtitle{
 
 font-size:14px;
 
 color:#795548;
 
-margin-bottom:15px;
+margin-bottom:18px;
 
 }
 
 
 
-/* اطلاعات بالا */
 
 .info-panel{
 
@@ -123,27 +134,33 @@ margin-bottom:12px;
 
 
 
+
 .info-box{
 
 background:
 
 linear-gradient(
+
 135deg,
+
 #fff3cd,
+
 #ffcc80
+
 );
 
-border-radius:16px;
+border-radius:18px;
 
-padding:9px 5px;
+padding:10px 5px;
 
 font-size:13px;
 
 box-shadow:
 
-0 4px 10px rgba(0,0,0,.1);
+0 5px 10px rgba(0,0,0,.08);
 
 }
+
 
 
 
@@ -151,37 +168,33 @@ box-shadow:
 
 display:block;
 
-font-size:20px;
+font-size:21px;
 
 font-weight:bold;
 
-margin-top:4px;
+margin-top:5px;
 
 }
 
 
 
-/* پنل کتابخانه */
 
 .library-panel{
 
 background:
 
-rgba(255,255,255,.55);
+rgba(255,255,255,.45);
 
-border-radius:18px;
+border-radius:20px;
 
 padding:12px;
 
-margin-bottom:12px;
+margin-bottom:15px;
 
 font-size:14px;
 
-box-shadow:
-
-0 5px 15px rgba(0,0,0,.08);
-
 }
+
 
 
 .library-panel strong{
@@ -192,7 +205,6 @@ color:#6d4c41;
 
 
 
-/* دکمه شروع */
 
 .start-btn{
 
@@ -201,14 +213,18 @@ border:none;
 background:
 
 linear-gradient(
+
 135deg,
+
 #8d6e63,
+
 #4e342e
+
 );
 
 color:white;
 
-padding:12px 35px;
+padding:13px 35px;
 
 border-radius:30px;
 
@@ -216,11 +232,12 @@ font-size:16px;
 
 cursor:pointer;
 
-margin-bottom:10px;
+margin-bottom:15px;
 
 transition:.3s;
 
 }
+
 
 
 
@@ -232,13 +249,13 @@ transform:scale(1.05);
 
 
 
-/* پیام */
+
 
 #message{
 
 min-height:25px;
 
-margin:8px 0;
+margin-bottom:10px;
 
 font-weight:bold;
 
@@ -248,24 +265,79 @@ color:#6d4c41;
 
 
 
-/* صفحه بازی */
+
 #board{
 
-width:100%;
+width:min(90vw,460px);
 
-max-width:430px;
+aspect-ratio:1;
 
-aspect-ratio:1 / 1;
-
-margin:10px auto;
+margin:auto;
 
 display:grid;
 
 grid-template-columns:repeat(8,1fr);
 
-gap:4px;
+gap:8px;
 
-padding:7px;
+padding:12px;
+
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#bcaaa4,
+
+#8d6e63
+
+);
+
+
+border-radius:25px;
+
+
+box-shadow:
+
+inset 0 0 20px rgba(0,0,0,.2);
+
+
+touch-action:none;
+
+}
+
+
+
+
+.cell{
+
+aspect-ratio:1;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+font-size:clamp(18px,4vw,32px);
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#fffdf5,
+
+#f5e6c8
+
+);
+
+border-radius:12px;
 
 cursor:pointer;
 
@@ -284,6 +356,18 @@ box-shadow .25s ease;
 
 
 
+/* حرکت نرم کتاب‌ها */
+
+.cell.moving{
+
+transition:transform .3s ease;
+
+z-index:5;
+
+}
+
+
+
 .cell:hover{
 
 transform:scale(1.05);
@@ -293,6 +377,7 @@ box-shadow:
 0 5px 12px rgba(0,0,0,.15);
 
 }
+
 
 
 
@@ -308,18 +393,18 @@ box-shadow:
 
 }
 
-
-
-/* حذف */
-
 .cell.removing{
 
-animation:bookRemove .35s forwards;
+animation:
+
+bookRemove .35s forwards;
 
 }
 
 
+
 @keyframes bookRemove{
+
 
 0%{
 
@@ -329,13 +414,15 @@ opacity:1;
 
 }
 
+
 50%{
 
-transform:scale(1.3) rotate(15deg);
+transform:scale(1.35) rotate(15deg);
 
 opacity:.5;
 
 }
+
 
 100%{
 
@@ -345,28 +432,36 @@ opacity:0;
 
 }
 
+
 }
 
 
 
-/* سقوط */
+
 
 .cell.falling{
 
-animation:bookFall .35s;
+animation:
+
+bookFall .35s ease;
 
 }
+
+
+
 
 
 @keyframes bookFall{
 
+
 from{
 
-transform:translateY(-40px);
+transform:translateY(-50px);
 
 opacity:0;
 
 }
+
 
 to{
 
@@ -376,20 +471,26 @@ opacity:1;
 
 }
 
+
 }
 
 
 
-/* حرکت اشتباه */
 
 .cell.invalid{
 
-animation:shake .35s;
+animation:
+
+shake .35s;
 
 }
 
 
+
+
+
 @keyframes shake{
+
 
 0%,100%{
 
@@ -397,17 +498,20 @@ transform:translateX(0);
 
 }
 
+
 25%{
 
-transform:translateX(-7px);
+transform:translateX(-8px);
 
 }
+
 
 50%{
 
-transform:translateX(7px);
+transform:translateX(8px);
 
 }
+
 
 75%{
 
@@ -415,25 +519,107 @@ transform:translateX(-5px);
 
 }
 
+
+}
+
+.game-shake{
+
+animation:screenShake .4s;
+
 }
 
 
+@keyframes screenShake{
+
+0%{
+transform:translateX(0);
+}
+
+25%{
+transform:translateX(-8px);
+}
+
+50%{
+transform:translateX(8px);
+}
+
+75%{
+transform:translateX(-5px);
+}
+
+100%{
+transform:translateX(0);
+}
+
+}
+
+
+@keyframes specialAppear{
+
+
+0%{
+
+transform:scale(0) rotate(180deg);
+
+opacity:0;
+
+}
+
+
+60%{
+
+transform:scale(1.3) rotate(20deg);
+
+opacity:1;
+
+}
+
+
+100%{
+
+transform:scale(1) rotate(0);
+
+opacity:1;
+
+}
+
+
+}
+
+
+
+.cell.new-special{
+
+animation:
+
+specialAppear .6s ease;
+
+}
 
 /* کتاب ویژه */
 
+
 .cell.special{
 
-font-size:clamp(12px,6vw,28px);
+background:
+linear-gradient(
+135deg,
+#ffd54f,
+#ffb300
+);
+
+font-size:clamp(14px,3vw,24px);
+
+box-shadow:
+0 0 18px rgba(255,193,7,.8);
 
 }
 
-
-/* طلایی */
+/* کتاب طلایی */
 
 .cell.gold-book{
 
 background:
-
 linear-gradient(
 135deg,
 #fff176,
@@ -441,12 +627,52 @@ linear-gradient(
 );
 
 box-shadow:
-
-0 0 20px #ffc107;
+0 0 20px rgba(255,193,7,.9);
 
 animation:goldGlow 1s infinite alternate;
 
 }
+
+
+
+/* کتاب جادویی */
+
+.cell.magic-book{
+
+background:
+linear-gradient(
+135deg,
+#ce93d8,
+#7b1fa2
+);
+
+box-shadow:
+0 0 22px rgba(156,39,176,.9);
+
+animation:magicGlow 1.2s infinite alternate;
+
+}
+
+
+
+/* کتاب زمان */
+
+.cell.time-book{
+
+background:
+linear-gradient(
+135deg,
+#80deea,
+#0288d1
+);
+
+box-shadow:
+0 0 22px rgba(3,169,244,.9);
+
+animation:timeGlow 1s infinite alternate;
+
+}
+
 
 
 
@@ -468,33 +694,11 @@ transform:scale(1.08);
 
 
 
-/* جادویی */
-
-.cell.magic-book{
-
-background:
-
-linear-gradient(
-135deg,
-#ce93d8,
-#7b1fa2
-);
-
-box-shadow:
-
-0 0 22px #9c27b0;
-
-animation:magicGlow 1.2s infinite alternate;
-
-}
-
-
-
 @keyframes magicGlow{
 
 from{
 
-filter:hue-rotate(0);
+filter:hue-rotate(0deg);
 
 }
 
@@ -503,28 +707,6 @@ to{
 filter:hue-rotate(40deg);
 
 }
-
-}
-
-
-
-/* زمان */
-
-.cell.time-book{
-
-background:
-
-linear-gradient(
-135deg,
-#80deea,
-#0288d1
-);
-
-box-shadow:
-
-0 0 22px #03a9f4;
-
-animation:timeGlow 1s infinite alternate;
 
 }
 
@@ -547,46 +729,8 @@ transform:rotate(3deg);
 }
 
 
+/* پنل کتابخانه */
 
-/* ظاهر شدن ویژه */
-
-.cell.new-special{
-
-animation:specialAppear .6s;
-
-}
-
-
-
-@keyframes specialAppear{
-
-0%{
-
-transform:scale(0) rotate(180deg);
-
-opacity:0;
-
-}
-
-60%{
-
-transform:scale(1.3);
-
-opacity:1;
-
-}
-
-100%{
-
-transform:scale(1);
-
-}
-
-}
-
-
-
-/* مجموعه کتاب */
 
 .collection{
 
@@ -594,13 +738,14 @@ display:flex;
 
 justify-content:center;
 
-gap:8px;
+gap:5px;
 
 flex-wrap:wrap;
 
-margin-top:10px;
+margin-top:8px;
 
 }
+
 
 
 
@@ -611,6 +756,8 @@ font-size:25px;
 opacity:.35;
 
 filter:grayscale(1);
+
+transition:.3s;
 
 }
 
@@ -628,7 +775,11 @@ transform:scale(1.1);
 
 
 
-/* دکمه ها */
+
+
+
+/* دکمه کتابخانه */
+
 
 .library-btn{
 
@@ -652,48 +803,6 @@ font-size:14px;
 
 
 
-.library-btn:hover{
-
-transform:scale(1.05);
-
-}
-
-
-
-/* راهنما */
-
-.help-box{
-
-margin-top:12px;
-
-}
-
-
-.help-box summary{
-
-cursor:pointer;
-
-font-weight:bold;
-
-}
-
-
-
-.help-box p{
-
-max-height:160px;
-
-overflow-y:auto;
-
-line-height:1.8;
-
-font-size:.9rem;
-
-}
-
-
-
-/* افکت راهنما */
 
 .cell.hint{
 
@@ -708,64 +817,18 @@ from{
 
 box-shadow:0 0 5px #ffd54f;
 
+transform:scale(1);
+
 }
+
 
 to{
 
 box-shadow:0 0 25px #ffb300;
 
-transform:scale(1.1);
+transform:scale(1.12);
 
 }
-
-}
-
-
-
-/* موبایل */
-
-@media(max-width:500px){
-
-.game-container{
-
-padding:15px;
-
-border-radius:22px;
-.title{
-font-size:24px;
-}
-
-#board{
-gap:3px;
-padding:5px;
-}
-
-.cell{
-border-radius:7px;
-}
-
-.start-btn{
-padding:10px 25px;
-}
-
-}
-
-
-#board{
-
-gap:5px;
-
-padding:8px;
-
-}
-
-
-.info-box{
-
-font-size:12px;
-
-}
-
 
 }
 
@@ -779,11 +842,7 @@ font-size:12px;
 
 <div class="game-container">
 
-<div style="display: flex; align-items: center; gap: 20px;">
-    <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
-        🏠 بازگشت
-    </a>
-</div>
+
 
 <h1 class="title">
 
@@ -793,6 +852,11 @@ font-size:12px;
 
 
 
+<p class="subtitle">
+
+سه کتاب مشابه را کنار هم قرار بده و کتاب‌های جدید کشف کن ✨
+
+</p>
 
 
 
@@ -857,9 +921,6 @@ font-size:12px;
 <div class="library-panel">
 
 
-<div class="library-panel">
-
-
 📖 سطح خواننده:
 
 <strong id="reader-level">
@@ -872,13 +933,14 @@ font-size:12px;
 <br>
 
 
-آخرین کشف:
+کتاب کشف شده:
 
 <strong id="current-book">
 
-هنوز کتابی کشف نشده 📖
+📕 کتاب تازه‌کار
 
 </strong>
+
 
 
 <div class="collection" id="collection">
@@ -967,71 +1029,13 @@ font-size:12px;
 
 </button>
 
-
-<footer>
-
-<details class="help-box">
-
-<summary>📖 راهنمای بازی</summary>
-
-
-<p style="margin-top:10px;font-size:.9rem;line-height:1.8;">
-
-
-📚 <b>هدف بازی:</b><br>
-سه کتاب مشابه را کنار هم قرار بده و امتیاز بگیر.
-
-
-<br><br>
-
-
-✨ <b>کتاب‌های ویژه:</b><br>
-
-👑📖 کتاب طلایی:
-یک ردیف کامل را پاک می‌کند.
-
-<br>
-
-✨📚 کتاب جادویی:
-تمام کتاب‌های مشابه را حذف می‌کند.
-
-<br>
-
-⏳📖 کتاب زمان:
-۲۰ ثانیه به زمان اضافه می‌کند.
-
-
-<br><br>
-
-
-🏆 <b>سطح‌های خواننده:</b><br>
-
-🌱 تازه‌کار<br>
-🌿 کتابخوان<br>
-📚 عاشق داستان<br>
-🔍 جستجوگر<br>
-🏛️ استاد کتاب
-
-
-<br><br>
-
-
-💡 راهنما فقط ۶ بار در هر بازی قابل استفاده است.
-
-
-</p>
-
-
-</details>
-</button>
-</footer>
 <button class="library-btn" onclick="showHint()">
+
 
 💡 پیدا کردن حرکت
 
+
 </button>
-
-
 
 <script>
 
@@ -1042,6 +1046,7 @@ font-size:12px;
 
 
 const books = [
+
 
 "📕",
 
@@ -1061,14 +1066,13 @@ const books = [
 
 "📚"
 
+
 ];
 
 
 
 
-// =========================
-// سطح‌های قابل کشف
-// =========================
+// کتاب‌های قابل کشف
 
 
 const unlockBooks = [
@@ -1079,6 +1083,8 @@ const unlockBooks = [
 score:0,
 
 icon:"📕",
+
+name:"کتاب تازه‌کار",
 
 level:"🌱 تازه‌کار"
 
@@ -1091,6 +1097,8 @@ score:300,
 
 icon:"📗",
 
+name:"داستان‌خوان",
+
 level:"🌿 کتابخوان"
 
 },
@@ -1101,6 +1109,8 @@ level:"🌿 کتابخوان"
 score:800,
 
 icon:"📘",
+
+name:"رمان‌دوست",
 
 level:"📚 عاشق داستان"
 
@@ -1113,6 +1123,8 @@ score:1500,
 
 icon:"📙",
 
+name:"کاوشگر کتاب",
+
 level:"🔍 جستجوگر"
 
 },
@@ -1124,13 +1136,14 @@ score:3000,
 
 icon:"📚",
 
+name:"نگهبان کتابخانه",
+
 level:"🏛️ استاد کتاب"
 
 }
 
 
 ];
-
 
 
 
@@ -1165,13 +1178,7 @@ let selectedCell=null;
 
 
 let oldBoard=null;
-
-
-// تعداد راهنما
-
 let hintCount=6;
-
-
 
 // کتاب‌های ویژه
 
@@ -1184,6 +1191,7 @@ magic:"✨📚",
 time:"⏳📖"
 
 };
+
 
 // عناصر صفحه
 
@@ -1484,19 +1492,7 @@ cell.dataset.col=col;
 
 cell.innerText=book;
 
-cell.addEventListener("click",(e)=>{
-
-if(
-cell.innerText===specialBooks.gold ||
-cell.innerText===specialBooks.magic ||
-cell.innerText===specialBooks.time
-){
-
-activateSpecial(cell);
-return;
-
-}
-
+cell.addEventListener("click",()=>{
 
 selectCell(cell);
 
@@ -2605,10 +2601,6 @@ score+=200;
 scoreElement.innerText=score;
 
 
-// خود کتاب جادویی هم مصرف شود
-board[row][col]=null;
-
-
 showMessage("✨📚 کتاب جادویی همه کتاب‌های مشابه را پاک کرد!");
 
 updateHighScore();
@@ -2626,29 +2618,25 @@ dropBooks();
 
 }
 
+
+
 // کتاب زمان ⏳📖
 
 else if(value===specialBooks.time){
-
 
 timeLeft+=20;
 
 timerElement.innerText=timeLeft;
 
-
 score+=100;
 
 scoreElement.innerText=score;
 
+showMessage("⏳📖 بیست ثانیه به زمان اضافه شد!");
 
 board[row][col]=null;
 
-
-showMessage("⏳📖 بیست ثانیه به زمان اضافه شد!");
-
-
 renderBoard();
-
 
 setTimeout(()=>{
 
@@ -2656,12 +2644,9 @@ dropBooks();
 
 },300);
 
-
 }
 
 }
-
-
 
 
 // =========================
@@ -2934,18 +2919,9 @@ unlocked=book;
 levelElement.innerText=unlocked.level;
 
 
-if(score===0){
+currentBookElement.innerText=
 
-currentBookElement.innerText =
-"هنوز کتابی کشف نشده 📖";
-
-}
-else{
-
-currentBookElement.innerText =
-unlocked.icon;
-
-}
+unlocked.icon+" "+unlocked.name;
 if(score>=3000){
 
 levelElement.innerText=
@@ -3412,6 +3388,7 @@ e.preventDefault();
 
 
 });
+
 
 
 

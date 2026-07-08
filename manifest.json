@@ -1,14 +1,17 @@
 {
+  "id": "/writer-notebook/?v=26",
   "name": "دفترچه نویسنده",
   "short_name": "نویسنده",
-  "start_url": "/writer-notebook/",
+  "start_url": "/writer-notebook/?v=26",
   "scope": "/writer-notebook/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#312e81",
+  "lang": "fa",
+  "dir": "rtl",
   "icons": [
     {
-      "src": "/writer-notebook/icon-512.png",
+      "src": "/writer-notebook/icon-512.png?v=26",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

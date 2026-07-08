@@ -1,4 +1,4 @@
-const CACHE_NAME = "writer-notebook-v30";
+const CACHE_NAME = "writer-notebook-v31";
 
 
 const ASSETS = [

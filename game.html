@@ -244,7 +244,7 @@ user-select:none;
 
 -webkit-user-select:none;
 
-touch-action:pan-y;
+touch-action:none;
 
 overflow:hidden;
 
@@ -1332,7 +1332,8 @@ cell.dataset.col=col;
 
 cell.innerText=book;
 
-cell.addEventListener("click",(e)=>{
+cell.addEventListener("click",()=>{
+
 
 if(
 cell.innerText===specialBooks.gold ||
@@ -1347,6 +1348,7 @@ return;
 
 
 selectCell(cell);
+
 
 });
 
@@ -2088,7 +2090,7 @@ dropBooks();
 function createSpecial(matches){
 
 
-let item=matches[0];
+let item=matches[Math.floor(matches.length/2)];
 
 
 let created=null;
@@ -2115,13 +2117,13 @@ created=specialBooks.gold;
 
 }
 
-
-
 if(created){
 
+matches.forEach(m=>{
+    board[m.row][m.col]=null;
+});
 
 board[item.row][item.col]=created;
-
 
 setTimeout(()=>{
 
@@ -2188,8 +2190,6 @@ else if(empty>0){
 
 
 board[row+empty][col]=board[row][col];
-
-
 board[row][col]=null;
 
 
@@ -2286,34 +2286,6 @@ createBoard();
 // =========================
 // کلیک روی کتاب ویژه
 // =========================
-
-
-
-boardElement.addEventListener("click",(e)=>{
-
-
-
-if(!e.target.classList.contains("cell")) return;
-
-
-
-let value=e.target.innerText;
-
-
-
-if(
-value===specialBooks.gold ||
-value===specialBooks.magic ||
-value===specialBooks.time
-){
-
-activateSpecial(e.target);
-
-}
-
-
-
-});
 
 
 
@@ -2427,7 +2399,16 @@ if(targetBook) break;
 
 }
 
+}
 
+
+if(!targetBook){
+
+showMessage("✨ کتابی برای حذف پیدا نشد");
+
+return;
+
+}
 
 // حذف تمام همان نوع کتاب
 
@@ -2442,6 +2423,9 @@ board[r][c]=null;
 
 }
 
+}
+
+}
 
 }
 
@@ -2454,10 +2438,12 @@ scoreElement.innerText=score;
 
 
 // خود کتاب جادویی هم مصرف شود
+cell.classList.add("removing");
 board[row][col]=null;
 
 
 showMessage("✨📚 کتاب جادویی همه کتاب‌های مشابه را پاک کرد!");
+
 
 updateHighScore();
 
@@ -2470,9 +2456,6 @@ setTimeout(()=>{
 dropBooks();
 
 },300);
-
-
-}
 
 // کتاب زمان ⏳📖
 
@@ -2489,10 +2472,16 @@ score+=100;
 scoreElement.innerText=score;
 
 
-board[row][col]=null;
+cell.classList.add("removing");
 
 
 showMessage("⏳📖 بیست ثانیه به زمان اضافه شد!");
+
+
+setTimeout(()=>{
+
+
+board[row][col]=null;
 
 
 renderBoard();
@@ -2500,16 +2489,18 @@ renderBoard();
 
 setTimeout(()=>{
 
+
 dropBooks();
+
 
 },300);
 
 
-}
+},350);
+
+
 
 }
-
-
 
 
 // =========================
@@ -3097,15 +3088,15 @@ let touchStartX = 0;
 let touchStartY = 0;
 let touchStartCell = null;
 
-
 boardElement.addEventListener(
 "touchstart",
 (e)=>{
 
+e.preventDefault();
+
 let cell = e.target.closest(".cell");
 
 if(!cell) return;
-
 
 touchStartCell = cell;
 
@@ -3204,9 +3195,34 @@ touchStartCell,
 
 }
 
+// اگر حرکت نبود یعنی لمس ساده بوده
+if(!target){
 
 
-if(target){
+let value = touchStartCell.innerText;
+
+
+if(
+value===specialBooks.gold ||
+value===specialBooks.magic ||
+value===specialBooks.time
+){
+
+activateSpecial(touchStartCell);
+
+}
+else{
+
+selectCell(touchStartCell);
+
+}
+
+
+}
+
+
+// اگر حرکت بود جابه‌جا کن
+else{
 
 
 saveOldBoard();
@@ -3219,6 +3235,7 @@ target
 
 
 }
+
 
 
 touchStartCell = null;

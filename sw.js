@@ -1,15 +1,26 @@
-const CACHE_NAME = "my-notebook-v49"; //بعد هر تغییر این جا رو عوض کن 
+const CACHE_NAME = "my-notebook-v51"; //بعد تغییرات این جا ورژن عوض کن
 
 
-// فایل‌هایی که باید در نصب اولیه ذخیره شوند
+// =========================
+// فایل‌های اصلی برنامه
+// =========================
+
 const ASSETS = [
+
     "./",
+
     "./index.html",
+
     "./nevisandegi.html",
+
     "./reader.html",
+
     "./game.html",
+
     "./about.html",
+
     "./manifest.json"
+
 ];
 
 
@@ -19,22 +30,28 @@ const ASSETS = [
 // نصب سرویس ورکر
 // =========================
 
-self.addEventListener("install", (event) => {
+self.addEventListener("install", (event)=>{
 
 
     // فعال شدن سریع نسخه جدید
+
     self.skipWaiting();
+
 
 
     event.waitUntil(
 
+
         caches.open(CACHE_NAME)
 
-        .then((cache) => {
+        .then((cache)=>{
+
 
             return cache.addAll(ASSETS);
 
+
         })
+
 
     );
 
@@ -49,10 +66,12 @@ self.addEventListener("install", (event) => {
 
 
 // =========================
-// فعال شدن و پاک کردن کش قدیمی
+// فعال شدن سرویس ورکر
+// پاک کردن کش‌های قدیمی
 // =========================
 
-self.addEventListener("activate", (event) => {
+
+self.addEventListener("activate",(event)=>{
 
 
     event.waitUntil(
@@ -109,7 +128,8 @@ self.addEventListener("activate", (event) => {
 
 
 // =========================
-// مدیریت درخواست‌ها
+// دریافت درخواست‌ها
+// مدیریت صفحات و فایل‌ها
 // =========================
 
 
@@ -121,10 +141,11 @@ self.addEventListener("fetch",(event)=>{
 
 
 
-    // -------------------------
+    // =====================
     // صفحات HTML
-    // همیشه نسخه جدید دریافت شود
-    // -------------------------
+    // همیشه نسخه تازه
+    // =====================
+
 
     if(request.mode === "navigate"){
 
@@ -161,7 +182,6 @@ self.addEventListener("fetch",(event)=>{
             })
 
 
-
             .catch(()=>{
 
 
@@ -183,7 +203,6 @@ self.addEventListener("fetch",(event)=>{
         );
 
 
-
         return;
 
 
@@ -196,29 +215,65 @@ self.addEventListener("fetch",(event)=>{
 
 
 
-    // -------------------------
-    // فایل‌های CSS / JS / عکس / آیکون
-    // -------------------------
+    // =====================
+    // فایل‌های CSS
+    // JS
+    // تصاویر
+    // آیکون‌ها
+    // =====================
 
 
     event.respondWith(
 
 
-        fetch(request)
+        caches.match(request)
+
+        .then((cached)=>{
 
 
-        .then((response)=>{
+            if(cached){
+
+
+                // اول نسخه کش شده را بده
+
+                // بعد نسخه جدید را ذخیره کن
+
+
+                fetch(request)
+
+                .then((response)=>{
+
+
+                    if(
+                        response &&
+                        response.status === 200
+                    ){
+
+
+                        caches.open(CACHE_NAME)
+
+                        .then((cache)=>{
+
+
+                            cache.put(
+                                request,
+                                response.clone()
+                            );
+
+
+                        });
+
+
+                    }
+
+
+                })
+
+                .catch(()=>{});
 
 
 
-            if(
-                !response ||
-                response.status !== 200 ||
-                response.type === "opaque"
-            ){
-
-
-                return response;
+                return cached;
 
 
             }
@@ -226,43 +281,66 @@ self.addEventListener("fetch",(event)=>{
 
 
 
-            const clone = response.clone();
+            return fetch(request)
+
+
+            .then((response)=>{
+
+
+                if(
+                    !response ||
+                    response.status !== 200
+                ){
+
+
+                    return response;
+
+
+                }
 
 
 
-            caches.open(CACHE_NAME)
 
-            .then((cache)=>{
+                const clone = response.clone();
 
 
-                cache.put(request,clone);
+
+                caches.open(CACHE_NAME)
+
+                .then((cache)=>{
+
+
+                    cache.put(
+                        request,
+                        clone
+                    );
+
+
+                });
+
+
+
+                return response;
+
 
 
             });
 
 
 
-            return response;
-
-
-
         })
-
 
 
         .catch(()=>{
 
 
-            return caches.match(request);
-
+            return caches.match("./index.html");
 
 
         })
 
 
-
     );
-
 
 
 });

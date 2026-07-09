@@ -1,4 +1,4 @@
-const CACHE_NAME = "writer-notebook-v45";
+const CACHE_NAME = "my-notebook-v48";  //این بخش برای اپدیت و تغیرات ورژن رو اصلاح کن هر بار
 
 
 const ASSETS = [
@@ -10,7 +10,15 @@ const ASSETS = [
     "./manifest.json"
 ];
 
-
+const ASSETS = [
+    "./",
+    "./index.html",
+    "./nevisandegi.html",
+    "./reader.html",
+    "./game.html",
+    "./about.html",
+    "./manifest.json"
+];
 
 // نصب سرویس ورکر
 self.addEventListener("install", (event) => {

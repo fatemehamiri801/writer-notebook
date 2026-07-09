@@ -260,12 +260,13 @@ overflow:hidden;
 
 }
 
+/* =========================
+   کتاب‌ها / خانه‌های بازی
+========================= */
 
-/* کتاب‌ها */
 .cell{
 
 min-width:0;
-
 min-height:0;
 
 display:flex;
@@ -276,14 +277,48 @@ justify-content:center;
 
 overflow:hidden;
 
-font-size:clamp(16px,6vw,28px);
 
-border-radius:8px;
+/* سایز کتاب */
+
+font-size:clamp(20px,7vw,34px);
+
+line-height:1;
+
+
+/* قاب شیشه‌ای */
+
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.85),
+rgba(255,255,255,.35)
+);
+
+
+border:
+
+2px solid rgba(255,255,255,.9);
+
+
+border-radius:12px;
+
+
+box-shadow:
+
+0 4px 12px rgba(0,0,0,.12),
+
+inset 0 0 8px rgba(255,255,255,.8);
+
+
 
 transition:
+
 transform .25s ease,
 box-shadow .25s ease,
-background .25s ease;
+background .25s ease,
+filter .25s ease;
+
+
 
 -webkit-tap-highlight-color:transparent;
 
@@ -296,42 +331,69 @@ user-select:none;
 }
 
 
+
 .cell:hover{
 
-transform:scale(1.05);
+
+transform:scale(1.06);
+
 
 box-shadow:
 
-0 5px 12px rgba(0,0,0,.15);
+0 8px 18px rgba(0,0,0,.18);
+
 
 }
 
 
 
+/* =========================
+   کتاب انتخاب شده
+========================= */
+
+
 .cell.selected{
 
-transform:scale(1.12);
+
+transform:scale(1.15);
+
 
 background:
+
 linear-gradient(
 135deg,
 #fff176,
 #ffb300
 );
 
+
+
+border-color:#fff8e1;
+
+
 box-shadow:
+
 0 0 15px #ffc107,
+
 0 0 35px #ff9800,
+
 0 0 60px #ffd54f;
+
+
 
 animation:selectedGlow .8s infinite alternate;
 
+
 z-index:10;
+
 
 }
 
 
+
+
 @keyframes selectedGlow{
+
 
 from{
 
@@ -339,26 +401,40 @@ filter:brightness(1);
 
 }
 
+
 to{
 
-filter:brightness(1.5);
+filter:brightness(1.35);
 
 }
 
+
 }
 
 
 
-/* حذف */
+
+
+/* =========================
+   حذف کتاب
+========================= */
+
 
 .cell.removing{
 
-animation:bookRemove .35s forwards;
+
+animation:
+
+bookRemove .4s forwards;
+
 
 }
 
 
+
+
 @keyframes bookRemove{
+
 
 0%{
 
@@ -368,315 +444,559 @@ opacity:1;
 
 }
 
+
 50%{
 
-transform:scale(1.3) rotate(15deg);
+transform:
+
+scale(1.35)
+
+rotate(15deg);
+
 
 opacity:.5;
 
 }
 
+
 100%{
 
 transform:scale(0);
+
 
 opacity:0;
 
 }
 
+
 }
 
 
 
-/* کتاب ویژه */
+
+
+/* =========================
+   کتاب‌های ویژه
+========================= */
+
 
 .cell.special{
 
-font-size:clamp(12px,6vw,28px);
+
+font-size:clamp(22px,7vw,36px);
+
+
+font-weight:bold;
+
 
 }
+
 
 
 
 .cell.gold-book{
 
+
 background:
+
 linear-gradient(
 135deg,
 #fff176,
 #ffb300
 );
 
+
+
+border:
+
+2px solid #ffe082;
+
+
+
 box-shadow:
-0 0 20px #ffc107;
+
+0 0 15px #ffc107,
+
+0 0 30px rgba(255,193,7,.7);
+
 
 }
 
 
 
+
+
 .cell.magic-book{
 
+
 background:
+
 linear-gradient(
 135deg,
 #ce93d8,
 #7b1fa2
 );
 
+
+
+border:
+
+2px solid #e1bee7;
+
+
+
 box-shadow:
-0 0 22px #9c27b0;
+
+0 0 18px #9c27b0,
+
+0 0 35px rgba(156,39,176,.6);
+
 
 }
 
 
 
+
+
 .cell.time-book{
 
+
 background:
+
 linear-gradient(
 135deg,
 #80deea,
 #0288d1
 );
 
+
+
+border:
+
+2px solid #b2ebf2;
+
+
+
 box-shadow:
-0 0 22px #03a9f4;
+
+0 0 18px #03a9f4,
+
+0 0 35px rgba(3,169,244,.6);
+
 
 }
-/* دکمه ها */
+
+
+
+
+
+/* =========================
+   دکمه کتابخانه
+========================= */
+
 
 .library-btn{
 
+
 margin-top:10px;
+
 
 border:none;
 
+
 background:#795548;
+
 
 color:white;
 
-padding:10px 20px;
 
-border-radius:20px;
+padding:10px 22px;
+
+
+border-radius:22px;
+
 
 cursor:pointer;
 
+
 font-size:14px;
+
+
+transition:.25s;
+
 
 }
 
 
 
-/* راهنما */
+.library-btn:hover{
+
+
+transform:translateY(-2px);
+
+
+box-shadow:
+
+0 5px 12px rgba(0,0,0,.2);
+
+
+}
+
+
+
+
+
+/* =========================
+   راهنما
+========================= */
+
 
 .help-box{
 
+
 margin-top:12px;
 
+
 }
-/* افکت راهنمای حرکت */
+
+
+
 
 .cell.hint{
 
-animation:hintGlow .8s infinite alternate;
+
+animation:
+
+hintGlow .9s infinite alternate;
+
 
 position:relative;
 
+
 z-index:5;
 
+
 }
+
+
+
 
 
 @keyframes hintGlow{
 
+
 from{
+
 
 transform:scale(1);
 
+
 box-shadow:
-0 0 5px #fff176,
-0 0 10px #ffd54f;
+
+0 0 8px #fff176;
+
 
 }
+
 
 
 to{
 
-transform:scale(1.15);
+
+transform:scale(1.12);
+
 
 box-shadow:
-0 0 20px #ffc107,
-0 0 40px #ff9800;
+
+0 0 25px #ffc107,
+
+0 0 45px #ff9800;
+
 
 }
 
+
 }
+
+
+
+
+
+/* =========================
+   مجموعه کتاب‌ها
+========================= */
+
+
 .collection{
+
 
 display:flex;
 
+
 justify-content:center;
 
-gap:8px;
 
-margin-top:12px;
+gap:10px;
+
+
+margin-top:14px;
+
 
 }
+
+
 
 
 .book-item{
 
-width:40px;
 
-height:40px;
+width:42px;
+
+
+height:42px;
+
 
 display:flex;
 
+
 align-items:center;
+
 
 justify-content:center;
 
-border-radius:10px;
 
-background:#eee;
+border-radius:12px;
 
-font-size:22px;
 
-opacity:.4;
+background:
+
+linear-gradient(
+145deg,
+#eeeeee,
+#dddddd
+);
+
+
+
+font-size:23px;
+
+
+opacity:.45;
+
+
+border:
+
+2px solid rgba(255,255,255,.7);
+
 
 }
 
 
+
+
 .book-item.unlocked{
+
 
 opacity:1;
 
+
 background:
+
 linear-gradient(
 135deg,
 #fff176,
 #ffb300
 );
 
+
+
 box-shadow:
-0 0 10px #ffc107;
+
+0 0 12px #ffc107;
+
 
 }
-/* موبایل */
+
+
+
+
+
+/* =========================
+   موبایل
+========================= */
+
 
 @media(max-width:500px){
 
 
+
 body{
+
 
 padding:5px;
 
+
 overflow-x:hidden;
 
+
 }
+
+
+
 
 
 .game-container{
 
+
 width:100%;
+
 
 max-width:100%;
 
+
 padding:12px;
+
 
 border-radius:22px;
 
+
 overflow:hidden;
 
+
 }
+
+
 
 
 
 .title{
 
+
 font-size:24px;
 
+
 }
+
+
 
 
 
 .info-panel{
 
+
 gap:5px;
 
+
 }
+
+
 
 
 
 .info-box{
 
+
 font-size:12px;
+
 
 padding:8px 3px;
 
+
 }
+
+
 
 
 
 .info-box span{
 
+
 font-size:18px;
 
+
 }
+
+
 
 
 
 #board{
 
+
 width:100%;
+
 
 max-width:100%;
 
+
 aspect-ratio:1 / 1;
 
-gap:2px;
 
-padding:3px;
+gap:5px;
+
+
+padding:5px;
+
 
 }
+
+
 
 
 
 .cell{
 
+
 width:100%;
+
 
 height:100%;
 
+
 min-width:0;
+
 
 min-height:0;
 
-font-size:clamp(14px,6vw,24px);
 
-line-height:1;
+font-size:
 
-overflow:hidden;
+clamp(18px,8vw,30px);
+
+
+
+border-radius:10px;
+
 
 }
+
+
 
 
 
 .start-btn{
 
+
 padding:10px 25px;
 
+
 }
+
+
 
 
 
 .library-btn{
 
+
 padding:9px 18px;
+
 
 font-size:13px;
 
+
 }
+
 
 
 }
@@ -1237,99 +1557,146 @@ return false;
 // =========================
 // ساخت جدول
 // =========================
-
-
 function createBoard(){
 
-
-let attempts=0;
-
-
+let attempts = 0;
 
 do{
 
+board = [];
 
-board=[];
-
-
-boardElement.innerHTML="";
+boardElement.innerHTML = "";
 
 
+for(let row=0; row<boardSize; row++){
 
-for(let row=0;row<boardSize;row++){
+    board[row] = [];
 
-
-board[row]=[];
-
-
-
-for(let col=0;col<boardSize;col++){
+    for(let col=0; col<boardSize; col++){
 
 
-
-let book=randomBook();
-
+        let book;
 
 
-board[row][col]=book;
+        do{
+
+            book = randomBook();
 
 
-
-createCell(row,col,book);
-
-
-
-}
+        }
+        while(
+            createsMatch(row,col,book)
+        );
 
 
+        board[row][col] = book;
+
+        createCell(row,col,book);
+
+
+    }
 
 }
-
 
 
 attempts++;
 
 
+if(attempts > 100){
 
-if(attempts>50){
-
-break;
-
-}
-
-
+    break;
 
 }
 
-while(!hasPossibleMove());
 
+}
+while(
+    !hasPossibleMove()
+);
 
 
 }
-
 
 // کتاب تصادفی
-
-
 function randomBook(){
 
+const weightedBooks = [
 
+"📕",
+"📕",
+"📕",
 
-return books[
+"📗",
+"📗",
+"📗",
 
-Math.floor(Math.random()*books.length)
+"📘",
+"📘",
+"📘",
+
+"📙",
+"📙",
+
+"📖",
+"📖",
+
+"📓",
+
+"📔"
 
 ];
 
 
+return weightedBooks[
+Math.floor(Math.random()*weightedBooks.length)
+];
+
 }
-//ساختن خانه بازی
+
+// جلوگیری از ساخته شدن سه کتاب مشابه پشت سر هم در شروع بازی
+
+function createsMatch(row,col,book){
+
+
+if(
+col>=2 &&
+board[row][col-1]===book &&
+board[row][col-2]===book
+){
+
+return true;
+
+}
+
+
+if(
+row>=2 &&
+board[row-1][col]===book &&
+board[row-2][col]===book
+){
+
+return true;
+
+}
+
+
+return false;
+
+
+}
+
+
+
+// ساختن خانه بازی
 
 function createCell(row,col,book){
 
 const cell=document.createElement("div");
 
+
 cell.className="cell";
+
+
 
 if(
 book===specialBooks.gold ||
@@ -1340,11 +1707,13 @@ book===specialBooks.time
 cell.classList.add("special");
 
 
+
 if(book===specialBooks.gold){
 
 cell.classList.add("gold-book");
 
 }
+
 
 
 if(book===specialBooks.magic){
@@ -1354,30 +1723,29 @@ cell.classList.add("magic-book");
 }
 
 
+
 if(book===specialBooks.time){
 
 cell.classList.add("time-book");
 
 }
 
+
 }
 
+
+
 cell.dataset.row=row;
+
 cell.dataset.col=col;
+
 cell.innerText = book;
+
 
 boardElement.appendChild(cell);
 
+
 }
-
-
-
-
-
-
-
-
-
 // انتخاب خانه
 
 
@@ -2073,160 +2441,87 @@ setTimeout(()=>{
 
 }
 
-
-
-// ساخت کتاب ویژه
-
+// =========================
+// ساخت کتاب ویژه هوشمند
+// =========================
 
 function createSpecial(matches){
 
 
-let item=matches[Math.floor(matches.length/2)];
+let created = null;
 
 
-let created=null;
+// پیدا کردن جهت ترکیب
+
+let rows = matches.map(m => m.row);
+let cols = matches.map(m => m.col);
+
+
+let sameRow = rows.every(r => r === rows[0]);
+let sameCol = cols.every(c => c === cols[0]);
 
 
 
-if(matches.length>=6){
+// تعیین نوع کتاب ویژه
 
-created=specialBooks.time;
+
+if(matches.length >= 6){
+
+    // ترکیب خیلی بزرگ
+    created = specialBooks.time;
+
+}
+
+
+else if(matches.length === 5){
+
+    // پنج تایی
+    created = specialBooks.magic;
 
 }
 
 
-else if(matches.length===5){
+else if(matches.length === 4){
 
-created=specialBooks.magic;
-
-}
-
-
-else if(matches.length===4){
-
-created=specialBooks.gold;
-
-}
-
-if(created){
-
-matches.forEach(m=>{
-    board[m.row][m.col]=null;
-});
-
-board[item.row][item.col]=created;
-
-setTimeout(()=>{
-
-
-let index=item.row*boardSize+item.col;
-
-
-let cells=document.querySelectorAll(".cell");
-
-
-if(cells[index]){
-
-cells[index].classList.add("new-special");
+    // چهار تایی
+    created = specialBooks.gold;
 
 }
 
 
 
-},50);
-
-
-
-showMessage(
-
-"✨ کتاب ویژه کشف شد: "+created
-
-);
-
-
+if(!created){
+    return;
 }
 
 
-}
+
 // =========================
-// سقوط کتاب‌ها
+// انتخاب جای ساخت ویژه
 // =========================
 
 
-
-function dropBooks(){
-
-
-for(let col=0;col<boardSize;col++){
-
-
-let empty=0;
+let item;
 
 
 
-for(let row=boardSize-1;row>=0;row--){
+// اگر خطی بود وسط واقعی خط انتخاب شود
 
+if(sameRow){
 
-
-if(board[row][col]===null){
-
-
-empty++;
-
-
-}
-
-else if(empty>0){
-
-
-
-board[row+empty][col]=board[row][col];
-board[row][col]=null;
-
-
+    item = matches.sort((a,b)=>a.col-b.col)[
+        Math.floor(matches.length/2)
+    ];
 
 }
 
 
-}
+else if(sameCol){
 
 
-
-
-
-for(let row=0;row<empty;row++){
-
-
-
-board[row][col]=randomBook();
-
-
-
-}
-
-
-
-}
-
-
-
-
-renderBoard();
-
-
-
-
-setTimeout(()=>{
-
-
-let again=findMatches();
-
-
-
-if(again.length>0){
-
-
-removeBooks(again);
+    item = matches.sort((a,b)=>a.row-b.row)[
+        Math.floor(matches.length/2)
+    ];
 
 
 }
@@ -2234,87 +2529,406 @@ removeBooks(again);
 else{
 
 
-combo=0;
+    // اگر شکل ترکیبی بود مرکز نزدیک به میانگین
+
+    let avgRow =
+    Math.round(
+        rows.reduce((a,b)=>a+b,0) / rows.length
+    );
+
+
+    let avgCol =
+    Math.round(
+        cols.reduce((a,b)=>a+b,0) / cols.length
+    );
+
+
+    item = matches.reduce((closest,current)=>{
+
+
+        let d1 =
+        Math.abs(current.row-avgRow)
+        +
+        Math.abs(current.col-avgCol);
+
+
+        let d2 =
+        Math.abs(closest.row-avgRow)
+        +
+        Math.abs(closest.col-avgCol);
 
 
 
-// اگر هیچ حرکت ممکنی باقی نمانده بود
-if(!hasPossibleMove()){
+        return d1 < d2 ? current : closest;
+
+
+    });
+
+
+}
 
 
 
-showMessage("🔄 کتابخانه دوباره مرتب شد");
+// =========================
+// حذف بقیه کتاب‌ها
+// =========================
 
+
+matches.forEach(m=>{
+
+
+    if(
+        m.row !== item.row ||
+        m.col !== item.col
+    ){
+
+        board[m.row][m.col]=null;
+
+    }
+
+
+});
+
+
+
+// گذاشتن کتاب ویژه
+
+board[item.row][item.col]=created;
+
+
+
+// افکت ساخت
+
+setTimeout(()=>{
+
+
+    let index =
+    item.row * boardSize + item.col;
+
+
+    let cells =
+    document.querySelectorAll(".cell");
+
+
+
+    if(cells[index]){
+
+
+        cells[index].classList.add("new-special");
+
+
+    }
+
+
+
+},50);
+
+
+
+
+// پیام
+
+showMessage(
+    "✨ کتاب ویژه کشف شد: " + created
+);
+
+
+
+}
+// =========================
+// سقوط حرفه‌ای کتاب‌ها
+// =========================
+
+
+function dropBooks(){
+
+
+let moved = false;
+
+
+
+// =========================
+// جمع کردن فضاهای خالی
+// =========================
+
+
+for(let col=0; col<boardSize; col++){
+
+
+    let emptySpaces = 0;
+
+
+
+    for(let row=boardSize-1; row>=0; row--){
+
+
+        if(board[row][col] === null){
+
+
+            emptySpaces++;
+
+
+        }
+
+        else if(emptySpaces > 0){
+
+
+            board[row + emptySpaces][col] =
+            board[row][col];
+
+
+            board[row][col] = null;
+
+
+            moved = true;
+
+
+        }
+
+
+    }
+
+
+
+    // =========================
+    // ساخت کتاب‌های جدید
+    // =========================
+
+
+    for(let row=0; row<emptySpaces; row++){
+
+
+        let newBook;
+
+
+
+        let safe = false;
+
+
+        let attempts = 0;
+
+
+
+        while(!safe && attempts < 20){
+
+
+            newBook = randomBook();
+
+
+
+            board[row][col] = newBook;
+
+
+
+            safe = !createsMatch(
+                row,
+                col,
+                newBook
+            );
+
+
+
+            attempts++;
+
+
+        }
+
+
+
+        board[row][col] = newBook;
+
+
+
+    }
+
+
+
+}
+
+
+
+// نمایش دوباره صفحه
+
+renderBoard();
+
+
+
+
+// =========================
+// بررسی آبشار بعدی
+// =========================
 
 
 setTimeout(()=>{
 
 
-createBoard();
+    let again = findMatches();
 
 
-},800);
+
+    if(again.length > 0){
+
+
+
+        removeBooks(again);
+
+
+
+    }
+
+    else{
+
+
+
+        combo = 0;
+
+
+
+        // =========================
+        // بررسی حرکت‌های باقی مانده
+        // =========================
+
+
+        if(!hasPossibleMove()){
+
+
+
+            showMessage(
+            "🔄 کتابخانه در حال مرتب شدن..."
+            );
+
+
+
+            setTimeout(()=>{
+
+
+                createBoard();
+
+
+
+            },900);
+
+
+
+        }
+
+
+
+    }
+
+
+
+},500);
 
 
 
 }
-
-
-
-}
-
-
-
-},600);
-
-
-
-}
-
-
-
 
 // =========================
-// کلیک روی کتاب ویژه
+// فعال سازی کتاب‌های ویژه
 // =========================
-
-
-
-
 
 
 function activateSpecial(cell){
 
 
-let row=Number(cell.dataset.row);
-
-let col=Number(cell.dataset.col);
-
-let value=cell.innerText;
+if(!gameStarted) return;
 
 
 
+let row = Number(cell.dataset.row);
+let col = Number(cell.dataset.col);
+
+let value = board[row][col];
+
+
+
+// =========================
 // کتاب طلایی 👑📖
+// =========================
 
-if(value===specialBooks.gold){
+
+if(value === specialBooks.gold){
 
 
-let removed=[];
+
+let removed = [];
+
+
+
+// تصمیم جهت پاکسازی
+
+// اگر همسایه‌های افقی داشته باشد ردیفی
+// در غیر این صورت ستونی
+
+
+let horizontal = false;
+
+
+
+if(
+col>0 &&
+board[row][col-1] === specialBooks.gold
+){
+
+horizontal=true;
+
+}
+
+
+
+
+if(horizontal){
+
 
 
 for(let c=0;c<boardSize;c++){
 
 
 removed.push({
-
 row:row,
-
 col:c
-
 });
 
 
 }
+
+
+
+showMessage(
+"👑📖 کتاب طلایی ردیف را پاک کرد!"
+);
+
+
+
+}
+
+else{
+
+
+
+for(let r=0;r<boardSize;r++){
+
+
+removed.push({
+row:r,
+col:col
+});
+
+
+}
+
+
+
+showMessage(
+"👑📖 کتاب طلایی ستون را پاک کرد!"
+);
+
+
+
+}
+
+
 
 
 
@@ -2330,18 +2944,14 @@ board[item.row][item.col]=null;
 
 score+=150;
 
-
 scoreElement.innerText=score;
-
-
-showMessage("👑📖 کتاب طلایی یک ردیف را پاک کرد!");
-
 
 
 updateHighScore();
 
 
 renderBoard();
+
 
 
 setTimeout(()=>{
@@ -2355,159 +2965,84 @@ dropBooks();
 
 
 }
+
+
+
+
+
+// =========================
 // کتاب جادویی ✨📚
-
-else if(value===specialBooks.magic){
-
-
-let targetBook=null;
-
-
-// پیدا کردن یک کتاب معمولی روی صفحه
-
-for(let r=0;r<boardSize;r++){
-
-    for(let c=0;c<boardSize;c++){
-
-
-        if(
-            board[r][c]!==null &&
-            board[r][c]!==specialBooks.gold &&
-            board[r][c]!==specialBooks.magic &&
-            board[r][c]!==specialBooks.time
-        ){
-
-            targetBook=board[r][c];
-
-            break;
-
-        }
-
-
-    }
-
-    if(targetBook) break;
-
-}
-
-
-
-if(!targetBook){
-
-    showMessage("✨ کتابی برای حذف پیدا نشد");
-
-    return;
-
-}
-
-
-// حذف تمام همان نوع کتاب
-
-for(let r=0;r<boardSize;r++){
-
-    for(let c=0;c<boardSize;c++){
-
-
-        if(board[r][c]===targetBook){
-
-            board[r][c]=null;
-
-        }
-
-
-    }
-
-}
-
-
-
-score+=200;
-
-scoreElement.innerText=score;
-
-
-// خود کتاب جادویی هم مصرف شود
-
-cell.classList.add("removing");
-
-board[row][col]=null;
-
-
-showMessage("✨📚 کتاب جادویی همه کتاب‌های مشابه را پاک کرد!");
-
-
-updateHighScore();
-
-
-renderBoard();
-
-
-setTimeout(()=>{
-
-    dropBooks();
-
-},300);
-
-
-
-}
-
-
-// کتاب زمان ⏳📖
-
-else if(value===specialBooks.time){
-
-
-timeLeft+=20;
-
-timerElement.innerText=timeLeft;
-
-
-score+=100;
-
-scoreElement.innerText=score;
-
-
-cell.classList.add("removing");
-
-
-showMessage("⏳📖 بیست ثانیه به زمان اضافه شد!");
-
-
-setTimeout(()=>{
-
-
-    board[row][col]=null;
-
-
-    renderBoard();
-
-
-    setTimeout(()=>{
-
-
-        dropBooks();
-
-
-    },300);
-
-
-},350);
-
-}
-}
-// =========================
-// سیستم راهنمای حرکت حرفه‌ای
 // =========================
 
 
-function showHint(){
+else if(value === specialBooks.magic){
 
 
-if(hintCount<=0){
+
+let counter={};
 
 
-showMessage("📚 بودجه راهنمای شما ته کشید!");
+
+let bestBook=null;
+
+let max=0;
+
+
+
+// پیدا کردن پرتعدادترین کتاب
+
+
+for(let r=0;r<boardSize;r++){
+
+
+for(let c=0;c<boardSize;c++){
+
+
+
+let book=board[r][c];
+
+
+
+if(
+book &&
+book!==specialBooks.gold &&
+book!==specialBooks.magic &&
+book!==specialBooks.time
+){
+
+
+counter[book]=(counter[book]||0)+1;
+
+
+
+if(counter[book]>max){
+
+max=counter[book];
+
+bestBook=book;
+
+}
+
+
+}
+
+
+
+}
+
+
+}
+
+
+
+
+
+if(!bestBook){
+
+
+showMessage(
+"✨ کتابی برای حذف پیدا نشد"
+);
 
 
 return;
@@ -2516,38 +3051,212 @@ return;
 }
 
 
-hintCount--;
+
+
+// حذف همان نوع کتاب
+
+
+for(let r=0;r<boardSize;r++){
+
+
+for(let c=0;c<boardSize;c++){
 
 
 
-document.querySelectorAll(".cell").forEach(cell=>{
+if(board[r][c]===bestBook){
 
 
-cell.classList.remove("hint");
+board[r][c]=null;
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+board[row][col]=null;
+
+
+
+score+=250;
+
+
+scoreElement.innerText=score;
+
+
+
+showMessage(
+"✨📚 کتاب جادویی "+bestBook+" ها را پیدا کرد!"
+);
+
+
+
+updateHighScore();
+
+
+renderBoard();
+
+
+
+setTimeout(()=>{
+
+
+dropBooks();
+
+
+},300);
+
+
+
+}
+
+
+
+
+
+
+// =========================
+// کتاب زمان ⏳📖
+// =========================
+
+
+else if(value === specialBooks.time){
+
+
+
+timeLeft += 20;
+
+
+
+timerElement.innerText=timeLeft;
+
+
+
+score += 100;
+
+
+scoreElement.innerText=score;
+
+
+
+board[row][col]=null;
+
+
+
+showMessage(
+"⏳📖 بیست ثانیه به زمان اضافه شد!"
+);
+
+
+
+updateHighScore();
+
+
+
+renderBoard();
+
+
+
+setTimeout(()=>{
+
+
+dropBooks();
+
+
+},300);
+
+
+
+}
+
+
+
+}
+
+
+// =========================
+// سیستم راهنمای حرکت حرفه‌ای
+// =========================
+
+
+function showHint(){
+
+
+
+if(!gameStarted){
+
+    return;
+
+}
+
+
+
+if(hintCount <= 0){
+
+
+    showMessage(
+    "📚 بودجه راهنما تمام شده!"
+    );
+
+
+    return;
+
+
+}
+
+
+
+
+// پاک کردن راهنمای قبلی
+
+document.querySelectorAll(".cell")
+.forEach(cell=>{
+
+
+    cell.classList.remove("hint");
 
 
 });
 
 
-let originalBoard = JSON.parse(JSON.stringify(board));
 
 
 
-let directions=[
+let originalBoard =
+JSON.parse(
+JSON.stringify(board)
+);
+
+
+
+let possibleMove = null;
+
+
+
+// فقط دو جهت کافی است چون حرکت برگشتی تکراری است
+
+let directions = [
 
 [0,1],
-[0,-1],
-[1,0],
-[-1,0]
+[1,0]
 
 ];
 
 
 
-for(let row=0;row<boardSize;row++){
 
 
-for(let col=0;col<boardSize;col++){
+for(let row=0; row<boardSize; row++){
+
+
+for(let col=0; col<boardSize; col++){
 
 
 
@@ -2555,22 +3264,27 @@ for(let dir of directions){
 
 
 
-let newRow=row+dir[0];
+let newRow =
+row + dir[0];
 
-let newCol=col+dir[1];
+
+let newCol =
+col + dir[1];
+
+
 
 
 
 if(
-
-newRow>=0 &&
-newRow<boardSize &&
-newCol>=0 &&
-newCol<boardSize
-
+newRow >=0 &&
+newRow < boardSize &&
+newCol >=0 &&
+newCol < boardSize
 ){
 
 
+
+// تست جابه‌جایی
 
 swapTest(
 row,
@@ -2581,23 +3295,105 @@ newCol
 
 
 
-let possible=findMatches().length>0;
+
+let matches =
+findMatches();
 
 
 
-board = JSON.parse(JSON.stringify(originalBoard));
+
+// برگرداندن صفحه
+
+board =
+JSON.parse(
+JSON.stringify(originalBoard)
+);
 
 
 
-if(possible){
+
+
+if(matches.length > 0){
+
+
+
+possibleMove = {
+
+
+r1:row,
+
+c1:col,
+
+r2:newRow,
+
+c2:newCol
+
+
+
+};
+
+
+break;
+
+
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+if(possibleMove){
+
+break;
+
+}
+
+
+}
+
+
+
+if(possibleMove){
+
+break;
+
+}
+
+
+}
+
+
+
+
+
+
+if(possibleMove){
+
+
+
+hintCount--;
+
 
 
 highlightHint(
-row,
-col,
-newRow,
-newCol
+
+possibleMove.r1,
+
+possibleMove.c1,
+
+possibleMove.r2,
+
+possibleMove.c2
+
 );
+
 
 
 return;
@@ -2607,7 +3403,13 @@ return;
 
 
 
-}
+
+
+showMessage(
+
+"🔍 هیچ حرکت ترکیبی پیدا نشد"
+
+);
 
 
 
@@ -2615,62 +3417,101 @@ return;
 
 
 
-}
 
 
 
-}
 
-
-
-showMessage("🔍 هیچ حرکت ترکیبی پیدا نشد");
-
-
-}
-
-
+// =========================
+// جابه‌جایی آزمایشی
+// =========================
 
 
 function swapTest(r1,c1,r2,c2){
 
 
-let temp=board[r1][c1];
+
+let temp =
+board[r1][c1];
 
 
-board[r1][c1]=board[r2][c2];
+
+board[r1][c1] =
+board[r2][c2];
 
 
-board[r2][c2]=temp;
+
+board[r2][c2] =
+temp;
+
 
 
 }
 
 
 
+
+
+
+
+// =========================
+// نمایش حرکت پیشنهادی
+// =========================
 
 
 function highlightHint(r1,c1,r2,c2){
 
 
-let cells=document.querySelectorAll(".cell");
+
+let cells =
+document.querySelectorAll(".cell");
 
 
 
-cells[r1*boardSize+c1].classList.add("hint");
-
-
-cells[r2*boardSize+c2].classList.add("hint");
+let first =
+cells[r1*boardSize+c1];
 
 
 
-showMessage("💡 این دو کتاب را جابه‌جا کن");
+let second =
+cells[r2*boardSize+c2];
+
+
+
+
+if(first){
+
+
+first.classList.add("hint");
 
 
 }
-// =========================
-// تایمر
-// =========================
 
+
+
+if(second){
+
+
+second.classList.add("hint");
+
+
+}
+
+
+
+
+showMessage(
+
+"💡 این دو کتاب را جابه‌جا کن"
+
+);
+
+
+
+}
+
+// =========================
+// تایمر بازی
+// =========================
 
 
 function startTimer(){
@@ -2681,12 +3522,21 @@ timer=setInterval(()=>{
 
 
 
+if(!gameStarted){
+
+clearInterval(timer);
+
+return;
+
+}
+
+
+
 timeLeft--;
 
 
 
 timerElement.innerText=timeLeft;
-
 
 
 
@@ -2703,9 +3553,7 @@ gameStarted=false;
 
 
 showMessage(
-
 "⏰ زمان تمام شد | امتیاز: "+score
-
 );
 
 
@@ -2725,9 +3573,6 @@ saveHighScore();
 }
 
 
-
-
-
 // =========================
 // سیستم کتابخانه و پیشرفت
 // =========================
@@ -2738,24 +3583,22 @@ function updateLibrary(){
 
 
 
-let unlocked=unlockBooks[0];
+let unlocked = unlockBooks[0];
 
 
+
+// پیدا کردن بالاترین سطح باز شده
 
 for(let book of unlockBooks){
 
 
-
-if(score>=book.score){
-
+    if(score >= book.score){
 
 
-unlocked=book;
+        unlocked = book;
 
 
-
-}
-
+    }
 
 
 }
@@ -2763,35 +3606,70 @@ unlocked=book;
 
 
 
-levelElement.innerText=unlocked.level;
+// نمایش سطح
+
+levelElement.innerText =
+unlocked.level;
 
 
-if(score===0){
+
+
+// نمایش آخرین کشف
+
+
+if(score <= 0){
+
+
 
 currentBookElement.innerText =
 "هنوز کتابی کشف نشده 📖";
 
+
+
 }
+
 else{
+
 
 currentBookElement.innerText =
 unlocked.icon;
 
-}
-if(score>=3000){
 
-levelElement.innerText=
+
+}
+
+
+
+
+
+// رتبه نهایی
+
+
+if(score >= 3000){
+
+
+
+levelElement.innerText =
 "🏛️ استاد کتاب";
 
-currentBookElement.innerText=
+
+
+currentBookElement.innerText =
 "📚 نگهبان کتابخانه | ✨ رتبه نهایی";
+
+
 
 }
 
 
 
 
-let items=document.querySelectorAll(".book-item");
+
+// بروزرسانی قفسه کتاب‌ها
+
+
+let items =
+document.querySelectorAll(".book-item");
 
 
 
@@ -2799,11 +3677,31 @@ unlockBooks.forEach((book,index)=>{
 
 
 
-if(score>=book.score && items[index]){
+if(
+items[index]
+){
 
 
 
-items[index].classList.add("unlocked");
+
+if(score >= book.score){
+
+
+items[index]
+.classList.add("unlocked");
+
+
+
+}
+
+else{
+
+
+items[index]
+.classList.remove("unlocked");
+
+
+}
 
 
 
@@ -2825,26 +3723,37 @@ saveProgress();
 
 
 
-
-
-
-
-
-// ذخیره پیشرفت
+// =========================
+// ذخیره پیشرفت دائمی
+// =========================
 
 
 function saveProgress(){
 
 
+    let progress = {
 
-localStorage.setItem(
 
-"bookLibraryScore",
+        score: Number(score),
 
-score
 
-);
+        level: levelElement.innerText,
 
+
+        lastSave: Date.now()
+
+
+    };
+
+
+
+    localStorage.setItem(
+
+        "bookLibraryProgress",
+
+        JSON.stringify(progress)
+
+    );
 
 
 }
@@ -2855,15 +3764,95 @@ score
 
 
 
+// =========================
+// بارگذاری پیشرفت
+// =========================
 
-// باز کردن کتابخانه
+
+function loadProgress(){
+
+
+
+    let saved = 
+    localStorage.getItem(
+        "bookLibraryProgress"
+    );
+
+
+
+    if(!saved){
+
+        return;
+
+    }
+
+
+
+    try{
+
+
+        let progress =
+        JSON.parse(saved);
+
+
+
+        if(
+            progress &&
+            progress.score !== undefined
+        ){
+
+
+
+            score =
+            Number(progress.score);
+
+
+
+            scoreElement.innerText =
+            score;
+
+
+
+            updateLibrary();
+
+
+
+        }
+
+
+
+    }
+
+    catch(error){
+
+
+        console.log(
+            "خطا در بارگذاری پیشرفت بازی",
+            error
+        );
+
+
+
+        localStorage.removeItem(
+            "bookLibraryProgress"
+        );
+
+
+    }
+
+
+
+}
+// =========================
+// نمایش کتابخانه
+// =========================
 
 
 function openLibrary(){
 
 
 
-let unlockedCount=0;
+let unlockedCount = 0;
 
 
 
@@ -2871,8 +3860,7 @@ unlockBooks.forEach(book=>{
 
 
 
-if(score>=book.score){
-
+if(score >= book.score){
 
 
 unlockedCount++;
@@ -2887,9 +3875,14 @@ unlockedCount++;
 
 
 
+
 showMessage(
 
-"📚 شما "+unlockedCount+" کتاب از ۵ کتابخانه را کشف کرده‌اید"
+"📚 شما "+
+unlockedCount+
+" کتاب از "+
+unlockBooks.length+
+" کتابخانه را کشف کرده‌اید ✨"
 
 );
 
@@ -2905,8 +3898,9 @@ showMessage(
 
 
 // =========================
-// رکورد
+// سیستم رکورد
 // =========================
+
 
 
 
@@ -2914,17 +3908,18 @@ function loadHighScore(){
 
 
 
-highScore=
+highScore = Number(
 
-Number(
-
-localStorage.getItem("bookMatchHigh")
+localStorage.getItem(
+"bookMatchHigh"
+)
 
 )||0;
 
 
 
-highScoreElement.innerText=highScore;
+highScoreElement.innerText =
+highScore;
 
 
 
@@ -2940,14 +3935,20 @@ function updateHighScore(){
 
 
 
-if(score>highScore){
+if(score > highScore){
 
 
 
-highScore=score;
+highScore = score;
 
 
-highScoreElement.innerText=highScore;
+
+highScoreElement.innerText =
+highScore;
+
+
+
+saveHighScore();
 
 
 
@@ -2978,41 +3979,173 @@ highScore
 
 
 }
-
-
-
-
 // =========================
-// کنترل کلیک و لمس
+// کنترل کلیک و لمس حرفه‌ای
 // =========================
+
+
+let boardLocked = false;
+
 
 
 boardElement.addEventListener("click",(e)=>{
 
-    let cell = e.target.closest(".cell");
 
-    if(!cell) return;
+if(boardLocked || !gameStarted){
 
-    let value = cell.innerText;
+return;
 
-
-    // کتاب ویژه
-    if(
-        value === specialBooks.gold ||
-        value === specialBooks.magic ||
-        value === specialBooks.time
-    ){
-
-        activateSpecial(cell);
-        return;
-
-    }
+}
 
 
-    // انتخاب یا جابه‌جایی معمولی
-    selectCell(cell);
+
+let cell = e.target.closest(".cell");
+
+
+
+if(!cell){
+
+return;
+
+}
+
+
+
+
+let row =
+Number(cell.dataset.row);
+
+
+
+let col =
+Number(cell.dataset.col);
+
+
+
+let value =
+board[row][col];
+
+
+
+
+
+// =========================
+// بررسی کتاب ویژه
+// =========================
+
+
+if(
+
+value === specialBooks.gold ||
+
+value === specialBooks.magic ||
+
+value === specialBooks.time
+
+){
+
+
+
+boardLocked = true;
+
+
+
+activateSpecial(cell);
+
+
+
+setTimeout(()=>{
+
+
+boardLocked = false;
+
+
+
+},700);
+
+
+
+return;
+
+
+
+}
+
+
+
+
+// =========================
+// انتخاب و جابه‌جایی معمولی
+// =========================
+
+
+selectCell(cell);
+
+
 
 });
+
+
+
+
+
+
+// =========================
+// پشتیبانی بهتر از لمس موبایل
+// =========================
+
+
+let touchStartTime = 0;
+
+
+
+boardElement.addEventListener(
+"touchstart",
+()=>{
+
+
+touchStartTime =
+Date.now();
+
+
+
+},
+{
+passive:true
+}
+);
+
+
+
+
+boardElement.addEventListener(
+"touchend",
+(e)=>{
+
+
+let duration =
+Date.now() - touchStartTime;
+
+
+
+// جلوگیری از لمس‌های طولانی
+
+if(duration > 500){
+
+return;
+
+}
+
+
+
+// اجازه بده click اصلی کار کند
+
+
+},
+{
+passive:true
+}
+);
 // =========================
 // پایان توابع جاوااسکریپت
 // =========================

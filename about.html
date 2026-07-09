@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>هدف و داستان این ابزار</title>
+
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+
+body{
+
+margin:0;
+
+padding:25px;
+
+min-height:100vh;
+
+font-family:Tahoma,Arial,sans-serif;
+
+background:
+
+radial-gradient(
+circle at top,
+#fff8e7,
+#ead7b5 45%,
+#d8bd8a
+);
+
+color:#4b2e1f;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-start;
+
+}
+
+
+
+/* دفتر اصلی */
+
+.paper{
+
+width:100%;
+
+max-width:850px;
+
+margin-top:20px;
+
+padding:38px 32px;
+
+background:
+
+linear-gradient(
+135deg,
+#fffaf0,
+#f7e8c8
+);
+
+
+border-radius:32px;
+
+
+border:
+
+2px solid #d2ae6d;
+
+
+box-shadow:
+
+0 20px 45px rgba(70,40,15,.2);
+
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+
+/* افکت کاغذ دست ساز */
+
+.paper::before{
+
+content:"📖  ✒️";
+
+position:absolute;
+
+top:18px;
+
+left:25px;
+
+font-size:30px;
+
+opacity:.35;
+
+}
+
+
+
+.paper::after{
+
+content:"🍂  ✨  🍃";
+
+position:absolute;
+
+bottom:18px;
+
+right:25px;
+
+font-size:24px;
+
+opacity:.4;
+
+}
+
+
+
+/* عنوان */
+
+h1{
+
+text-align:center;
+
+color:#68401f;
+
+font-size:2rem;
+
+margin:15px 0 35px;
+
+text-shadow:
+
+0 2px 8px rgba(100,60,20,.15);
+
+}
+
+
+
+/* مقدمه */
+
+.intro{
+
+font-size:1.08rem;
+
+line-height:2.2;
+
+text-align:center;
+
+padding:0 10px;
+
+margin-bottom:35px;
+
+color:#604535;
+
+}
+
+
+
+/* فصل ها */
+
+.chapter{
+
+background:
+
+rgba(255,255,255,.6);
+
+
+border-radius:22px;
+
+padding:24px;
+
+margin-bottom:24px;
+
+
+border-right:
+
+5px solid #c49a5a;
+
+
+box-shadow:
+
+0 8px 18px rgba(80,50,20,.08);
+
+
+transition:.3s ease;
+
+}
+
+
+
+.chapter:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+
+0 12px 25px rgba(80,50,20,.15);
+
+}
+
+
+
+.chapter h2{
+
+margin:0;
+
+font-size:1.3rem;
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+color:#5b3923;
+
+}
+
+
+
+.chapter h2::after{
+
+content:"";
+
+display:block;
+
+width:65px;
+
+height:3px;
+
+background:#d6b77a;
+
+border-radius:10px;
+
+margin-right:10px;
+
+}
+
+
+
+/* متن */
+
+.chapter p{
+
+line-height:2.15;
+
+font-size:1rem;
+
+margin-top:18px;
+
+color:#4f392c;
+
+letter-spacing:.2px;
+
+word-spacing:2px;
+
+}
+
+
+
+/* رنگ اختصاصی فصل ها */
+
+
+.writer{
+
+border-right-color:#8b7bb8;
+
+}
+
+
+
+.writer h2{
+
+color:#6d5cae;
+
+}
+
+
+
+.reader{
+
+border-right-color:#8a9a5b;
+
+}
+
+
+
+.reader h2{
+
+color:#718355;
+
+}
+
+
+
+.game{
+
+border-right-color:#6fa8dc;
+
+}
+
+
+
+.game h2{
+
+color:#3d78b5;
+
+}
+
+
+
+.simple{
+
+border-right-color:#d4a017;
+
+}
+
+
+
+.simple h2{
+
+color:#b8860b;
+
+}
+
+
+
+.income{
+
+border-right-color:#b87333;
+
+}
+
+
+
+.income h2{
+
+color:#9a5b25;
+
+}
+
+
+
+.goal{
+
+border-right-color:#9b59b6;
+
+}
+
+
+
+.goal h2{
+
+color:#7d3c98;
+
+}
+
+
+
+/* پایان */
+
+.end{
+
+text-align:center;
+
+margin-top:35px;
+
+font-size:1.15rem;
+
+font-weight:bold;
+
+color:#704214;
+
+}
+
+
+
+/* دکمه */
+
+.back{
+
+display:block;
+
+width:max-content;
+
+margin:30px auto 0;
+
+
+background:
+
+linear-gradient(
+135deg,
+#8b5e34,
+#5d3a1a
+);
+
+
+color:white;
+
+text-decoration:none;
+
+padding:13px 32px;
+
+border-radius:35px;
+
+
+font-size:.95rem;
+
+transition:.3s;
+
+}
+
+
+
+.back:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+
+0 8px 20px rgba(80,40,10,.25);
+
+}
+
+
+
+/* موبایل */
+
+@media(max-width:600px){
+
+
+body{
+
+padding:12px;
+
+}
+
+
+
+.paper{
+
+padding:28px 18px;
+
+border-radius:24px;
+
+}
+
+
+
+h1{
+
+font-size:1.5rem;
+
+}
+
+
+
+.intro{
+
+font-size:.95rem;
+
+}
+
+
+
+.chapter{
+
+padding:18px;
+
+}
+
+
+
+.chapter h2{
+
+font-size:1.1rem;
+
+}
+
+
+
+.chapter p{
+
+font-size:.9rem;
+
+line-height:2;
+
+}
+
+
+
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="paper">
+
+
+<h1>
+✨ هدف و داستان این ابزار
+</h1>
+
+
+<div class="intro">
+
+یک ایده، یک احساس یا یک لحظه‌ی الهام نیاز دارد جایی برای ماندن داشته باشد؛
+
+این مجموعه برای همین لحظه‌ها ساخته شده است.
+
+</div>
+<div class="chapter writer">
+
+<h2>
+📖 چرا این ابزار خلق شد؟
+</h2>
+
+
+<p>
+
+یه وقت‌هایی یک نویسنده فقط به جایی نیاز دارد که ایده‌ها، شخصیت‌ها و مسیر داستانش را مرتب کند؛
+
+و یک زمان‌هایی یک خواننده بعد از تمام کردن یک کتاب نیاز دارد احساسات، برداشت‌ها و تجربه‌ای را که از آن کتاب داشته ثبت کند.
+
+<br><br>
+
+این مجموعه برای همین لحظه‌ها ساخته شده است؛ یک همراه ساده، سریع و همیشه آماده برای نظم دادن به فکرها و نگه داشتن لحظه‌های مهم.
+
+<br><br>
+
+دفترچه نویسندگی کمک می‌کند نویسنده پیش از شروع یا در مسیر نوشتن، جهان داستان، شخصیت‌ها و برنامه‌ی ذهنی خود را ثبت کند و در پایان یک فایل PDF از مسیر داستانش داشته باشد؛ مثل یک نقشه راه که همیشه می‌تواند به آن برگردد.
+
+<br><br>
+
+دفترچه کتابخوان برای ثبت حس و تجربه‌ی خواندن ساخته شده است؛ جایی برای نوشتن اینکه یک کتاب چه احساسی ایجاد کرده، چه چیزی در ذهن مانده و چرا آن کتاب ارزش به یاد سپردن داشته است.
+
+<br><br>
+
+در کنار این دو بخش، یک بازی ساده‌ی کتاب‌محور هم قرار گرفته؛ تجربه‌ای کوتاه برای زمانی که ذهن شلوغ است و کاربر چند دقیقه فاصله می‌خواهد تا دوباره با آرامش به نوشتن یا مطالعه برگردد.
+
+</p>
+
+</div>
+
+
+
+
+<div class="chapter simple">
+
+<h2>
+✨ چرا ثبت‌نام ندارد؟
+</h2>
+
+
+<p>
+
+هدف این مجموعه ساخت یک ابزار پیچیده و سنگین نیست؛ بلکه ساخت یک دستیار کوچک است که بدون مراحل اضافی، در لحظه‌ای که جرقه‌ی یک ایده یا احساس یک کتاب تازه وجود دارد، سریع در دسترس باشد.
+
+<br><br>
+
+ثبت‌نام در این ابزار وجود ندارد، چون گاهی الهام یا یک حس مهم منتظر ساخت حساب کاربری نمی‌ماند.
+
+<br><br>
+
+وقتی یک نویسنده ناگهان ایده‌ای پیدا می‌کند یا یک خواننده تازه کتابی را تمام کرده، مهم‌ترین چیز سرعت است.
+
+<br><br>
+
+کاربر باید بتواند وارد شود، بنویسد، ذخیره کند، PDF بگیرد و ادامه‌ی مسیرش را دنبال کند.
+
+</p>
+
+</div>
+
+
+
+
+<div class="chapter income">
+
+<h2>
+🤝 نگاه من به درآمد و ارزش ابزار
+</h2>
+
+
+<p>
+
+این ابزار قرار نیست برای درآمدزایی، کمک‌رسانی خود را به یک سرویس پولی تبدیل کند.
+
+<br><br>
+
+یک دستیار باید در دسترس باشد؛ به همین دلیل بخش‌های اصلی برای نویسنده‌ها و کتابخوان‌ها رایگان باقی می‌مانند.
+
+<br><br>
+
+برای ساخت یک رابطه برد-برد، مسیر دیگری انتخاب شده است.
+
+<br><br>
+
+کسانی که دوست دارند با قلم و کاغذ پیش بروند یا دوست دارند آرشیوهایشان شکل فیزیکی و ماندگار داشته باشد، می‌توانند نسخه‌های فیزیکی دفترچه نویسنده و دفترچه کتابخوان را داشته باشند.
+
+<br><br>
+
+دفترچه فیزیکی نویسندگی می‌تواند یادگاری از مسیر قبل از نوشتن باشد؛ نقشه‌ای از ایده‌ها، شخصیت‌ها و جهانی که قبل از خلق داستان ساخته شده است.
+
+<br><br>
+
+دفترچه فیزیکی کتابخوان می‌تواند یادگاری از مسیر بعد از خواندن باشد؛ ثبت احساس‌ها، فکرها و خاطراتی که هر کتاب در ذهن و قلب خواننده باقی گذاشته است.
+
+</p>
+
+</div>
+
+
+
+
+<div class="chapter goal">
+
+<h2>
+🎯 هدف کلی پروژه
+</h2>
+
+
+<p>
+
+هدف این مجموعه ساخت یک فضای کوچک اما کاربردی برای آدم‌هایی است که با دنیای کتاب و نوشتن زندگی می‌کنند.
+
+<br><br>
+
+جایی برای ثبت فکرها، نگه داشتن احساسات و داشتن چند دقیقه آرامش.
+
+<br><br>
+
+یک همراه ساده که همیشه آماده است؛ سریع باز می‌شود، کار خودش را انجام می‌دهد و بدون اینکه مزاحم زندگی کاربر شود، در لحظه‌های مهم کنارش حضور دارد.
+
+</p>
+
+</div>
+
+
+
+
+<div class="end">
+
+📚 یک دفتر کوچک برای فکرهای بزرگ
+
+</div>
+
+
+
+<a href="index.html" class="back">
+
+🏠 بازگشت به دفترچه‌ها
+
+</a>
+
+
+
+</div>
+
+
+</body>
+
+</html>

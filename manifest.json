@@ -1,9 +1,8 @@
 {
-  "id": "/?v=26",
   "name": "دفترچه من | نویسنده و کتابخوان",
   "short_name": "دفترچه من",
-  "start_url": "/?v=26",
-  "scope": "/",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#fff8e7",
   "theme_color": "#8b5e34",
@@ -11,7 +10,7 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "/icon-512.png?v=26",
+      "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

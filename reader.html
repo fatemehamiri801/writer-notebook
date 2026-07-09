@@ -944,6 +944,26 @@ textareas.forEach(textarea => {
     });
 
 });
+// تابع زیر را به ابتدای بخش <script> اضافه کنید
+function openTab(evt, tabName) {
+    // ۱. پنهان کردن تمام محتواهای تب
+    const tabContents = document.getElementsByClassName("tab-content");
+    for (let i = 0; i < tabContents.length; i++) {
+        tabContents[i].style.display = "none";
+        tabContents[i].classList.remove("active");
+    }
+
+    // ۲. غیرفعال کردن کلاس active از تمام دکمه‌های منو
+    const navLinks = document.getElementsByClassName("nav-link");
+    for (let i = 0; i < navLinks.length; i++) {
+        navLinks[i].classList.remove("active");
+    }
+
+    // ۳. نمایش تب انتخاب شده و فعال کردن دکمه مربوطه
+    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
 </script>
 <footer style="margin-top: 60px; padding: 20px; text-align: center;">
     <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f5f3ff; border: 2px solid #8b5cf6; border-radius: 16px;">

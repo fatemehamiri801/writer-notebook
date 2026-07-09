@@ -220,38 +220,31 @@ textarea:focus {
         font-size: 14px;
     }
 }
-
-/* =========================
-   PRINT
-========================= */
-
 @media print {
 
-    body {
-        overflow: visible !important;
-    }
-
-    .tab-content {
-        display: block !important;
-        visibility: visible !important;
-        height: auto !important;
-        overflow: visible !important;
-        page-break-after: always;
-    }
-
-    .tab-content:last-child {
-        page-break-after: auto;
-    }
-
-    header, nav, footer, .mascot-box,
+    header,
+    nav,
+    footer,
+    .mascot-box,
     button,
     .no-print {
-        display: none !important;
+        display:none !important;
     }
 
-    * {
-        overflow: visible !important;
+    body{
+        background:white !important;
+        color:#000;
     }
+
+}
+.print-footer{
+    position:fixed;
+    bottom:10px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:12px;
+    color:#666;
 }
     </style>
 </head>
@@ -269,9 +262,9 @@ textarea:focus {
         </h1>
     </div>
     <div class="header-btns" style="display: flex; gap: 15px; align-items: center;">
-        <button onclick="printAllTabs()" style="background-color: #10b981; color: #ffffff; padding: 12px 24px; border-radius: 8px; border: none; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s;">
-            📥 خروجی PDF
-        </button>
+<button onclick="printFullContent()" style="background-color: #10b981; color: white; padding: 12px 24px; font-size: 1rem; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s;">
+    📥 خروجی PDF
+</button>
 
         <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s;">
     👤 ارتباط در تلگرام
@@ -637,73 +630,332 @@ textarea:focus {
     </div>
 
 </div>
-    <script>
-        // ۱. سوئیچ تب‌ها
-        function openTab(evt, tabId) {
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => content.classList.remove('active'));
+<script>
 
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active'));
+function openTab(evt, tabId) {
 
-            document.getElementById(tabId).classList.add('active');
-            evt.currentTarget.classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    const tabContents = document.querySelectorAll('.tab-content');
 
-        // ۲. حافظه خودکار هوشمند (ذخیره اطلاعات در مرورگر)
-        const textareas = document.querySelectorAll('textarea');
-        textareas.forEach(textarea => {
-            const saved = localStorage.getItem(textarea.id);
-            if (saved) textarea.value = saved;
-
-            textarea.addEventListener('input', () => {
-                localStorage.setItem(textarea.id, textarea.value);
-            });
-        });
-
-       // ۳. موتور چاپ (باز کردن همه تب‌ها و پرینت)
-function printAllTabs() {
-
-    const tabs = document.querySelectorAll('.tab-content');
-    const activeTab = document.querySelector('.tab-content.active');
-
-    // نمایش همه تب‌ها
-    tabs.forEach(tab => {
-        tab.classList.add('active');
+    tabContents.forEach(content => {
+        content.classList.remove('active');
     });
 
-    window.print();
 
-    // برگرداندن به حالت اولیه
-    tabs.forEach(tab => {
-        tab.classList.remove('active');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
     });
 
-    if (activeTab) {
-        activeTab.classList.add('active');
-    }
+
+    document.getElementById(tabId).classList.add('active');
+
+    evt.currentTarget.classList.add('active');
+
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+
 }
-    </script>
-	</div>
+
+
+
+// ذخیره خودکار اطلاعات
+
+const textareas = document.querySelectorAll('textarea');
+
+
+textareas.forEach(textarea => {
+
+    const saved = localStorage.getItem(textarea.id);
+
+    if(saved){
+        textarea.value = saved;
+    }
+
+
+    textarea.addEventListener('input',()=>{
+
+        localStorage.setItem(
+            textarea.id,
+            textarea.value
+        );
+
+    });
+
+});
+
+
+
+
+// چاپ کامل دفترچه
+
+function printFullContent(){
+
+
+const tabs = [
+
+{
+id:"tab-chars",
+title:"👤 شخصیت‌ها"
+},
+
+{
+id:"tab-world",
+title:"🌍 جهان‌سازی"
+},
+
+{
+id:"tab-story",
+title:"📖 داستان و ماجرا"
+},
+
+{
+id:"tab-time",
+title:"⏳ زمان و ریتم"
+},
+
+{
+id:"tab-hub",
+title:"🔥 پشت صحنه اثر"
+}
+
+];
+
+
+
+let contentHtml = `
+
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>دفترچه نویسندگی</title>
+
+
+<style>
+
+
+@page{
+    size:A4;
+    margin:20mm;
+}
+
+
+
+body{
+
+font-family:Tahoma,sans-serif;
+direction:rtl;
+line-height:2;
+color:#111;
+padding:20px;
+
+}
+
+
+
+h1{
+
+text-align:center;
+color:#312e81;
+margin-bottom:40px;
+
+}
+
+
+
+.section-title{
+    font-size:22px;
+    font-weight:bold;
+    color:#5b21b6;
+    border-bottom:2px solid #ddd;
+    margin-top:35px;
+    padding-bottom:10px;
+    break-before:page;
+    page-break-before:always;
+}
+
+.section-title:first-of-type{
+    break-before:auto;
+    page-break-before:auto;
+}
+
+
+.box{
+    margin:0 0 45px 0;
+    padding:20px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    break-inside:auto;
+    page-break-inside:auto;
+}
+.label{
+    font-size:18px;
+    font-weight:bold;
+    color:#312e81;
+    margin-bottom:20px;
+    break-after:avoid;
+    page-break-after:avoid;
+}
+
+.value{
+    white-space:pre-wrap;
+    line-height:2;
+    font-size:15px;
+    text-align:right;
+    overflow-wrap:break-word;
+}
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<h1>
+📓 دفترچه نویسندگی من
+</h1>
+
+
+`;
+
+function escapeHTML(str){
+    return str
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;");
+}
+
+tabs.forEach(tab=>{
+
+
+const section=document.getElementById(tab.id);
+
+
+if(!section) return;
+
+
+
+contentHtml += `
+
+<div class="section-title">
+${tab.title}
+</div>
+
+`;
+
+
+
+const fields = section.querySelectorAll("textarea");
+
+
+
+fields.forEach(field=>{
+
+
+if(field.value.trim() !== ""){
+
+
+const label =
+field.parentElement.querySelector("label");
+contentHtml += `
+
+<div class="box">
+
+<div class="label">
+${label ? label.innerText : "بخش"}
+</div>
+
+<div class="value">
+${escapeHTML(field.value.trim()).replace(/\n/g,"<br>")}
+</div>
+
+</div>
+
+`;
+
+}
+
+});
+
+});
+
+
+
+contentHtml += `
+
+<div class="print-footer">
+📓 دفترچه نویسندگی
+</div>
+
+</body>
+
+</html>
+
+`;
+
+
+
+const printWindow = window.open("","_blank");
+
+
+printWindow.document.write(contentHtml);
+
+
+printWindow.document.close();
+
+
+
+printWindow.onload=function(){
+
+    printWindow.focus();
+
+    printWindow.print();
+
+    printWindow.onafterprint=function(){
+
+        printWindow.close();
+
+    };
+
+};
+
+
+}
+</script>
+
 <footer style="margin-top: 60px; padding: 20px; text-align: center;">
     <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f0f7ff; border: 2px solid #3b82f6; border-radius: 16px;">
-        
-<h3 style="color: #1e40af; font-size: 1.3rem; margin: 0 0 10px 0;">
-    📓 دفترچه نویسندگی: <strong style="color: #2563eb;">نقشه راهی برای داستان‌هایی که در ذهنت شکل گرفته‌اند</strong>
-</h3>
 
-<p style="color: #374151; font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
-    با سفارش <strong>دفترچه فیزیکی نویسندگی</strong>، ایده‌ها، شخصیت‌ها و جهان‌های داستانی‌ات را سازمان بده تا مسیر خلق اثرت را قدم به قدم بسازی و 
-    <strong>نسخه PDF «چگونه داستان بنویسیم»</strong> را به عنوان هدیه دریافت کن.
-</p>
-        
-        <a href="https://t.me/fatemehamiri1381" target="_blank" 
-           style="background-color: #2563eb; color: #ffffff; padding: 10px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1rem; display: inline-block; transition: 0.3s;">
+        <h3 style="color: #1e40af; font-size: 1.3rem; margin: 0 0 10px 0;">
+            📓 دفترچه نویسندگی:
+            <strong style="color: #2563eb;">
+                نقشه راهی برای داستان‌هایی که در ذهنت شکل گرفته‌اند
+            </strong>
+        </h3>
+
+        <p style="color: #374151; font-size: 0.95rem; line-height:1.5; margin-bottom:15px;">
+            با سفارش <strong>دفترچه فیزیکی نویسندگی</strong>،
+            ایده‌ها، شخصیت‌ها و جهان‌های داستانی‌ات را سازمان بده.
+        </p>
+
+        <a href="https://t.me/fatemehamiri1381"
+           target="_blank"
+           style="background-color:#2563eb;color:#fff;padding:10px 30px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
             🚀 سفارش پکیج در تلگرام
         </a>
+
     </div>
 </footer>
+
 </body>
+
 </html>

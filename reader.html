@@ -227,14 +227,10 @@ textarea:focus {
 }
 
 /* =========================
-   PRINT
+   PRINT SYSTEM
 ========================= */
 
 @media print {
-
-    body {
-        overflow: visible !important;
-    }
 
     header,
     nav,
@@ -245,19 +241,23 @@ textarea:focus {
         display: none !important;
     }
 
-}
-/* نمایش همه تب‌ها هنگام چاپ */
-body.print-mode .tab-content {
-    display: block !important;
-    visibility: visible !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    page-break-after: always;
+    body {
+        background: white !important;
+        color: #000 !important;
+    }
+
 }
 
-body.print-mode .tab-content:last-child {
-    page-break-after: auto;
+.print-footer {
+
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+
 }
 </style>
 </head>
@@ -460,47 +460,381 @@ body.print-mode .tab-content:last-child {
 
     </div>
 </div>
-
 <script>
+
     // ۱. سوئیچ تب‌ها
     function openTab(evt, tabId) {
+
         const tabContents = document.querySelectorAll('.tab-content');
-        tabContents.forEach(content => content.classList.remove('active'));
+
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+        });
+
 
         const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => link.classList.remove('active'));
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+
 
         document.getElementById(tabId).classList.add('active');
+
         evt.currentTarget.classList.add('active');
-        
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+
     }
 
-    // ۲. حافظه خودکار هوشمند
-    const textareas = document.querySelectorAll('textarea');
-    textareas.forEach(textarea => {
-        const saved = localStorage.getItem(textarea.id);
-        if (saved) textarea.value = saved;
 
-        textarea.addEventListener('input', () => {
-            localStorage.setItem(textarea.id, textarea.value);
+
+    // ۲. حافظه خودکار هوشمند
+
+    const textareas = document.querySelectorAll('textarea');
+
+
+    textareas.forEach(textarea => {
+
+        const saved = localStorage.getItem(textarea.id);
+
+
+        if(saved){
+            textarea.value = saved;
+        }
+
+
+        textarea.addEventListener('input',()=>{
+
+            localStorage.setItem(
+                textarea.id,
+                textarea.value
+            );
+
         });
+
     });
 
-// ۳. موتور چاپ (نمایش همه تب‌ها)
-function printAllTabs() {
 
-    document.body.classList.add('print-mode');
 
-    setTimeout(() => {
-        window.print();
-    }, 300);
+
+
+    // ۳. موتور چاپ کامل دفترچه
+
+    function printAllTabs(){
+
+
+        const tabs = [
+
+            {
+                id:"tab1",
+                title:"🏷️ شناسنامه"
+            },
+
+            {
+                id:"tab2",
+                title:"🎯 پیش‌شروع"
+            },
+
+            {
+                id:"tab3",
+                title:"👤 شخصیت‌ها"
+            },
+
+            {
+                id:"tab4",
+                title:"🌍 جهان و سبک"
+            },
+
+            {
+                id:"tab5",
+                title:"🔍 تحلیل و معما"
+            },
+
+            {
+                id:"tab6",
+                title:"✍️ نگاه نویسنده"
+            },
+
+            {
+                id:"tab7",
+                title:"💎 گنجینه"
+            },
+
+            {
+                id:"tab8",
+                title:"🎬 اقتباس و پایان"
+            }
+
+        ];
+
+
+
+        let contentHtml = `
+
+        <html lang="fa" dir="rtl">
+
+        <head>
+
+        <meta charset="UTF-8">
+
+        <title>دفترچه کتابخوان</title>
+
+
+        <style>
+
+
+        @page{
+            size:A4;
+            margin:20mm;
+        }
+
+
+        body{
+
+            font-family:Tahoma,sans-serif;
+            direction:rtl;
+            line-height:2;
+            color:#111;
+            padding:20px;
+
+        }
+
+
+        h1{
+
+            text-align:center;
+            color:#312e81;
+            margin-bottom:40px;
+
+        }
+
+
+        .section-title{
+
+            font-size:22px;
+            font-weight:bold;
+            color:#5b21b6;
+            border-bottom:2px solid #ddd;
+            margin-top:35px;
+            padding-bottom:10px;
+            page-break-before:always;
+
+        }
+
+
+        .section-title:first-of-type{
+
+            page-break-before:auto;
+
+        }
+
+
+  .box{
+
+margin:0 0 45px 0;
+padding:20px;
+border:1px solid #ddd;
+border-radius:10px;
+break-inside:auto;
+page-break-inside:auto;
+
 }
 
-// بعد از بسته شدن پرینت
-window.onafterprint = function () {
-    document.body.classList.remove('print-mode');
-};
+
+      .label{
+
+font-size:18px;
+font-weight:bold;
+color:#312e81;
+margin-bottom:20px;
+break-after:avoid;
+page-break-after:avoid;
+
+}
+
+
+        .value{
+
+            white-space:pre-wrap;
+            line-height:2;
+            font-size:15px;
+            overflow-wrap:break-word;
+
+        }
+
+
+        .print-footer{
+
+            position:fixed;
+            bottom:10px;
+            left:0;
+            right:0;
+            text-align:center;
+            font-size:12px;
+            color:#666;
+
+        }
+
+
+        </style>
+
+
+        </head>
+
+
+        <body>
+
+
+        <h1>
+        📖 دفترچه کتابخوان من
+        </h1>
+
+
+        `;
+
+
+
+        function escapeHTML(str){
+
+            return str
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;");
+
+        }
+
+
+
+
+        tabs.forEach(tab=>{
+
+
+            const section = document.getElementById(tab.id);
+
+
+            if(!section) return;
+
+
+
+            contentHtml += `
+
+            <div class="section-title">
+
+            ${tab.title}
+
+            </div>
+
+            `;
+
+
+
+            const fields = section.querySelectorAll("textarea");
+
+
+
+            fields.forEach(field=>{
+
+
+                if(field.value.trim() !== ""){
+
+
+                    const label =
+                    field.parentElement.querySelector("label");
+
+
+
+                    contentHtml += `
+
+                    <div class="box">
+
+
+                    <div class="label">
+
+                    ${label ? label.innerText : "بخش"}
+
+                    </div>
+
+
+                    <div class="value">
+
+                    ${escapeHTML(field.value.trim()).replace(/\n/g,"<br>")}
+
+                    </div>
+
+
+                    </div>
+
+                    `;
+
+                }
+
+
+            });
+
+
+        });
+
+
+
+
+        contentHtml += `
+
+
+        <div class="print-footer">
+
+        📖 دفترچه کتابخوان
+
+        </div>
+
+
+        </body>
+
+        </html>
+
+
+        `;
+
+
+
+
+        const printWindow = window.open("","_blank");
+
+
+        printWindow.document.write(contentHtml);
+
+
+        printWindow.document.close();
+
+
+
+        printWindow.onload=function(){
+
+
+            printWindow.focus();
+
+
+            printWindow.print();
+
+
+
+            printWindow.onafterprint=function(){
+
+                printWindow.close();
+
+            };
+
+
+        };
+
+
+    }
+
+
 </script>
 <footer style="margin-top: 60px; padding: 20px; text-align: center;">
     <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f5f3ff; border: 2px solid #8b5cf6; border-radius: 16px;">

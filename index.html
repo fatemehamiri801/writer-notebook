@@ -82,15 +82,14 @@
     <a href="about.html" class="purpose-btn">✨ هدف و داستان این ابزار</a>
 
     <script>
-        // ثبت سرویس‌ورکر و مدیریت آپدیت‌های آنی
+        // ثبت سرویس‌ورکر با مسیر نسبی './sw.js' برای هماهنگی با GitHub Pages
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then(reg => {
+                navigator.serviceWorker.register('./sw.js').then(reg => {
                     reg.addEventListener('updatefound', () => {
                         const newWorker = reg.installing;
                         newWorker.addEventListener('statechange', () => {
                             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                // به محض اینکه ورژن جدید نصب شد، صفحه رفرش می‌شود تا تغییرات اعمال شود
                                 window.location.reload();
                             }
                         });

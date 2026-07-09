@@ -1,15 +1,7 @@
-const CACHE_NAME = "my-notebook-v48";  //این بخش برای اپدیت و تغیرات ورژن رو اصلاح کن هر بار
+const CACHE_NAME = "my-notebook-v49"; //بعد هر تغییر این جا رو عوض کن 
 
 
-const ASSETS = [
-    "./",
-    "./index.html",
-    "./nevisandegi.html",
-    "./reader.html",
-    "./game.html",
-    "./manifest.json"
-];
-
+// فایل‌هایی که باید در نصب اولیه ذخیره شوند
 const ASSETS = [
     "./",
     "./index.html",
@@ -20,15 +12,24 @@ const ASSETS = [
     "./manifest.json"
 ];
 
+
+
+
+// =========================
 // نصب سرویس ورکر
+// =========================
+
 self.addEventListener("install", (event) => {
 
+
+    // فعال شدن سریع نسخه جدید
     self.skipWaiting();
 
 
     event.waitUntil(
 
         caches.open(CACHE_NAME)
+
         .then((cache) => {
 
             return cache.addAll(ASSETS);
@@ -37,35 +38,48 @@ self.addEventListener("install", (event) => {
 
     );
 
+
 });
 
 
 
 
 
-// فعال شدن و حذف کش‌های قدیمی
+
+
+
+// =========================
+// فعال شدن و پاک کردن کش قدیمی
+// =========================
+
 self.addEventListener("activate", (event) => {
 
 
     event.waitUntil(
 
+
         caches.keys()
+
         .then((keys)=>{
 
 
             return Promise.all(
+
 
                 keys.map((key)=>{
 
 
                     if(key !== CACHE_NAME){
 
+
                         return caches.delete(key);
+
 
                     }
 
 
                 })
+
 
             );
 
@@ -75,7 +89,9 @@ self.addEventListener("activate", (event) => {
 
         .then(()=>{
 
+
             return self.clients.claim();
+
 
         })
 
@@ -91,7 +107,12 @@ self.addEventListener("activate", (event) => {
 
 
 
+
+// =========================
 // مدیریت درخواست‌ها
+// =========================
+
+
 self.addEventListener("fetch",(event)=>{
 
 
@@ -99,7 +120,12 @@ self.addEventListener("fetch",(event)=>{
 
 
 
-    // صفحات HTML همیشه جدید باشند
+
+    // -------------------------
+    // صفحات HTML
+    // همیشه نسخه جدید دریافت شود
+    // -------------------------
+
     if(request.mode === "navigate"){
 
 
@@ -108,25 +134,32 @@ self.addEventListener("fetch",(event)=>{
 
             fetch(request)
 
+
             .then((response)=>{
 
 
                 const clone = response.clone();
 
 
+
                 caches.open(CACHE_NAME)
 
                 .then((cache)=>{
 
+
                     cache.put(request,clone);
 
+
                 });
+
 
 
                 return response;
 
 
+
             })
+
 
 
             .catch(()=>{
@@ -143,10 +176,12 @@ self.addEventListener("fetch",(event)=>{
                 });
 
 
+
             })
 
 
         );
+
 
 
         return;
@@ -159,7 +194,13 @@ self.addEventListener("fetch",(event)=>{
 
 
 
-    // فایل‌های JS CSS عکس و...
+
+
+    // -------------------------
+    // فایل‌های CSS / JS / عکس / آیکون
+    // -------------------------
+
+
     event.respondWith(
 
 
@@ -169,11 +210,20 @@ self.addEventListener("fetch",(event)=>{
         .then((response)=>{
 
 
-            if(!response || response.status !== 200){
+
+            if(
+                !response ||
+                response.status !== 200 ||
+                response.type === "opaque"
+            ){
+
 
                 return response;
 
+
             }
+
+
 
 
             const clone = response.clone();
@@ -197,6 +247,7 @@ self.addEventListener("fetch",(event)=>{
 
 
         })
+
 
 
         .catch(()=>{

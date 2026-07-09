@@ -1,346 +1,48 @@
-const CACHE_NAME = "my-notebook-v51"; //بعد تغییرات این جا ورژن عوض کن
-
-
-// =========================
-// فایل‌های اصلی برنامه
-// =========================
+const CACHE_NAME = "my-notebook-v52"; //  تغییری در سایت دادی، فقط این ورژن را عوض کن (مثلاً 52)
 
 const ASSETS = [
-
-    "./",
-
-    "./index.html",
-
-    "./nevisandegi.html",
-
-    "./reader.html",
-
-    "./game.html",
-
-    "./about.html",
-
-    "./manifest.json"
-
+    "/",
+    "/index.html",
+    "/nevisandegi.html",
+    "/reader.html",
+    "/game.html",
+    "/about.html",
+    "/manifest.json"
 ];
 
-
-
-
-// =========================
-// نصب سرویس ورکر
-// =========================
-
-self.addEventListener("install", (event)=>{
-
-
-    // فعال شدن سریع نسخه جدید
-
-    self.skipWaiting();
-
-
-
+// 1. نصب و فعال‌سازی فوری
+self.addEventListener("install", (event) => {
+    self.skipWaiting(); // سرویس‌ورکر جدید بلافاصله جایگزین قبلی می‌شود
     event.waitUntil(
-
-
-        caches.open(CACHE_NAME)
-
-        .then((cache)=>{
-
-
-            return cache.addAll(ASSETS);
-
-
-        })
-
-
+        caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
     );
-
-
 });
 
-
-
-
-
-
-
-
-// =========================
-// فعال شدن سرویس ورکر
-// پاک کردن کش‌های قدیمی
-// =========================
-
-
-self.addEventListener("activate",(event)=>{
-
-
+// 2. پاکسازی کش‌های قدیمی به محض فعال شدن
+self.addEventListener("activate", (event) => {
     event.waitUntil(
-
-
-        caches.keys()
-
-        .then((keys)=>{
-
-
+        caches.keys().then((keys) => {
             return Promise.all(
-
-
-                keys.map((key)=>{
-
-
-                    if(key !== CACHE_NAME){
-
-
-                        return caches.delete(key);
-
-
-                    }
-
-
+                keys.map((key) => {
+                    if (key !== CACHE_NAME) return caches.delete(key);
                 })
-
-
             );
-
-
-        })
-
-
-        .then(()=>{
-
-
-            return self.clients.claim();
-
-
-        })
-
-
+        }).then(() => self.clients.claim()) // کنترل فوری تمام تب‌های باز
     );
-
-
 });
 
-
-
-
-
-
-
-
-// =========================
-// دریافت درخواست‌ها
-// مدیریت صفحات و فایل‌ها
-// =========================
-
-
-self.addEventListener("fetch",(event)=>{
-
-
-    const request = event.request;
-
-
-
-
-    // =====================
-    // صفحات HTML
-    // همیشه نسخه تازه
-    // =====================
-
-
-    if(request.mode === "navigate"){
-
-
-        event.respondWith(
-
-
-            fetch(request)
-
-
-            .then((response)=>{
-
-
-                const clone = response.clone();
-
-
-
-                caches.open(CACHE_NAME)
-
-                .then((cache)=>{
-
-
-                    cache.put(request,clone);
-
-
-                });
-
-
-
-                return response;
-
-
-
-            })
-
-
-            .catch(()=>{
-
-
-                return caches.match(request)
-
-                .then((cached)=>{
-
-
-                    return cached || caches.match("./index.html");
-
-
-                });
-
-
-
-            })
-
-
-        );
-
-
-        return;
-
-
-    }
-
-
-
-
-
-
-
-
-    // =====================
-    // فایل‌های CSS
-    // JS
-    // تصاویر
-    // آیکون‌ها
-    // =====================
-
-
+// 3. استراتژی هوشمند برای نمایش تغییرات
+self.addEventListener("fetch", (event) => {
     event.respondWith(
-
-
-        caches.match(request)
-
-        .then((cached)=>{
-
-
-            if(cached){
-
-
-                // اول نسخه کش شده را بده
-
-                // بعد نسخه جدید را ذخیره کن
-
-
-                fetch(request)
-
-                .then((response)=>{
-
-
-                    if(
-                        response &&
-                        response.status === 200
-                    ){
-
-
-                        caches.open(CACHE_NAME)
-
-                        .then((cache)=>{
-
-
-                            cache.put(
-                                request,
-                                response.clone()
-                            );
-
-
-                        });
-
-
-                    }
-
-
-                })
-
-                .catch(()=>{});
-
-
-
-                return cached;
-
-
-            }
-
-
-
-
-            return fetch(request)
-
-
-            .then((response)=>{
-
-
-                if(
-                    !response ||
-                    response.status !== 200
-                ){
-
-
-                    return response;
-
-
+        caches.match(event.request).then((cachedResponse) => {
+            // اگر فایل در کش بود، آن را برگردان ولی در پس‌زمینه نسخه جدید را چک کن (Stale-while-revalidate)
+            const fetchPromise = fetch(event.request).then((networkResponse) => {
+                if (networkResponse.status === 200) {
+                    caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse.clone()));
                 }
-
-
-
-
-                const clone = response.clone();
-
-
-
-                caches.open(CACHE_NAME)
-
-                .then((cache)=>{
-
-
-                    cache.put(
-                        request,
-                        clone
-                    );
-
-
-                });
-
-
-
-                return response;
-
-
-
+                return networkResponse;
             });
-
-
-
+            return cachedResponse || fetchPromise;
         })
-
-
-        .catch(()=>{
-
-
-            return caches.match("./index.html");
-
-
-        })
-
-
     );
-
-
 });

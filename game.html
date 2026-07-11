@@ -1066,7 +1066,7 @@ font-size:13px;
 
 <span id="timer">
 
-180
+100
 
 </span>
 
@@ -1289,7 +1289,7 @@ level:"🌱 تازه‌کار"
 
 {
 
-score:300,
+score:500,
 
 icon:"📗",
 
@@ -1300,7 +1300,7 @@ level:"🌿 کتابخوان"
 
 {
 
-score:800,
+score:1000,
 
 icon:"📘",
 
@@ -1311,7 +1311,7 @@ level:"📚 عاشق داستان"
 
 {
 
-score:1500,
+score:1700,
 
 icon:"📙",
 
@@ -1322,7 +1322,7 @@ level:"🔍 جستجوگر"
 
 {
 
-score:3000,
+score:5000,
 
 icon:"📚",
 
@@ -1357,7 +1357,7 @@ let combo=0;
 let timer;
 
 
-let timeLeft=180;
+let timeLeft=100;
 
 
 let gameStarted=false;
@@ -1423,7 +1423,7 @@ hintCount=6;
 combo=0;
 
 
-timeLeft=180;
+timeLeft=100;
 
 
 selectedCell=null;
@@ -2348,98 +2348,93 @@ other.col===item.col
 
 // حذف کتاب‌ها
 
-
 function removeBooks(matches){
 
+    if(!matches || matches.length === 0) return;
 
-combo++;
+    if(window.isRemoving) return;
 
+    window.isRemoving = true;
 
-let cells=document.querySelectorAll(".cell");
-
-
-
-matches.forEach(item=>{
+    combo++;
 
 
-let index=item.row*boardSize+item.col;
+    let cells = document.querySelectorAll(".cell");
 
 
-if(cells[index]){
+    matches.forEach(item=>{
 
+        let index = item.row * boardSize + item.col;
 
-cells[index].classList.add("removing");
+        if(cells[index]){
 
+            cells[index].classList.add("removing");
 
-}
+        }
 
-
-});
-
+    });
 
 
 
-
-setTimeout(()=>{
-
+    setTimeout(()=>{
 
 
-matches.forEach(item=>{
+        matches.forEach(item=>{
 
+            board[item.row][item.col] = null;
 
-board[item.row][item.col]=null;
-
-
-});
+        });
 
 
 
+        let points = matches.length * 10 * combo;
 
 
-let points=matches.length*10*combo;
+        score += points;
 
-
-
-score+=points;
-
-
-scoreElement.innerText=score;
+        scoreElement.innerText = score;
 
 
 
+        if(combo > 1){
 
-if(combo>1){
+            showMessage(
+                "🔥 کمبو x" + combo + " | +" + points
+            );
 
-    showMessage(
-        "🔥 کمبو x"+combo+" | +"+points
-    );
-
-}
-
-
-createSpecial(matches);
+        }
 
 
-updateLibrary();
+
+        createSpecial(matches);
 
 
-updateHighScore();
+        updateLibrary();
 
 
-renderBoard();
+        updateHighScore();
 
 
-setTimeout(()=>{
-
-    dropBooks();
-
-},300);
+        renderBoard();
 
 
-},350);
+
+        setTimeout(()=>{
+
+
+            window.isRemoving = false;
+
+
+            dropBooks();
+
+
+        },300);
+
+
+
+    },350);
 
 }
-
 // =========================
 // ساخت کتاب ویژه هوشمند
 // =========================
@@ -2861,18 +2856,10 @@ let removed = [];
 // در غیر این صورت ستونی
 
 
-let horizontal = false;
 
-
-
-if(
-col>0 &&
-board[row][col-1] === specialBooks.gold
-){
-
-horizontal=true;
-
-}
+let horizontal =
+    (col > 0 && board[row][col-1] === specialBooks.gold) ||
+    (col < boardSize - 1 && board[row][col+1] === specialBooks.gold);
 
 
 
@@ -3130,7 +3117,7 @@ else if(value === specialBooks.time){
 
 
 
-timeLeft += 20;
+timeLeft += 3;
 
 
 
@@ -3150,7 +3137,7 @@ board[row][col]=null;
 
 
 showMessage(
-"⏳📖 بیست ثانیه به زمان اضافه شد!"
+"⏳📖 ۳ ثانیه به زمان اضافه شد!"
 );
 
 
@@ -3654,7 +3641,8 @@ levelElement.innerText =
 
 
 currentBookElement.innerText =
-"📚 نگهبان کتابخانه | ✨ رتبه نهایی";
+
+"📚  ✨ رتبه نهایی";
 
 
 

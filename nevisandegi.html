@@ -3,20 +3,25 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
+<script>if(localStorage.getItem('nb-dark-mode')==='1'){document.documentElement.classList.add('nb-dark');}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <link rel="manifest" href="./manifest.json">
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
-
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<link rel="canonical" href="https://fatemehamiri801.github.io/writer-notebook/nevisandegi.html">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="دفترچه من">
 <meta name="theme-color" content="#4c1d95">
+
+<meta name="description" content="دفترچه نویسندگی؛ ابزار رایگان و بدون ثبت‌نام برای ثبت شخصیت‌ها، جهان داستان و مسیر نوشتن، با خروجی PDF.">
+<meta property="og:title" content="دفترچه نویسندگی">
+<meta property="og:description" content="ابزار ثبت و پرورش ایده‌های داستانی، رایگان و بدون ثبت‌نام.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fatemehamiri801.github.io/writer-notebook/nevisandegi.html">
+<meta property="og:image" content="https://fatemehamiri801.github.io/writer-notebook/icon-512.png">
     <title>دفترچه نویسندگی</title>
     <style>
  /* =========================
@@ -35,7 +40,7 @@ html, body {
 
 body {
     background-color: #e0f2fe;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #1e1b4b;
     line-height: 1.7;
 }
@@ -53,6 +58,29 @@ header {
     gap: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     flex-wrap: wrap;
+}
+
+.header-topline {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* دکمه‌ی منوی کشویی هدر؛ فقط توی موبایل نشون داده می‌شه */
+.mobile-menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    font-size: 1.25rem;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 /* =========================
@@ -80,19 +108,13 @@ header {
     background-color: #059669;
     transform: translateY(-2px);
 }
-.btn-new-book {
-    background-color: #ef4444;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: inherit;
-}
 /* =========================
    NAV (UNIFIED SCROLL SYSTEM)
 ========================= */
+.nav-wrapper {
+    position: relative;
+}
+
 nav {
     background-color: #fff;
     display: flex;
@@ -107,6 +129,38 @@ nav {
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+}
+
+/* نشونه‌ی بصری برای اینکه کاربر بفهمه تب‌های بیشتری با اسکرول افقی هست */
+.nav-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 34px;
+    background: linear-gradient(to left, rgba(255,255,255,0), #ffffff 85%);
+    pointer-events: none;
+    display: none;
+}
+
+.nav-wrapper::before {
+    content: "◀";
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: #9ca3af;
+    pointer-events: none;
+    display: none;
+    animation: nb-scroll-hint 1.6s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes nb-scroll-hint {
+    0%, 100% { transform: translateY(-50%) translateX(0); opacity: .45; }
+    50% { transform: translateY(-50%) translateX(-4px); opacity: 1; }
 }
 
 .nav-link {
@@ -216,6 +270,33 @@ textarea:focus {
 }
 
 /* =========================
+   TOOLBAR BUTTONS (پروژه)
+========================= */
+.btn-toolbar {
+    background: #ede9fe;
+    color: #5b21b6;
+    border: 1px solid #c4b5fd;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+
+.btn-toolbar-danger {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+
+/* =========================
    MOBILE FIX
 ========================= */
 @media (max-width: 768px) {
@@ -224,6 +305,45 @@ textarea:focus {
         flex-direction: column;
         text-align: center;
         padding: 14px;
+        padding-top: 68px; /* فاصله برای اینکه دکمه‌ی شناور دارک‌مود روی عنوان نیفته */
+    }
+
+    .header-topline {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .header-topline .btn-back { order: 1; }
+
+    .mobile-menu-toggle {
+        display: inline-flex;
+        order: 2;
+    }
+
+    h1.page-title {
+        order: 3;
+        flex-basis: 100%;
+        font-size: 1.5rem !important;
+        margin-top: 10px !important;
+    }
+
+    .header-btns {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 14px;
+        gap: 10px;
+    }
+
+    .header-btns.open {
+        display: flex;
+    }
+
+    .nav-wrapper::after,
+    .nav-wrapper::before {
+        display: block;
     }
 
     .main-wrapper {
@@ -266,26 +386,28 @@ textarea:focus {
     color:#666;
 }
     </style>
+    <link rel="stylesheet" href="./shared/style.css">
 </head>
 <body>
 
+<button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز">🌙</button>
+
  <header style="background-color: #5b21b6; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(88, 28, 135, 0.2); width: 100%; box-sizing: border-box; margin: 0; position: relative; left: 0; top: 0;">
-    
-    <div style="display: flex; align-items: center; gap: 20px;">
-        <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
+
+    <div class="header-topline">
+        <a href="index.html" class="btn-back" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
             🏠 بازگشت
         </a>
-        
-        <h1 style="margin: 0; padding-right: 10px; font-size: 2.2rem; font-family: Tahoma, sans-serif; font-weight: 900; color: #facc15; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); letter-spacing: 1px; transform: rotate(-1deg); cursor: default;">
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" title="منو" aria-label="باز کردن منو">☰</button>
+
+        <h1 class="page-title" style="margin: 0; padding-right: 10px; font-size: 2.2rem; font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 900; color: #facc15; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); letter-spacing: 1px; transform: rotate(-1deg); cursor: default;">
             دفترچه نویسندگی
         </h1>
     </div>
-<div class="header-btns">
+<div class="header-btns" id="headerBtns">
 <button onclick="printFullContent()" style="background-color: #10b981; color: white; padding: 12px 24px; font-size: 1rem; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s;">
     📥 خروجی PDF
-</button>
-<button class="btn-new-book" onclick="newBookNotebook()">
-🗑️ کتاب جدید
 </button>
 
         <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s;">
@@ -293,6 +415,21 @@ textarea:focus {
 </a>
     </div>
 </header>
+
+<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:14px 20px; background:#ede9fe; border-bottom:1px solid #ddd6fe;">
+    <div style="display:flex; align-items:center; gap:8px;">
+        <label for="project-select" style="font-weight:bold; color:#4c1d95; font-size:0.9rem;">📚 پروژه:</label>
+        <select id="project-select" onchange="switchProject(this.value)" style="padding:8px 12px; border-radius:8px; border:1px solid #a78bfa; font-family:inherit; font-size:0.9rem; background:#fff;"></select>
+    </div>
+    <button onclick="createNewProject()" class="btn-toolbar">➕ پروژه جدید</button>
+    <button onclick="renameCurrentProject()" class="btn-toolbar">✏️ تغییر نام</button>
+    <button onclick="deleteCurrentProject()" class="btn-toolbar-danger">🗑️ حذف پروژه</button>
+
+    <div style="display:flex; align-items:center; gap:6px; margin-right:auto;">
+        <input id="search-box" type="text" placeholder="🔍 جستجو در این پروژه..." style="padding:8px 12px; border-radius:8px; border:1px solid #a78bfa; font-family:inherit; font-size:0.85rem; min-width:180px;">
+        <button onclick="searchNotebook()" class="btn-toolbar">جستجو</button>
+    </div>
+</div>
 
     <div class="mascot-box" style="display: flex; align-items: center; justify-content: center; gap: 15px; padding: 20px; background: #f3f4f6; border-radius: 12px; margin: 20px;">
         <span style="font-size: 40px;">✍️📓</span>
@@ -303,6 +440,7 @@ textarea:focus {
         
 
 
+<div class="nav-wrapper">
 <nav style="display: flex; gap: 10px; padding: 10px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; justify-content: flex-start;">
     <button class="nav-link active" onclick="openTab(event, 'tab-chars')">👤 ۱. شخصیت‌ها</button>
     <button class="nav-link" onclick="openTab(event, 'tab-world')">🌍 ۲. جهان‌سازی</button>
@@ -310,6 +448,7 @@ textarea:focus {
     <button class="nav-link" onclick="openTab(event, 'tab-time')">⏳ ۴. زمان و ریتم</button>
     <button class="nav-link" onclick="openTab(event, 'tab-hub')">🎬 ۵. پشت صحنه اثر</button>
 </nav>
+</div>
 <div class="main-wrapper">
 
 <!-- TAB: CHARACTERS -->
@@ -653,6 +792,7 @@ textarea:focus {
 
 </div>
 
+<script src="./shared/common.js"></script>
 <script>
 
 function openTab(evt, tabId) {
@@ -685,29 +825,70 @@ function openTab(evt, tabId) {
 
 
 
-// ذخیره خودکار اطلاعات
+// ====== سیستم چند پروژه‌ای دفترچه نویسندگی (منطق مشترک در shared/common.js) ======
+const pm = createProjectManager({
+    ns: 'nvsdg',
+    firstItemName: 'داستان ۱',
+    legacyName: 'داستان قبلی',
+    newPromptText: 'نام داستان جدید را وارد کن:',
+    newPromptDefault: 'داستان جدید',
+    renamePromptText: 'نام جدید داستان:',
+    minItemsAlert: 'حداقل یک پروژه باید باقی بماند.',
+    deleteConfirm: (name) => `داستان «${name}» برای همیشه حذف شود؟`
+});
+function switchProject(id){ return pm.switchProject(id); }
+function createNewProject(){ return pm.createNewProject(); }
+function renameCurrentProject(){ return pm.renameCurrentProject(); }
+function deleteCurrentProject(){ return pm.deleteCurrentProject(); }
 
 const textareas = document.querySelectorAll('textarea');
 
+(async function initNotebook(){
+    await pm.migrateAndInit();
+    pm.renderProjectSelector();
+    await pm.loadActiveProjectIntoForm();
+})();
 
 textareas.forEach(textarea => {
 
-    const saved = localStorage.getItem(textarea.id);
-
-    if(saved){
-        textarea.value = saved;
-    }
-
-
     textarea.addEventListener('input',()=>{
 
-        localStorage.setItem(
-            textarea.id,
-            textarea.value
-        );
+        pm.saveActiveProjectField(textarea);
 
     });
 
+});
+
+// جستجو در متن‌های پروژه فعال
+function searchNotebook(){
+    const query = document.getElementById('search-box').value.trim();
+    document.querySelectorAll('.search-highlight').forEach(el => el.classList.remove('search-highlight'));
+    if(!query) return;
+
+    const match = Array.from(document.querySelectorAll('textarea')).find(t =>
+        t.value.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if(!match){
+        alert('چیزی با این عبارت در این پروژه پیدا نشد.');
+        return;
+    }
+
+    const tabContent = match.closest('.tab-content');
+    if(tabContent){
+        const tabId = tabContent.id;
+        const navBtn = Array.from(document.querySelectorAll('.nav-link'))
+            .find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId));
+        if(navBtn) navBtn.click();
+    }
+
+    match.classList.add('search-highlight');
+    match.scrollIntoView({ behavior:'smooth', block:'center' });
+    match.focus();
+    setTimeout(()=> match.classList.remove('search-highlight'), 3000);
+}
+document.getElementById('search-box').addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') searchNotebook();
 });
 
 // چاپ کامل دفترچه
@@ -756,6 +937,7 @@ let contentHtml = `
 
 <title>دفترچه نویسندگی</title>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 
 <style>
 
@@ -769,7 +951,7 @@ let contentHtml = `
 
 body{
 
-font-family:Tahoma,sans-serif;
+font-family:'Vazirmatn',Tahoma,sans-serif;
 direction:rtl;
 line-height:2;
 color:#111;
@@ -1117,52 +1299,6 @@ printWindow.onload = function(){
 
 
 
-// پاک کردن اطلاعات دفترچه نویسندگی
-
-function newBookNotebook(){
-
-    const confirmDelete = confirm(
-        "یادداشت‌های این داستان پاک شود و داستان جدید شروع شود؟"
-    );
-
-
-    if(confirmDelete){
-
-
-        Object.keys(localStorage).forEach(key => {
-
-
-            if(
-                key.startsWith("char-") ||
-                key.startsWith("world-") ||
-                key.startsWith("story-") ||
-                key.startsWith("time-") ||
-                key.startsWith("hub-")
-            ){
-
-                localStorage.removeItem(key);
-
-            }
-
-
-        });
-
-
-
-        document.querySelectorAll("textarea").forEach(textarea => {
-
-            textarea.value = "";
-
-        });
-
-
-
-        alert("داستان جدید آماده شد ✍️✨");
-
-
-    }
-
-}
 </script>
 
 <footer style="margin-top: 60px; padding: 20px; text-align: center;">

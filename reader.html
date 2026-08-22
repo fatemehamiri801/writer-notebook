@@ -2,15 +2,24 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
+<script>if(localStorage.getItem('nb-dark-mode')==='1'){document.documentElement.classList.add('nb-dark');}</script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<link rel="canonical" href="https://fatemehamiri801.github.io/writer-notebook/reader.html">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="دفترچه من">
 <meta name="theme-color" content="#4c1d95"> 
+
+<meta name="description" content="دفترچه کتاب‌خوان؛ جایی برای ثبت حس و تجربه‌ی هر کتابی که می‌خوانی، بدون نیاز به ثبت‌نام.">
+<meta property="og:title" content="دفترچه کتاب‌خوان">
+<meta property="og:description" content="ثبت و تحلیل کتاب‌های مطالعه‌شده، رایگان و بدون ثبت‌نام.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fatemehamiri801.github.io/writer-notebook/reader.html">
+<meta property="og:image" content="https://fatemehamiri801.github.io/writer-notebook/icon-512.png">
 
 <link rel="manifest" href="./manifest.json">
     <title>دفترچه کتاب‌خوان</title>
@@ -31,7 +40,7 @@ html, body {
 
 body {
     background-color: #e0f2fe;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #1e1b4b;
     line-height: 1.7;
 }
@@ -49,6 +58,29 @@ header {
     gap: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     flex-wrap: wrap;
+}
+
+.header-topline {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* دکمه‌ی منوی کشویی هدر؛ فقط توی موبایل نشون داده می‌شه */
+.mobile-menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    font-size: 1.25rem;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 /* =========================
@@ -81,6 +113,10 @@ header {
 /* =========================
    NAV (UNIFIED SCROLL SYSTEM)
 ========================= */
+.nav-wrapper {
+    position: relative;
+}
+
 nav {
     background-color: #fff;
     display: flex;
@@ -95,6 +131,38 @@ nav {
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+}
+
+/* نشونه‌ی بصری برای اینکه کاربر بفهمه تب‌های بیشتری با اسکرول افقی هست */
+.nav-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 34px;
+    background: linear-gradient(to left, rgba(255,255,255,0), #ffffff 85%);
+    pointer-events: none;
+    display: none;
+}
+
+.nav-wrapper::before {
+    content: "◀";
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: #9ca3af;
+    pointer-events: none;
+    display: none;
+    animation: nb-scroll-hint 1.6s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes nb-scroll-hint {
+    0%, 100% { transform: translateY(-50%) translateX(0); opacity: .45; }
+    50% { transform: translateY(-50%) translateX(-4px); opacity: 1; }
 }
 
 .nav-link {
@@ -205,6 +273,33 @@ textarea:focus {
 }
 
 /* =========================
+   TOOLBAR BUTTONS (پروژه)
+========================= */
+.btn-toolbar {
+    background: #e0e7ff;
+    color: #3730a3;
+    border: 1px solid #a5b4fc;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+
+.btn-toolbar-danger {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+
+/* =========================
    MOBILE FIX (CRITICAL)
 ========================= */
 @media (max-width: 768px) {
@@ -213,6 +308,45 @@ textarea:focus {
         flex-direction: column;
         text-align: center;
         padding: 14px;
+        padding-top: 68px; /* فاصله برای اینکه دکمه‌ی شناور دارک‌مود روی عنوان نیفته */
+    }
+
+    .header-topline {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .header-topline .btn-back { order: 1; }
+
+    .mobile-menu-toggle {
+        display: inline-flex;
+        order: 2;
+    }
+
+    h1.page-title {
+        order: 3;
+        flex-basis: 100%;
+        font-size: 1.4rem !important;
+        margin-top: 10px !important;
+    }
+
+    .header-btns {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 14px;
+        gap: 10px;
+    }
+
+    .header-btns.open {
+        display: flex;
+    }
+
+    .nav-wrapper::after,
+    .nav-wrapper::before {
+        display: block;
     }
 
     .main-wrapper {
@@ -262,53 +396,51 @@ textarea:focus {
     color: #666;
 
 }
-.btn-new-book {
-
-    background-color:#ef4444;
-    color:white;
-    padding:10px 20px;
-    border-radius:8px;
-    border:none;
-    font-weight:bold;
-    cursor:pointer;
-    font-family:inherit;
-    transition:0.2s;
-
-}
-
-.btn-new-book:hover {
-
-    background-color:#dc2626;
-    transform:translateY(-2px);
-
-}
 </style>
+<link rel="stylesheet" href="./shared/style.css">
 </head>
 <body>
 
+<button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز">🌙</button>
+
 <header style="background-color: #312e81; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box;">
-    
-    <div style="display: flex; align-items: center; gap: 20px;">
-        <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
+
+    <div class="header-topline">
+        <a href="index.html" class="btn-back" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
             🏠 بازگشت
         </a>
-        <h1 style="margin: 0; font-size: 1.8rem; font-family: Tahoma, sans-serif; font-weight: 900; color: #facc15;">
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" title="منو" aria-label="باز کردن منو">☰</button>
+
+        <h1 class="page-title" style="margin: 0; font-size: 1.8rem; font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 900; color: #facc15;">
             📖 دفترچه کتابخوان
         </h1>
     </div>
-    
-    <div style="display: flex; gap: 15px; align-items: center;">
+
+    <div class="header-btns" id="headerBtns">
         <button onclick="printAllTabs()" style="background-color: #10b981; color: #ffffff; padding: 10px 20px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer;">
             📥 خروجی PDF
         </button>
-	<button class="btn-new-book" onclick="newBookNotebook()">
-🗑️ کتاب جدید
-</button>
         <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
     👤 ارتباط در تلگرام
 </a>
     </div>
 </header>
+
+<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:14px 20px; background:#e0e7ff; border-bottom:1px solid #c7d2fe;">
+    <div style="display:flex; align-items:center; gap:8px;">
+        <label for="project-select" style="font-weight:bold; color:#312e81; font-size:0.9rem;">📖 کتاب/پروژه:</label>
+        <select id="project-select" onchange="switchProject(this.value)" style="padding:8px 12px; border-radius:8px; border:1px solid #818cf8; font-family:inherit; font-size:0.9rem; background:#fff;"></select>
+    </div>
+    <button onclick="createNewProject()" class="btn-toolbar">➕ کتاب جدید</button>
+    <button onclick="renameCurrentProject()" class="btn-toolbar">✏️ تغییر نام</button>
+    <button onclick="deleteCurrentProject()" class="btn-toolbar-danger">🗑️ حذف پروژه</button>
+
+    <div style="display:flex; align-items:center; gap:6px; margin-right:auto;">
+        <input id="search-box" type="text" placeholder="🔍 جستجو در این کتاب..." style="padding:8px 12px; border-radius:8px; border:1px solid #818cf8; font-family:inherit; font-size:0.85rem; min-width:180px;">
+        <button onclick="searchNotebook()" class="btn-toolbar">جستجو</button>
+    </div>
+</div>
 
 <!-- کادر خوش‌آمدگویی (مشابه دفترچه نویسنده) -->
 <div class="mascot-box" style="display: flex; align-items: center; justify-content: center; gap: 15px; padding: 25px; background: #f3f4f6; border-radius: 12px; margin: 20px auto; max-width: 1000px; box-sizing: border-box;">
@@ -319,6 +451,7 @@ textarea:focus {
 </div>
 
 <!-- منوی ناوبری (مشابه دفترچه نویسنده با استایل‌های درشت‌تر) -->
+<div class="nav-wrapper">
 <nav>
     <button class="nav-link active" onclick="openTab(event, 'tab1')">🏷️ شناسنامه</button>
     <button class="nav-link" onclick="openTab(event, 'tab2')">🎯 پیش‌شروع</button>
@@ -329,6 +462,7 @@ textarea:focus {
     <button class="nav-link" onclick="openTab(event, 'tab7')">💎 گنجینه</button>
     <button class="nav-link" onclick="openTab(event, 'tab8')">🎬 اقتباس و پایان</button>
 </nav>
+</div>
 
 <!-- تب ۱: شناسنامه -->
 <div id="tab1" class="tab-content active">
@@ -486,6 +620,7 @@ textarea:focus {
 
     </div>
 </div>
+<script src="./shared/common.js"></script>
 <script>
 // ۳. موتور چاپ کامل دفترچه
 
@@ -515,6 +650,8 @@ function printAllTabs(){
 
 <title>دفترچه کتابخوان</title>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+
 <style>
 
 @page{
@@ -525,7 +662,7 @@ function printAllTabs(){
 
 body{
 
-    font-family:Tahoma,sans-serif;
+    font-family:'Vazirmatn',Tahoma,sans-serif;
     direction:rtl;
     line-height:2;
     color:#111;
@@ -881,70 +1018,72 @@ printWindow.onload = function(){
 
 
 }
-// پاک کردن اطلاعات دفترچه کتابخوان
-
-function newBookNotebook(){
-
-    const confirmDelete = confirm(
-        "یادداشت‌های این کتاب پاک شود و کتاب جدید شروع شود؟"
-    );
-
-
-    if(confirmDelete){
-
-
-        Object.keys(localStorage).forEach(key => {
-
-
-            if(key.startsWith("read-")){
-
-                localStorage.removeItem(key);
-
-            }
-
-
-        });
-
-
-
-        document.querySelectorAll("textarea").forEach(textarea => {
-
-            textarea.value = "";
-
-        });
-
-
-
-        alert("کتاب جدید آماده شد 📖✨");
-
-
-    }
-
-}
-// ذخیره خودکار یادداشت‌های کتابخوان
+// ====== سیستم چند پروژه‌ای دفترچه کتابخوان (منطق مشترک در shared/common.js) ======
+const pm = createProjectManager({
+    ns: 'reader',
+    firstItemName: 'کتاب ۱',
+    legacyName: 'کتاب قبلی',
+    newPromptText: 'نام کتاب جدید را وارد کن:',
+    newPromptDefault: 'کتاب جدید',
+    renamePromptText: 'نام جدید کتاب:',
+    minItemsAlert: 'حداقل یک کتاب باید باقی بماند.',
+    deleteConfirm: (name) => `یادداشت‌های «${name}» برای همیشه حذف شود؟`
+});
+function switchProject(id){ return pm.switchProject(id); }
+function createNewProject(){ return pm.createNewProject(); }
+function renameCurrentProject(){ return pm.renameCurrentProject(); }
+function deleteCurrentProject(){ return pm.deleteCurrentProject(); }
 
 const textareas = document.querySelectorAll('textarea');
 
+(async function initNotebook(){
+    await pm.migrateAndInit();
+    pm.renderProjectSelector();
+    await pm.loadActiveProjectIntoForm();
+})();
+
 textareas.forEach(textarea => {
-
-    const saved = localStorage.getItem(textarea.id);
-
-    if(saved){
-        textarea.value = saved;
-    }
-
 
     textarea.addEventListener('input',()=>{
 
-        localStorage.setItem(
-            textarea.id,
-            textarea.value
-        );
+        pm.saveActiveProjectField(textarea);
 
     });
 
 });
-// تابع زیر را به ابتدای بخش <script> اضافه کنید
+
+// جستجو در یادداشت‌های کتاب فعال
+function searchNotebook(){
+    const query = document.getElementById('search-box').value.trim();
+    document.querySelectorAll('.search-highlight').forEach(el => el.classList.remove('search-highlight'));
+    if(!query) return;
+
+    const match = Array.from(document.querySelectorAll('textarea')).find(t =>
+        t.value.toLowerCase().includes(query.toLowerCase())
+    );
+
+    if(!match){
+        alert('چیزی با این عبارت در این کتاب پیدا نشد.');
+        return;
+    }
+
+    const tabContent = match.closest('.tab-content');
+    if(tabContent){
+        const tabId = tabContent.id;
+        const navBtn = Array.from(document.querySelectorAll('.nav-link'))
+            .find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId));
+        if(navBtn) navBtn.click();
+    }
+
+    match.classList.add('search-highlight');
+    match.scrollIntoView({ behavior:'smooth', block:'center' });
+    match.focus();
+    setTimeout(()=> match.classList.remove('search-highlight'), 3000);
+}
+document.getElementById('search-box').addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') searchNotebook();
+});
+
 function openTab(evt, tabName) {
     // ۱. پنهان کردن تمام محتواهای تب
     const tabContents = document.getElementsByClassName("tab-content");

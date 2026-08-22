@@ -4,11 +4,24 @@
 <head>
 
 <meta charset="UTF-8">
+<script>if(localStorage.getItem('nb-dark-mode')==='1'){document.documentElement.classList.add('nb-dark');}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<link rel="canonical" href="https://fatemehamiri801.github.io/writer-notebook/about.html">
+<meta name="theme-color" content="#4c1d95">
+
+<meta name="description" content="هدف و داستان دفترچه من؛ ابزاری رایگان و بدون ثبت‌نام برای نویسندگان و کتاب‌خوان‌ها.">
+<meta property="og:title" content="هدف و داستان این ابزار">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fatemehamiri801.github.io/writer-notebook/about.html">
+<meta property="og:image" content="https://fatemehamiri801.github.io/writer-notebook/icon-512.png">
 
 <title>هدف و داستان این ابزار</title>
 
-
+<link rel="stylesheet" href="./shared/style.css">
 <style>
 
 *{
@@ -24,7 +37,7 @@ padding:25px;
 
 min-height:100vh;
 
-font-family:Tahoma,Arial,sans-serif;
+font-family:'Vazirmatn',Tahoma,Arial,sans-serif;
 
 background:
 
@@ -499,12 +512,17 @@ line-height:2;
 
 }
 
+/* رنگ مخصوص این صفحه برای دکمه‌ی دارک‌مود (بقیه‌ی استایل‌ها مشترکه) */
+#dark-mode-toggle{background:#5b3923;}
+
 </style>
 </head>
 
 
 <body>
 
+<button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز">🌙</button>
+<script src="./shared/common.js"></script>
 
 <div class="paper">
 

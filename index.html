@@ -3,24 +3,33 @@
 
 <head>
     <meta charset="UTF-8">
+<script>if(localStorage.getItem('nb-dark-mode')==='1'){document.documentElement.classList.add('nb-dark');}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <link rel="manifest" href="./manifest.json">
+<link rel="canonical" href="https://fatemehamiri801.github.io/writer-notebook/">
 
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3209/3209260.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" type="image/png" href="./icon-192.png">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="دفترچه من">
 <meta name="theme-color" content="#4c1d95">
 
+<meta name="description" content="دفترچه من؛ ابزار رایگان و بدون ثبت‌نام برای نویسندگان و کتاب‌خوان‌ها. ایده‌ها، شخصیت‌ها و جهان داستانت را بنویس یا حس و تجربه‌ی کتاب‌هایی که خوانده‌ای را ثبت کن.">
+<meta property="og:title" content="دفترچه من | نویسنده و کتاب‌خوان">
+<meta property="og:description" content="ابزار رایگان و بدون ثبت‌نام برای ثبت ایده‌های داستانی و تجربه‌ی کتاب‌خوانی.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fatemehamiri801.github.io/writer-notebook/">
+<meta property="og:image" content="https://fatemehamiri801.github.io/writer-notebook/icon-512.png">
+
     <title>خانه دفترچه‌ها</title>
 
     <style>
         * { box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
             background: radial-gradient(circle at center, #f5f3ff, #e0e7ff 40%, #c7d2fe 100%);
             margin: 0;
             padding: 20px;
@@ -56,11 +65,18 @@
         .box p { font-size: 0.9rem; color: #5b21b6; margin-top: 12px; line-height: 1.5; font-weight: 500; }
         .purpose-btn { margin-top: 35px; padding: 10px 24px; border-radius: 30px; background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #4c1d95; border: 1.5px solid #a78bfa; text-decoration: none; font-size: .9rem; font-weight: 600; box-shadow: 0 8px 20px rgba(76, 29, 149, .12); transition: .3s ease; }
         .purpose-btn:hover { transform: translateY(-3px); background: linear-gradient(135deg, #ddd6fe, #c4b5fd); box-shadow: 0 12px 25px rgba(76, 29, 149, .2); }
-        @media(max-width:600px) { body { padding: 15px; } h1 { font-size: 1.4rem; margin: 25px 0; } .box { max-width: 100%; min-height: 190px; } }
+        @media(max-width:600px) { body { padding: 15px; } h1 { font-size: 1.4rem; margin: 46px 0 25px; } .box { max-width: 100%; min-height: 190px; } }
+        #install-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #4c1d95; color: #fff; padding: 14px 20px; display: none; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; z-index: 1000; box-shadow: 0 -4px 15px rgba(0,0,0,.15); }
+        #install-banner button { border: none; border-radius: 8px; padding: 8px 16px; font-weight: bold; cursor: pointer; }
+        #install-banner .install-yes { background: #facc15; color: #4c1d95; }
+        #install-banner .install-no { background: transparent; color: #ddd6fe; }
     </style>
+    <link rel="stylesheet" href="./shared/style.css">
 </head>
 
 <body>
+    <button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز">🌙</button>
+
     <h1>دنیای کوچک کتاب و نوشتن 📚</h1>
 
     <div class="container">
@@ -84,6 +100,35 @@
     </div>
 
     <a href="about.html" class="purpose-btn">✨ هدف و داستان این ابزار</a>
+
+    <div id="install-banner">
+        <span>📲 می‌خوای این سایت رو مثل یک اپ روی گوشیت نصب کنی؟</span>
+        <button class="install-yes" onclick="doInstallPrompt()">نصب کن</button>
+        <button class="install-no" onclick="dismissInstallBanner()">فعلاً نه</button>
+    </div>
+
+    <script src="./shared/common.js"></script>
+    <script>
+        // پیشنهاد نصب PWA
+        let deferredInstallPrompt = null;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+            if(!localStorage.getItem('nb-install-dismissed')){
+                document.getElementById('install-banner').style.display = 'flex';
+            }
+        });
+        function doInstallPrompt(){
+            document.getElementById('install-banner').style.display = 'none';
+            if(deferredInstallPrompt){
+                deferredInstallPrompt.prompt();
+            }
+        }
+        function dismissInstallBanner(){
+            document.getElementById('install-banner').style.display = 'none';
+            localStorage.setItem('nb-install-dismissed', '1');
+        }
+    </script>
 
     <script>
         // ثبت سرویس‌ورکر با مسیر نسبی './sw.js' برای هماهنگی با GitHub Pages

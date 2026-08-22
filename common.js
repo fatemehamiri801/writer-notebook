@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/* ---------- منوی کشویی هدر در موبایل ---------- */
+function toggleMobileMenu() {
+    const menu = document.getElementById('headerBtns');
+    if (menu) menu.classList.toggle('open');
+}
+
 /* ======================================================
    ذخیره‌سازی با ظرفیت بالا (IndexedDB)
    localStorage معمولاً فقط ۵-۱۰ مگابایت جا داره. برای اینکه

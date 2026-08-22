@@ -40,7 +40,7 @@ html, body {
 
 body {
     background-color: #e0f2fe;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #1e1b4b;
     line-height: 1.7;
 }
@@ -58,6 +58,29 @@ header {
     gap: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     flex-wrap: wrap;
+}
+
+.header-topline {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* دکمه‌ی منوی کشویی هدر؛ فقط توی موبایل نشون داده می‌شه */
+.mobile-menu-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.12);
+    color: #fff;
+    font-size: 1.25rem;
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 /* =========================
@@ -90,6 +113,10 @@ header {
 /* =========================
    NAV (UNIFIED SCROLL SYSTEM)
 ========================= */
+.nav-wrapper {
+    position: relative;
+}
+
 nav {
     background-color: #fff;
     display: flex;
@@ -104,6 +131,38 @@ nav {
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+}
+
+/* نشونه‌ی بصری برای اینکه کاربر بفهمه تب‌های بیشتری با اسکرول افقی هست */
+.nav-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 34px;
+    background: linear-gradient(to left, rgba(255,255,255,0), #ffffff 85%);
+    pointer-events: none;
+    display: none;
+}
+
+.nav-wrapper::before {
+    content: "◀";
+    position: absolute;
+    top: 50%;
+    left: 6px;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    color: #9ca3af;
+    pointer-events: none;
+    display: none;
+    animation: nb-scroll-hint 1.6s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes nb-scroll-hint {
+    0%, 100% { transform: translateY(-50%) translateX(0); opacity: .45; }
+    50% { transform: translateY(-50%) translateX(-4px); opacity: 1; }
 }
 
 .nav-link {
@@ -214,6 +273,33 @@ textarea:focus {
 }
 
 /* =========================
+   TOOLBAR BUTTONS (پروژه)
+========================= */
+.btn-toolbar {
+    background: #e0e7ff;
+    color: #3730a3;
+    border: 1px solid #a5b4fc;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+
+.btn-toolbar-danger {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    font-family: inherit;
+}
+
+/* =========================
    MOBILE FIX (CRITICAL)
 ========================= */
 @media (max-width: 768px) {
@@ -222,6 +308,45 @@ textarea:focus {
         flex-direction: column;
         text-align: center;
         padding: 14px;
+        padding-top: 68px; /* فاصله برای اینکه دکمه‌ی شناور دارک‌مود روی عنوان نیفته */
+    }
+
+    .header-topline {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .header-topline .btn-back { order: 1; }
+
+    .mobile-menu-toggle {
+        display: inline-flex;
+        order: 2;
+    }
+
+    h1.page-title {
+        order: 3;
+        flex-basis: 100%;
+        font-size: 1.4rem !important;
+        margin-top: 10px !important;
+    }
+
+    .header-btns {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 14px;
+        gap: 10px;
+    }
+
+    .header-btns.open {
+        display: flex;
+    }
+
+    .nav-wrapper::after,
+    .nav-wrapper::before {
+        display: block;
     }
 
     .main-wrapper {
@@ -279,17 +404,20 @@ textarea:focus {
 <button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز">🌙</button>
 
 <header style="background-color: #312e81; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box;">
-    
-    <div style="display: flex; align-items: center; gap: 20px;">
-        <a href="index.html" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
+
+    <div class="header-topline">
+        <a href="index.html" class="btn-back" style="background-color: #7c3aed; color: #ffffff; padding: 8px 15px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: bold; border: 1px solid #c4b5fd;">
             🏠 بازگشت
         </a>
-        <h1 style="margin: 0; font-size: 1.8rem; font-family: Tahoma, sans-serif; font-weight: 900; color: #facc15;">
+
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" title="منو" aria-label="باز کردن منو">☰</button>
+
+        <h1 class="page-title" style="margin: 0; font-size: 1.8rem; font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 900; color: #facc15;">
             📖 دفترچه کتابخوان
         </h1>
     </div>
-    
-    <div style="display: flex; gap: 15px; align-items: center;">
+
+    <div class="header-btns" id="headerBtns">
         <button onclick="printAllTabs()" style="background-color: #10b981; color: #ffffff; padding: 10px 20px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer;">
             📥 خروجی PDF
         </button>
@@ -304,13 +432,13 @@ textarea:focus {
         <label for="project-select" style="font-weight:bold; color:#312e81; font-size:0.9rem;">📖 کتاب/پروژه:</label>
         <select id="project-select" onchange="switchProject(this.value)" style="padding:8px 12px; border-radius:8px; border:1px solid #818cf8; font-family:inherit; font-size:0.9rem; background:#fff;"></select>
     </div>
-    <button onclick="createNewProject()" style="background:#10b981; color:#fff; border:none; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:bold; font-size:0.85rem;">➕ کتاب جدید</button>
-    <button onclick="renameCurrentProject()" style="background:#3b82f6; color:#fff; border:none; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:bold; font-size:0.85rem;">✏️ تغییر نام</button>
-    <button onclick="deleteCurrentProject()" style="background:#ef4444; color:#fff; border:none; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:bold; font-size:0.85rem;">🗑️ حذف پروژه</button>
+    <button onclick="createNewProject()" class="btn-toolbar">➕ کتاب جدید</button>
+    <button onclick="renameCurrentProject()" class="btn-toolbar">✏️ تغییر نام</button>
+    <button onclick="deleteCurrentProject()" class="btn-toolbar-danger">🗑️ حذف پروژه</button>
 
     <div style="display:flex; align-items:center; gap:6px; margin-right:auto;">
         <input id="search-box" type="text" placeholder="🔍 جستجو در این کتاب..." style="padding:8px 12px; border-radius:8px; border:1px solid #818cf8; font-family:inherit; font-size:0.85rem; min-width:180px;">
-        <button onclick="searchNotebook()" style="background:#4338ca; color:#fff; border:none; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:bold; font-size:0.85rem;">جستجو</button>
+        <button onclick="searchNotebook()" class="btn-toolbar">جستجو</button>
     </div>
 </div>
 
@@ -323,6 +451,7 @@ textarea:focus {
 </div>
 
 <!-- منوی ناوبری (مشابه دفترچه نویسنده با استایل‌های درشت‌تر) -->
+<div class="nav-wrapper">
 <nav>
     <button class="nav-link active" onclick="openTab(event, 'tab1')">🏷️ شناسنامه</button>
     <button class="nav-link" onclick="openTab(event, 'tab2')">🎯 پیش‌شروع</button>
@@ -333,6 +462,7 @@ textarea:focus {
     <button class="nav-link" onclick="openTab(event, 'tab7')">💎 گنجینه</button>
     <button class="nav-link" onclick="openTab(event, 'tab8')">🎬 اقتباس و پایان</button>
 </nav>
+</div>
 
 <!-- تب ۱: شناسنامه -->
 <div id="tab1" class="tab-content active">
@@ -520,6 +650,8 @@ function printAllTabs(){
 
 <title>دفترچه کتابخوان</title>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+
 <style>
 
 @page{
@@ -530,7 +662,7 @@ function printAllTabs(){
 
 body{
 
-    font-family:Tahoma,sans-serif;
+    font-family:'Vazirmatn',Tahoma,sans-serif;
     direction:rtl;
     line-height:2;
     color:#111;

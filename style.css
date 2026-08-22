@@ -3,6 +3,36 @@
    (قبلاً این قوانین توی هر ۵ فایل جدا کپی شده بودن)
    ====================================================== */
 
+/* فونت فارسی Vazirmatn (رایگان، متن‌باز، بدون نیاز به سرور یا هزینه) */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* حالت شب/روز */
 html.nb-dark {
     filter: invert(0.92) hue-rotate(180deg);
@@ -22,6 +52,17 @@ html.nb-dark {
     font-size: 20px;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+}
+
+/* توی موبایل کوچیک‌تر می‌شه تا احتمال تداخلش با عنوان صفحه کمتر بشه */
+@media (max-width: 600px) {
+    #dark-mode-toggle {
+        width: 38px;
+        height: 38px;
+        top: 10px;
+        left: 10px;
+        font-size: 17px;
+    }
 }
 
 /* هایلایت نتیجه‌ی جستجو (دفترچه نویسندگی و کتاب‌خوان) */

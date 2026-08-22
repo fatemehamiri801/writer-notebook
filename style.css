@@ -1,0 +1,31 @@
+/* ======================================================
+   استایل‌های مشترک بین همه‌ی صفحات سایت «دفترچه من»
+   (قبلاً این قوانین توی هر ۵ فایل جدا کپی شده بودن)
+   ====================================================== */
+
+/* حالت شب/روز */
+html.nb-dark {
+    filter: invert(0.92) hue-rotate(180deg);
+}
+
+#dark-mode-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #312e81;
+    color: #fbbf24;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+}
+
+/* هایلایت نتیجه‌ی جستجو (دفترچه نویسندگی و کتاب‌خوان) */
+.search-highlight {
+    outline: 3px solid #f59e0b !important;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, .3) !important;
+}

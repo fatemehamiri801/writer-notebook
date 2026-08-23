@@ -25,6 +25,100 @@ function toggleMobileMenu() {
 }
 
 /* ======================================================
+   رفع مشکل اسکرول با کیبورد (Windows/دسکتاپ)
+   وقتی روی دکمه‌ای کلیک می‌شه، فوکوس روش می‌مونه. اگه اون دکمه
+   داخل یه container باشه که فقط افقی اسکرول می‌شه (مثل nav)،
+   مرورگر با زدن Page Up/Down یا کلیدهای جهت‌دار سعی می‌کنه همون
+   container رو اسکرول کنه (که عمودی جایی برای اسکرول نداره) و
+   دیگه به صفحه‌ی اصلی نمی‌رسه؛ در نتیجه اسکرول کیبورد قفل می‌شه.
+   راه‌حل: بعد از هر کلیک روی دکمه/لینک، فوکوس رو آزاد می‌کنیم تا
+   کیبورد دوباره کل صفحه رو اسکرول کنه. (فوکوس با تب کیبورد دست‌نخورده
+   می‌مونه چون این فقط بعد از «کلیک» اجرا می‌شه.)
+   ====================================================== */
+document.addEventListener('click', (e) => {
+    const el = e.target.closest('button, a');
+    if (el) requestAnimationFrame(() => el.blur());
+});
+
+/* ======================================================
+   مودال سفارشی به‌جای prompt/confirm بومی مرورگر
+   توی حالت standalone (نصب‌شده روی صفحه‌ی اصلی موبایل) این
+   دیالوگ‌های بومی خیلی وقت‌ها نمایش داده نمی‌شن؛ این نسخه با
+   HTML/CSS خودمون همه‌جا یکسان کار می‌کنه.
+   ====================================================== */
+function nbBuildModal({ message, withInput, defaultValue, danger }) {
+    return new Promise((resolve) => {
+        const prevFocus = document.activeElement;
+        const overlay = document.createElement('div');
+        overlay.className = 'nb-modal-overlay';
+
+        const box = document.createElement('div');
+        box.className = 'nb-modal-box';
+
+        const msg = document.createElement('div');
+        msg.className = 'nb-modal-message';
+        msg.textContent = message;
+        box.appendChild(msg);
+
+        let input = null;
+        if (withInput) {
+            input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'nb-modal-input';
+            input.value = defaultValue || '';
+            box.appendChild(input);
+        }
+
+        const actions = document.createElement('div');
+        actions.className = 'nb-modal-actions';
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.className = 'nb-modal-btn nb-modal-btn-cancel';
+        cancelBtn.textContent = 'انصراف';
+
+        const okBtn = document.createElement('button');
+        okBtn.type = 'button';
+        okBtn.className = 'nb-modal-btn ' + (danger ? 'nb-modal-btn-danger' : 'nb-modal-btn-ok');
+        okBtn.textContent = danger ? 'حذف کن' : 'تأیید';
+
+        actions.appendChild(cancelBtn);
+        actions.appendChild(okBtn);
+        box.appendChild(actions);
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+
+        function close(result) {
+            overlay.remove();
+            document.removeEventListener('keydown', onKeydown);
+            if (prevFocus && prevFocus.focus) prevFocus.focus();
+            resolve(result);
+        }
+
+        function onKeydown(ev) {
+            if (ev.key === 'Escape') { ev.preventDefault(); close(withInput ? null : false); }
+            if (ev.key === 'Enter') { ev.preventDefault(); okBtn.click(); }
+        }
+
+        cancelBtn.addEventListener('click', () => close(withInput ? null : false));
+        okBtn.addEventListener('click', () => close(withInput ? (input.value.trim() || null) : true));
+        overlay.addEventListener('mousedown', (e) => { if (e.target === overlay) close(withInput ? null : false); });
+        document.addEventListener('keydown', onKeydown);
+
+        (input || okBtn).focus();
+        if (input) input.select();
+    });
+}
+
+function nbPrompt(message, defaultValue) {
+    return nbBuildModal({ message, withInput: true, defaultValue });
+}
+
+function nbConfirm(message, danger) {
+    return nbBuildModal({ message, withInput: false, danger });
+}
+
+/* ======================================================
    ذخیره‌سازی با ظرفیت بالا (IndexedDB)
    localStorage معمولاً فقط ۵-۱۰ مگابایت جا داره. برای اینکه
    کاربرهایی که متن زیاد می‌نویسن به این سقف نخورن، داده‌ی
@@ -198,7 +292,9 @@ function createProjectManager(cfg) {
     }
 
     async function createNewProject() {
-        const name = prompt(cfg.newPromptText, cfg.newPromptDefault);
+        // به‌جای window.prompt (که توی PWA نصب‌شده روی موبایل/iOS
+        // خیلی وقت‌ها اصلاً نمایش داده نمی‌شه) از مودال خودمون استفاده می‌کنیم
+        const name = await nbPrompt(cfg.newPromptText, cfg.newPromptDefault);
         if (!name) return;
         const id = uid();
         const projects = getProjects();
@@ -210,12 +306,12 @@ function createProjectManager(cfg) {
         await loadActiveProjectIntoForm();
     }
 
-    function renameCurrentProject() {
+    async function renameCurrentProject() {
         const id = getActiveId();
         const projects = getProjects();
         const proj = projects.find(p => p.id === id);
         if (!proj) return;
-        const name = prompt(cfg.renamePromptText, proj.name);
+        const name = await nbPrompt(cfg.renamePromptText, proj.name);
         if (!name) return;
         proj.name = name;
         saveProjects(projects);
@@ -225,12 +321,13 @@ function createProjectManager(cfg) {
     async function deleteCurrentProject() {
         const projects = getProjects();
         if (projects.length <= 1) {
-            alert(cfg.minItemsAlert);
+            await nbConfirm(cfg.minItemsAlert);
             return;
         }
         const id = getActiveId();
         const proj = projects.find(p => p.id === id);
-        if (!confirm(cfg.deleteConfirm(proj.name))) return;
+        const ok = await nbConfirm(cfg.deleteConfirm(proj.name), true);
+        if (!ok) return;
 
         await deleteProjectData(id);
         const remaining = projects.filter(p => p.id !== id);

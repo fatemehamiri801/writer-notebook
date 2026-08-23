@@ -209,6 +209,16 @@ nav {
 
 .tab-content.active {
     display: block;
+    animation: nb-tab-in 180ms ease;
+}
+
+@keyframes nb-tab-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tab-content.active { animation: none; }
 }
 
 /* =========================
@@ -221,6 +231,12 @@ nav {
     margin-bottom: 18px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.06);
     border-right: 6px solid #10b981;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.layer-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.1);
 }
 
 .layer-card h3 {
@@ -276,11 +292,11 @@ textarea:focus {
    TOOLBAR BUTTONS (پروژه)
 ========================= */
 .btn-toolbar {
-    background: #e0e7ff;
-    color: #3730a3;
-    border: 1px solid #a5b4fc;
+    background: var(--indigo-light);
+    color: var(--indigo-dark);
+    border: 1px solid var(--indigo-border);
     padding: 8px 14px;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: bold;
     font-size: 0.85rem;
@@ -292,7 +308,7 @@ textarea:focus {
     color: #fff;
     border: none;
     padding: 8px 14px;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: bold;
     font-size: 0.85rem;
@@ -314,11 +330,15 @@ textarea:focus {
     .header-topline {
         width: 100%;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-start;
+        gap: 10px;
     }
 
     .header-topline .btn-back { order: 1; }
 
+    /* عمداً کنار دکمه‌ی بازگشت نگه داشته می‌شه، نه در گوشه‌ی مخالف؛
+       چون دکمه‌ی شناور دارک‌مود دقیقاً همون گوشه (چپ-بالا) رو اشغال می‌کنه
+       و اگه اینجا هم بره اونجا، رو هم می‌افتن و لمس‌شون قاطی می‌شه */
     .mobile-menu-toggle {
         display: inline-flex;
         order: 2;
@@ -427,7 +447,7 @@ textarea:focus {
     </div>
 </header>
 
-<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:14px 20px; background:#e0e7ff; border-bottom:1px solid #c7d2fe;">
+<div class="project-toolbar" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; padding:14px 20px; background:#e0e7ff; border-bottom:1px solid #c7d2fe;">
     <div style="display:flex; align-items:center; gap:8px;">
         <label for="project-select" style="font-weight:bold; color:#312e81; font-size:0.9rem;">📖 کتاب/پروژه:</label>
         <select id="project-select" onchange="switchProject(this.value)" style="padding:8px 12px; border-radius:8px; border:1px solid #818cf8; font-family:inherit; font-size:0.9rem; background:#fff;"></select>
@@ -1085,10 +1105,10 @@ document.getElementById('search-box').addEventListener('keydown', (e) => {
 });
 
 function openTab(evt, tabName) {
-    // ۱. پنهان کردن تمام محتواهای تب
+    // ۱. پنهان کردن تمام محتواهای تب (نمایش/پنهان‌سازی فقط با کلاس انجام می‌شه
+    //    تا انیمیشن fade تعریف‌شده در CSS درست اجرا بشه)
     const tabContents = document.getElementsByClassName("tab-content");
     for (let i = 0; i < tabContents.length; i++) {
-        tabContents[i].style.display = "none";
         tabContents[i].classList.remove("active");
     }
 
@@ -1099,9 +1119,10 @@ function openTab(evt, tabName) {
     }
 
     // ۳. نمایش تب انتخاب شده و فعال کردن دکمه مربوطه
-    document.getElementById(tabName).style.display = "block";
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.classList.add("active");
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
 <footer style="margin-top: 60px; padding: 20px; text-align: center;">

@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-notebook-v62";
+const CACHE_NAME = "my-notebook-v77";
 // استفاده از مسیرهای نسبی برای هماهنگی با ساختار گیت‌هاب
 const ASSETS = [
     "./",

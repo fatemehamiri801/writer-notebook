@@ -21,7 +21,292 @@
 
 <title>هدف و داستان این ابزار</title>
 
-<link rel="stylesheet" href="./shared/style.css">
+<style>
+/* ======================================================
+   استایل‌های مشترک بین همه‌ی صفحات سایت «دفترچه من»
+   (قبلاً این قوانین توی هر ۵ فایل جدا کپی شده بودن)
+   ====================================================== */
+
+/* فونت فارسی Vazirmatn (رایگان، متن‌باز، بدون نیاز به سرور یا هزینه) */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ======================================================
+   متغیرهای مشترک رنگ و فاصله‌گذاری
+   یه منبع واحد برای رنگ‌ها و فاصله‌ها که هر صفحه ازش استفاده
+   می‌کنه؛ به‌جای اینکه هر صفحه رنگ بنفش/نیلی خودش رو جدا تعریف کنه.
+   ====================================================== */
+:root {
+    --purple-primary: #7c3aed;
+    --purple-dark: #5b21b6;
+    --purple-darker: #4c1d95;
+    --purple-light: #ede9fe;
+    --purple-border: #c4b5fd;
+
+    --indigo-primary: #4f46e5;
+    --indigo-dark: #312e81;
+    --indigo-light: #e0e7ff;
+    --indigo-border: #a5b4fc;
+
+    --space-xs: 6px;
+    --space-sm: 10px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 40px;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    /* حالت روز (پیش‌فرض) */
+    --bg: #f5f3ff;
+    --text: #1e1b4b;
+    --card-bg: #ffffff;
+    --card-border: #e5e7eb;
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --toolbar-bg: #ede9fe;
+    --muted-text: #6b7280;
+}
+
+/* ======================================================
+   حالت شب/روز واقعی
+   قبلاً با filter: invert روی کل صفحه پیاده شده بود که باعث می‌شد
+   ایموجی‌ها و آیکون‌ها رنگ‌های ناهماهنگ بگیرن. حالا با متغیرهای
+   CSS که فقط پس‌زمینه، متن و کارت‌ها رو عوض می‌کنن.
+   ====================================================== */
+html.nb-dark {
+    --bg: #16132b;
+    --text: #ede9fe;
+    --card-bg: #221d3d;
+    --card-border: #382f5e;
+    --input-bg: #241f42;
+    --input-border: #4c4472;
+    --toolbar-bg: #241f42;
+    --muted-text: #a5a0c2;
+}
+
+html.nb-dark body {
+    background-color: var(--bg) !important;
+    color: var(--text) !important;
+}
+
+html.nb-dark .layer-card,
+html.nb-dark .box,
+html.nb-dark nav {
+    background-color: var(--card-bg) !important;
+    color: var(--text) !important;
+    border-color: var(--card-border) !important;
+}
+
+html.nb-dark .project-toolbar {
+    background: var(--toolbar-bg) !important;
+    border-color: var(--card-border) !important;
+}
+
+html.nb-dark label,
+html.nb-dark .sub-label,
+html.nb-dark h1, html.nb-dark h2, html.nb-dark h3, html.nb-dark p {
+    color: var(--text);
+}
+
+html.nb-dark textarea,
+html.nb-dark input,
+html.nb-dark select {
+    background: var(--input-bg) !important;
+    color: var(--text) !important;
+    border-color: var(--input-border) !important;
+}
+
+html.nb-dark .btn-toolbar {
+    background: var(--toolbar-bg) !important;
+    color: #d8b4fe !important;
+    border-color: var(--input-border) !important;
+}
+
+html.nb-dark footer,
+html.nb-dark footer div {
+    background-color: var(--card-bg) !important;
+    color: var(--text) !important;
+}
+
+#dark-mode-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: #312e81;
+    color: #fbbf24;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+    transition: transform .15s ease;
+}
+
+#dark-mode-toggle:hover {
+    transform: scale(1.06);
+}
+
+/* توی موبایل کوچیک‌تر می‌شه تا احتمال تداخلش با عنوان صفحه کمتر بشه */
+@media (max-width: 600px) {
+    #dark-mode-toggle {
+        width: 38px;
+        height: 38px;
+        top: 10px;
+        left: 10px;
+        font-size: 17px;
+    }
+}
+
+/* هایلایت نتیجه‌ی جستجو (دفترچه نویسندگی و کتاب‌خوان) */
+.search-highlight {
+    outline: 3px solid #f59e0b !important;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, .3) !important;
+}
+
+/* ======================================================
+   فوکوس با کیبورد / صفحه‌خوان
+   :hover به‌تنهایی برای کسی که با کیبورد یا صفحه‌خوان کار می‌کنه
+   کافی نیست؛ این outline فقط وقتی با کیبورد فوکوس می‌گیره نشون
+   داده می‌شه (نه با کلیک ماوس)، طبق رفتار استاندارد :focus-visible.
+   ====================================================== */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ======================================================
+   مودال سفارشی (جایگزین prompt/confirm بومی مرورگر)
+   توی PWA نصب‌شده روی موبایل (به‌خصوص iOS، حالت standalone)
+   دیالوگ‌های window.prompt/confirm خیلی وقت‌ها اصلاً نمایش داده
+   نمی‌شن یا کار نمی‌کنن. این مودال با HTML/CSS خودمون جایگزینشون
+   می‌شه و همه‌جا (دسکتاپ، موبایل، PWA نصب‌شده) یکسان کار می‌کنه.
+   ====================================================== */
+.nb-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 10, 30, .55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    padding: 20px;
+    animation: nb-modal-fade 150ms ease;
+}
+
+@keyframes nb-modal-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.nb-modal-box {
+    background: var(--card-bg);
+    color: var(--text);
+    width: 100%;
+    max-width: 360px;
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+    animation: nb-modal-in 150ms ease;
+}
+
+@keyframes nb-modal-in {
+    from { opacity: 0; transform: translateY(10px) scale(.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.nb-modal-message {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    white-space: pre-line;
+}
+
+.nb-modal-input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+}
+
+.nb-modal-input:focus {
+    outline: none;
+    border-color: var(--indigo-primary);
+}
+
+.nb-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.nb-modal-btn {
+    padding: 9px 18px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.nb-modal-btn-cancel {
+    background: var(--toolbar-bg);
+    color: var(--muted-text);
+}
+
+.nb-modal-btn-ok {
+    background: var(--purple-primary);
+    color: #fff;
+}
+
+.nb-modal-btn-danger {
+    background: #ef4444;
+    color: #fff;
+}
+</style>
 <style>
 
 *{
@@ -522,7 +807,361 @@ line-height:2;
 <body>
 
 <button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز">🌙</button>
-<script src="./shared/common.js"></script>
+<script>
+/* ======================================================
+   کدهای مشترک بین صفحات سایت «دفترچه من»
+   (قبلاً این توابع توی چند فایل جدا کپی شده بودن)
+   ====================================================== */
+
+/* ---------- حالت شب/روز ---------- */
+function toggleDarkMode() {
+    const isDark = document.documentElement.classList.toggle('nb-dark');
+    localStorage.setItem('nb-dark-mode', isDark ? '1' : '0');
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('dark-mode-toggle');
+    if (btn) {
+        btn.textContent = document.documentElement.classList.contains('nb-dark') ? '☀️' : '🌙';
+    }
+});
+
+/* ---------- منوی کشویی هدر در موبایل ---------- */
+function toggleMobileMenu() {
+    const menu = document.getElementById('headerBtns');
+    if (menu) menu.classList.toggle('open');
+}
+
+/* ======================================================
+   رفع مشکل اسکرول با کیبورد (Windows/دسکتاپ)
+   وقتی روی دکمه‌ای کلیک می‌شه، فوکوس روش می‌مونه. اگه اون دکمه
+   داخل یه container باشه که فقط افقی اسکرول می‌شه (مثل nav)،
+   مرورگر با زدن Page Up/Down یا کلیدهای جهت‌دار سعی می‌کنه همون
+   container رو اسکرول کنه (که عمودی جایی برای اسکرول نداره) و
+   دیگه به صفحه‌ی اصلی نمی‌رسه؛ در نتیجه اسکرول کیبورد قفل می‌شه.
+   راه‌حل: بعد از هر کلیک روی دکمه/لینک، فوکوس رو آزاد می‌کنیم تا
+   کیبورد دوباره کل صفحه رو اسکرول کنه. (فوکوس با تب کیبورد دست‌نخورده
+   می‌مونه چون این فقط بعد از «کلیک» اجرا می‌شه.)
+   ====================================================== */
+document.addEventListener('click', (e) => {
+    const el = e.target.closest('button, a');
+    if (el) requestAnimationFrame(() => el.blur());
+});
+
+/* ======================================================
+   مودال سفارشی به‌جای prompt/confirm بومی مرورگر
+   توی حالت standalone (نصب‌شده روی صفحه‌ی اصلی موبایل) این
+   دیالوگ‌های بومی خیلی وقت‌ها نمایش داده نمی‌شن؛ این نسخه با
+   HTML/CSS خودمون همه‌جا یکسان کار می‌کنه.
+   ====================================================== */
+function nbBuildModal({ message, withInput, defaultValue, danger }) {
+    return new Promise((resolve) => {
+        const prevFocus = document.activeElement;
+        const overlay = document.createElement('div');
+        overlay.className = 'nb-modal-overlay';
+
+        const box = document.createElement('div');
+        box.className = 'nb-modal-box';
+
+        const msg = document.createElement('div');
+        msg.className = 'nb-modal-message';
+        msg.textContent = message;
+        box.appendChild(msg);
+
+        let input = null;
+        if (withInput) {
+            input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'nb-modal-input';
+            input.value = defaultValue || '';
+            box.appendChild(input);
+        }
+
+        const actions = document.createElement('div');
+        actions.className = 'nb-modal-actions';
+
+        const cancelBtn = document.createElement('button');
+        cancelBtn.type = 'button';
+        cancelBtn.className = 'nb-modal-btn nb-modal-btn-cancel';
+        cancelBtn.textContent = 'انصراف';
+
+        const okBtn = document.createElement('button');
+        okBtn.type = 'button';
+        okBtn.className = 'nb-modal-btn ' + (danger ? 'nb-modal-btn-danger' : 'nb-modal-btn-ok');
+        okBtn.textContent = danger ? 'حذف کن' : 'تأیید';
+
+        actions.appendChild(cancelBtn);
+        actions.appendChild(okBtn);
+        box.appendChild(actions);
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+
+        function close(result) {
+            overlay.remove();
+            document.removeEventListener('keydown', onKeydown);
+            if (prevFocus && prevFocus.focus) prevFocus.focus();
+            resolve(result);
+        }
+
+        function onKeydown(ev) {
+            if (ev.key === 'Escape') { ev.preventDefault(); close(withInput ? null : false); }
+            if (ev.key === 'Enter') { ev.preventDefault(); okBtn.click(); }
+        }
+
+        cancelBtn.addEventListener('click', () => close(withInput ? null : false));
+        okBtn.addEventListener('click', () => close(withInput ? (input.value.trim() || null) : true));
+        overlay.addEventListener('mousedown', (e) => { if (e.target === overlay) close(withInput ? null : false); });
+        document.addEventListener('keydown', onKeydown);
+
+        (input || okBtn).focus();
+        if (input) input.select();
+    });
+}
+
+function nbPrompt(message, defaultValue) {
+    return nbBuildModal({ message, withInput: true, defaultValue });
+}
+
+function nbConfirm(message, danger) {
+    return nbBuildModal({ message, withInput: false, danger });
+}
+
+/* ======================================================
+   ذخیره‌سازی با ظرفیت بالا (IndexedDB)
+   localStorage معمولاً فقط ۵-۱۰ مگابایت جا داره. برای اینکه
+   کاربرهایی که متن زیاد می‌نویسن به این سقف نخورن، داده‌ی
+   هر پروژه رو توی IndexedDB نگه می‌داریم (ظرفیتش خیلی بیشتره)
+   و فقط اطلاعات کوچیک (لیست پروژه‌ها و پروژه‌ی فعال) توی
+   localStorage می‌مونه چون سریع و همزمانه.
+   ====================================================== */
+const NB_IDB_NAME = 'nb-storage';
+const NB_IDB_STORE = 'projectData';
+let _nbIdbPromise = null;
+
+function nbIdbOpen() {
+    if (_nbIdbPromise) return _nbIdbPromise;
+    _nbIdbPromise = new Promise((resolve, reject) => {
+        if (!('indexedDB' in window)) { reject(new Error('IndexedDB not supported')); return; }
+        const req = indexedDB.open(NB_IDB_NAME, 1);
+        req.onupgradeneeded = () => {
+            if (!req.result.objectStoreNames.contains(NB_IDB_STORE)) {
+                req.result.createObjectStore(NB_IDB_STORE);
+            }
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+    return _nbIdbPromise;
+}
+
+async function nbIdbGet(key) {
+    try {
+        const db = await nbIdbOpen();
+        return await new Promise((resolve, reject) => {
+            const tx = db.transaction(NB_IDB_STORE, 'readonly');
+            const req = tx.objectStore(NB_IDB_STORE).get(key);
+            req.onsuccess = () => resolve(req.result !== undefined ? req.result : null);
+            req.onerror = () => reject(req.error);
+        });
+    } catch (e) { return null; }
+}
+
+async function nbIdbSet(key, value) {
+    try {
+        const db = await nbIdbOpen();
+        await new Promise((resolve, reject) => {
+            const tx = db.transaction(NB_IDB_STORE, 'readwrite');
+            tx.objectStore(NB_IDB_STORE).put(value, key);
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+        });
+        return true;
+    } catch (e) { return false; }
+}
+
+async function nbIdbDelete(key) {
+    try {
+        const db = await nbIdbOpen();
+        await new Promise((resolve, reject) => {
+            const tx = db.transaction(NB_IDB_STORE, 'readwrite');
+            tx.objectStore(NB_IDB_STORE).delete(key);
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+        });
+        return true;
+    } catch (e) { return false; }
+}
+
+/* ======================================================
+   سیستم چند پروژه‌ای (دفترچه نویسندگی و دفترچه کتاب‌خوان)
+   قبلاً این منطق توی دو فایل جدا و تقریباً عین هم کپی شده بود؛
+   حالا یک نسخه‌ی مشترک با تنظیمات جدا برای هر صفحه.
+   ====================================================== */
+function createProjectManager(cfg) {
+    const NS = cfg.ns;
+    const PROJECTS_KEY = `${NS}-projects`;
+    const ACTIVE_KEY = `${NS}-active-project`;
+    const MIGRATED_FLAG = `${NS}-idb-migrated`;
+    const projDataKey = (id) => `${NS}-proj-${id}`;
+
+    function getProjects() {
+        try { return JSON.parse(localStorage.getItem(PROJECTS_KEY)) || []; }
+        catch (e) { return []; }
+    }
+    function saveProjects(list) { localStorage.setItem(PROJECTS_KEY, JSON.stringify(list)); }
+    function getActiveId() { return localStorage.getItem(ACTIVE_KEY); }
+    function setActiveId(id) { localStorage.setItem(ACTIVE_KEY, id); }
+    function uid() { return 'p' + Date.now() + Math.floor(Math.random() * 1000); }
+
+    async function getProjectData(id) {
+        const fromIdb = await nbIdbGet(projDataKey(id));
+        if (fromIdb) return fromIdb;
+        try {
+            const legacy = JSON.parse(localStorage.getItem(projDataKey(id)) || 'null');
+            return legacy || {};
+        } catch (e) { return {}; }
+    }
+
+    async function setProjectData(id, data) {
+        const ok = await nbIdbSet(projDataKey(id), data);
+        if (ok) {
+            localStorage.removeItem(projDataKey(id));
+        } else {
+            try {
+                localStorage.setItem(projDataKey(id), JSON.stringify(data));
+            } catch (e) {
+                alert('حافظه‌ی مرورگر پر شده. لطفاً یکی از پروژه‌های قدیمی رو حذف کن تا بشه ادامه داد.');
+            }
+        }
+    }
+
+    async function deleteProjectData(id) {
+        await nbIdbDelete(projDataKey(id));
+        localStorage.removeItem(projDataKey(id));
+    }
+
+    async function migrateAndInit() {
+        let projects = getProjects();
+        if (projects.length === 0) {
+            const legacyData = {};
+            let hasLegacy = false;
+            document.querySelectorAll('textarea').forEach(t => {
+                const v = localStorage.getItem(t.id);
+                if (v) { hasLegacy = true; legacyData[t.id] = v; }
+            });
+            const id = uid();
+            projects = [{ id, name: hasLegacy ? cfg.legacyName : cfg.firstItemName }];
+            saveProjects(projects);
+            setActiveId(id);
+            await setProjectData(id, legacyData);
+        } else if (!localStorage.getItem(MIGRATED_FLAG)) {
+            // انتقال یک‌بارهٔ داده‌های قدیمی از localStorage به IndexedDB
+            for (const p of projects) {
+                const raw = localStorage.getItem(projDataKey(p.id));
+                if (raw) {
+                    try {
+                        await nbIdbSet(projDataKey(p.id), JSON.parse(raw));
+                        localStorage.removeItem(projDataKey(p.id));
+                    } catch (e) { /* اگه خطا داد، نسخه‌ی قدیمی دست‌نخورده می‌مونه */ }
+                }
+            }
+        }
+        localStorage.setItem(MIGRATED_FLAG, '1');
+        if (!getActiveId() || !projects.find(p => p.id === getActiveId())) {
+            setActiveId(projects[0].id);
+        }
+    }
+
+    function renderProjectSelector() {
+        const select = document.getElementById('project-select');
+        const projects = getProjects();
+        const activeId = getActiveId();
+        select.innerHTML = '';
+        projects.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.id;
+            opt.textContent = p.name;
+            if (p.id === activeId) opt.selected = true;
+            select.appendChild(opt);
+        });
+    }
+
+    async function loadActiveProjectIntoForm() {
+        const id = getActiveId();
+        const data = await getProjectData(id);
+        document.querySelectorAll('textarea').forEach(t => {
+            t.value = data[t.id] || '';
+        });
+    }
+
+    async function switchProject(id) {
+        setActiveId(id);
+        await loadActiveProjectIntoForm();
+    }
+
+    async function createNewProject() {
+        // به‌جای window.prompt (که توی PWA نصب‌شده روی موبایل/iOS
+        // خیلی وقت‌ها اصلاً نمایش داده نمی‌شه) از مودال خودمون استفاده می‌کنیم
+        const name = await nbPrompt(cfg.newPromptText, cfg.newPromptDefault);
+        if (!name) return;
+        const id = uid();
+        const projects = getProjects();
+        projects.push({ id, name });
+        saveProjects(projects);
+        await setProjectData(id, {});
+        setActiveId(id);
+        renderProjectSelector();
+        await loadActiveProjectIntoForm();
+    }
+
+    async function renameCurrentProject() {
+        const id = getActiveId();
+        const projects = getProjects();
+        const proj = projects.find(p => p.id === id);
+        if (!proj) return;
+        const name = await nbPrompt(cfg.renamePromptText, proj.name);
+        if (!name) return;
+        proj.name = name;
+        saveProjects(projects);
+        renderProjectSelector();
+    }
+
+    async function deleteCurrentProject() {
+        const projects = getProjects();
+        if (projects.length <= 1) {
+            await nbConfirm(cfg.minItemsAlert);
+            return;
+        }
+        const id = getActiveId();
+        const proj = projects.find(p => p.id === id);
+        const ok = await nbConfirm(cfg.deleteConfirm(proj.name), true);
+        if (!ok) return;
+
+        await deleteProjectData(id);
+        const remaining = projects.filter(p => p.id !== id);
+        saveProjects(remaining);
+        setActiveId(remaining[0].id);
+        renderProjectSelector();
+        await loadActiveProjectIntoForm();
+    }
+
+    async function saveActiveProjectField(textarea) {
+        const id = getActiveId();
+        const data = await getProjectData(id);
+        data[textarea.id] = textarea.value;
+        await setProjectData(id, data);
+    }
+
+    return {
+        getProjects, getActiveId, setActiveId,
+        migrateAndInit, renderProjectSelector, loadActiveProjectIntoForm,
+        switchProject, createNewProject, renameCurrentProject, deleteCurrentProject,
+        saveActiveProjectField
+    };
+}
+</script>
 
 <div class="paper">
 

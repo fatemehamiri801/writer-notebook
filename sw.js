@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-notebook-v70";
+const CACHE_NAME = "my-notebook-v62";
 // استفاده از مسیرهای نسبی برای هماهنگی با ساختار گیت‌هاب
 const ASSETS = [
     "./",
@@ -9,9 +9,7 @@ const ASSETS = [
     "./about.html",
     "./manifest.json",
     "./icon-192.png",
-    "./icon-512.png",
-    "./shared/style.css",
-    "./shared/common.js"
+    "./icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {

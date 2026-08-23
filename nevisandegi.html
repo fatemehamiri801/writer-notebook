@@ -502,12 +502,44 @@ html.nb-dark body {
     color: var(--text) !important;
 }
 
+.mascot-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 22px 20px;
+    margin: 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 55%, #ddd6fe 100%);
+    border: 1px solid #ddd6fe;
+    border-right: 5px solid #7c3aed;
+    box-shadow: 0 6px 18px rgba(124, 58, 237, 0.15);
+}
+.mascot-emoji {
+    font-size: 42px;
+    filter: drop-shadow(0 2px 4px rgba(76, 29, 149, 0.2));
+}
+.mascot-text {
+    font-size: 1.1rem;
+    color: #4c1d95;
+    margin: 0;
+    font-weight: bold;
+}
+
 html.nb-dark .layer-card,
 html.nb-dark .box,
 html.nb-dark nav {
     background-color: var(--card-bg) !important;
     color: var(--text) !important;
     border-color: var(--card-border) !important;
+}
+
+html.nb-dark .mascot-box {
+    background: var(--card-bg) !important;
+    border-color: var(--card-border) !important;
+}
+html.nb-dark .mascot-text {
+    color: var(--text) !important;
 }
 
 html.nb-dark .project-toolbar {
@@ -712,11 +744,11 @@ select:focus-visible,
     </div>
 <div class="header-btns" id="headerBtns">
 <button onclick="printFullContent()" style="background-color: #10b981; color: white; padding: 12px 24px; font-size: 1rem; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s;">
-    📥 خروجی PDF
+    📥 خروجی PDF (برای خوندن/چاپ/اشتراک)
 </button>
 
         <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s;">
-    👤 ارتباط در تلگرام
+    👤 ارتباط با سازنده
 </a>
     </div>
 </header>
@@ -729,6 +761,9 @@ select:focus-visible,
     <button onclick="createNewProject()" class="btn-toolbar">➕ پروژه جدید</button>
     <button onclick="renameCurrentProject()" class="btn-toolbar">✏️ تغییر نام</button>
     <button onclick="deleteCurrentProject()" class="btn-toolbar-danger">🗑️ حذف پروژه</button>
+    <button onclick="backupCurrentProject()" class="btn-toolbar" title="فایل بک‌آپ رو ذخیره کن تا بعداً بتونی همین‌جا ادامه‌ی ویرایشش رو بدی">💾 بک‌آپ پروژه (برای ادامه‌ی ویرایش بعداً)</button>
+    <button onclick="triggerRestoreFilePicker()" class="btn-toolbar" title="یه فایل بک‌آپ رو به‌عنوان پروژه‌ی جدید بارگذاری کن">📂 بارگذاری بک‌آپ</button>
+    <input type="file" id="restore-file-input" accept="application/json" style="display:none" onchange="restoreProjectFromFile(this.files[0]); this.value='';">
 
     <div style="display:flex; align-items:center; gap:6px; margin-right:auto;">
         <input id="search-box" type="text" placeholder="🔍 جستجو در این پروژه..." style="padding:8px 12px; border-radius:8px; border:1px solid #a78bfa; font-family:inherit; font-size:0.85rem; min-width:180px;">
@@ -736,9 +771,9 @@ select:focus-visible,
     </div>
 </div>
 
-    <div class="mascot-box" style="display: flex; align-items: center; justify-content: center; gap: 15px; padding: 20px; background: #f3f4f6; border-radius: 12px; margin: 20px;">
-        <span style="font-size: 40px;">✍️📓</span>
-        <p style="font-size: 1.1rem; color: #374151; margin: 0; font-weight: bold;">
+    <div class="mascot-box">
+        <span class="mascot-emoji">✍️📓</span>
+        <p class="mascot-text">
             سلام نویسنده! امروز قراره چه دنیایی رو خلق کنیم؟
         </p>
     </div>
@@ -1444,11 +1479,52 @@ function createProjectManager(cfg) {
         await setProjectData(id, data);
     }
 
+    async function backupCurrentProject() {
+        const id = getActiveId();
+        const projects = getProjects();
+        const proj = projects.find(p => p.id === id);
+        if (!proj) return;
+        const data = await getProjectData(id);
+        const payload = { app: NS, name: proj.name, exportedAt: new Date().toISOString(), data };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${proj.name}-backup.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+    }
+
+    async function restoreProjectFromFile(file) {
+        if (!file) return;
+        try {
+            const text = await file.text();
+            const payload = JSON.parse(text);
+            if (!payload || typeof payload.data !== 'object') {
+                await nbConfirm('فایل بک‌آپ معتبر نیست.');
+                return;
+            }
+            const name = payload.name ? `${payload.name} (بازیابی‌شده)` : cfg.newPromptDefault + ' (بازیابی‌شده)';
+            const id = uid();
+            const projects = getProjects();
+            projects.push({ id, name });
+            saveProjects(projects);
+            await setProjectData(id, payload.data);
+            setActiveId(id);
+            renderProjectSelector();
+            await loadActiveProjectIntoForm();
+        } catch (e) {
+            await nbConfirm('خطا در خواندن فایل بک‌آپ. مطمئن شو فایل درستی انتخاب کردی.');
+        }
+    }
+
     return {
         getProjects, getActiveId, setActiveId,
         migrateAndInit, renderProjectSelector, loadActiveProjectIntoForm,
         switchProject, createNewProject, renameCurrentProject, deleteCurrentProject,
-        saveActiveProjectField
+        saveActiveProjectField, backupCurrentProject, restoreProjectFromFile
     };
 }
 </script>
@@ -1488,7 +1564,7 @@ function openTab(evt, tabId) {
 const pm = createProjectManager({
     ns: 'nvsdg',
     firstItemName: 'داستان ۱',
-    legacyName: 'داستان قبلی',
+    legacyName: 'داستان فعلی',
     newPromptText: 'نام داستان جدید را وارد کن:',
     newPromptDefault: 'داستان جدید',
     renamePromptText: 'نام جدید داستان:',
@@ -1499,6 +1575,9 @@ function switchProject(id){ return pm.switchProject(id); }
 function createNewProject(){ return pm.createNewProject(); }
 function renameCurrentProject(){ return pm.renameCurrentProject(); }
 function deleteCurrentProject(){ return pm.deleteCurrentProject(); }
+function backupCurrentProject(){ return pm.backupCurrentProject(); }
+function restoreProjectFromFile(file){ return pm.restoreProjectFromFile(file); }
+function triggerRestoreFilePicker(){ document.getElementById('restore-file-input').click(); }
 
 const textareas = document.querySelectorAll('textarea');
 
@@ -1964,21 +2043,18 @@ printWindow.onload = function(){
     <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f0f7ff; border: 2px solid #3b82f6; border-radius: 16px;">
 
         <h3 style="color: #1e40af; font-size: 1.3rem; margin: 0 0 10px 0;">
-            📓 دفترچه نویسندگی:
-            <strong style="color: #2563eb;">
-                نقشه راهی برای داستان‌هایی که در ذهنت شکل گرفته‌اند
-            </strong>
+            ✍️ <strong style="color: #2563eb;">آموزش گام‌به‌گام نویسندگی</strong>
         </h3>
 
         <p style="color: #374151; font-size: 0.95rem; line-height:1.5; margin-bottom:15px;">
-            با سفارش <strong>دفترچه فیزیکی نویسندگی</strong>،
-            ایده‌ها، شخصیت‌ها و جهان‌های داستانی‌ات را سازمان بده.
+            می‌خوای قدم‌به‌قدم یاد بگیری چطور درست بنویسی؟ فایل «آموزش نویسندگی» از ساخت
+            جهان داستانی و شخصیت‌پردازی تا پیاده‌سازی و اصول نوشتن رو به‌صورت گام‌به‌گام یادت می‌ده.
         </p>
 
         <a href="https://t.me/fatemehamiri1381"
            target="_blank"
            style="background-color:#2563eb;color:#fff;padding:10px 30px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
-            🚀 سفارش پکیج در تلگرام
+            🚀 سفارش فایل آموزش نویسندگی در تلگرام
         </a>
 
     </div>

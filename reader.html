@@ -513,12 +513,46 @@ html.nb-dark body {
     color: var(--text) !important;
 }
 
+.mascot-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 1000px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 55%, #c7d2fe 100%);
+    border: 1px solid #c7d2fe;
+    border-right: 5px solid #4f46e5;
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.15);
+}
+.mascot-emoji {
+    font-size: 42px;
+    filter: drop-shadow(0 2px 4px rgba(49, 46, 129, 0.2));
+}
+.mascot-text {
+    font-size: 1.1rem;
+    color: #312e81;
+    margin: 0;
+    font-weight: bold;
+}
+
 html.nb-dark .layer-card,
 html.nb-dark .box,
 html.nb-dark nav {
     background-color: var(--card-bg) !important;
     color: var(--text) !important;
     border-color: var(--card-border) !important;
+}
+
+html.nb-dark .mascot-box {
+    background: var(--card-bg) !important;
+    border-color: var(--card-border) !important;
+}
+html.nb-dark .mascot-text {
+    color: var(--text) !important;
 }
 
 html.nb-dark .project-toolbar {
@@ -718,16 +752,16 @@ select:focus-visible,
         <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" title="منو" aria-label="باز کردن منو">☰</button>
 
         <h1 class="page-title" style="margin: 0; font-size: 1.8rem; font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 900; color: #facc15;">
-            📖 دفترچه کتابخوان
+            📖 دفترچه کتاب‌خوان
         </h1>
     </div>
 
     <div class="header-btns" id="headerBtns">
         <button onclick="printAllTabs()" style="background-color: #10b981; color: #ffffff; padding: 10px 20px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer;">
-            📥 خروجی PDF
+            📥 خروجی PDF (برای خوندن/چاپ/اشتراک)
         </button>
         <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">
-    👤 ارتباط در تلگرام
+    👤 ارتباط با سازنده
 </a>
     </div>
 </header>
@@ -740,6 +774,9 @@ select:focus-visible,
     <button onclick="createNewProject()" class="btn-toolbar">➕ کتاب جدید</button>
     <button onclick="renameCurrentProject()" class="btn-toolbar">✏️ تغییر نام</button>
     <button onclick="deleteCurrentProject()" class="btn-toolbar-danger">🗑️ حذف پروژه</button>
+    <button onclick="backupCurrentProject()" class="btn-toolbar" title="فایل بک‌آپ رو ذخیره کن تا بعداً بتونی همین‌جا ادامه‌ی ویرایشش رو بدی">💾 بک‌آپ پروژه (برای ادامه‌ی ویرایش بعداً)</button>
+    <button onclick="triggerRestoreFilePicker()" class="btn-toolbar" title="یه فایل بک‌آپ رو به‌عنوان پروژه‌ی جدید بارگذاری کن">📂 بارگذاری بک‌آپ</button>
+    <input type="file" id="restore-file-input" accept="application/json" style="display:none" onchange="restoreProjectFromFile(this.files[0]); this.value='';">
 
     <div style="display:flex; align-items:center; gap:6px; margin-right:auto;">
         <input id="search-box" type="text" placeholder="🔍 جستجو در این کتاب..." style="padding:8px 12px; border-radius:8px; border:1px solid #818cf8; font-family:inherit; font-size:0.85rem; min-width:180px;">
@@ -748,9 +785,9 @@ select:focus-visible,
 </div>
 
 <!-- کادر خوش‌آمدگویی (مشابه دفترچه نویسنده) -->
-<div class="mascot-box" style="display: flex; align-items: center; justify-content: center; gap: 15px; padding: 25px; background: #f3f4f6; border-radius: 12px; margin: 20px auto; max-width: 1000px; box-sizing: border-box;">
-    <span style="font-size: 40px;">📖 ✍️</span>
-    <p style="font-size: 1.3rem; color: #312e81; margin: 0; font-weight: bold;">
+<div class="mascot-box">
+    <span class="mascot-emoji">📖 ✍️</span>
+    <p class="mascot-text">
         سلام کتاب‌خوان! امروز چه کتابی رو ثبت می‌کنی؟
     </p>
 </div>
@@ -1272,11 +1309,52 @@ function createProjectManager(cfg) {
         await setProjectData(id, data);
     }
 
+    async function backupCurrentProject() {
+        const id = getActiveId();
+        const projects = getProjects();
+        const proj = projects.find(p => p.id === id);
+        if (!proj) return;
+        const data = await getProjectData(id);
+        const payload = { app: NS, name: proj.name, exportedAt: new Date().toISOString(), data };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${proj.name}-backup.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+    }
+
+    async function restoreProjectFromFile(file) {
+        if (!file) return;
+        try {
+            const text = await file.text();
+            const payload = JSON.parse(text);
+            if (!payload || typeof payload.data !== 'object') {
+                await nbConfirm('فایل بک‌آپ معتبر نیست.');
+                return;
+            }
+            const name = payload.name ? `${payload.name} (بازیابی‌شده)` : cfg.newPromptDefault + ' (بازیابی‌شده)';
+            const id = uid();
+            const projects = getProjects();
+            projects.push({ id, name });
+            saveProjects(projects);
+            await setProjectData(id, payload.data);
+            setActiveId(id);
+            renderProjectSelector();
+            await loadActiveProjectIntoForm();
+        } catch (e) {
+            await nbConfirm('خطا در خواندن فایل بک‌آپ. مطمئن شو فایل درستی انتخاب کردی.');
+        }
+    }
+
     return {
         getProjects, getActiveId, setActiveId,
         migrateAndInit, renderProjectSelector, loadActiveProjectIntoForm,
         switchProject, createNewProject, renameCurrentProject, deleteCurrentProject,
-        saveActiveProjectField
+        saveActiveProjectField, backupCurrentProject, restoreProjectFromFile
     };
 }
 </script>
@@ -1307,7 +1385,7 @@ function printAllTabs(){
 
 <meta charset="UTF-8">
 
-<title>دفترچه کتابخوان</title>
+<title>دفترچه کتاب‌خوان</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 
@@ -1506,7 +1584,7 @@ h1{
 
 
 <h1>
-📖 دفترچه کتابخوان من
+📖 دفترچه کتاب‌خوان من
 </h1>
 
 
@@ -1616,7 +1694,7 @@ contentHtml += `
 
 <div class="print-footer">
 
-📖 دفترچه کتابخوان
+📖 دفترچه کتاب‌خوان
 
 </div>
 
@@ -1677,11 +1755,11 @@ printWindow.onload = function(){
 
 
 }
-// ====== سیستم چند پروژه‌ای دفترچه کتابخوان (منطق مشترک در shared/common.js) ======
+// ====== سیستم چند پروژه‌ای دفترچه کتاب‌خوان (منطق مشترک در shared/common.js) ======
 const pm = createProjectManager({
     ns: 'reader',
     firstItemName: 'کتاب ۱',
-    legacyName: 'کتاب قبلی',
+    legacyName: 'کتاب فعلی',
     newPromptText: 'نام کتاب جدید را وارد کن:',
     newPromptDefault: 'کتاب جدید',
     renamePromptText: 'نام جدید کتاب:',
@@ -1692,6 +1770,9 @@ function switchProject(id){ return pm.switchProject(id); }
 function createNewProject(){ return pm.createNewProject(); }
 function renameCurrentProject(){ return pm.renameCurrentProject(); }
 function deleteCurrentProject(){ return pm.deleteCurrentProject(); }
+function backupCurrentProject(){ return pm.backupCurrentProject(); }
+function restoreProjectFromFile(file){ return pm.restoreProjectFromFile(file); }
+function triggerRestoreFilePicker(){ document.getElementById('restore-file-input').click(); }
 
 const textareas = document.querySelectorAll('textarea');
 
@@ -1768,18 +1849,18 @@ function openTab(evt, tabName) {
     <div style="max-width: 600px; margin: 0 auto; padding: 25px; background-color: #f5f3ff; border: 2px solid #8b5cf6; border-radius: 16px;">
         
         <h3 style="color: #4c1d95; font-size: 1.3rem; margin: 0 0 10px 0;">
-            📖 دفترچه کتابخوان: <strong style="color: #6d28d9;">آرشیو شخصی جهان‌هایی که با کتاب‌ها زندگی کردی</strong>
+            📚 <strong style="color: #6d28d9;">مرجع کتاب‌های پیشنهادی</strong>
         </h3>
         
         <p style="color: #374151; font-size: 0.95rem; line-height: 1.5; margin-bottom: 15px;">
-            احساسات، یادداشت‌ها، تحلیل‌ها و مسیر مطالعه‌ات را ثبت کن و آرشیوی از تجربه‌های خواندنت بساز. 
-            با سفارش <strong>نسخه فیزیکی دفترچه</strong>، این مسیر را ماندگار کن و 
-            <strong>PDF اختصاصی معرفی کتاب</strong> را به عنوان هدیه دریافت کن.
+            دنبال کتاب بعدی می‌گردی؟ فایل PDF «مرجع کتاب‌های پیشنهادی» معرفی و خلاصه‌ی
+            کتاب‌های برتر از ژانرهای مختلف رو به همراه لیست دسته‌بندی‌شده در اختیارت می‌ذاره،
+            تا همیشه یه منبع آماده برای انتخاب کتاب بعدی داشته باشی.
         </p>
         
         <a href="https://t.me/fatemehamiri1381" target="_blank" 
            style="background-color: #6d28d9; color: #ffffff; padding: 10px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1rem; display: inline-block; transition: 0.3s;">
-            🚀 سفارش پکیج در تلگرام
+            🚀 سفارش فایل معرفی کتاب در تلگرام
         </a>
     </div>
 </footer>

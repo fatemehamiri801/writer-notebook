@@ -1,5 +1,5 @@
-const CACHE_NAME = "my-notebook-v81";
-// استفاده از مسیرهای نسبی برای هماهنگی با ساختار گیت‌هاب
+const CACHE_NAME = "my-notebook-v63";
+// اپدیت های سرویس ورکر
 const ASSETS = [
     "./",
     "./index.html",

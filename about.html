@@ -801,6 +801,32 @@ line-height:2;
 #dark-mode-toggle{background:#5b3923;}
 
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===== پالت دفترچه: جوهر / کاغذ / طلا ===== */
+:root{--ink:#2a1560;--gold:#c99a3e;--pp:#fbf6e9;--cd:#fffdf7;--straw:#f1e2bd;--hand:'Aref Ruqaa','Vazirmatn',serif}
+html.nb-dark{--bg:#1c130d;--text:#2a1560;--card-bg:#f3e8cc;--card-border:#d8c9a0;--pp:#eadbb9;--cd:#f3e8cc;--straw:#e0cc9c}
+html body{background:radial-gradient(circle at 50% 40%,#f5f3ff,#e0e7ff 45%,#c7d2fe)!important;color:var(--ink)}
+html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#2a1d15,#120c09 75%)!important}
+html.nb-dark body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 65% 60% at 80% 6%,rgba(255,184,92,.28),transparent 70%)}
+html body #dark-mode-toggle{background:var(--ink)!important;border:1.5px dashed #e3c26d!important;color:#e3c26d}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2.5px solid var(--gold)!important;outline-offset:2px}
+.search-highlight{outline-color:var(--gold)!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+:root{--acc:#c0587f;--accd:#9b3f64}
+html body .paper{background:repeating-linear-gradient(transparent 0 35px,rgba(90,70,160,.10) 35px 36px),var(--pp)!important;border:0;border-radius:8px 4px 4px 8px;box-shadow:3px 4px 0 #e9dfc6,0 18px 40px rgba(60,40,10,.25)}
+html body .paper::before{content:'';opacity:1;top:0;bottom:0;left:auto;right:46px;width:1px;font-size:0;background:rgba(192,88,127,.42)}
+html body .paper::after{content:'';opacity:1;top:-6px;bottom:auto;left:50%;right:auto;width:90px;height:22px;margin-left:-45px;background:rgba(227,194,109,.55);transform:rotate(-2deg);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+html body h1,html body .chapter h2{font-family:var(--hand);color:var(--ink);text-shadow:none}
+html body .intro,html body .chapter p,html body .end{color:#3d2f55}
+html body .chapter{background:var(--cd);border:1px solid #e3d8bd;border-right-width:5px;border-radius:6px;box-shadow:2px 3px 0 #e9dfc6,0 8px 18px rgba(60,40,10,.10)}
+html body .chapter.writer{border-right-color:#c0587f}html body .chapter.reader{border-right-color:#4a7bb5}html body .chapter.game{border-right-color:#7d8a45}
+html body .chapter.simple,html body .chapter.income,html body .chapter.goal{border-right-color:var(--gold)}
+html body .chapter h2::after{background:var(--gold);opacity:.6}
+html body .back{background:var(--ink);color:#f3dc93;border:1.5px dashed #e3c26d}
+html.nb-dark body .chapter p,html.nb-dark body .intro,html.nb-dark body h1,html.nb-dark body .chapter h2,html.nb-dark body .end{color:var(--ink)}
+</style>
 </head>
 
 

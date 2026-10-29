@@ -25,766 +25,122 @@
 <meta property="og:image" content="https://fatemehamiri801.github.io/writer-notebook/icon-512.png">
 
     <title>خانه دفترچه‌ها</title>
-
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
-            background: radial-gradient(circle at center, #f5f3ff, #e0e7ff 40%, #c7d2fe 100%);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-        h1 { color: #4c1d95; margin: 45px 0 35px; text-align: center; font-size: 1.8rem; text-shadow: 0 2px 10px rgba(76, 29, 149, 0.15); }
-        .container { display: flex; gap: 22px; width: 100%; max-width: 850px; justify-content: center; flex-wrap: wrap; }
-        .box {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            padding: 30px 20px;
-            border-radius: 28px;
-            text-align: center;
-            width: 100%;
-            max-width: 240px;
-            min-height: 220px;
-            box-shadow: 0 10px 30px rgba(76, 29, 149, 0.12);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2.5px solid #a78bfa;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #2e1065;
-        }
-        .box:hover { border-color: #7c3aed; transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(124, 58, 237, 0.25); }
-        .emoji { font-size: 72px; margin-bottom: 15px; display: block; }
-        h2 { font-size: 1.2rem; margin: 0; font-weight: 700; }
-        .box p { font-size: 0.9rem; color: #5b21b6; margin-top: 12px; line-height: 1.5; font-weight: 500; }
-        .purpose-btn { margin-top: 35px; padding: 10px 24px; border-radius: 30px; background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #4c1d95; border: 1.5px solid #a78bfa; text-decoration: none; font-size: .9rem; font-weight: 600; box-shadow: 0 8px 20px rgba(76, 29, 149, .12); transition: .3s ease; }
-        .purpose-btn:hover { transform: translateY(-3px); background: linear-gradient(135deg, #ddd6fe, #c4b5fd); box-shadow: 0 12px 25px rgba(76, 29, 149, .2); }
-        @media(max-width:600px) { body { padding: 15px; } h1 { font-size: 1.4rem; margin: 46px 0 25px; } .box { max-width: 100%; min-height: 190px; } }
-        #install-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #4c1d95; color: #fff; padding: 14px 20px; display: none; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; z-index: 1000; box-shadow: 0 -4px 15px rgba(0,0,0,.15); }
-        #install-banner button { border: none; border-radius: 8px; padding: 8px 16px; font-weight: bold; cursor: pointer; }
-        #install-banner .install-yes { background: #facc15; color: #4c1d95; }
-        #install-banner .install-no { background: transparent; color: #ddd6fe; }
-    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<script>try{if(sessionStorage.getItem('nb-cover-seen')==='1'||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('nb-open')}catch(e){}</script>
+<noscript><style>.book{transform:translateX(var(--shift))}.cover{transform:rotateY(180deg)}</style></noscript>
 <style>
-/* ======================================================
-   استایل‌های مشترک بین همه‌ی صفحات سایت «دفترچه من»
-   (قبلاً این قوانین توی هر ۵ فایل جدا کپی شده بودن)
-   ====================================================== */
-
-/* فونت فارسی Vazirmatn (رایگان، متن‌باز، بدون نیاز به سرور یا هزینه) */
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
-    font-weight: 900;
-    font-style: normal;
-    font-display: swap;
-}
-
-/* ======================================================
-   متغیرهای مشترک رنگ و فاصله‌گذاری
-   یه منبع واحد برای رنگ‌ها و فاصله‌ها که هر صفحه ازش استفاده
-   می‌کنه؛ به‌جای اینکه هر صفحه رنگ بنفش/نیلی خودش رو جدا تعریف کنه.
-   ====================================================== */
-:root {
-    --purple-primary: #7c3aed;
-    --purple-dark: #5b21b6;
-    --purple-darker: #4c1d95;
-    --purple-light: #ede9fe;
-    --purple-border: #c4b5fd;
-
-    --indigo-primary: #4f46e5;
-    --indigo-dark: #312e81;
-    --indigo-light: #e0e7ff;
-    --indigo-border: #a5b4fc;
-
-    --space-xs: 6px;
-    --space-sm: 10px;
-    --space-md: 16px;
-    --space-lg: 24px;
-    --space-xl: 40px;
-
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-
-    /* حالت روز (پیش‌فرض) */
-    --bg: #f5f3ff;
-    --text: #1e1b4b;
-    --card-bg: #ffffff;
-    --card-border: #e5e7eb;
-    --input-bg: #ffffff;
-    --input-border: #cbd5e1;
-    --toolbar-bg: #ede9fe;
-    --muted-text: #6b7280;
-}
-
-/* ======================================================
-   حالت شب/روز واقعی
-   قبلاً با filter: invert روی کل صفحه پیاده شده بود که باعث می‌شد
-   ایموجی‌ها و آیکون‌ها رنگ‌های ناهماهنگ بگیرن. حالا با متغیرهای
-   CSS که فقط پس‌زمینه، متن و کارت‌ها رو عوض می‌کنن.
-   ====================================================== */
-html.nb-dark {
-    --bg: #16132b;
-    --text: #ede9fe;
-    --card-bg: #221d3d;
-    --card-border: #382f5e;
-    --input-bg: #241f42;
-    --input-border: #4c4472;
-    --toolbar-bg: #241f42;
-    --muted-text: #a5a0c2;
-}
-
-html.nb-dark body {
-    background-color: var(--bg) !important;
-    color: var(--text) !important;
-}
-
-html.nb-dark .layer-card,
-html.nb-dark .box,
-html.nb-dark nav {
-    background-color: var(--card-bg) !important;
-    color: var(--text) !important;
-    border-color: var(--card-border) !important;
-}
-
-html.nb-dark .project-toolbar {
-    background: var(--toolbar-bg) !important;
-    border-color: var(--card-border) !important;
-}
-
-html.nb-dark label,
-html.nb-dark .sub-label,
-html.nb-dark h1, html.nb-dark h2, html.nb-dark h3, html.nb-dark p {
-    color: var(--text);
-}
-
-html.nb-dark textarea,
-html.nb-dark input,
-html.nb-dark select {
-    background: var(--input-bg) !important;
-    color: var(--text) !important;
-    border-color: var(--input-border) !important;
-}
-
-html.nb-dark .btn-toolbar {
-    background: var(--toolbar-bg) !important;
-    color: #d8b4fe !important;
-    border-color: var(--input-border) !important;
-}
-
-html.nb-dark footer,
-html.nb-dark footer div {
-    background-color: var(--card-bg) !important;
-    color: var(--text) !important;
-}
-
-#dark-mode-toggle {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: none;
-    background: #312e81;
-    color: #fbbf24;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
-    transition: transform .15s ease;
-}
-
-#dark-mode-toggle:hover {
-    transform: scale(1.06);
-}
-
-/* توی موبایل کوچیک‌تر می‌شه تا احتمال تداخلش با عنوان صفحه کمتر بشه */
-@media (max-width: 600px) {
-    #dark-mode-toggle {
-        width: 38px;
-        height: 38px;
-        top: 10px;
-        left: 10px;
-        font-size: 17px;
-    }
-}
-
-/* هایلایت نتیجه‌ی جستجو (دفترچه نویسندگی و کتاب‌خوان) */
-.search-highlight {
-    outline: 3px solid #f59e0b !important;
-    box-shadow: 0 0 0 4px rgba(245, 158, 11, .3) !important;
-}
-
-/* ======================================================
-   فوکوس با کیبورد / صفحه‌خوان
-   :hover به‌تنهایی برای کسی که با کیبورد یا صفحه‌خوان کار می‌کنه
-   کافی نیست؛ این outline فقط وقتی با کیبورد فوکوس می‌گیره نشون
-   داده می‌شه (نه با کلیک ماوس)، طبق رفتار استاندارد :focus-visible.
-   ====================================================== */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-select:focus-visible,
-[tabindex]:focus-visible {
-    outline: 3px solid #f59e0b;
-    outline-offset: 2px;
-    border-radius: 4px;
-}
-
-/* ======================================================
-   مودال سفارشی (جایگزین prompt/confirm بومی مرورگر)
-   توی PWA نصب‌شده روی موبایل (به‌خصوص iOS، حالت standalone)
-   دیالوگ‌های window.prompt/confirm خیلی وقت‌ها اصلاً نمایش داده
-   نمی‌شن یا کار نمی‌کنن. این مودال با HTML/CSS خودمون جایگزینشون
-   می‌شه و همه‌جا (دسکتاپ، موبایل، PWA نصب‌شده) یکسان کار می‌کنه.
-   ====================================================== */
-.nb-modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 10, 30, .55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5000;
-    padding: 20px;
-    animation: nb-modal-fade 150ms ease;
-}
-
-@keyframes nb-modal-fade {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-.nb-modal-box {
-    background: var(--card-bg);
-    color: var(--text);
-    width: 100%;
-    max-width: 360px;
-    border-radius: var(--radius-lg);
-    padding: 22px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.35);
-    font-family: 'Vazirmatn', Tahoma, sans-serif;
-    animation: nb-modal-in 150ms ease;
-}
-
-@keyframes nb-modal-in {
-    from { opacity: 0; transform: translateY(10px) scale(.97); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.nb-modal-message {
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 14px;
-    white-space: pre-line;
-}
-
-.nb-modal-input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: var(--radius-sm);
-    border: 2px solid var(--input-border);
-    background: var(--input-bg);
-    color: var(--text);
-    font-family: inherit;
-    font-size: 0.95rem;
-    margin-bottom: 16px;
-}
-
-.nb-modal-input:focus {
-    outline: none;
-    border-color: var(--indigo-primary);
-}
-
-.nb-modal-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-}
-
-.nb-modal-btn {
-    padding: 9px 18px;
-    border-radius: var(--radius-sm);
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: inherit;
-    font-size: 0.9rem;
-}
-
-.nb-modal-btn-cancel {
-    background: var(--toolbar-bg);
-    color: var(--muted-text);
-}
-
-.nb-modal-btn-ok {
-    background: var(--purple-primary);
-    color: #fff;
-}
-
-.nb-modal-btn-danger {
-    background: #ef4444;
-    color: #fff;
-}
+@font-face{font-family:'Vazirmatn';src:url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Vazirmatn';src:url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+:root{--pw:min(40vw,430px);--ph:clamp(460px,74vh,600px);--shift:0px;--ink:#2a1560;--hand:'Aref Ruqaa','Vazirmatn',serif;--tex:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nLjgnIG51bU9jdGF2ZXM9JzInIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48ZmVDb2xvck1hdHJpeCB2YWx1ZXM9JzAgMCAwIDAgLjQ1IDAgMCAwIDAgLjM4IDAgMCAwIDAgLjI1IDAgMCAwIC4wOSAwJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+");--lea:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNDAnIGhlaWdodD0nMTQwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nLjU1JyBudW1PY3RhdmVzPSczJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PGZlQ29sb3JNYXRyaXggdmFsdWVzPScwIDAgMCAwIDEgMCAwIDAgMCAxIDAgMCAwIDAgMSAwIDAgMCAuNSAtLjE0Jy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+")}
+@media(max-width:760px){:root{--pw:min(88vw,400px);--ph:clamp(470px,76vh,640px);--shift:calc(var(--pw)*-.5)}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;overflow-x:hidden;font-family:'Vazirmatn','Segoe UI',Tahoma,sans-serif;color:var(--ink);background:radial-gradient(circle at 50% 40%,#f5f3ff,#e0e7ff 45%,#c7d2fe)}
+html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#2a1d15,#120c09 75%)}
+.glow{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .6s;background:radial-gradient(ellipse 65% 60% at 80% 6%,rgba(255,184,92,.3),transparent 70%)}
+html.nb-dark .glow{opacity:1}
+.lamp{position:fixed;top:12px;left:12px;z-index:3;width:46px;height:46px;padding:0;display:grid;place-items:center;border-radius:50%;border:1.5px solid rgba(124,58,237,.35);background:rgba(255,255,255,.75);color:#4c1d95;cursor:pointer}
+.lamp svg{width:26px;height:26px}.lamp .bulb{fill:#cbd5e1;transition:fill .4s}
+html.nb-dark .lamp{background:rgba(40,28,20,.85);border-color:#a87b3c;color:#e3c26d}html.nb-dark .lamp .bulb{fill:#ffcf70}
+.closebk{position:fixed;top:12px;left:66px;z-index:3;height:46px;padding:0 16px;display:none;align-items:center;gap:6px;border-radius:23px;border:1.5px dashed rgba(227,194,109,.8);background:linear-gradient(135deg,#43228f,#1b0b40);color:#e3c26d;font:700 .9rem 'Vazirmatn',sans-serif;cursor:pointer}
+html.nb-book-open .closebk{display:flex}
+.stage{width:100%;padding:34px 0 60px;display:flex;justify-content:center}
+.book{position:relative;width:calc(var(--pw)*2);height:var(--ph);perspective:2400px;transform:translateX(calc(var(--pw)/2));transition:transform 1s cubic-bezier(.6,.05,.25,1)}
+.book.is-open{transform:translateX(var(--shift))}
+.instant,.instant *{transition:none!important}
+.page,.cover,.leaf{position:absolute;top:0;left:0;width:var(--pw);height:100%}
+.page{padding:8px 0 10px 8px;border-radius:10px 3px 3px 10px;background:var(--lea),#2a1360;box-shadow:0 16px 36px rgba(30,10,70,.35)}
+.sheet{position:relative;height:100%;overflow:hidden;padding:9% 9% 6%;background:var(--tex),#fbf6e9;box-shadow:-2px 2px 0 #e9dfc6,-4px 4px 0 #fbf6e9,-6px 6px 0 #ddd2b6,inset -24px 0 24px -16px rgba(60,40,10,.35)}
+.ruled{background:repeating-linear-gradient(transparent 0 31px,rgba(90,70,160,.12) 31px 32px),var(--tex),#fbf6e9}
+html.nb-dark .sheet{background-color:#eadbb9}
+.cover{z-index:2;transform-origin:right center;transform-style:preserve-3d;transition:transform 1.1s cubic-bezier(.55,.05,.2,1)}
+.is-open .cover{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.front{border:0;padding:0;cursor:pointer;border-radius:10px 4px 4px 10px;background:var(--lea),linear-gradient(135deg,#43228f,#2a1360 55%,#1b0b40);box-shadow:0 18px 40px rgba(30,10,70,.45),inset 0 0 0 1px rgba(255,255,255,.08);color:#e3c26d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;font-family:inherit}
+.front::before{content:'';position:absolute;inset:14px 9% 14px 14px;border:2px dashed rgba(227,194,109,.55);border-radius:6px}
+.front::after{content:'';position:absolute;top:0;bottom:0;right:0;width:7%;border-radius:0 4px 4px 0;background:linear-gradient(90deg,rgba(0,0,0,.28),rgba(255,255,255,.1) 45%,rgba(0,0,0,.4))}
+.front:focus-visible{outline:3px solid #e3c26d;outline-offset:4px}
+.ttl{font:700 clamp(2.4rem,calc(var(--pw)/6.5),3.8rem)/1.35 var(--hand);color:#e3c26d;background:linear-gradient(100deg,#a97c28,#f6e3a1 30%,#c99a3e 50%,#fff0b8 65%,#a97c28);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 1px rgba(0,0,0,.5))}
+.orn{width:46%;height:2px;background:linear-gradient(90deg,transparent,#e3c26d,transparent)}
+.front small{font-size:1rem}.front em{font-style:normal;font-size:.85rem;opacity:.85;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.ribbon{position:absolute;bottom:-46px;left:26%;width:20px;height:48px;backface-visibility:hidden;background:linear-gradient(90deg,#b88a2e,#f0d284 50%,#b88a2e);clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%)}
+.page .ribbon{left:62%;z-index:-1}
+.book:not(.is-open) .page .ribbon{display:none}
+.back{transform:rotateY(180deg);padding:8px 8px 10px 0;border-radius:3px 10px 10px 3px;background:var(--lea),#2a1360;box-shadow:0 16px 36px rgba(30,10,70,.35)}
+.back .sheet{box-shadow:2px 2px 0 #e9dfc6,4px 4px 0 #fbf6e9,6px 6px 0 #ddd2b6,inset 24px 0 24px -16px rgba(60,40,10,.35)}
+h1,h2{font-family:var(--hand);color:var(--ink);margin:0}
+.sheet h1{font-size:clamp(1.5rem,calc(var(--pw)/12),2.3rem);line-height:1.6;margin-bottom:.4em}
+.sheet p{margin:0 0 1em;font-size:.95rem;line-height:2;color:#3b2a66}
+.th{font-size:1.9rem;line-height:1.5;margin-bottom:.3em}
+.note{position:relative;display:inline-block;margin-top:1.3em;padding:14px 16px;background:#f1e2bd;color:#4a3a1a;border-radius:3px;font-weight:700;font-size:.9rem;text-decoration:none;transform:rotate(-2deg);box-shadow:0 6px 12px rgba(80,60,0,.25);transition:transform .25s}
+.note::before{content:'';position:absolute;top:-10px;left:50%;width:56px;height:20px;margin-left:-28px;background:rgba(227,194,109,.55);transform:rotate(3deg)}
+html.nb-dark .note{background:#e0cc9c}
+a:focus-visible,button:focus-visible{outline:2.5px solid #c99a3e;outline-offset:2px}
+.note:hover,.note:focus-visible{transform:rotate(0) translateY(-2px)}
+.m{display:none}
+.toc{list-style:none;margin:0;padding:0}
+.toc a{display:flex;align-items:center;gap:12px;padding:12px 4px;color:var(--ink);text-decoration:none;border-bottom:1.5px dotted rgba(90,70,160,.4)}
+.toc a:hover,.toc a:focus-visible{background:rgba(124,58,237,.08)}
+.toc a:focus-visible{outline:2px solid #7c3aed;outline-offset:2px}
+.toc .n{width:1.2em;font:700 1.3rem var(--hand);color:#a67c2a}
+.toc svg{width:54px;height:54px;flex:none}
+.toc b{display:block;font-size:1rem}.toc small{display:block;font-size:.8rem;line-height:1.7;color:#5b4b8a}
+.pen,.top,.pop{transform-box:fill-box;transform-origin:center;transition:transform .3s}
+a:hover .pen,a:focus-visible .pen{transform:translate(-3px,3px) rotate(-8deg)}
+a:hover .top,a:focus-visible .top{transform:translateY(-5px) rotate(-3deg)}
+a:hover .pop,a:focus-visible .pop{transform:translateY(-6px)}
+.leaf{left:var(--pw);z-index:3;transform-origin:left center;opacity:0;pointer-events:none;border-radius:0 6px 6px 0;background:linear-gradient(90deg,#f0e6cc,#fbf6e9 30%);box-shadow:0 0 28px rgba(0,0,0,.3)}
+.turning .leaf{pointer-events:auto;animation:turn .52s cubic-bezier(.45,0,.55,1) forwards}
+@keyframes turn{0%{opacity:0;transform:rotateY(0)}12%{opacity:1}100%{opacity:1;transform:rotateY(-180deg)}}
+@media(max-width:760px){.c{display:none}.note.m{display:inline-block}}
+#install-banner{position:fixed;bottom:12px;left:12px;right:12px;max-width:520px;margin:0 auto;z-index:5;display:none;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:14px 18px;border-radius:18px;background:linear-gradient(135deg,#43228f,#1b0b40);color:#fff;border:1.5px dashed rgba(227,194,109,.7);box-shadow:0 12px 30px rgba(30,10,70,.4)}
+#install-banner img{width:48px;height:48px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+#install-banner button{border:0;border-radius:8px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer}
+.install-yes{background:#facc15;color:#4c1d95}.install-no{background:transparent;color:#ddd6fe}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
 </style>
 </head>
-
 <body>
-    <button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز">🌙</button>
-
-    <h1>دنیای کوچک کتاب و نوشتن 📚</h1>
-
-    <div class="container">
-        <a href="nevisandegi.html" class="box">
-            <span class="emoji">🖋️</span>
-            <h2>دفترچه نویسندگی</h2>
-            <p>ابزار ثبت و پرورش ایده‌های داستانی.</p>
-        </a>
-
-        <a href="reader.html" class="box">
-            <span class="emoji">📖</span>
-            <h2>دفترچه کتاب‌خوان</h2>
-            <p>ثبت و تحلیل کتاب‌های مطالعه شده.</p>
-        </a>
-
-        <a href="game.html" class="box">
-            <span class="emoji">📚</span>
-            <h2>جورچین کتاب‌ها</h2>
-            <p>به سطح استاد کتاب برس!</p>
-        </a>
-    </div>
-
-    <a href="about.html" class="purpose-btn">✨ هدف و داستان این ابزار</a>
-
-    <div id="install-banner">
-        <span>📲 می‌خوای این سایت رو مثل یک اپ روی گوشیت نصب کنی؟</span>
-        <button class="install-yes" onclick="doInstallPrompt()">نصب کن</button>
-        <button class="install-no" onclick="dismissInstallBanner()">فعلاً نه</button>
-    </div>
-
+<button class="lamp" id="lamp" aria-label="حالت شب/روز" aria-pressed="false" title="حالت شب/روز"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="bulb" d="M11 4l8 4-3.5 6-8-4z"/><path d="M6 21h8M10 21v-6l3-5"/></svg></button>
+<button class="closebk" id="closebk" type="button" aria-label="بستن دفترچه">📕 بستن دفترچه</button>
+<main class="stage"><div class="book" id="book">
+ <div class="page" id="pl"><div class="sheet ruled"><div class="c"><h1>دنیای کوچک کتاب و نوشتن</h1><p>ایده‌ها، شخصیت‌ها و جهان داستانت را بنویس یا حس و تجربه‌ی کتاب‌هایی را که خوانده‌ای ثبت کن. رایگان و بدون ثبت‌نام.</p><a class="note" href="about.html" data-turn>✨ هدف و داستان این ابزار</a></div></div><i class="ribbon"></i></div>
+ <div class="cover">
+  <button class="face front" id="open" aria-label="باز کردن دفترچه"><span class="orn"></span><span class="ttl">دفترچه من</span><span class="orn"></span><small>نویسنده و کتاب‌خوان</small><em>برای باز کردن لمس کن</em></button>
+  <i class="ribbon"></i>
+  <div class="face back" id="pt"><div class="sheet"><h2 class="th">فهرست</h2>
+   <ol class="toc">
+    <li><a href="nevisandegi.html" data-turn><span class="n">۱</span><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="8" width="38" height="48" rx="3" fill="#fff" stroke="#5b21b6" stroke-width="2"/><path d="M16 20h26M16 28h26M16 36h20M16 44h14" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round"/><path d="M15 8v48" stroke="#f87171" stroke-width="1.5"/><g class="pen"><path d="M54 12l6 6-22 26-8 3 3-8z" fill="#7c3aed"/><path d="M33 38l-3 9 8-3z" fill="#fde68a"/></g></svg><span><b>دفترچه نویسندگی</b><small>ابزار ثبت و پرورش ایده‌های داستانی.</small></span></a></li>
+    <li><a href="reader.html" data-turn><span class="n">۲</span><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="42" width="48" height="12" rx="2" fill="#4c1d95"/><rect x="12" y="30" width="42" height="12" rx="2" fill="#c4b5fd"/><path d="M14 42v12M50 42v12M17 30v12M48 30v12" stroke="rgba(255,255,255,.45)" stroke-width="2"/><g class="top"><rect x="10" y="18" width="40" height="12" rx="2" fill="#f59e0b"/><path d="M16 18v12M44 18v12" stroke="rgba(255,255,255,.55)" stroke-width="2"/></g></svg><span><b>دفترچه کتاب‌خوان</b><small>ثبت و تحلیل کتاب‌های مطالعه شده.</small></span></a></li>
+    <li><a href="game.html" data-turn><span class="n">۳</span><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="50" width="52" height="5" rx="1.5" fill="#92400e"/><rect x="9" y="22" width="8" height="28" rx="1" fill="#7c3aed"/><rect x="18" y="16" width="9" height="34" rx="1" fill="#f59e0b"/><g class="pop"><rect x="28" y="24" width="8" height="26" rx="1" fill="#10b981"/></g><rect x="37" y="20" width="9" height="30" rx="1" fill="#ef4444"/><rect x="47" y="26" width="8" height="24" rx="1" fill="#4f46e5"/></svg><span><b>جورچین کتاب‌ها</b><small>به سطح استاد کتاب برس!</small></span></a></li>
+   </ol>
+   <a class="note m" href="about.html" data-turn>✨ هدف و داستان این ابزار</a>
+  </div></div>
+ </div>
+ <div class="leaf" aria-hidden="true"></div>
+</div></main>
+<div class="glow" aria-hidden="true"></div>
+<div id="install-banner"><img src="icon-192.png" alt="" width="48" height="48"><span>📲 می‌خوای این سایت رو مثل یک اپ روی گوشیت نصب کنی؟</span><button class="install-yes" onclick="doInstallPrompt()">نصب کن</button><button class="install-no" onclick="dismissInstallBanner()">فعلاً نه</button></div>
 <script>
-/* ======================================================
-   کدهای مشترک بین صفحات سایت «دفترچه من»
-   (قبلاً این توابع توی چند فایل جدا کپی شده بودن)
-   ====================================================== */
-
-/* ---------- حالت شب/روز ---------- */
-function toggleDarkMode() {
-    const isDark = document.documentElement.classList.toggle('nb-dark');
-    localStorage.setItem('nb-dark-mode', isDark ? '1' : '0');
-    const btn = document.getElementById('dark-mode-toggle');
-    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('dark-mode-toggle');
-    if (btn) {
-        btn.textContent = document.documentElement.classList.contains('nb-dark') ? '☀️' : '🌙';
-    }
-});
-
-/* ---------- منوی کشویی هدر در موبایل ---------- */
-function toggleMobileMenu() {
-    const menu = document.getElementById('headerBtns');
-    if (menu) menu.classList.toggle('open');
-}
-
-/* ======================================================
-   رفع مشکل اسکرول با کیبورد (Windows/دسکتاپ)
-   وقتی روی دکمه‌ای کلیک می‌شه، فوکوس روش می‌مونه. اگه اون دکمه
-   داخل یه container باشه که فقط افقی اسکرول می‌شه (مثل nav)،
-   مرورگر با زدن Page Up/Down یا کلیدهای جهت‌دار سعی می‌کنه همون
-   container رو اسکرول کنه (که عمودی جایی برای اسکرول نداره) و
-   دیگه به صفحه‌ی اصلی نمی‌رسه؛ در نتیجه اسکرول کیبورد قفل می‌شه.
-   راه‌حل: بعد از هر کلیک روی دکمه/لینک، فوکوس رو آزاد می‌کنیم تا
-   کیبورد دوباره کل صفحه رو اسکرول کنه. (فوکوس با تب کیبورد دست‌نخورده
-   می‌مونه چون این فقط بعد از «کلیک» اجرا می‌شه.)
-   ====================================================== */
-document.addEventListener('click', (e) => {
-    const el = e.target.closest('button, a');
-    if (el) requestAnimationFrame(() => el.blur());
-});
-
-/* ======================================================
-   مودال سفارشی به‌جای prompt/confirm بومی مرورگر
-   توی حالت standalone (نصب‌شده روی صفحه‌ی اصلی موبایل) این
-   دیالوگ‌های بومی خیلی وقت‌ها نمایش داده نمی‌شن؛ این نسخه با
-   HTML/CSS خودمون همه‌جا یکسان کار می‌کنه.
-   ====================================================== */
-function nbBuildModal({ message, withInput, defaultValue, danger }) {
-    return new Promise((resolve) => {
-        const prevFocus = document.activeElement;
-        const overlay = document.createElement('div');
-        overlay.className = 'nb-modal-overlay';
-
-        const box = document.createElement('div');
-        box.className = 'nb-modal-box';
-
-        const msg = document.createElement('div');
-        msg.className = 'nb-modal-message';
-        msg.textContent = message;
-        box.appendChild(msg);
-
-        let input = null;
-        if (withInput) {
-            input = document.createElement('input');
-            input.type = 'text';
-            input.className = 'nb-modal-input';
-            input.value = defaultValue || '';
-            box.appendChild(input);
-        }
-
-        const actions = document.createElement('div');
-        actions.className = 'nb-modal-actions';
-
-        const cancelBtn = document.createElement('button');
-        cancelBtn.type = 'button';
-        cancelBtn.className = 'nb-modal-btn nb-modal-btn-cancel';
-        cancelBtn.textContent = 'انصراف';
-
-        const okBtn = document.createElement('button');
-        okBtn.type = 'button';
-        okBtn.className = 'nb-modal-btn ' + (danger ? 'nb-modal-btn-danger' : 'nb-modal-btn-ok');
-        okBtn.textContent = danger ? 'حذف کن' : 'تأیید';
-
-        actions.appendChild(cancelBtn);
-        actions.appendChild(okBtn);
-        box.appendChild(actions);
-        overlay.appendChild(box);
-        document.body.appendChild(overlay);
-
-        function close(result) {
-            overlay.remove();
-            document.removeEventListener('keydown', onKeydown);
-            if (prevFocus && prevFocus.focus) prevFocus.focus();
-            resolve(result);
-        }
-
-        function onKeydown(ev) {
-            if (ev.key === 'Escape') { ev.preventDefault(); close(withInput ? null : false); }
-            if (ev.key === 'Enter') { ev.preventDefault(); okBtn.click(); }
-        }
-
-        cancelBtn.addEventListener('click', () => close(withInput ? null : false));
-        okBtn.addEventListener('click', () => close(withInput ? (input.value.trim() || null) : true));
-        overlay.addEventListener('mousedown', (e) => { if (e.target === overlay) close(withInput ? null : false); });
-        document.addEventListener('keydown', onKeydown);
-
-        (input || okBtn).focus();
-        if (input) input.select();
-    });
-}
-
-function nbPrompt(message, defaultValue) {
-    return nbBuildModal({ message, withInput: true, defaultValue });
-}
-
-function nbConfirm(message, danger) {
-    return nbBuildModal({ message, withInput: false, danger });
-}
-
-/* ======================================================
-   ذخیره‌سازی با ظرفیت بالا (IndexedDB)
-   localStorage معمولاً فقط ۵-۱۰ مگابایت جا داره. برای اینکه
-   کاربرهایی که متن زیاد می‌نویسن به این سقف نخورن، داده‌ی
-   هر پروژه رو توی IndexedDB نگه می‌داریم (ظرفیتش خیلی بیشتره)
-   و فقط اطلاعات کوچیک (لیست پروژه‌ها و پروژه‌ی فعال) توی
-   localStorage می‌مونه چون سریع و همزمانه.
-   ====================================================== */
-const NB_IDB_NAME = 'nb-storage';
-const NB_IDB_STORE = 'projectData';
-let _nbIdbPromise = null;
-
-function nbIdbOpen() {
-    if (_nbIdbPromise) return _nbIdbPromise;
-    _nbIdbPromise = new Promise((resolve, reject) => {
-        if (!('indexedDB' in window)) { reject(new Error('IndexedDB not supported')); return; }
-        const req = indexedDB.open(NB_IDB_NAME, 1);
-        req.onupgradeneeded = () => {
-            if (!req.result.objectStoreNames.contains(NB_IDB_STORE)) {
-                req.result.createObjectStore(NB_IDB_STORE);
-            }
-        };
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
-    return _nbIdbPromise;
-}
-
-async function nbIdbGet(key) {
-    try {
-        const db = await nbIdbOpen();
-        return await new Promise((resolve, reject) => {
-            const tx = db.transaction(NB_IDB_STORE, 'readonly');
-            const req = tx.objectStore(NB_IDB_STORE).get(key);
-            req.onsuccess = () => resolve(req.result !== undefined ? req.result : null);
-            req.onerror = () => reject(req.error);
-        });
-    } catch (e) { return null; }
-}
-
-async function nbIdbSet(key, value) {
-    try {
-        const db = await nbIdbOpen();
-        await new Promise((resolve, reject) => {
-            const tx = db.transaction(NB_IDB_STORE, 'readwrite');
-            tx.objectStore(NB_IDB_STORE).put(value, key);
-            tx.oncomplete = () => resolve();
-            tx.onerror = () => reject(tx.error);
-        });
-        return true;
-    } catch (e) { return false; }
-}
-
-async function nbIdbDelete(key) {
-    try {
-        const db = await nbIdbOpen();
-        await new Promise((resolve, reject) => {
-            const tx = db.transaction(NB_IDB_STORE, 'readwrite');
-            tx.objectStore(NB_IDB_STORE).delete(key);
-            tx.oncomplete = () => resolve();
-            tx.onerror = () => reject(tx.error);
-        });
-        return true;
-    } catch (e) { return false; }
-}
-
-/* ======================================================
-   سیستم چند پروژه‌ای (دفترچه نویسندگی و دفترچه کتاب‌خوان)
-   قبلاً این منطق توی دو فایل جدا و تقریباً عین هم کپی شده بود؛
-   حالا یک نسخه‌ی مشترک با تنظیمات جدا برای هر صفحه.
-   ====================================================== */
-function createProjectManager(cfg) {
-    const NS = cfg.ns;
-    const PROJECTS_KEY = `${NS}-projects`;
-    const ACTIVE_KEY = `${NS}-active-project`;
-    const MIGRATED_FLAG = `${NS}-idb-migrated`;
-    const projDataKey = (id) => `${NS}-proj-${id}`;
-
-    function getProjects() {
-        try { return JSON.parse(localStorage.getItem(PROJECTS_KEY)) || []; }
-        catch (e) { return []; }
-    }
-    function saveProjects(list) { localStorage.setItem(PROJECTS_KEY, JSON.stringify(list)); }
-    function getActiveId() { return localStorage.getItem(ACTIVE_KEY); }
-    function setActiveId(id) { localStorage.setItem(ACTIVE_KEY, id); }
-    function uid() { return 'p' + Date.now() + Math.floor(Math.random() * 1000); }
-
-    async function getProjectData(id) {
-        const fromIdb = await nbIdbGet(projDataKey(id));
-        if (fromIdb) return fromIdb;
-        try {
-            const legacy = JSON.parse(localStorage.getItem(projDataKey(id)) || 'null');
-            return legacy || {};
-        } catch (e) { return {}; }
-    }
-
-    async function setProjectData(id, data) {
-        const ok = await nbIdbSet(projDataKey(id), data);
-        if (ok) {
-            localStorage.removeItem(projDataKey(id));
-        } else {
-            try {
-                localStorage.setItem(projDataKey(id), JSON.stringify(data));
-            } catch (e) {
-                alert('حافظه‌ی مرورگر پر شده. لطفاً یکی از پروژه‌های قدیمی رو حذف کن تا بشه ادامه داد.');
-            }
-        }
-    }
-
-    async function deleteProjectData(id) {
-        await nbIdbDelete(projDataKey(id));
-        localStorage.removeItem(projDataKey(id));
-    }
-
-    async function migrateAndInit() {
-        let projects = getProjects();
-        if (projects.length === 0) {
-            const legacyData = {};
-            let hasLegacy = false;
-            document.querySelectorAll('textarea').forEach(t => {
-                const v = localStorage.getItem(t.id);
-                if (v) { hasLegacy = true; legacyData[t.id] = v; }
-            });
-            const id = uid();
-            projects = [{ id, name: hasLegacy ? cfg.legacyName : cfg.firstItemName }];
-            saveProjects(projects);
-            setActiveId(id);
-            await setProjectData(id, legacyData);
-        } else if (!localStorage.getItem(MIGRATED_FLAG)) {
-            // انتقال یک‌بارهٔ داده‌های قدیمی از localStorage به IndexedDB
-            for (const p of projects) {
-                const raw = localStorage.getItem(projDataKey(p.id));
-                if (raw) {
-                    try {
-                        await nbIdbSet(projDataKey(p.id), JSON.parse(raw));
-                        localStorage.removeItem(projDataKey(p.id));
-                    } catch (e) { /* اگه خطا داد، نسخه‌ی قدیمی دست‌نخورده می‌مونه */ }
-                }
-            }
-        }
-        localStorage.setItem(MIGRATED_FLAG, '1');
-        if (!getActiveId() || !projects.find(p => p.id === getActiveId())) {
-            setActiveId(projects[0].id);
-        }
-    }
-
-    function renderProjectSelector() {
-        const select = document.getElementById('project-select');
-        const projects = getProjects();
-        const activeId = getActiveId();
-        select.innerHTML = '';
-        projects.forEach(p => {
-            const opt = document.createElement('option');
-            opt.value = p.id;
-            opt.textContent = p.name;
-            if (p.id === activeId) opt.selected = true;
-            select.appendChild(opt);
-        });
-    }
-
-    async function loadActiveProjectIntoForm() {
-        const id = getActiveId();
-        const data = await getProjectData(id);
-        document.querySelectorAll('textarea').forEach(t => {
-            t.value = data[t.id] || '';
-        });
-    }
-
-    async function switchProject(id) {
-        setActiveId(id);
-        await loadActiveProjectIntoForm();
-    }
-
-    async function createNewProject() {
-        // به‌جای window.prompt (که توی PWA نصب‌شده روی موبایل/iOS
-        // خیلی وقت‌ها اصلاً نمایش داده نمی‌شه) از مودال خودمون استفاده می‌کنیم
-        const name = await nbPrompt(cfg.newPromptText, cfg.newPromptDefault);
-        if (!name) return;
-        const id = uid();
-        const projects = getProjects();
-        projects.push({ id, name });
-        saveProjects(projects);
-        await setProjectData(id, {});
-        setActiveId(id);
-        renderProjectSelector();
-        await loadActiveProjectIntoForm();
-    }
-
-    async function renameCurrentProject() {
-        const id = getActiveId();
-        const projects = getProjects();
-        const proj = projects.find(p => p.id === id);
-        if (!proj) return;
-        const name = await nbPrompt(cfg.renamePromptText, proj.name);
-        if (!name) return;
-        proj.name = name;
-        saveProjects(projects);
-        renderProjectSelector();
-    }
-
-    async function deleteCurrentProject() {
-        const projects = getProjects();
-        if (projects.length <= 1) {
-            await nbConfirm(cfg.minItemsAlert);
-            return;
-        }
-        const id = getActiveId();
-        const proj = projects.find(p => p.id === id);
-        const ok = await nbConfirm(cfg.deleteConfirm(proj.name), true);
-        if (!ok) return;
-
-        await deleteProjectData(id);
-        const remaining = projects.filter(p => p.id !== id);
-        saveProjects(remaining);
-        setActiveId(remaining[0].id);
-        renderProjectSelector();
-        await loadActiveProjectIntoForm();
-    }
-
-    async function saveActiveProjectField(textarea) {
-        const id = getActiveId();
-        const data = await getProjectData(id);
-        data[textarea.id] = textarea.value;
-        await setProjectData(id, data);
-    }
-
-    return {
-        getProjects, getActiveId, setActiveId,
-        migrateAndInit, renderProjectSelector, loadActiveProjectIntoForm,
-        switchProject, createNewProject, renameCurrentProject, deleteCurrentProject,
-        saveActiveProjectField
-    };
-}
+(function(){
+const $=s=>document.querySelector(s),root=document.documentElement,b=$('#book'),btn=$('#open'),L=$('#pl'),T=$('#pt'),lamp=$('#lamp');
+const sync=()=>lamp.setAttribute('aria-pressed',root.classList.contains('nb-dark'));
+lamp.onclick=()=>{const d=root.classList.toggle('nb-dark');try{localStorage.setItem('nb-dark-mode',d?'1':'0')}catch(e){}sync()};sync();
+let t,nav=false;
+function open(user){clearTimeout(t);if(b.classList.contains('is-open'))return;b.classList.add('is-open');root.classList.add('nb-book-open');L.inert=T.inert=false;btn.tabIndex=-1;btn.setAttribute('aria-hidden','true');if(user)try{sessionStorage.setItem('nb-cover-seen','1')}catch(e){}if(user)setTimeout(()=>T.querySelector('a').focus({preventScroll:true}),900)}
+btn.onclick=()=>open(true);
+if(root.classList.contains('nb-open')){b.classList.add('instant');open()}
+else{L.inert=T.inert=true}
+$('#closebk').onclick=()=>{if(!b.classList.contains('is-open')||b.classList.contains('turning'))return;b.classList.remove('instant','is-open');root.classList.remove('nb-book-open');L.inert=T.inert=true;btn.tabIndex=0;btn.removeAttribute('aria-hidden');try{sessionStorage.removeItem('nb-cover-seen')}catch(e){}setTimeout(()=>btn.focus({preventScroll:true}),1100)};
+document.addEventListener('click',e=>{const a=e.target.closest('a[data-turn]');if(!a||e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||matchMedia('(prefers-reduced-motion: reduce)').matches)return;e.preventDefault();if(nav)return;nav=true;b.classList.add('turning');setTimeout(()=>{location.href=a.href},480)});
+addEventListener('pageshow',e=>{if(e.persisted){nav=false;b.classList.remove('turning')}});
+})();
+let deferredInstallPrompt=null;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;if(!localStorage.getItem('nb-install-dismissed')){localStorage.setItem('nb-install-dismissed','1');document.getElementById('install-banner').style.display='flex'}});
+function doInstallPrompt(){localStorage.setItem('nb-install-dismissed','1');document.getElementById('install-banner').style.display='none';if(deferredInstallPrompt)deferredInstallPrompt.prompt()}
+function dismissInstallBanner(){document.getElementById('install-banner').style.display='none';localStorage.setItem('nb-install-dismissed','1')}
+if('serviceWorker' in navigator){addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').then(reg=>{reg.addEventListener('updatefound',()=>{const w=reg.installing;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)location.reload()})})}).catch(err=>console.log('SW registration failed: ',err))})}
 </script>
-    <script>
-        // پیشنهاد نصب PWA
-        let deferredInstallPrompt = null;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredInstallPrompt = e;
-            if(!localStorage.getItem('nb-install-dismissed')){
-                document.getElementById('install-banner').style.display = 'flex';
-            }
-        });
-        function doInstallPrompt(){
-            document.getElementById('install-banner').style.display = 'none';
-            if(deferredInstallPrompt){
-                deferredInstallPrompt.prompt();
-            }
-        }
-        function dismissInstallBanner(){
-            document.getElementById('install-banner').style.display = 'none';
-            localStorage.setItem('nb-install-dismissed', '1');
-        }
-    </script>
-
-    <script>
-        // ثبت سرویس‌ورکر با مسیر نسبی './sw.js' برای هماهنگی با GitHub Pages
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').then(reg => {
-                    reg.addEventListener('updatefound', () => {
-                        const newWorker = reg.installing;
-                        newWorker.addEventListener('statechange', () => {
-                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                window.location.reload();
-                            }
-                        });
-                    });
-                }).catch(err => console.log('SW registration failed: ', err));
-            });
-        }
-    </script>
 </body>
 </html>

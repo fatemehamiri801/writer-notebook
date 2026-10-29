@@ -1302,6 +1302,37 @@ select:focus-visible,
 }
 </style>
 
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===== پالت دفترچه: جوهر / کاغذ / طلا ===== */
+:root{--ink:#2a1560;--gold:#c99a3e;--pp:#fbf6e9;--cd:#fffdf7;--straw:#f1e2bd;--hand:'Aref Ruqaa','Vazirmatn',serif}
+html.nb-dark{--bg:#1c130d;--text:#2a1560;--card-bg:#f3e8cc;--card-border:#d8c9a0;--pp:#eadbb9;--cd:#f3e8cc;--straw:#e0cc9c}
+html body{background:radial-gradient(circle at 50% 40%,#f5f3ff,#e0e7ff 45%,#c7d2fe)!important;color:var(--ink)}
+html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#2a1d15,#120c09 75%)!important}
+html.nb-dark body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 65% 60% at 80% 6%,rgba(255,184,92,.28),transparent 70%)}
+html body #dark-mode-toggle{background:var(--ink)!important;border:1.5px dashed #e3c26d!important;color:#e3c26d}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2.5px solid var(--gold)!important;outline-offset:2px}
+.search-highlight{outline-color:var(--gold)!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+:root{--acc:#7d8a45;--accd:#5f6b2f;--t1:#e8edd2;--t2:#dde5c0;--t3:#f1f4e3;--ml:rgba(125,138,69,.42)}
+html body .game-container{position:relative;background:repeating-linear-gradient(transparent 0 31px,rgba(90,70,160,.10) 31px 32px),var(--pp)!important;border:0;border-radius:8px 4px 4px 8px;border-top:4px solid var(--acc);box-shadow:3px 4px 0 #e9dfc6,0 16px 36px rgba(60,40,10,.25)}
+.game-container::before{content:'';position:absolute;top:0;bottom:0;right:34px;width:1px;background:var(--ml);pointer-events:none}
+.game-container::after{content:'';position:absolute;top:-6px;left:50%;width:84px;height:22px;margin-left:-42px;background:rgba(227,194,109,.55);transform:rotate(-2deg);box-shadow:0 1px 2px rgba(0,0,0,.12);pointer-events:none}
+html body .title{font-family:var(--hand);font-weight:700;color:var(--ink)}
+html body .info-box{background:var(--t1);border:1px solid #d8c9a0;border-radius:6px;box-shadow:2px 3px 0 #e9dfc6;color:var(--ink)}
+html body .library-panel{background:var(--straw);border-radius:3px;box-shadow:0 5px 10px rgba(80,60,0,.18);color:#4a3a1a}
+html body .library-panel strong{color:var(--accd)}
+html body .start-btn,html body .library-btn{background:var(--ink);color:#f3dc93;border:1.5px dashed #e3c26d}
+html body .library-btn:nth-of-type(2){background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+html body #message{color:var(--accd)}
+html body .cell{background:linear-gradient(145deg,var(--t3),var(--t1));border:1.5px solid #e3d8bd;border-radius:8px;box-shadow:1px 2px 0 #e9dfc6}
+html body .cell.selected,html body .cell.gold-book,html body .book-item.unlocked{background:linear-gradient(135deg,#f6e7b0,#e3c26d);border-color:var(--gold);box-shadow:0 0 12px rgba(201,154,62,.7)}
+html body .cell.hint{animation:none;outline:2.5px dashed var(--gold)}
+html body .book-item{background:var(--t1);border:1px solid #d8c9a0}
+html.nb-dark body .game-container{color:var(--ink)}
+html.nb-dark body #message,html.nb-dark body .title{color:var(--ink)}
+</style>
 </head>
 
 <body>

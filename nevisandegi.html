@@ -227,7 +227,7 @@ nav {
     padding: 20px;
     margin-bottom: 18px;
     box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-    border-right: 6px solid #10b981;
+    border-right: 6px solid var(--gold);
     transition: transform .2s ease, box-shadow .2s ease;
 }
 
@@ -724,6 +724,51 @@ select:focus-visible,
     color: #fff;
 }
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style id="nb-notebook-theme">
+@media screen{
+:root{--tex:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nLjgnIG51bU9jdGF2ZXM9JzInIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48ZmVDb2xvck1hdHJpeCB2YWx1ZXM9JzAgMCAwIDAgLjQ1IDAgMCAwIDAgLjM4IDAgMCAwIDAgLjI1IDAgMCAwIC4wOSAwJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+");--hand:'Aref Ruqaa','Vazirmatn',serif;--ink:#2a1560;--gold:#c99a3e;--pp:#fbf6e9;--cd:#fffdf7;--straw:#f1e2bd;--acc:#c0587f;--accd:#9b3f64;--t1:#fbe4ec;--t2:#f6d5e1;--t3:#fdeef3;--ml:rgba(192,88,127,.42)}
+html.nb-dark{--bg:#1c130d;--text:#2a1560;--card-bg:#f3e8cc;--card-border:#d8c9a0;--input-bg:#fffaf0;--input-border:#cdbb8c;--toolbar-bg:#efe2c2;--muted-text:#6b5a8a;--pp:#eadbb9;--cd:#f3e8cc;--straw:#e0cc9c}
+html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#2a1d15,#120c09 75%)!important}
+html.nb-dark::after{content:'';position:fixed;inset:0;z-index:40;pointer-events:none;background:radial-gradient(ellipse 65% 60% at 80% 6%,rgba(255,184,92,.22),transparent 70%)}
+html body>header{background:repeating-linear-gradient(transparent 0 31px,rgba(90,70,160,.16) 31px 32px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),var(--tex),var(--pp)!important;border-bottom:3px solid #d8c9a0!important;box-shadow:0 6px 16px rgba(60,40,10,.18)!important}
+html body>header .page-title{font-family:var(--hand)!important;font-weight:700!important;color:var(--ink)!important;background:none;-webkit-text-fill-color:var(--ink);text-shadow:none!important;filter:none}
+html body>header .mobile-menu-toggle{color:var(--ink);background:rgba(124,58,237,.1);border-color:rgba(42,21,96,.4)}
+html body>header .btn-back{background:var(--accd)!important;color:#fff!important;border:0!important}
+html body>header .header-btns button{background:var(--ink)!important;color:#f3dc93!important;border:1.5px dashed #e3c26d!important}
+html body>header .header-btns a{background:transparent!important;color:var(--ink)!important;border:1.5px solid var(--ink)!important}
+html body .project-toolbar{background:#f6efdc!important;border-bottom:2px dashed #d8c9a0!important}
+html.nb-dark body .project-toolbar{background:#efe2c2!important}
+html body .btn-toolbar.btn-toolbar{background:#fffaf0!important;color:var(--accd)!important;border:1.5px solid var(--acc)!important}
+html body .nav-wrapper nav{background:transparent!important;border:0!important;border-bottom:2px solid #d8c9a0!important;padding-top:12px!important;gap:6px!important}
+html body .nav-wrapper{background:transparent!important}
+html body nav .nav-link{border-radius:12px 12px 0 0!important;border:1.5px solid #d8c9a0!important;border-bottom:0!important;box-shadow:none!important;color:var(--ink)!important;transition:transform .2s}
+html body nav .nav-link:nth-child(3n+1){background:var(--t1)!important}
+html body nav .nav-link:nth-child(3n+2){background:var(--t2)!important}
+html body nav .nav-link:nth-child(3n){background:var(--t3)!important}
+html body nav .nav-link:hover{transform:translateY(-3px)}
+html body nav .nav-link.active{background:var(--pp)!important;border-top:3px solid var(--acc)!important;font-weight:700;transform:translateY(-3px)}
+html.nb-dark body nav .nav-link:not(.active){filter:brightness(.93)}
+html body .mascot-box.mascot-box{background:var(--straw)!important;border:0!important;border-radius:3px!important;box-shadow:0 6px 12px rgba(80,60,0,.22)!important;position:relative}
+html body .mascot-box.mascot-box .mascot-text{color:#4a3a1a!important}
+.mascot-box::before,.mascot-box::after{content:'';position:absolute;top:-4px;width:64px;height:20px;background:rgba(227,194,109,.55);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.mascot-box::before{right:-20px;transform:rotate(38deg)}
+.mascot-box::after{left:-20px;transform:rotate(-38deg)}
+html body .main-wrapper{background:repeating-linear-gradient(transparent 0 35px,rgba(90,70,160,.10) 35px 36px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),var(--pp)!important}
+.section-title,.layer-card h3{font-family:var(--hand)}
+html body .layer-card{position:relative;background:var(--cd)!important;border:1px solid #e3d8bd!important;border-radius:6px!important;box-shadow:2px 3px 0 #e9dfc6,0 8px 18px rgba(60,40,10,.12)!important}
+.layer-card::before{content:'';position:absolute;top:-12px;right:26px;width:14px;height:34px;border:2px solid var(--acc);border-radius:8px;pointer-events:none}
+html body #dark-mode-toggle{background:var(--ink)!important;border:1.5px dashed #e3c26d!important;color:#e3c26d}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2.5px solid var(--gold)!important;outline-offset:2px}
+.tab-content.active{transform-origin:right center;animation:nbTurn .35s ease-out}
+@keyframes nbTurn{from{opacity:0;transform:perspective(900px) rotateY(8deg) translateX(-12px)}to{opacity:1;transform:none}}
+.nb-ink{position:fixed;width:14px;height:14px;border-radius:50% 50% 50% 8%;background:var(--accd);pointer-events:none;z-index:60;animation:nbInk .9s ease-out forwards}
+@keyframes nbInk{0%{transform:scale(.2);opacity:.9}40%{transform:scale(1.6);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+@media(max-width:600px){html body .main-wrapper{background:repeating-linear-gradient(transparent 0 35px,rgba(90,70,160,.10) 35px 36px),var(--pp)!important}}
+@media(prefers-reduced-motion:reduce){.tab-content.active,.nb-ink{animation:none!important}nav .nav-link{transition:none}}
+}
+</style>
 </head>
 <body>
 
@@ -743,11 +788,11 @@ select:focus-visible,
         </h1>
     </div>
 <div class="header-btns" id="headerBtns">
-<button onclick="printFullContent()" style="background-color: #10b981; color: white; padding: 12px 24px; font-size: 1rem; border-radius: 10px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s;">
+<button onclick="printFullContent()" style="background-color: var(--ink); color: #f3dc93; border: 1.5px dashed #e3c26d; padding: 12px 24px; font-size: 1rem; border-radius: 10px;  cursor: pointer; font-weight: bold; transition: 0.3s;">
     📥 خروجی PDF (برای خوندن/چاپ/اشتراک)
 </button>
 
-        <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: #059669; color: #ffffff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s;">
+        <a href="https://t.me/fatemehamiri1381" target="_blank" style="background-color: transparent; color: var(--ink); border: 1.5px solid var(--ink); padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.3s;">
     👤 ارتباط با سازنده
 </a>
     </div>
@@ -818,7 +863,7 @@ select:focus-visible,
     </div>
 
     <div class="layer-card">
-        <h3>👁️ لایه دوم: بدن، رفتار و امضای حضور</h3>
+        <h3>👁️ لایه دوم: بدن، رفتار و امضای شخصیت</h3>
 
         <div class="field-group">
             <label>🩸 نشانه‌های ظاهری و زخم‌های ماندگار</label>
@@ -2060,6 +2105,9 @@ printWindow.onload = function(){
     </div>
 </footer>
 
+<script>
+(function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var t;document.addEventListener('input',function(e){var el=e.target;if(!el.matches||!el.matches('textarea'))return;clearTimeout(t);t=setTimeout(function(){var r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var d=document.createElement('i');d.className='nb-ink';d.style.left=(r.left+14)+'px';d.style.top=Math.min(r.bottom-24,innerHeight-30)+'px';document.body.appendChild(d);setTimeout(function(){d.remove()},950)},1200)})})();
+</script>
 </body>
 
 </html>

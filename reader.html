@@ -782,6 +782,59 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @media(prefers-reduced-motion:reduce){.tab-content.active,.nb-ink{animation:none!important}nav .nav-link{transition:none}}
 }
 </style>
+<style id="nb-pastel-tabs">
+@media screen{
+:root{--ink:#3a2a3f}
+html{--tint:#f6c3d0;--acc:#e58fa8;--accd:#a8456a;--ml:rgba(229,143,168,.55)}
+html:not(.nb-dark){--pt:#fff4f7}
+html[data-tab="0"]{--tint:#f6c3d0;--acc:#e58fa8;--accd:#a8456a;--ml:rgba(229,143,168,.55)}
+html:not(.nb-dark)[data-tab="0"]{--pt:#fff4f7}
+html[data-tab="1"]{--tint:#f9cdb5;--acc:#ee9a74;--accd:#a5532b;--ml:rgba(238,154,116,.6)}
+html:not(.nb-dark)[data-tab="1"]{--pt:#fff4ec}
+html[data-tab="2"]{--tint:#f9e3a3;--acc:#e3b93f;--accd:#8a6a10;--ml:rgba(227,185,63,.6)}
+html:not(.nb-dark)[data-tab="2"]{--pt:#fffae6}
+html[data-tab="3"]{--tint:#d6e8b8;--acc:#9bc25c;--accd:#567a1f;--ml:rgba(155,194,92,.6)}
+html:not(.nb-dark)[data-tab="3"]{--pt:#f7fbee}
+html[data-tab="4"]{--tint:#bfe3d0;--acc:#6fbf9b;--accd:#2f7a5a;--ml:rgba(111,191,155,.6)}
+html:not(.nb-dark)[data-tab="4"]{--pt:#f2faf6}
+html[data-tab="5"]{--tint:#c3dbf3;--acc:#6fa6da;--accd:#2f6aa3;--ml:rgba(111,166,218,.6)}
+html:not(.nb-dark)[data-tab="5"]{--pt:#f0f6fd}
+html[data-tab="6"]{--tint:#d5c8f0;--acc:#9d85d6;--accd:#5e45a3;--ml:rgba(157,133,214,.6)}
+html:not(.nb-dark)[data-tab="6"]{--pt:#f7f3fd}
+html[data-tab="7"]{--tint:#ecc6e4;--acc:#cf8fc2;--accd:#8e4a82;--ml:rgba(207,143,194,.6)}
+html:not(.nb-dark)[data-tab="7"]{--pt:#fdf3fb}
+html body nav .nav-link:nth-child(1){background:#f6c3d0!important}
+html body nav .nav-link:nth-child(2){background:#f9cdb5!important}
+html body nav .nav-link:nth-child(3){background:#f9e3a3!important}
+html body nav .nav-link:nth-child(4){background:#d6e8b8!important}
+html body nav .nav-link:nth-child(5){background:#bfe3d0!important}
+html body nav .nav-link:nth-child(6){background:#c3dbf3!important}
+html body nav .nav-link:nth-child(7){background:#d5c8f0!important}
+html body nav .nav-link:nth-child(8){background:#ecc6e4!important}
+html body nav .nav-link.active{background:var(--pt,var(--pp))!important;border-top:5px solid var(--acc)!important;font-weight:700;transform:translateY(-3px)}
+html body nav .nav-link{color:#3a2a3f!important;font-weight:700}
+html body .main-wrapper{background-color:var(--pt,var(--pp));background-image:radial-gradient(var(--acc) 1.3px,transparent 1.5px);background-size:24px 24px!important;background-position:0 0}
+html body>header .header-btns button{background:#3a2a3f!important}
+.mascot-box::before,.mascot-box::after{background:var(--acc)!important;opacity:.8;box-shadow:none!important}
+.mascot-box .mascot-emoji{display:inline-flex;width:112px;height:auto}.mascot-box .mascot-emoji svg{width:100%;height:auto;display:block;filter:drop-shadow(0 3px 3px rgba(58,42,63,.25))}
+.layer-card::before{top:-12px!important;right:50%!important;margin-right:-46px;width:92px!important;height:26px!important;border:0!important;border-radius:0!important;background:var(--acc) repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 6px,transparent 6px 12px)!important;opacity:.88;transform:rotate(-2deg);clip-path:polygon(0 0,4% 20%,0 40%,4% 60%,0 80%,0 100%,100% 100%,96% 80%,100% 60%,96% 40%,100% 20%,100% 0)}
+.layer-card::after{content:"";position:absolute;top:12px;left:14px;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:inset -3px -3px 0 rgba(0,0,0,.18),0 2px 3px rgba(0,0,0,.3);pointer-events:none}
+html body .layer-card{border-top:5px solid var(--acc)!important}
+html:not(.nb-dark) body{background-color:#f7eedf!important;background-image:radial-gradient(rgba(150,120,90,.16) 1.3px,transparent 1.4px)!important;background-size:22px 22px}
+html body .layer-card{transform:rotate(-.3deg);box-shadow:3px 5px 0 rgba(150,120,90,.25),0 10px 22px rgba(60,40,10,.16)!important}
+html body .layer-card:nth-of-type(even){transform:rotate(.3deg)}
+@media(max-width:600px){html body .layer-card{transform:none!important}}
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ function sync(){var l=document.querySelectorAll('nav .nav-link'),i=0;for(var k=0;k<l.length;k++){if(l[k].classList.contains('active')){i=k;break}}document.documentElement.setAttribute('data-tab',i)}
+ var o=window.openTab;
+ if(typeof o==='function'){window.openTab=function(){var r=o.apply(this,arguments);sync();return r}}
+ document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('nav .nav-link'))setTimeout(sync,0)});
+ sync();
+});
+</script>
 </head>
 <body>
 
@@ -831,7 +884,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
 <!-- کادر خوش‌آمدگویی (مشابه دفترچه نویسنده) -->
 <div class="mascot-box">
-    <span class="mascot-emoji">📖 ✍️</span>
+    <span class="mascot-emoji"><svg viewBox="0 0 150 130" aria-hidden="true"><rect x="8" y="88" width="134" height="30" rx="4" fill="#cdbfea" stroke="#3a2a3f" stroke-width="3"/><path d="M26 88v30M118 88v30" stroke="#3a2a3f" stroke-width="2.5"/><rect x="18" y="56" width="116" height="32" rx="4" fill="#bfe3d0" stroke="#3a2a3f" stroke-width="3"/><path d="M34 56v32M104 56v32" stroke="#3a2a3f" stroke-width="2.5"/><g transform="rotate(-3 62 41)"><rect x="2" y="26" width="122" height="30" rx="4" style="fill:var(--tint)" stroke="#3a2a3f" stroke-width="3"/><path d="M20 28v28M100 26v28" stroke="#3a2a3f" stroke-width="2.5"/></g><path d="M52 26q8-22 18 0" fill="none" style="stroke:var(--accd)" stroke-width="4" stroke-linecap="round"/></svg></span>
     <p class="mascot-text">
         سلام کتاب‌خوان! امروز چه کتابی رو ثبت می‌کنی؟
     </p>

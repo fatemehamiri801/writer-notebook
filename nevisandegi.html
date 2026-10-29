@@ -769,6 +769,48 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @media(prefers-reduced-motion:reduce){.tab-content.active,.nb-ink{animation:none!important}nav .nav-link{transition:none}}
 }
 </style>
+<style id="nb-pastel-tabs">
+@media screen{
+:root{--ink:#3a2a3f}
+html{--tint:#f6c3d0;--acc:#e58fa8;--accd:#a8456a;--ml:rgba(229,143,168,.55)}
+html:not(.nb-dark){--pt:#fff4f7}
+html[data-tab="0"]{--tint:#f6c3d0;--acc:#e58fa8;--accd:#a8456a;--ml:rgba(229,143,168,.55)}
+html:not(.nb-dark)[data-tab="0"]{--pt:#fff4f7}
+html[data-tab="1"]{--tint:#bfe3d0;--acc:#6fbf9b;--accd:#2f7a5a;--ml:rgba(111,191,155,.6)}
+html:not(.nb-dark)[data-tab="1"]{--pt:#f2faf6}
+html[data-tab="2"]{--tint:#f9e3a3;--acc:#e3b93f;--accd:#8a6a10;--ml:rgba(227,185,63,.6)}
+html:not(.nb-dark)[data-tab="2"]{--pt:#fffae6}
+html[data-tab="3"]{--tint:#c3dbf3;--acc:#6fa6da;--accd:#2f6aa3;--ml:rgba(111,166,218,.6)}
+html:not(.nb-dark)[data-tab="3"]{--pt:#f0f6fd}
+html[data-tab="4"]{--tint:#d5c8f0;--acc:#9d85d6;--accd:#5e45a3;--ml:rgba(157,133,214,.6)}
+html:not(.nb-dark)[data-tab="4"]{--pt:#f7f3fd}
+html body nav .nav-link:nth-child(1){background:#f6c3d0!important}
+html body nav .nav-link:nth-child(2){background:#bfe3d0!important}
+html body nav .nav-link:nth-child(3){background:#f9e3a3!important}
+html body nav .nav-link:nth-child(4){background:#c3dbf3!important}
+html body nav .nav-link:nth-child(5){background:#d5c8f0!important}
+html body nav .nav-link.active{background:var(--pt,var(--pp))!important;border-top:5px solid var(--acc)!important;font-weight:700;transform:translateY(-3px)}
+html body nav .nav-link{color:#3a2a3f!important;font-weight:700}
+html body .main-wrapper{background:repeating-linear-gradient(transparent 0 35px,rgba(90,70,160,.12) 35px 36px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),var(--pt,var(--pp))!important}
+html body>header .header-btns button{background:#3a2a3f!important}
+.mascot-box::before,.mascot-box::after{background:var(--acc)!important;opacity:.8;box-shadow:none!important}
+.mascot-box .mascot-emoji{display:inline-flex;width:112px;height:auto}.mascot-box .mascot-emoji svg{width:100%;height:auto;display:block;filter:drop-shadow(0 3px 3px rgba(58,42,63,.25))}
+.layer-card::before{top:-12px!important;right:50%!important;margin-right:-46px;width:92px!important;height:26px!important;border:0!important;border-radius:0!important;background:var(--acc) repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 6px,transparent 6px 12px)!important;opacity:.88;transform:rotate(-2deg);clip-path:polygon(0 0,4% 20%,0 40%,4% 60%,0 80%,0 100%,100% 100%,96% 80%,100% 60%,96% 40%,100% 20%,100% 0)}
+.layer-card::after{content:"";position:absolute;top:12px;left:14px;width:14px;height:14px;border-radius:50%;background:var(--acc);box-shadow:inset -3px -3px 0 rgba(0,0,0,.18),0 2px 3px rgba(0,0,0,.3);pointer-events:none}
+html body .layer-card{border-top:5px solid var(--acc)!important}
+html:not(.nb-dark) body{background-color:#f7eedf!important;background-image:radial-gradient(rgba(150,120,90,.16) 1.3px,transparent 1.4px)!important;background-size:22px 22px}
+html body .main-wrapper{background:repeating-linear-gradient(transparent 0 35px,rgba(90,70,160,.10) 35px 36px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),var(--pt,var(--pp))!important}
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ function sync(){var l=document.querySelectorAll('nav .nav-link'),i=0;for(var k=0;k<l.length;k++){if(l[k].classList.contains('active')){i=k;break}}document.documentElement.setAttribute('data-tab',i)}
+ var o=window.openTab;
+ if(typeof o==='function'){window.openTab=function(){var r=o.apply(this,arguments);sync();return r}}
+ document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('nav .nav-link'))setTimeout(sync,0)});
+ sync();
+});
+</script>
 </head>
 <body>
 
@@ -817,7 +859,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 </div>
 
     <div class="mascot-box">
-        <span class="mascot-emoji">✍️📓</span>
+        <span class="mascot-emoji"><svg viewBox="0 0 320 210" aria-hidden="true"><g transform="rotate(-2 160 40)"><rect x="92" y="4" width="136" height="92" rx="3" fill="#fffdf7" stroke="#3a2a3f" stroke-width="5"/><path d="M104 24H216M104 38H216M104 52H190" style="stroke:var(--acc)" stroke-width="4" stroke-linecap="round" opacity=".6"/></g><rect x="66" y="88" width="188" height="20" rx="10" fill="#4b3a52" stroke="#3a2a3f" stroke-width="5"/><circle cx="58" cy="98" r="11" fill="#f9e3a3" stroke="#3a2a3f" stroke-width="5"/><circle cx="262" cy="98" r="11" fill="#f9e3a3" stroke="#3a2a3f" stroke-width="5"/><path d="M50 112H270L298 178H22Z" style="fill:var(--tint)" stroke="#3a2a3f" stroke-width="5" stroke-linejoin="round"/><path d="M62 122H258L276 164H44Z" style="fill:var(--acc)" opacity=".35"/><g fill="#fff8ec" stroke="#3a2a3f" stroke-width="4"><circle cx="82" cy="134" r="8"/><circle cx="108" cy="134" r="8"/><circle cx="134" cy="134" r="8"/><circle cx="160" cy="134" r="8"/><circle cx="186" cy="134" r="8"/><circle cx="212" cy="134" r="8"/><circle cx="238" cy="134" r="8"/><circle cx="94" cy="156" r="8"/><circle cx="120" cy="156" r="8"/><circle cx="146" cy="156" r="8"/><circle cx="172" cy="156" r="8"/><circle cx="198" cy="156" r="8"/><circle cx="224" cy="156" r="8"/></g><rect x="10" y="178" width="300" height="22" rx="6" fill="#8e6b9e" stroke="#3a2a3f" stroke-width="5"/></svg></span>
         <p class="mascot-text">
             سلام نویسنده! امروز قراره چه دنیایی رو خلق کنیم؟
         </p>

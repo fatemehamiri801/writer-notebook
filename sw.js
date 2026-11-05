@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-notebook-v73";
+const CACHE_NAME = "my-notebook-v74";
 // اپدیت های سرویس ورکر
 const ASSETS = [
     "./",

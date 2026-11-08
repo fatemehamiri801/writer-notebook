@@ -160,12 +160,20 @@ var css2 = [
 '.nbx-tb-more{display:none}.nbx-tb-panel{display:contents}',
 '@media(max-width:700px){',
 '.project-toolbar{padding:10px 12px!important;gap:8px!important}',
-'.nbx-tb-more{display:inline-flex;align-items:center;gap:4px}',
+'.nbx-tb-more{display:inline-flex;align-items:center;gap:6px}',
+'html body .project-toolbar .nbx-tb-more.btn-toolbar.btn-toolbar{background:var(--accd,#6b4a1e)!important;color:#fff!important;border:2px solid var(--accd,#6b4a1e)!important;border-radius:12px!important;min-height:44px;padding:8px 16px!important;font-size:.95rem!important;box-shadow:0 3px 0 rgba(0,0,0,.25),0 4px 10px rgba(0,0,0,.15);cursor:pointer;-webkit-tap-highlight-color:transparent}',
+'.nbx-tb-more:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.25)}',
+'.nbx-tb-more .nbx-tb-ch{display:inline-block;transition:transform .2s}.nbx-tb-more[aria-expanded="true"] .nbx-tb-ch{transform:rotate(180deg)}',
+'html.nb-dark body .project-toolbar .nbx-tb-more.btn-toolbar.btn-toolbar{background:#e3c26d!important;color:#1c1712!important;border-color:#e3c26d!important}',
 '.nbx-tb-panel{display:none}',
 '.nbx-tb-panel.open{display:flex;flex:1 1 100%;flex-wrap:wrap;gap:8px;padding-top:6px}',
 '.nbx-tb-panel .btn-toolbar,.nbx-tb-panel .btn-toolbar-danger{flex:1 1 calc(50% - 8px);text-align:center}',
 '.nbx-tb-panel>div{flex:1 1 100%;margin-right:0!important}',
-'.nav-wrapper nav{margin-left:112px}',
+'html body .nav-wrapper{position:static!important;box-shadow:none}',
+'html body .nav-wrapper::before,html body .nav-wrapper::after{display:none!important;content:none!important}',
+'html body .nav-wrapper nav{margin:0!important;position:static!important;overflow:visible!important;flex-wrap:wrap!important;white-space:normal!important;justify-content:center!important;gap:8px!important;padding:12px 10px!important}',
+'html body .nav-wrapper nav .nav-link{flex:1 1 auto!important;padding:9px 12px!important;font-size:.88rem!important;border-radius:12px!important;margin:0!important;border-bottom-width:2px!important;text-align:center}',
+'.nbx-navbar,.nbx-navbar.on{display:none!important}',
 '}',
 '.nbx-guide{margin-bottom:12px}.nbx-road-st h3 small{font-weight:400;font-size:.8rem}',
 '.nbx-road-it{display:flex;gap:8px;align-items:flex-start;padding:3px 0;cursor:pointer;font-size:.9rem;line-height:1.8}.nbx-road-it input{margin-top:6px;width:18px;height:18px;flex:none}.nbx-road-it.on span{opacity:.6;text-decoration:line-through}',
@@ -2035,7 +2043,9 @@ function buildToolbarMenu() {
     if (!tb || $('.nbx-tb-more', tb)) return;
     var kids = Array.prototype.slice.call(tb.children).filter(function (c) { return !c.querySelector || !c.querySelector('#project-select'); });
     var panel = el('div', { 'class': 'nbx-tb-panel', id: 'nbx-tb-panel' });
-    var more = el('button', { 'class': 'btn-toolbar nbx-tb-more', type: 'button', 'aria-expanded': 'false', 'aria-controls': 'nbx-tb-panel' }, '⋯ پروژه');
+    var more = el('button', { 'class': 'btn-toolbar nbx-tb-more', type: 'button', 'aria-expanded': 'false', 'aria-controls': 'nbx-tb-panel' }, '');
+    more.innerHTML = '<span class="nbx-tb-ic" aria-hidden="true">⚙️</span><span class="nbx-tb-tx">' + (isReader ? 'مدیریت کتاب' : 'مدیریت پروژه') + '</span><span class="nbx-tb-ch" aria-hidden="true">▾</span>';
+    more.title = 'نام‌گذاری، بک‌آپ، بارگذاری، جستجو، حذف و ...';
     tb.appendChild(more); tb.appendChild(panel);
     kids.forEach(function (k) { panel.appendChild(k); });
     function setOpen(o) { panel.classList.toggle('open', o); more.setAttribute('aria-expanded', String(o)); }
@@ -2456,7 +2466,7 @@ async function init() {
         if (isWriter) tb.appendChild(el('a', { 'class': 'btn-toolbar nbx-liblink', href: 'works.html' }, '✍️ آثار من'));
         var cb = el('button', { 'class': 'btn-toolbar', type: 'button' }, SHARE.icon + ' ' + SHARE.name); cb.onclick = function () { openShareCard('', '«' + activeName() + '»'); }; tb.appendChild(cb);
     }
-    if (isWriter) buildToolbarMenu();
+    buildToolbarMenu();
     buildDice();
     buildStickies();
     buildNavHint();

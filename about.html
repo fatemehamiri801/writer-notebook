@@ -30,28 +30,28 @@
 /* فونت فارسی Vazirmatn (رایگان، متن‌باز، بدون نیاز به سرور یا هزینه) */
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Medium.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Bold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Black.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -827,6 +827,38 @@ html body .chapter h2::after{background:var(--gold);opacity:.6}
 html body .back{background:var(--ink);color:#f3dc93;border:1.5px dashed #e3c26d}
 html.nb-dark body .chapter p,html.nb-dark body .intro,html.nb-dark body h1,html.nb-dark body .chapter h2,html.nb-dark body .end{color:var(--ink)}
 </style>
+<style id="nb-night">
+/* ===== nb-night v2 ===== */
+html.nb-dark{color-scheme:dark;--ink:#eadfc6;--pp:#241e17;--cd:#2c251d;--straw:#4d3f22}
+html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#1d1510,#0c0806 78%)!important}
+html.nb-dark body::after{background:radial-gradient(ellipse 65% 60% at 80% 6%,rgba(255,170,80,.09),transparent 70%)!important}
+html.nb-dark body #dark-mode-toggle{background:#2b2118!important;border:1.5px dashed #a87b3c!important;color:#e3c26d!important}
+html.nb-dark body .paper{background:repeating-linear-gradient(transparent 0 35px,rgba(227,194,109,.06) 35px 36px),#241e17!important;box-shadow:3px 4px 0 #1a1510,0 18px 40px rgba(0,0,0,.6)}
+html.nb-dark body .chapter{background:#2c251d;border-color:#4a3e30;box-shadow:2px 3px 0 #1a1510,0 8px 18px rgba(0,0,0,.4)}
+html.nb-dark body .chapter p,html.nb-dark body .intro,html.nb-dark body .end{color:#d3c6aa}
+html.nb-dark body h1,html.nb-dark body .chapter h2{color:#f0e4c9}
+html.nb-dark body .back{background:#3a2c1d;color:#f3dc93;border-color:#a87b3c}
+html.nb-dark body strong,html.nb-dark body b{color:#f3e3b4}
+</style>
+<style id="nb-day">
+/* ===== nb-day v2 ===== */
+html:not(.nb-dark) body{background:radial-gradient(circle at 20% 10%,#fbdde6,transparent 55%),radial-gradient(circle at 85% 90%,#d6e4f8,transparent 55%),#f3e4ee!important}
+html:not(.nb-dark) body .paper{background:repeating-linear-gradient(transparent 0 35px,rgba(150,90,120,.12) 35px 36px),#fbe6df!important;box-shadow:3px 4px 0 #efc9c8,0 18px 40px rgba(120,60,70,.22)}
+html:not(.nb-dark) body .chapter{background:#fbefdc;border-color:#ecd9bd;box-shadow:2px 3px 0 #efdcc3,0 8px 18px rgba(120,80,40,.10)}
+html:not(.nb-dark) body .chapter.writer{background:#fcdfe8;border-color:#f0bccd;border-right-color:#c0587f}
+html:not(.nb-dark) body .chapter.reader{background:#dbe8f8;border-color:#b9d0ee;border-right-color:#4a7bb5}
+html:not(.nb-dark) body .chapter.game{background:#e3eecf;border-color:#c9dba6;border-right-color:#7d8a45}
+html:not(.nb-dark) body .chapter.simple,html:not(.nb-dark) body .chapter.income,html:not(.nb-dark) body .chapter.goal{background:#fbecb9;border-color:#ecd48a}
+</style>
+<style id="nb-pastel3">
+/* سه کارت هم‌رنگ: هر کدام یک پاستل جدا */
+html:not(.nb-dark) body .chapter.goal{background:#e6dcf8;border-color:#cdbcee;border-right-color:#9d85d6}
+html:not(.nb-dark) body .chapter.simple{background:#fddcc8;border-color:#f3bfa0;border-right-color:#e08a4b}
+html:not(.nb-dark) body .chapter.income{background:#d3efec;border-color:#a9dbd6;border-right-color:#3f9c97}
+html.nb-dark body .chapter.goal{border-right-color:#9d85d6}
+html.nb-dark body .chapter.simple{border-right-color:#e08a4b}
+html.nb-dark body .chapter.income{border-right-color:#4fb3ad}
+</style>
 </head>
 
 
@@ -1443,6 +1475,7 @@ PDF فقط یک فایل ذخیره‌شده نیست؛
 
 
 
+<script src="extras.js?v=15"></script>
 </body>
 
 

@@ -1024,28 +1024,28 @@ font-size:13px;
 /* فونت فارسی Vazirmatn (رایگان، متن‌باز، بدون نیاز به سرور یا هزینه) */
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Medium.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Bold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Black.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -1332,6 +1332,35 @@ html body .cell.hint{animation:none;outline:2.5px dashed var(--gold)}
 html body .book-item{background:var(--t1);border:1px solid #d8c9a0}
 html.nb-dark body .game-container{color:var(--ink)}
 html.nb-dark body #message,html.nb-dark body .title{color:var(--ink)}
+</style>
+<style id="nb-night">
+/* ===== nb-night v2 ===== */
+html.nb-dark{color-scheme:dark;--ink:#eadfc6;--pp:#241e17;--cd:#2c251d;--straw:#4d3f22;--t1:#2f3224;--t2:#363a28;--t3:#3a3d2a;--accd:#b9c97a;--ml:rgba(125,138,69,.35)}
+html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#1d1510,#0c0806 78%)!important}
+html.nb-dark body::after{background:radial-gradient(ellipse 65% 60% at 80% 6%,rgba(255,170,80,.09),transparent 70%)!important}
+html.nb-dark body #dark-mode-toggle{background:#2b2118!important;border:1.5px dashed #a87b3c!important;color:#e3c26d!important}
+html.nb-dark body .game-container{background:repeating-linear-gradient(transparent 0 31px,rgba(227,194,109,.06) 31px 32px),#241e17!important;box-shadow:3px 4px 0 #1a1510,0 16px 36px rgba(0,0,0,.6);color:#eadfc6}
+html.nb-dark body .info-box{background:#2f3224;border-color:#4a4a30;box-shadow:2px 3px 0 #1a1510;color:#eadfc6}
+html.nb-dark body .info-box span,html.nb-dark body .info-box{color:#eadfc6}
+html.nb-dark body .library-panel{background:#4d3f22;color:#f3e3b4;box-shadow:0 5px 10px rgba(0,0,0,.45)}
+html.nb-dark body .library-panel strong{color:#cfe08a}
+html.nb-dark body .start-btn,html.nb-dark body .library-btn{background:#3a2c1d;color:#f3dc93;border-color:#a87b3c}
+html.nb-dark body .library-btn:nth-of-type(2){background:transparent;color:#eadfc6;border-color:#8a7a5c}
+html.nb-dark body .cell{background:linear-gradient(145deg,#3a3d2a,#2f3224);border-color:#4a4a30;box-shadow:1px 2px 0 #1a1510}
+html.nb-dark body .cell.selected,html.nb-dark body .cell.gold-book,html.nb-dark body .book-item.unlocked{background:linear-gradient(135deg,#7a6320,#a88a32);border-color:#e3c26d}
+html.nb-dark body .book-item{background:#2f3224;border-color:#4a4a30}
+html.nb-dark body .help-box,html.nb-dark body .collection{background:#2c251d;color:#eadfc6}
+html.nb-dark body #message{color:#cfe08a}
+</style>
+<style id="nb-day">
+/* ===== nb-day v2 ===== */
+html:not(.nb-dark){--pp:#e6efd0;--t1:#dbe9c2;--t2:#cfe0b0;--t3:#e9f2d6}
+html:not(.nb-dark) body{background:radial-gradient(circle at 20% 10%,#fbe5d2,transparent 55%),radial-gradient(circle at 85% 90%,#d3e8dc,transparent 55%),#efe6d6!important}
+html:not(.nb-dark) body .game-container{background:repeating-linear-gradient(transparent 0 31px,rgba(90,110,40,.10) 31px 32px),#e6efd0!important;box-shadow:3px 4px 0 #cfdcae,0 16px 36px rgba(60,80,20,.22)}
+html:not(.nb-dark) body .info-box{background:#d5e6bb;border-color:#b9cf93;box-shadow:2px 3px 0 #c3d6a2}
+html:not(.nb-dark) body .library-panel{background:#f6dca6}
+html:not(.nb-dark) body .cell{background:linear-gradient(145deg,#eef5df,#d9e8c0);border-color:#bdd09a;box-shadow:1px 2px 0 #c3d6a2}
+html:not(.nb-dark) body .book-item{background:#d9e8c0;border-color:#bdd09a}
 </style>
 </head>
 

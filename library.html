@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<script>if(localStorage.getItem('nb-dark-mode')==='1'){document.documentElement.classList.add('nb-dark');}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" type="image/png" href="./icon-192.png">
+<link rel="canonical" href="https://fatemehamiri801.github.io/writer-notebook/library.html">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="دفترچه من">
+<meta name="theme-color" content="#e89d8b">
+<meta name="description" content="کتابخانهٔ من؛ قفسهٔ همهٔ کتاب‌هایی که خوانده‌ای یا می‌خواهی بخوانی: وضعیت، امتیاز، جمله‌های ماندگار، صف خواندن و مقایسهٔ کتاب‌ها.">
+<meta property="og:title" content="کتابخانهٔ من | دفترچه من">
+<meta property="og:description" content="قفسهٔ کتاب‌های خوانده‌شده، در حال خواندن و صف خواندن؛ با جمله‌های ماندگار و مقایسهٔ کتاب‌ها.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fatemehamiri801.github.io/writer-notebook/library.html">
+<meta property="og:image" content="https://fatemehamiri801.github.io/writer-notebook/icon-512.png">
+<title>کتابخانهٔ من | دفترچه من</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* فونت فارسی Vazirmatn (همان فونت بقیهٔ صفحه‌ها) */
+@font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Medium.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Bold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{
+    /* هویت بصری مشترک سایت: کاغذ دفترچه، جوهر، طلایی؛ رنگ شاخص کتابخانه: نعنایی */
+    --hand:'Aref Ruqaa','Vazirmatn',serif;
+    --ink:#3a2a3f;--gold:#c99a3e;--pp:#fbf6e9;--cd:#fffdf7;--line:#e3d8bd;
+    --tint:#bfe3d0;--acc:#6fbf9b;--accd:#2f7a5a;--ml:rgba(111,191,155,.6);
+    --muted:#7a6a7f;
+}
+html.nb-dark{--ink:#eadfc6;--pp:#241e17;--cd:#2c251d;--line:#4a3e30;--accd:#8fd1b0;--muted:#a99c82;color-scheme:dark}
+body{
+    min-height:100vh;font-family:'Vazirmatn','Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:var(--ink);line-height:1.8;
+    background:radial-gradient(rgba(150,100,130,.14) 1.3px,transparent 1.4px),radial-gradient(circle at 20% 15%,#fbdde6,transparent 55%),radial-gradient(circle at 85% 85%,#d6e4f8,transparent 55%),#f3e4ee;
+    background-size:22px 22px,auto,auto,auto;overflow-x:hidden;
+}
+html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#1d1510,#0c0806 78%)}
+
+/* دکمهٔ شب/روز (مثل بقیهٔ صفحه‌ها) */
+#dark-mode-toggle{position:fixed;top:15px;left:15px;z-index:1000;width:44px;height:44px;border-radius:50%;background:var(--ink);border:1.5px dashed #e3c26d;color:#e3c26d;font-size:20px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .15s}
+html.nb-dark #dark-mode-toggle{background:#2b2118;border-color:#a87b3c}
+#dark-mode-toggle:hover{transform:scale(1.06)}
+@media(max-width:600px){#dark-mode-toggle{width:38px;height:38px;top:10px;left:10px;font-size:17px}}
+
+/* سربرگ */
+.lib-head{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:18px 24px 18px 124px;
+    background:repeating-linear-gradient(transparent 0 31px,rgba(90,70,160,.12) 31px 32px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),color-mix(in srgb,var(--tint) 55%,#fbeee2);
+    border-bottom:3px solid var(--acc);
+}
+html.nb-dark .lib-head{background:#241e17;border-bottom-color:#a87b3c}
+.lib-head h1{font-family:var(--hand);font-size:2rem;line-height:1.3;color:var(--ink);font-weight:700}
+.lib-head nav{display:flex;flex-wrap:wrap;gap:8px}
+.lib-head a{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;font:700 .85rem Vazirmatn,Tahoma,sans-serif;text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);background:transparent}
+.lib-head a.back{background:var(--accd);border-color:var(--accd);color:#fff}
+html.nb-dark .lib-head a.back{color:#1c1712}
+.lib-head a:hover{transform:translateY(-2px)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2.5px solid var(--gold);outline-offset:2px}
+@media(max-width:600px){.lib-head{padding:58px 14px 14px}.lib-head h1{font-size:1.6rem}.lib-sheet{background:repeating-linear-gradient(transparent 0 35px,rgba(90,70,160,.10) 35px 36px),var(--cd)}}
+
+/* بدنهٔ صفحه: کاغذ خط‌دار */
+.lib-main{max-width:940px;margin:22px auto 70px;padding:0 14px}
+.lib-sheet{
+    position:relative;border-radius:8px;border:1px solid var(--line);padding:22px 18px 24px;
+    background:repeating-linear-gradient(transparent 0 35px,rgba(90,70,160,.10) 35px 36px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),var(--cd);
+    box-shadow:2px 3px 0 #e9dfc6,0 8px 18px rgba(60,40,10,.12);
+}
+html.nb-dark .lib-sheet{box-shadow:0 8px 18px rgba(0,0,0,.5)}
+.lib-intro{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+#lib-stats{margin-bottom:6px}
+.lib-pane{padding:6px 0 0!important}
+.nbx-seg{padding-right:0!important;padding-left:0!important}
+noscript .lib-intro{color:#c0392b}
+</style>
+</head>
+<body>
+
+<button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز" aria-label="حالت شب/روز">🌙</button>
+
+<header class="lib-head">
+    <h1>📚 کتابخانهٔ من</h1>
+    <nav aria-label="بخش‌های سایت">
+        <a class="back" href="index.html">🏠 خانه</a>
+        <a href="reader.html">📖 دفترچه کتاب‌خوان</a>
+        <a href="nevisandegi.html">✍️ دفترچه نویسندگی</a>
+        <a href="game.html">🧩 جورچین کتاب‌ها</a>
+    </nav>
+</header>
+
+<main class="lib-main">
+    <div class="lib-sheet">
+        <p class="lib-intro">قفسهٔ همهٔ کتاب‌هایت یک‌جا: وضعیت و امتیاز هر کتاب، جمله‌های ماندگار، صف خواندن و مقایسهٔ دو کتاب. هر کتاب دفترچهٔ خودش را در «دفترچه کتاب‌خوان» دارد؛ با «باز کردن دفترچه» یک‌راست به آن می‌روی.</p>
+        <div id="lib-root"></div>
+        <noscript><p class="lib-intro">برای نمایش کتابخانه جاوااسکریپت باید فعال باشد.</p></noscript>
+    </div>
+</main>
+
+<script>
+function toggleDarkMode() {
+    var isDark = document.documentElement.classList.toggle('nb-dark');
+    try { localStorage.setItem('nb-dark-mode', isDark ? '1' : '0'); } catch (e) {}
+    var btn = document.getElementById('dark-mode-toggle');
+    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+}
+document.addEventListener('DOMContentLoaded', function () {
+    var btn = document.getElementById('dark-mode-toggle');
+    if (btn) btn.textContent = document.documentElement.classList.contains('nb-dark') ? '☀️' : '🌙';
+});
+if ('serviceWorker' in navigator) { addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); }); }
+</script>
+<script src="extras.js?v=15"></script>
+</body>
+</html>

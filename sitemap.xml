@@ -16,6 +16,16 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://fatemehamiri801.github.io/writer-notebook/library.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+  <url>
+        <loc>https://fatemehamiri801.github.io/writer-notebook/works.html</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://fatemehamiri801.github.io/writer-notebook/game.html</loc>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>

@@ -21,5 +21,19 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "دفترچه نویسندگی",
+      "url": "./nevisandegi.html"
+    },
+    {
+      "name": "دفترچه کتاب‌خوان",
+      "url": "./reader.html"
+    },
+    {
+      "name": "کتابخانهٔ من",
+      "url": "./library.html"
+    }
   ]
 }

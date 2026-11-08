@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-notebook-v74";
+const CACHE_NAME = "my-notebook-v94";
 // اپدیت های سرویس ورکر
 const ASSETS = [
     "./",
@@ -7,15 +7,31 @@ const ASSETS = [
     "./reader.html",
     "./game.html",
     "./about.html",
+    "./library.html",
+    "./works.html",
+    "./extras.js",
     "./manifest.json",
     "./icon-192.png",
-    "./icon-512.png"
+    "./icon-512.png",
+    "./fonts.css"
+];
+
+// فونت‌ها فایل‌های جدا هستن؛ اگه یکی‌شون هنوز روی سرور نباشه نصب سرویس‌ورکر نباید خراب بشه
+const FONT_FILES = [
+    "./fonts/Vazirmatn-Regular.woff2",
+    "./fonts/Vazirmatn-Medium.woff2",
+    "./fonts/Vazirmatn-Bold.woff2",
+    "./fonts/Vazirmatn-Black.woff2"
 ];
 
 self.addEventListener("install", (event) => {
     self.skipWaiting();
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+        caches.open(CACHE_NAME).then((cache) =>
+            cache.addAll(ASSETS).then(() =>
+                Promise.all(FONT_FILES.map((u) => cache.add(u).catch(() => null)))
+            )
+        )
     );
 });
 
@@ -39,7 +55,7 @@ self.addEventListener("fetch", (event) => {
     // با استراتژی «اول کش» کاربرهای موبایل که یه بار سایت رو باز
     // کرده بودن، حتی بعد از رفع باگ‌ها هنوز نسخه‌ی قدیمی و خراب رو
     // می‌دیدن. اگه اینترنت نبود، همون کش قدیمی fallback می‌مونه.
-    if (event.request.mode === "navigate") {
+    if (event.request.mode === "navigate" || event.request.destination === "script" || /\.js(\?|$)/.test(event.request.url)) {
         event.respondWith(
             fetch(event.request)
                 .then((networkResponse) => {

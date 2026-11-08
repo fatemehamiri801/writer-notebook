@@ -426,28 +426,28 @@ textarea:focus {
 /* فونت فارسی Vazirmatn (رایگان، متن‌باز، بدون نیاز به سرور یا هزینه) */
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Medium.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Bold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+    src: url('fonts/Vazirmatn-Black.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
     font-weight: 900;
     font-style: normal;
     font-display: swap;
@@ -844,6 +844,77 @@ document.addEventListener('DOMContentLoaded',function(){
  sync();
 });
 </script>
+<style id="nb-night">
+/* ===== nb-night v2: نایت مود واقعی (کاغذ تیره، متن کرم ملایم، بدون خیرگی) ===== */
+@media screen{
+html.nb-dark{color-scheme:dark;--ink:#eadfc6;--text:#e6d9bf;--bg:#0e0a07;--card-bg:#2c251d;--card-border:#4a3e30;--input-bg:#1c1712;--input-border:#54483a;--toolbar-bg:#2a231b;--muted-text:#a99c82;--pp:#241e17;--cd:#2c251d;--straw:#4d3f22;--t1:#3a2d33;--t2:#2f3a33;--t3:#3a3526;--accd:#f0a3b8;--ml:rgba(229,143,168,.3)}
+html.nb-dark::after{background:radial-gradient(ellipse 65% 60% at 80% 6%,rgba(255,170,80,.09),transparent 70%)!important}
+html.nb-dark body::after{background:radial-gradient(ellipse 65% 60% at 80% 6%,rgba(255,170,80,.09),transparent 70%)!important}
+html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#1d1510,#0c0806 78%)!important;color:var(--text)!important}
+html.nb-dark body #dark-mode-toggle{background:#2b2118!important;border:1.5px dashed #a87b3c!important;color:#e3c26d!important;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+html.nb-dark body>header{background:repeating-linear-gradient(transparent 0 31px,rgba(227,194,109,.07) 31px 32px),#241e17!important;border-bottom:3px solid #4a3e30!important;box-shadow:0 6px 16px rgba(0,0,0,.5)!important}
+html.nb-dark body>header .page-title{color:#f0e4c9!important;-webkit-text-fill-color:#f0e4c9!important}
+html.nb-dark body>header .mobile-menu-toggle{color:#eadfc6;background:rgba(227,194,109,.1);border-color:rgba(227,194,109,.4)}
+html.nb-dark body>header .btn-back{background:#7a3a52!important;color:#fbeaf0!important}
+html.nb-dark body>header .header-btns button{background:#3a2c1d!important;color:#f3dc93!important;border-color:#a87b3c!important}
+html.nb-dark body>header .header-btns a{color:#eadfc6!important;border-color:#8a7a5c!important}
+html.nb-dark body .project-toolbar{background:#2a231b!important;border-bottom:2px dashed #4a3e30!important}
+html.nb-dark .project-toolbar span,html.nb-dark .project-toolbar label{color:#e6d9bf!important}
+html.nb-dark body .btn-toolbar.btn-toolbar{background:#2f271e!important;color:var(--accd)!important;border-color:#6b5a44!important}
+html.nb-dark .btn-toolbar-danger,html.nb-dark body .btn-toolbar-danger.btn-toolbar{background:#6e2a2a!important;color:#ffdada!important;border-color:#8f4040!important}
+html.nb-dark body .mascot-box.mascot-box{background:#4d3f22!important;box-shadow:0 6px 12px rgba(0,0,0,.5)!important}
+html.nb-dark body .mascot-box.mascot-box .mascot-text{color:#f3e3b4!important}
+html.nb-dark body .mascot-emoji svg{filter:brightness(.8)}
+html.nb-dark body nav .nav-link{color:#eadfc6!important;border-color:#4a3e30!important}
+html.nb-dark body nav .nav-link:nth-child(1){background:#5a3340!important}
+html.nb-dark body nav .nav-link:nth-child(2){background:#2f4a3c!important}
+html.nb-dark body nav .nav-link:nth-child(3){background:#5a4a1f!important}
+html.nb-dark body nav .nav-link:nth-child(4){background:#2f435c!important}
+html.nb-dark body nav .nav-link:nth-child(5){background:#41355f!important}
+html.nb-dark body nav .nav-link:nth-child(6){background:#3d4a24!important}
+html.nb-dark body nav .nav-link:nth-child(7){background:#4f3a5e!important}
+html.nb-dark body nav .nav-link:nth-child(8){background:#5a3a4c!important}
+html.nb-dark body nav .nav-link:not(.active){filter:brightness(.9)}
+html.nb-dark body nav .nav-link.active{background:#241e17!important;color:#f6ecd2!important}
+html.nb-dark body .nav-wrapper nav{border-bottom-color:#4a3e30!important}
+html.nb-dark body .main-wrapper{background:repeating-linear-gradient(transparent 0 35px,rgba(227,194,109,.06) 35px 36px),linear-gradient(to left,transparent 46px,rgba(229,143,168,.28) 46px 47px,transparent 47px),#241e17!important}
+@media(max-width:600px){html.nb-dark body .main-wrapper{background:repeating-linear-gradient(transparent 0 35px,rgba(227,194,109,.06) 35px 36px),#241e17!important}}
+html.nb-dark body .layer-card{background:#2c251d!important;border:1px solid #4a3e30!important;border-top:5px solid var(--ca)!important;box-shadow:2px 3px 0 #1a1510,0 8px 18px rgba(0,0,0,.45)!important}
+html.nb-dark .layer-card::before,html.nb-dark .layer-card::after{opacity:.7}
+html.nb-dark .section-title,html.nb-dark .layer-card h3,html.nb-dark h1,html.nb-dark h2,html.nb-dark h3,html.nb-dark p,html.nb-dark label,html.nb-dark .label,html.nb-dark .sub-label{color:#eadfc6!important}
+html.nb-dark .muted,html.nb-dark small{color:var(--muted-text)!important}
+html.nb-dark textarea,html.nb-dark input,html.nb-dark select{background:#1c1712!important;color:#eadfc6!important;border-color:#54483a!important}
+html.nb-dark textarea::placeholder,html.nb-dark input::placeholder{color:#8f836b!important}
+html.nb-dark textarea:focus,html.nb-dark input:focus,html.nb-dark select:focus{border-color:#c99a3e!important}
+html.nb-dark body .nav-link{text-shadow:none}
+html.nb-dark .section-title,html.nb-dark .layer-card h3,html.nb-dark .layer-card h2{border-bottom-color:#54483a!important}
+html.nb-dark hr{border-color:#4a3e30}
+html.nb-dark .nav-wrapper::after{background:linear-gradient(to left,rgba(36,30,23,0),#241e17 85%)!important}html.nb-dark .nav-wrapper::before{color:#8f836b}
+
+html.nb-dark[data-tab="0"]{--accd:#f0a3b8}html.nb-dark[data-tab="1"]{--accd:#8fd1b0}html.nb-dark[data-tab="2"]{--accd:#e3c26d}html.nb-dark[data-tab="3"]{--accd:#9cc4ec}html.nb-dark[data-tab="4"]{--accd:#c3b2ee}html.nb-dark[data-tab="5"]{--accd:#9cc4ec}html.nb-dark[data-tab="6"]{--accd:#c3b2ee}html.nb-dark[data-tab="7"]{--accd:#e5a8da}
+}
+</style>
+<style id="nb-day">
+/* ===== nb-day v2: روز پاستلی رنگی، بدون سفید ===== */
+@media screen{
+html:not(.nb-dark){--pp:#fbe6df;--cd:#fbefdc;--straw:#f6dca6}
+html:not(.nb-dark)[data-tab="0"]{--pt:#fbdbe5}
+html:not(.nb-dark)[data-tab="1"]{--pt:#d6eee2}
+html:not(.nb-dark)[data-tab="2"]{--pt:#fbecb8}
+html:not(.nb-dark)[data-tab="3"]{--pt:#d3e5f7}
+html:not(.nb-dark)[data-tab="4"]{--pt:#e5d9f8}
+html:not(.nb-dark)[data-tab="5"]{--pt:#d3e5f7}
+html:not(.nb-dark)[data-tab="6"]{--pt:#e5d9f8}
+html:not(.nb-dark)[data-tab="7"]{--pt:#f8d9ee}
+html:not(.nb-dark) body{background-color:#f6dfe4!important;background-image:radial-gradient(rgba(150,100,130,.16) 1.3px,transparent 1.4px),linear-gradient(160deg,color-mix(in srgb,var(--tint) 50%,#fbeee2),color-mix(in srgb,var(--tint) 22%,#efe4f6))!important;background-size:22px 22px,auto!important}
+html:not(.nb-dark) body>header{background:repeating-linear-gradient(transparent 0 31px,rgba(90,70,160,.12) 31px 32px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),color-mix(in srgb,var(--tint) 55%,#fbeee2)!important;border-bottom-color:var(--acc)!important}
+html:not(.nb-dark) body .project-toolbar{background:color-mix(in srgb,var(--tint) 38%,#fbf0e0)!important;border-bottom-color:var(--acc)!important}
+html:not(.nb-dark) body .btn-toolbar.btn-toolbar{background:color-mix(in srgb,var(--tint) 30%,#fbf0e0)!important}
+html:not(.nb-dark) body .layer-card{background:color-mix(in srgb,var(--ca) 20%,#fbf0dc)!important;border:1px solid color-mix(in srgb,var(--ca) 50%,#f0e2cc)!important}
+html:not(.nb-dark) textarea,html:not(.nb-dark) input,html:not(.nb-dark) select{background:color-mix(in srgb,var(--ca,var(--tint)) 12%,#fbf3e2)!important;border-color:color-mix(in srgb,var(--ca,var(--acc)) 65%,#d9c9b0)!important}
+html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(255,255,255,0),color-mix(in srgb,var(--tint) 40%,#fbeee2) 85%)!important}
+}
+</style>
 </head>
 <body>
 
@@ -1353,7 +1424,7 @@ function createProjectManager(cfg) {
     async function loadActiveProjectIntoForm() {
         const id = getActiveId();
         const data = await getProjectData(id);
-        document.querySelectorAll('textarea').forEach(t => {
+        document.querySelectorAll('textarea[id]').forEach(t => {
             t.value = data[t.id] || '';
         });
     }
@@ -1494,7 +1565,7 @@ function printAllTabs(){
 
 <title>دفترچه کتاب‌خوان</title>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="fonts.css">
 
 <style>
 
@@ -1921,6 +1992,7 @@ function searchNotebook(){
             .find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId));
         if(navBtn) navBtn.click();
     }
+    if(window.nbxReveal) window.nbxReveal(match);
 
     match.classList.add('search-highlight');
     match.scrollIntoView({ behavior:'smooth', block:'center' });
@@ -1974,5 +2046,6 @@ function openTab(evt, tabName) {
 <script>
 (function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var t;document.addEventListener('input',function(e){var el=e.target;if(!el.matches||!el.matches('textarea'))return;clearTimeout(t);t=setTimeout(function(){var r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var d=document.createElement('i');d.className='nb-ink';d.style.left=(r.left+14)+'px';d.style.top=Math.min(r.bottom-24,innerHeight-30)+'px';document.body.appendChild(d);setTimeout(function(){d.remove()},950)},1200)})})();
 </script>
+<script src="extras.js?v=15"></script>
 </body>
 </html>

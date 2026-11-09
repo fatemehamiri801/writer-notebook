@@ -212,6 +212,15 @@ html:not(.nb-dark) .ruled{background:repeating-linear-gradient(transparent 0 31p
 html:not(.nb-dark) .lbl{background:#fdeccd}
 html:not(.nb-dark) .leaf{background:linear-gradient(90deg,#f0d6d2,#fde6e2 30%)}
 @media(max-width:760px){html:not(.nb-dark) .back .sheet{box-shadow:2px 2px 0 #bfd6c6,4px 4px 0 #e3efe6,6px 6px 0 #aac6b3,inset 14px 0 18px -14px rgba(40,80,60,.3)}}
+
+/* ===== fix: روی‌هم‌افتادن متن فهرست در موبایل ===== */
+@media(max-width:760px){
+.toc{justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.toc li{flex:1 0 auto;min-height:0}
+.toc a{min-height:max-content;align-items:center;gap:10px;padding:6px 4px}
+.toc b{line-height:1.5;font-size:.95rem}
+.toc small{font-size:.74rem;line-height:1.55}
+}
 </style>
 </head>
 <body>

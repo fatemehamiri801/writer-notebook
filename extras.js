@@ -128,7 +128,7 @@ var css = '' +
 '.nbx-book-top{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}' +
 '.nbx-book-name{font-weight:700;font-size:1rem}' +
 '.nbx-stars{display:inline-flex;gap:2px;direction:ltr}' +
-'.nbx-star{border:0;background:none;font-size:1.45rem;line-height:1;cursor:pointer;color:#c9b88f;padding:2px}' +
+'.nbx-star{border:0;background:none;font-size:1.7rem;line-height:1;cursor:pointer;color:#9a7f45;padding:2px;min-width:42px;min-height:42px;display:inline-flex;align-items:center;justify-content:center}html.nb-dark .nbx-star{color:#b3a47c}html.nb-dark .nbx-star.on{color:#f0c34a}' +
 '.nbx-star.on{color:#e3a712}' +
 '.nbx-book-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;font-size:.82rem;color:var(--nbx-mut)}' +
 '.nbx-book select,.nbx-book input[type=date],.nbx-meta select,.nbx-meta input[type=date],.nbx-modal select{padding:6px 8px;border-radius:8px;border:1.5px solid var(--nbx-bd);background:var(--nbx-in)!important;color:var(--nbx-tx)!important;font:inherit;font-size:.82rem}' +
@@ -172,7 +172,7 @@ var css2 = [
 'html body .nav-wrapper{position:static!important;box-shadow:none}',
 'html body .nav-wrapper::before,html body .nav-wrapper::after{display:none!important;content:none!important}',
 'html body .nav-wrapper nav{margin:0!important;position:static!important;overflow:visible!important;flex-wrap:wrap!important;white-space:normal!important;justify-content:center!important;gap:8px!important;padding:12px 10px!important}',
-'html body .nav-wrapper nav .nav-link{flex:1 1 auto!important;padding:9px 12px!important;font-size:.88rem!important;border-radius:12px!important;margin:0!important;border-bottom-width:2px!important;text-align:center}',
+'html body .nav-wrapper nav .nav-link{flex:1 1 auto!important;padding:12px 14px!important;min-height:46px;font-size:1rem!important;border-radius:12px!important;margin:0!important;border-bottom-width:2px!important;text-align:center}',
 '.nbx-navbar,.nbx-navbar.on{display:none!important}',
 '}',
 '.nbx-guide{margin-bottom:12px}.nbx-road-st h3 small{font-weight:400;font-size:.8rem}',
@@ -333,7 +333,52 @@ var PROMPTS_W = [
     'آخرین صحنهٔ داستانت را بدون هیچ دیالوگی توصیف کن.',
     'در این داستان «خانه» برای هر شخصیت یعنی چه؟',
     'دو شخصیتت در آسانسور گیر کرده‌اند؛ کدامشان اول سکوت را می‌شکند و چرا؟',
-    'چه چیزی در آغاز داستان درست به نظر می‌رسد ولی در پایان غلط از آب درمی‌آید؟'
+    'چه چیزی در آغاز داستان درست به نظر می‌رسد ولی در پایان غلط از آب درمی‌آید؟',
+    'شخصیتت صبح که از خواب بیدار می‌شود، اولین فکرش چیست؟',
+    'چه چیزی شب‌ها شخصیتت را بیدار نگه می‌دارد؟',
+    'شخصیتت دربارهٔ پول و قدرت چه باوری دارد و این باور از کجا آمده؟',
+    'اولین چیزی که دیگران دربارهٔ شخصیتت فکر می‌کنند چیست، و چرا اشتباه است؟',
+    'شخصیتت در چه موقعیتی ناخودآگاه دروغ می‌گوید؟',
+    'کدام خاطرهٔ کودکی هنوز تصمیم‌های امروز شخصیتت را می‌سازد؟',
+    'شخصیتت از چه چیزی بیش از مرگ می‌ترسد؟',
+    'اگر شخصیتت یک روز کامل فقط حقیقت می‌گفت، چه بلایی سرش می‌آمد؟',
+    'چه کسی را شخصیتت هنوز نبخشیده و چرا؟',
+    'کدام ویژگی شخصیتت در آغاز مزیت است و در پایان به مصیبت تبدیل می‌شود؟',
+    'اگر شخصیتت می‌توانست یک اشتباه گذشته را پاک کند، کدام را انتخاب می‌کرد و بعدش چه می‌شد؟',
+    'شخصیتت وقتی کسی را دوست دارد چه کاری می‌کند که دیگران نمی‌کنند؟',
+    'بوی خانهٔ شخصیتت چیست؟',
+    'چه چیزی در جیب یا کیف شخصیتت هست که هیچ‌کس خبر ندارد؟',
+    'اگر شخصیت منفی‌ات یک روز مهربان باشد، به چه دلیلی؟',
+    'شخصیت منفی‌ات شب‌ها پیش از خواب به چه فکر می‌کند؟',
+    'کدام ارزش شخصیتت زیر فشار اول از همه می‌شکند؟',
+    'قدیمی‌ترین ضرب‌المثل جهان داستانت چیست و معنای واقعی‌اش چه بوده؟',
+    'مردم جهان داستانت صبحانه چه می‌خورند و این دربارهٔ اقتصادشان چه می‌گوید؟',
+    'چه چیزی در جهان تو ممنوع یا قاچاق است و چه کسی از آن سود می‌برد؟',
+    'مردم جهانت چطور مرگ را بدرقه می‌کنند؟',
+    'خطرناک‌ترین مکان جهان داستانت کجاست و چرا هنوز کسی به آنجا می‌رود؟',
+    'جهان تو چه دروغ رسمی‌ای دارد که همه می‌دانند دروغ است؟',
+    'کدام شغل در جهان تو هست که در جهان ما نیست؟',
+    'یک جشن یا آیین مهم در جهان داستانت چطور شروع شد؟',
+    'کمیاب‌ترین و ارزشمندترین چیز در جهان داستانت چیست؟',
+    'یک واژه، لهجه یا ناسزا که فقط در جهان تو معنا دارد چیست؟',
+    'اگر رنگ آسمان جهانت فرق می‌کرد، چه چیزهایی تغییر می‌کرد؟',
+    'قدرتمندترین نهاد جهان داستانت چطور به قدرت رسید و چه چیزی از دید مردم پنهان مانده؟',
+    'اگر صحنهٔ سوم داستانت را حذف کنی، چه چیزی فرو می‌ریزد؟',
+    'کدام تصمیم قهرمانت باید کاملاً غلط، اما قابل‌فهم باشد؟',
+    'قهرمانت اولین بار کجا باید شکست بخورد؟',
+    'یک صحنهٔ آرامِ پیش از طوفان بنویس؛ چه چیزی در آن نامحسوس اشاره به طوفان است؟',
+    'چه چیزی را می‌توانی با یک شیء کوچک نشان بدهی، به‌جای آنکه توضیح بدهی؟',
+    'اگر کل داستانت در یک شب اتفاق می‌افتاد، آن شب چه شبی بود؟',
+    'اولین جمله‌ای که خواننده را مجبور به ادامه دادن می‌کند چیست؟',
+    'یک دیالوگ بنویس که در آن هیچ‌کس حرف اصلی‌اش را نمی‌زند.',
+    'اگر راوی داستانت یک حیوان یا یک شیء بود، چه چیزی را می‌دید؟',
+    'مهم‌ترین چیزی که قهرمانت باید یاد بگیرد چیست، و چه کسی نباید آن را به او بگوید؟',
+    'اگر پایان داستانت تلخ‌وشیرین باشد، چه چیزی شیرین است و چه چیزی تلخ؟',
+    'نقطهٔ بی‌بازگشت داستانت کجاست و قهرمان از کجا می‌فهمد؟',
+    'داستانت را در یک جمله بگو، بعد همان را فقط با یک تصویر بگو.',
+    'چه چیزی در داستانت باید کوچک‌تر و ساده‌تر شود تا قوی‌تر شود؟',
+    'کدام شخصیت فرعی می‌تواند ناگهان مهم‌ترین نقش را بگیرد؟',
+    'اگر ده سال بعد داستانت را بخوانی، کدام قسمتش را عوض می‌کنی؟'
 ];
 var PROMPTS_R = [
     'اگر جای شخصیت اصلی بودی، کدام تصمیمش را عوض می‌کردی؟',
@@ -347,24 +392,60 @@ var PROMPTS_R = [
     'چه چیزی از سبک نویسنده را می‌توانی در نوشتهٔ خودت امتحان کنی؟',
     'کدام لحظهٔ کتاب را پیش‌بینی نمی‌کردی و چرا؟',
     'بعد از تمام شدن کتاب، اولین فکری که به سرت زد چه بود؟',
-    'اگر می‌توانستی از شخصیت اصلی فقط یک سؤال بپرسی، چه می‌پرسیدی؟'
+    'اگر می‌توانستی از شخصیت اصلی فقط یک سؤال بپرسی، چه می‌پرسیدی؟',
+    'کدام جمله یا پاراگراف را زیر خط می‌کشیدی و چرا؟',
+    'اگر شخصیت اصلی را در یک کافه می‌دیدی، چه چیزی به او می‌گفتی؟',
+    'کدام شخصیت کتاب شبیه کسی است که می‌شناسی؟',
+    'نویسنده در کجای کتاب چیزی را از تو پنهان کرد؟',
+    'کدام قسمت کتاب را دوبار خواندی و چرا؟',
+    'کتاب را بدون لو دادن داستان در یک جمله چطور معرفی می‌کنی؟',
+    'اگر این کتاب یک غذا بود، چه طعمی داشت؟',
+    'کدام شخصیت را زودتر از بقیه دوست یا دشمن داشتی، و بعداً نظرت عوض شد؟',
+    'کتاب چه سؤال بی‌جوابی در ذهنت گذاشت؟',
+    'اگر این داستان در شهر و زمان تو اتفاق می‌افتاد، چه چیزی فرق می‌کرد؟',
+    'کدام قسمت کتاب کند به نظر رسید و شاید لازم بود؟',
+    'کدام توصیف یا تصویر نویسنده برایت زنده‌تر از بقیه بود؟',
+    'بعد از این کتاب، دلت می‌خواهد کدام کتاب را بخوانی؟',
+    'پایان کتاب را چطور برای دوستت تعریف می‌کنی؟',
+    'کدام دیالوگ کتاب را هنوز به یاد داری؟',
+    'چه چیزی از شخصیت اصلی را در خودت دیدی؟',
+    'اگر عنوان کتاب را عوض می‌کردی، چه می‌گذاشتی؟',
+    'کتاب فراتر از ماجرا دربارهٔ چه چیزی است؟',
+    'کدام شخصیت بیشتر از همه تغییر کرد و چه چیزی او را عوض کرد؟',
+    'اگر یک شخصیت فرعی راوی کتاب می‌شد، داستان چه فرقی می‌کرد؟',
+    'کدام لحظهٔ کتاب تو را خنداند یا اشکت را درآورد؟',
+    'نویسنده با چه ترفندی تو را تا آخر کتاب نگه داشت؟',
+    'کجای کتاب حس کردی «این را قبلاً جایی دیده‌ام»؟',
+    'برای نقش اصلی فیلم این کتاب چه کسی را انتخاب می‌کردی؟',
+    'اگر بخواهی یک نکته از این کتاب را در زندگی‌ات به کار ببری، کدام است؟',
+    'چه چیزی در کتاب نیمه‌گفته ماند که دلت می‌خواست بیشتر بدانی؟',
+    'اگر با نویسنده یک قهوه می‌خوردی، اولین سؤالت چه بود؟',
+    'کدام صحنه را اگر نویسنده طولانی‌تر می‌نوشت بیشتر لذت می‌بردی؟',
+    'کدام جمله از کتاب را دوست داری ماندگار بماند؟',
+    'این کتاب را کدام فصل سال یا ساعت روز دوست داشتی بخوانی؟',
+    'چه چیزی این کتاب را برای تو خواندنی کرد؟',
+    'اگر قرار بود به یک جملهٔ کتاب جواب بدهی، به کدام و چه می‌گفتی؟',
+    'کدام شخصیت در پایان کتاب به نظرت بهتر از بقیه از ماجرا بیرون آمد؟'
 ];
 var diceApi = null;
 function buildDice() {
-    var tab = isWriter ? $('#tab-hub') : $('#tab6');
+    var nav = $('nav'), tab = null;
     var target = isWriter ? '#hub-free-writing' : '#read-writing-ideas';
     var targetName = isWriter ? '«تخلیه ذهن»' : '«ایده‌هایی که کتاب به ذهنت رساند»';
-    if (!tab) return;
+    if (!nav || !$('.tab-content') || $('#tab-dice')) return;
+    tab = el('div', { id: 'tab-dice', 'class': 'tab-content' });
     var pool = isWriter ? PROMPTS_W : PROMPTS_R, last = -1;
     diceApi = null;
     var box = el('div', { 'class': 'nbx-dice', id: 'nbx-dice' },
-        '<h3>🎲 جرقهٔ تصادفی</h3><div class="nbx-dice-q" id="nbx-dice-q" aria-live="polite">برای شروع، دکمهٔ زیر را بزن.</div>' +
-        '<div class="nbx-row"><button type="button" class="nbx-btn primary" id="nbx-dice-roll">🎲 یک سؤال تصادفی بده</button>' +
+        '<h3>🎲 جرقهٔ تصادفی</h3><div class="nbx-dice-q" id="nbx-dice-q" aria-live="polite">برای شروع، دکمهٔ «ایده تصادفی» را بزن.</div>' +
+        '<div class="nbx-row"><button type="button" class="nbx-btn primary" id="nbx-dice-roll">🎲 ایده تصادفی</button>' +
         '<button type="button" class="nbx-btn" id="nbx-dice-ans" hidden>✍️ همین‌جا جواب بده</button></div>' +
         '<div id="nbx-dice-form" hidden><textarea class="nbx-skip" id="nbx-dice-text" placeholder="هر چیزی که اولین بار به ذهنت می‌رسد؛ بدون سانسور..."></textarea>' +
-        '<div class="nbx-row"><button type="button" class="nbx-btn primary" id="nbx-dice-save">💾 ذخیره در ' + esc(targetName) + '</button></div></div>');
-    var first = $('.layer-card', tab);
-    var ref = first || tab.firstChild; ref.parentNode.insertBefore(box, ref);
+        '<div class="nbx-row"><button type="button" class="nbx-btn primary" id="nbx-dice-save">💾 ذخیره در ایده‌های تصادفی</button></div></div>');
+    var arch = el('div', { 'class': 'nbx-dice-arch' }, '<h3 style="margin:18px 0 8px;font-size:1.05rem">📚 ایده‌های تصادفی ذخیره‌شده <small class="nbx-muted" id="nbx-dice-cnt"></small></h3><div id="nbx-dice-list"></div>');
+    tab.appendChild(box); tab.appendChild(arch);
+    placeTab(tab);
+    nav.appendChild(el('button', { 'class': 'nav-link', onclick: "openTab(event, 'tab-dice')" }, '🎲 ' + (isWriter ? fa($$('nav .nav-link').length + 1) + '. ' : '') + 'ایده تصادفی'));
     var q = $('#nbx-dice-q'), ans = $('#nbx-dice-ans'), form = $('#nbx-dice-form'), txt = $('#nbx-dice-text');
     $('#nbx-dice-roll').onclick = function () {
         var i; do { i = Math.floor(Math.random() * pool.length); } while (i === last && pool.length > 1);
@@ -372,14 +453,43 @@ function buildDice() {
     };
     ans.onclick = function () { form.hidden = false; txt.focus(); };
     diceApi = { set: function (t) { q.textContent = t; ans.hidden = false; form.hidden = false; txt.value = ''; txt.focus(); } };
-    $('#nbx-dice-save').onclick = function () {
-        var v = txt.value.trim(), t = $(target);
-        if (!v || !t) { toast('اول چیزی بنویس.'); return; }
-        t.value = (t.value.trim() ? t.value.replace(/\s+$/, '') + '\n\n' : '') + '— ' + q.textContent + '\n' + v;
-        t.dispatchEvent(new Event('input', { bubbles: true }));
+    $('#nbx-dice-save').onclick = async function () {
+        var v = txt.value.trim();
+        if (!v) { toast('اول چیزی بنویس.'); return; }
+        var item = { id: uid(), q: q.textContent, t: v, ts: Date.now() };
+        await patchData(activeId(), function (d) { d.__dice = [item].concat(d.__dice || []); });
         txt.value = ''; form.hidden = true;
-        toast('ذخیره شد ✓');
+        toast('در ایده‌های تصادفی ذخیره شد ✓');
+        refreshDice();
     };
+    $('#nbx-dice-list').addEventListener('input', function (e) {
+        var ta = e.target; if (!ta.classList.contains('nbx-dice-edit')) return;
+        autoGrow(ta); var id = ta.closest('.nbx-quote').getAttribute('data-id'), val = ta.value;
+        clearTimeout(ta._t); ta._t = setTimeout(function () { patchData(activeId(), function (d) { (d.__dice || []).forEach(function (x) { if (x.id === id) x.t = val; }); }); }, 400);
+    });
+    $('#nbx-dice-list').addEventListener('click', async function (e) {
+        var bt = e.target.closest('[data-del]'); if (!bt) return;
+        var id = bt.closest('.nbx-quote').getAttribute('data-id');
+        if (!confirm('این ایده حذف شود؟')) return;
+        await patchData(activeId(), function (d) { d.__dice = (d.__dice || []).filter(function (x) { return x.id !== id; }); });
+        refreshDice();
+    });
+    refreshDice();
+}
+async function refreshDice() {
+    var host = $('#nbx-dice-list'); if (!host) return;
+    var d = await getData(activeId()), list = (d.__dice || []).filter(function (x) { return x && typeof x === 'object'; });
+    host.innerHTML = '';
+    var cnt = $('#nbx-dice-cnt'); if (cnt) cnt.textContent = list.length ? fa(list.length) + ' ایده' : '';
+    if (!list.length) { host.innerHTML = '<div class="nbx-empty">هنوز ایده‌ای ذخیره نکرده‌ای. یک «ایده تصادفی» بگیر، جواب بده و ذخیره کن.</div>'; return; }
+    list.forEach(function (x) {
+        var c = el('div', { 'class': 'nbx-quote', 'data-id': x.id },
+            '<div class="nbx-muted" style="font-weight:700;margin-bottom:6px">🎲 ' + esc(x.q || '') + '</div>' +
+            '<textarea class="nbx-in nbx-skip nbx-dice-edit" rows="2" style="width:100%;min-height:60px" aria-label="جواب"></textarea>' +
+            '<div class="nbx-row" style="margin-top:6px"><span class="nbx-muted">' + (x.ts ? esc(persianDate(dateKey(new Date(x.ts)))) : '') + '</span><button type="button" class="nbx-btn nbx-danger" data-del style="margin-right:auto">🗑 حذف</button></div>');
+        var ta = $('textarea', c); ta.value = x.t || '';
+        host.appendChild(c); autoGrow(ta);
+    });
 }
 
 /* ======================================================================
@@ -963,10 +1073,11 @@ function applyStatusChange(meta, val) {
     return patch;
 }
 function buildMetaBox() {
-    var tab = isWriter ? $('.tab-content') : $('#tab1'); if (!tab) return;
-    var box = el('div', { 'class': 'layer-card nbx-meta', id: 'nbx-meta' });
-    var first = $('.layer-card', tab);
-    tab.insertBefore(box, first && first.parentNode === tab ? first : tab.firstChild);
+    var nav = $('nav'); if (!nav || !$('.tab-content') || $('#tab-status')) return;
+    var tab = el('div', { id: 'tab-status', 'class': 'tab-content' });
+    tab.appendChild(el('div', { 'class': 'layer-card nbx-meta', id: 'nbx-meta' }));
+    placeTab(tab);
+    nav.appendChild(el('button', { 'class': 'nav-link', onclick: "openTab(event, 'tab-status')" }, (isWriter ? '📖 ' + fa($$('nav .nav-link').length + 1) + '. وضعیت اثر' : '🌟 وضعیت و امتیاز')));
 }
 async function refreshMetaBox() {
     var box = $('#nbx-meta'); if (!box) return;
@@ -997,6 +1108,7 @@ async function refreshMetaBox() {
 async function loadRows() {
     var projects = PM().getProjects(), rows = [];
     for (var i = 0; i < projects.length; i++) {
+        if (!projects[i] || !projects[i].id) continue;
         var d = await getData(projects[i].id), meta = d.__meta || {};
         rows.push({ id: projects[i].id, name: projects[i].name, meta: meta });
     }
@@ -1014,6 +1126,7 @@ function libSummary(rows) {
         writing: rows.filter(function (r) { return r.meta.status === 'writing'; }).length,
         revising: rows.filter(function (r) { return r.meta.status === 'revising'; }).length,
         idea: rows.filter(function (r) { return r.meta.status === 'idea'; }).length,
+        dropped: rows.filter(function (r) { return r.meta.status === 'dropped'; }).length,
         avg: rated.length ? (rated.reduce(function (a, r) { return a + r.meta.rating; }, 0) / rated.length) : 0
     };
     // خلاصه برای نمایش روی صفحهٔ اصلی (بدون نیاز به باز کردن دیتابیس)
@@ -1021,8 +1134,8 @@ function libSummary(rows) {
     return s;
 }
 function statsHtml(s) {
-    if (isWriter || isWorks) return '<div class="nbx-sum"><div class="big"><b>' + fa(s.done) + '</b>کتاب نوشته و تمام کرده‌ای</div>' +
-        '<div><b>' + fa(s.total) + '</b>اثر در دفترچه</div><div><b>' + fa(s.thisYear) + '</b>تمام‌شده در سال ' + esc(s.yr) + '</div><div><b>' + fa(s.writing + s.revising) + '</b>در حال نوشتن و بازنویسی</div><div><b>' + fa(s.idea) + '</b>در مرحلهٔ ایده</div></div>';
+    if (isWriter || isWorks) return '<div class="nbx-sum nbx-sum5"><div data-f="idea" role="button" tabindex="0" aria-pressed="false"><b>' + fa(s.idea) + '</b>💡 ایده</div><div data-f="writing" role="button" tabindex="0" aria-pressed="false"><b>' + fa(s.writing) + '</b>✍️ در حال نوشتن</div><div data-f="revising" role="button" tabindex="0" aria-pressed="false"><b>' + fa(s.revising) + '</b>🔧 در حال بازنویسی</div><div data-f="done" role="button" tabindex="0" aria-pressed="false"><b>' + fa(s.done) + '</b>✅ تمام شد</div><div data-f="dropped" role="button" tabindex="0" aria-pressed="false"><b>' + fa(s.dropped) + '</b>⏸️ نیمه‌کاره ماند</div></div>';
+        '<div><b>' + fa(s.total) + '</b>اثر ثبت‌شده</div><div><b>' + fa(s.thisYear) + '</b>تمام‌شده در سال ' + esc(s.yr) + '</div><div><b>' + fa(s.writing + s.revising) + '</b>در حال نوشتن و بازنویسی</div><div><b>' + fa(s.idea) + '</b>در مرحلهٔ ایده</div></div>';
     return '<div class="nbx-sum"><div class="big"><b>' + fa(s.thisYear) + '</b>کتاب در سال ' + esc(s.yr) + ' تمام کرده‌ای</div>' +
         '<div><b>' + fa(s.total) + '</b>کتاب در کتابخانه</div><div><b>' + fa(s.done) + '</b>کل کتاب‌های تمام‌شده</div><div><b>' + fa(s.reading) + '</b>در حال خواندن</div><div><b>' + fa(s.want) + '</b>در صف خواندن</div>' +
         '<div><b>' + (s.avg ? fa(s.avg.toFixed(1)) : '—') + '</b>میانگین امتیاز</div></div>';
@@ -1268,7 +1381,7 @@ async function quotesInto(pane, m) {
     paint();
 }
 var NEXT_KEY = 'nbx-next';
-function getNext() { try { return JSON.parse(lsGet(NEXT_KEY, '[]')) || []; } catch (e) { return []; } }
+function getNext() { return safeList(NEXT_KEY).filter(function (x) { return typeof x.t === 'string'; }); }
 function setNext(l) { lsSet(NEXT_KEY, JSON.stringify(l)); }
 function nextInto(pane, m) {
     var list = getNext();
@@ -1322,10 +1435,10 @@ async function compareInto(pane, m) {
    🛒 فهرست خرید + 🖋️ نویسندگان مورد علاقه (صفحهٔ کتابخانه)
    ====================================================================== */
 var BUY_KEY = 'nbx-buy', AUTH_KEY = 'nbx-authors';
-var BUY_PRI = [['1', '🔴 حتماً بخر'], ['2', '🟡 وقتی شد'], ['3', '🟢 شاید']];
-function getBuy() { try { return JSON.parse(lsGet(BUY_KEY, '[]')) || []; } catch (e) { return []; } }
+var BUY_PRI = [['1', '🔴 حتماً بخر'], ['2', '🟡 هر وقت که شد'], ['3', '🟢 شاید']];
+function getBuy() { return safeList(BUY_KEY).filter(function (x) { return typeof x.t === 'string'; }); }
 function setBuy(l) { lsSet(BUY_KEY, JSON.stringify(l)); }
-function getAuth() { try { return JSON.parse(lsGet(AUTH_KEY, '[]')) || []; } catch (e) { return []; } }
+function getAuth() { return safeList(AUTH_KEY).filter(function (x) { return typeof x.n === 'string'; }); }
 function setAuth(l) { lsSet(AUTH_KEY, JSON.stringify(l)); }
 function priceOf(b) { var n = parseInt(String(b.pr || '').replace(/[۰-۹]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); }).replace(/[^\d]/g, ''), 10); return isNaN(n) ? 0 : n; }
 function money(n) { try { return n.toLocaleString('fa-IR'); } catch (e) { return String(n); } }
@@ -1393,11 +1506,78 @@ async function authorsInto(pane, m) {
         host.appendChild(c);
     });
 }
+/* ======================================================================
+   💾 پشتیبان‌گیری و بازیابی کل صفحه (کتابخانهٔ من / آثار من)
+   ====================================================================== */
+var BK_APP = isWorks ? 'nvsdg-works' : 'reader-library';
+function bkKeys() { return isWorks ? [EXT_KEY, IDEA_KEY] : [NEXT_KEY, BUY_KEY, AUTH_KEY]; }
+function backupBarHtml() {
+    return '<div class="nbx-row nbx-bkbar" style="margin-bottom:10px;gap:8px">' +
+        '<button type="button" class="nbx-btn" id="nbx-bk-save" title="همهٔ ' + (isWorks ? 'آثار، خلاصه‌ها و بایگانی ایده‌ها' : 'کتاب‌ها، جمله‌ها، صف خواندن، فهرست خرید و نویسنده‌ها') + ' را در یک فایل ذخیره کن">💾 پشتیبان‌گیری از همه‌چیز</button>' +
+        '<button type="button" class="nbx-btn" id="nbx-bk-load" title="فایل پشتیبان را بارگذاری کن">📂 بازیابی از فایل</button>' +
+        '<input type="file" id="nbx-bk-file" accept="application/json,.json" style="display:none"></div>';
+}
+function bkAsk(msg) { return (typeof window.nbConfirm === 'function') ? window.nbConfirm(msg, true) : Promise.resolve(confirm(msg)); }
+async function fullBackup() {
+    try {
+        var projects = PM().getProjects(), out = [];
+        for (var i = 0; i < projects.length; i++) {
+            if (!projects[i] || !projects[i].id) continue;
+            out.push({ id: projects[i].id, name: projects[i].name, data: await getData(projects[i].id) });
+        }
+        var ls = {}; bkKeys().forEach(function (k) { var v = lsGet(k, null); if (v != null) ls[k] = v; });
+        var payload = { app: BK_APP, kind: 'full', exportedAt: new Date().toISOString(), projects: out, ls: ls };
+        var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        var url = URL.createObjectURL(blob), a = document.createElement('a');
+        a.href = url; a.download = (isWorks ? 'works' : 'library') + '-backup-' + dateKey() + '.json';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        toast('فایل پشتیبان ذخیره شد ✓');
+    } catch (e) { try { console.error(e); } catch (_) {} toast('⚠️ پشتیبان‌گیری انجام نشد.'); }
+}
+async function fullRestore(file) {
+    if (!file) return;
+    try {
+        var payload = JSON.parse(await file.text()), projs = [], lists = {};
+        if (payload && payload.app === BK_APP && Array.isArray(payload.projects)) { projs = payload.projects; lists = payload.ls || {}; }
+        else if (payload && payload.app === NS && payload.data && typeof payload.data === 'object') { projs = [{ id: uid(), name: payload.name || 'کتاب بازیابی‌شده', data: payload.data }]; }
+        else { toast('فایل پشتیبان معتبر نیست یا مال بخش دیگری است.'); return; }
+        projs = projs.filter(function (x) { return x && typeof x.id === 'string' && x.id && x.data && typeof x.data === 'object'; });
+        var ok = await bkAsk('محتوای فایل با اطلاعات فعلی ادغام می‌شود؛ چیزی حذف نمی‌شود. مواردی که هم در فایل و هم الان هستند با نسخهٔ فایل جایگزین می‌شوند. ادامه بدهم؟');
+        if (!ok) return;
+        var list = LP.list(), nProj = 0, nItems = 0;
+        for (var i = 0; i < projs.length; i++) {
+            var x = projs[i], idx = -1;
+            list.forEach(function (q, k) { if (q && q.id === x.id) idx = k; });
+            if (idx > -1) list[idx] = { id: x.id, name: x.name || list[idx].name }; else list.push({ id: x.id, name: x.name || 'بدون نام' });
+            await setData(x.id, x.data); nProj++;
+        }
+        lsSet(NS + '-projects', JSON.stringify(list));
+        bkKeys().forEach(function (k) {
+            if (typeof lists[k] !== 'string') return;
+            var bk; try { bk = JSON.parse(lists[k]); } catch (e) { return; }
+            if (!Array.isArray(bk)) return;
+            var cur = safeList(k), map = {}, order = [];
+            function keyOf(it) { return (it && typeof it.id === 'string' && it.id) ? it.id : JSON.stringify(it); }
+            cur.forEach(function (it) { var kk = keyOf(it); if (!(kk in map)) order.push(kk); map[kk] = it; });
+            bk.forEach(function (it) { if (!it || typeof it !== 'object' || Array.isArray(it)) return; var kk = keyOf(it); if (!(kk in map)) order.push(kk); map[kk] = it; nItems++; });
+            strictSave(k, order.map(function (kk) { return map[kk]; }));
+        });
+        toast('بازیابی شد ✓ (' + fa(nProj) + ' ' + (isWorks ? 'دفترچه' : 'کتاب') + (nItems ? ' و ' + fa(nItems) + ' مورد دیگر' : '') + ')');
+        setTimeout(function () { location.reload(); }, 900);
+    } catch (e) { try { console.error(e); } catch (_) {} toast('خطا در خواندن فایل پشتیبان. فایل درستی انتخاب کن.'); }
+}
+function wireBackupBar() {
+    var sv = $('#nbx-bk-save'), ld = $('#nbx-bk-load'), fi = $('#nbx-bk-file'); if (!sv || !ld || !fi) return;
+    sv.onclick = fullBackup;
+    ld.onclick = function () { fi.click(); };
+    fi.onchange = function () { var f = fi.files && fi.files[0]; fi.value = ''; fullRestore(f); };
+}
 function buildLibraryPage() {
     var host = $('#lib-root'); if (!host) return;
-    host.innerHTML = '<div id="lib-stats"></div><div class="nbx-seg" id="lib-seg" role="tablist" aria-label="بخش‌های کتابخانه"></div><div class="nbx-mbody lib-pane" id="lib-pane"></div>';
-    var seg = $('#lib-seg'), pane = $('#lib-pane');
-    var tabs = [['list', '📚 قفسهٔ کتاب‌ها', bookListInto], ['quotes', '✨ جمله‌های ماندگار', quotesInto], ['next', '🔖 صف خواندن', nextInto], ['buy', '🛒 فهرست خرید', buyInto], ['authors', '🖋️ نویسندگان من', authorsInto], ['compare', '⚖️ مقایسه', compareInto]];
+    host.innerHTML = backupBarHtml() + '<div id="lib-stats"></div><div class="nbx-seg" id="lib-seg" role="tablist" aria-label="بخش‌های کتابخانه"></div><div class="nbx-mbody lib-pane" id="lib-pane"></div>';
+    wireBackupBar(); var seg = $('#lib-seg'), pane = $('#lib-pane');
+    var tabs = [['list', '📚 قفسهٔ کتاب‌ها', bookListInto], ['quotes', '✨ جمله‌های ماندگار', quotesInto], ['next', '🔖 صف خواندن', nextInto], ['buy', '🛒 فهرست خرید', buyInto], ['authors', '🖋️ نویسنده‌های مورد علاقه‌ام', authorsInto], ['compare', '⚖️ مقایسه', compareInto]];
     function show(id) {
         if (!tabs.some(function (t) { return t[0] === id; })) id = 'list';
         $$('button', seg).forEach(function (b) { var on = b.getAttribute('data-id') === id; b.setAttribute('aria-pressed', String(on)); b.setAttribute('aria-selected', String(on)); });
@@ -1434,43 +1614,106 @@ function buildNavHint() {
 /* ======================================================================
    ✍️ آثار من (صفحهٔ نویسنده): شمارش و وضعیت کتاب‌هایی که نوشته
    ====================================================================== */
+var EXT_KEY = 'nbx-works-ext', IDEA_KEY = 'nbx-ideas';
+/* خواندن امن: داده‌ی خراب یا ناقص هیچ‌وقت صفحه را از کار نمی‌اندازد */
+function safeList(key) {
+    var raw; try { raw = JSON.parse(lsGet(key, '[]')); } catch (e) { return []; }
+    if (!Array.isArray(raw)) return [];
+    return raw.filter(function (x) { return x && typeof x === 'object' && !Array.isArray(x); }).map(function (x) { if (typeof x.id !== 'string' || !x.id) x.id = uid(); return x; });
+}
+var lastSaveWarn = 0;
+function strictSave(key, list) {
+    try { localStorage.setItem(key, JSON.stringify(list)); return true; }
+    catch (e) { var n = Date.now(); if (n - lastSaveWarn > 4000) { lastSaveWarn = n; toast('⚠️ ذخیره نشد؛ حافظهٔ مرورگر پر است یا ذخیره‌سازی بسته است.'); } return false; }
+}
+function getExt() { return safeList(EXT_KEY).filter(function (x) { return typeof x.t === 'string' && x.t.trim(); }); }
+function setExt(l) { return strictSave(EXT_KEY, l); }
+function getIdeas() { return safeList(IDEA_KEY); }
+function setIdeas(l) { return strictSave(IDEA_KEY, l); }
+function extStatusSelect(v) { return '<select class="nbx-st" aria-label="وضعیت اثر">' + BSTATUS.slice(1).map(function (s) { return '<option value="' + s[0] + '"' + (v === s[0] ? ' selected' : '') + '>' + s[1] + '</option>'; }).join('') + '</select>'; }
+function autoGrow(t) { t.style.height = 'auto'; t.style.height = Math.max(t.scrollHeight + 2, 90) + 'px'; }
+async function loadWorkRows() {
+    var rows = await loadRows();
+    getExt().forEach(function (x) { rows.push({ id: x.id, name: x.t, meta: { status: x.s || 'done', finished: x.fin || '' }, ext: true, note: x.n || '' }); });
+    return rows;
+}
 async function worksListInto(body) {
     var filter = 'all', q = '', rows = [], gname = {};
     GENRES_W.forEach(function (g) { gname[g.id] = g.icon + ' ' + g.name; });
-    body.innerHTML = '<div class="nbx-formbox nbx-addbook"><label class="nbx-muted" for="nbx-bl-new">اثر تازه (کتاب یا داستان) را اضافه کن</label>' +
-        '<div class="nbx-row"><input class="nbx-in" id="nbx-bl-new" type="text" placeholder="نام کتاب یا داستان" style="flex:1;min-width:180px"><button type="button" class="nbx-btn primary" id="nbx-bl-add">➕ افزودن</button></div></div>' +
-        '<div class="nbx-chips" id="nbx-bl-chips"></div>' +
+    body.innerHTML = '<div class="nbx-formbox nbx-addbook"><label class="nbx-muted" for="nbx-bl-new">✍️ ثبت اثر تازه؛ اسم، خلاصه و جایگاهش در آرشیو را خودت انتخاب کن</label>' +
+        '<input class="nbx-in" id="nbx-bl-new" type="text" placeholder="نام اثر (کتاب یا داستان)" style="width:100%;margin-top:6px">' +
+        '<textarea class="nbx-in" id="nbx-bl-sum" placeholder="خلاصهٔ اثر؛ دربارهٔ چیست؟ (اختیاری)" rows="3" style="width:100%;min-height:80px;margin-top:8px"></textarea>' +
+        '<div class="nbx-row" style="margin-top:8px"><select id="nbx-ex-st" aria-label="آرشیو؛ وضعیت اثر">' + BSTATUS.slice(1).map(function (s) { return '<option value="' + s[0] + '"' + (s[0] === 'writing' ? ' selected' : '') + '>' + s[1] + '</option>'; }).join('') + '</select>' +
+        '<input class="nbx-in" id="nbx-ex-fin" type="date" aria-label="تاریخ اتمام (اختیاری)" title="تاریخ اتمام (اختیاری)" style="max-width:170px"></div>' +
+        '<label class="nbx-muted" style="display:flex;align-items:center;gap:6px;margin-top:8px;cursor:pointer"><input type="checkbox" id="nbx-bl-nb"> 📓 برای این اثر دفترچهٔ نویسندگی هم ساخته شود</label>' +
+        '<div class="nbx-row" style="margin-top:8px"><button type="button" class="nbx-btn primary" id="nbx-ex-add">➕ ثبت اثر</button></div></div>' +
         '<div class="nbx-row" style="margin:6px 0 4px"><input class="nbx-in" id="nbx-bl-q" type="search" placeholder="🔍 جستجو بین آثار" aria-label="جستجو بین آثار" style="flex:1;min-width:150px;max-width:280px"></div><div id="nbx-bl-list"></div>';
     $('#nbx-bl-q').oninput = function (e) { q = e.target.value.trim(); paint(); };
     async function addWork() {
         var inp = $('#nbx-bl-new'), name = inp.value.trim();
         if (!name) { toast('نام اثر را بنویس.'); return; }
-        await LP.addBook(name); inp.value = ''; toast('به آثار من اضافه شد ✓'); reload();
+        var st = $('#nbx-ex-st').value, sum = $('#nbx-bl-sum').value.trim(), fin = st === 'done' ? $('#nbx-ex-fin').value : '';
+        if (st === 'done' && !fin) fin = dateKey();
+        if ($('#nbx-bl-nb').checked) {
+            var id = await LP.addBook(name);
+            await setMeta({ status: st, finished: fin, summary: sum }, id);
+        } else {
+            var l = getExt();
+            l.push({ id: uid(), t: name, s: st, fin: fin, n: sum });
+            if (!setExt(l)) return;
+        }
+        inp.value = ''; $('#nbx-bl-sum').value = ''; $('#nbx-ex-fin').value = ''; $('#nbx-bl-nb').checked = false;
+        toast('اثر ثبت شد ✓'); reload();
     }
-    $('#nbx-bl-add').onclick = addWork;
+    function syncExDate() { var on = $('#nbx-ex-st').value === 'done', f = $('#nbx-ex-fin'); f.disabled = !on; f.style.opacity = on ? '1' : '.45'; if (!on) f.value = ''; }
+    $('#nbx-ex-st').onchange = syncExDate; syncExDate();
+    $('#nbx-ex-add').onclick = addWork;
     $('#nbx-bl-new').onkeydown = function (e) { if (e.key === 'Enter') { e.preventDefault(); addWork(); } };
-    async function reload() { rows = await loadRows(); paint(); }
+    async function reload() {
+        try { rows = await loadWorkRows(); paint(); }
+        catch (err) { try { console.error(err); } catch (_) {} var h = $('#nbx-bl-list'); if (h) h.innerHTML = '<div class="nbx-empty">⚠️ خواندن آثار با مشکل روبه‌رو شد. صفحه را یک‌بار تازه کن؛ داده‌هایت پاک نشده است.</div>'; }
+    }
     function paint() {
         var s = libSummary(rows), sh = $('#lib-stats'); if (sh) sh.innerHTML = statsHtml(s);
-        var chips = $('#nbx-bl-chips'); chips.innerHTML = '';
-        [['all', 'همه'], ['done', '✅ تمام‌شده'], ['writing', '✍️ در حال نوشتن'], ['revising', '🔧 بازنویسی'], ['idea', '💡 ایده'], ['dropped', '⏸️ نیمه‌کاره']].forEach(function (f) {
-            var c = el('button', { 'class': 'nbx-chip', type: 'button', 'aria-pressed': String(filter === f[0]) }, f[1]);
-            c.onclick = function () { filter = f[0]; paint(); };
-            chips.appendChild(c);
+        if (sh) $$('[data-f]', sh).forEach(function (bx) {
+            var f = bx.getAttribute('data-f'), on = filter === f;
+            bx.setAttribute('aria-pressed', String(on)); if (on) bx.classList.add('on');
+            function pick() { filter = (filter === f) ? 'all' : f; paint(); }
+            bx.onclick = pick;
+            bx.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } };
         });
         var list = rows.filter(function (r) { return (filter === 'all' || (r.meta.status || '') === filter) && (!q || r.name.toLowerCase().indexOf(q.toLowerCase()) > -1); });
         var host = $('#nbx-bl-list'); host.innerHTML = '';
-        if (!rows.length) { host.innerHTML = '<div class="nbx-empty">هنوز اثری ثبت نکرده‌ای. اولین کتابت را بالا اضافه کن؛ هر اثر دفترچهٔ خودش را در «دفترچه نویسندگی» دارد.</div>'; return; }
+        if (!rows.length) { host.innerHTML = '<div class="nbx-empty">هنوز اثری ثبت نکرده‌ای. اولین اثرت را بالا اضافه کن؛ می‌توانی آن را با دفترچهٔ خودش در «دفترچه نویسندگی» بسازی یا فقط اسمش را ثبت کنی.</div>'; return; }
         if (!list.length) { host.innerHTML = '<div class="nbx-empty">اثری با این فیلتر پیدا نشد.</div>'; return; }
         list.forEach(function (r) {
             var meta = r.meta, b = el('div', { 'class': 'nbx-book' });
+            if (r.ext) {
+                b.innerHTML = '<div class="nbx-book-top"><span class="nbx-book-name">' + esc(r.name) + '</span><span class="nbx-muted">📎 خارج از دفترچه</span></div>' +
+                    '<div class="nbx-book-foot">' + extStatusSelect(meta.status || 'done') +
+                    (meta.status === 'done' ? '<label>پایان: <input type="date" class="nbx-fin" value="' + esc(meta.finished || '') + '"></label>' : '') +
+                    '<button type="button" class="nbx-btn nbx-share">🖼️ کارت اثر</button><button type="button" class="nbx-mini del" style="margin-right:auto" aria-label="حذف اثر">🗑</button></div>' +
+                    '<textarea class="nbx-in nbx-ext-note" placeholder="خلاصهٔ اثر (اختیاری)..." rows="2" style="margin-top:8px;width:100%;min-height:60px"></textarea>';
+                var xl = $('.nbx-ext-note', b); xl.value = r.note || ''; setTimeout(function () { autoGrow(xl); }, 0);
+                function patchExt(fn) { var l = getExt(), it = l.filter(function (z) { return z.id === r.id; })[0]; if (it) { fn(it); setExt(l); } }
+                xl.oninput = function () { autoGrow(xl); patchExt(function (it) { it.n = xl.value; }); };
+                $('.nbx-st', b).onchange = function (e) { var v = e.target.value; patchExt(function (it) { it.s = v; if (v === 'done' && !it.fin) it.fin = dateKey(); }); reload(); };
+                var xf = $('.nbx-fin', b); if (xf) xf.onchange = function (e) { patchExt(function (it) { it.fin = e.target.value; }); reload(); };
+                $('.nbx-share', b).onclick = function () { openShareCard('«' + r.name + '»', 'اثری که نوشتم'); };
+                $('.del', b).onclick = function () { if (!confirm('«' + r.name + '» از فهرست آثار حذف شود؟')) return; setExt(getExt().filter(function (z) { return z.id !== r.id; })); reload(); };
+                host.appendChild(b); return;
+            }
             var gs = (meta.genres || []).map(function (g) { return gname[g]; }).filter(Boolean).join(' · ');
             b.innerHTML = '<div class="nbx-book-top"><span class="nbx-book-name">' + esc(r.name) + '</span></div>' +
                 (gs ? '<div class="nbx-muted" style="margin-top:2px">' + esc(gs) + '</div>' : '') +
                 '<div class="nbx-book-foot">' + statusSelect(meta.status || '') +
                 (meta.status === 'done' ? '<label>پایان: <input type="date" class="nbx-fin" value="' + esc(meta.finished || '') + '"></label>' : '') +
                 '<button type="button" class="nbx-btn nbx-share">🖼️ کارت اثر</button><button type="button" class="nbx-btn nbx-open" style="margin-right:auto">باز کردن دفترچه ←</button></div>' +
-                (meta.finished ? '<div class="nbx-muted" style="margin-top:4px">تمام‌شده در ' + esc(persianDate(meta.finished)) + '</div>' : '');
+                (meta.finished ? '<div class="nbx-muted" style="margin-top:4px">تمام‌شده در ' + esc(persianDate(meta.finished)) + '</div>' : '') +
+                '<textarea class="nbx-in nbx-ext-note" placeholder="خلاصهٔ اثر (اختیاری)..." rows="2" style="margin-top:8px;width:100%;min-height:60px"></textarea>';
+            var sl = $('.nbx-ext-note', b); sl.value = meta.summary || ''; setTimeout(function () { autoGrow(sl); }, 0);
+            var slT = 0; sl.oninput = function () { autoGrow(sl); clearTimeout(slT); slT = setTimeout(function () { setMeta({ summary: sl.value }, r.id); }, 400); };
+            sl.onblur = function () { clearTimeout(slT); setMeta({ summary: sl.value }, r.id); };
             $('.nbx-st', b).onchange = async function (e) { await setMeta(applyStatusChange(meta, e.target.value), r.id); reload(); };
             var fin = $('.nbx-fin', b);
             if (fin) fin.onchange = async function (e) { await setMeta({ finished: e.target.value }, r.id); reload(); };
@@ -1481,10 +1724,58 @@ async function worksListInto(body) {
     }
     reload();
 }
+function ideasInto(pane) {
+    var q = '';
+    pane.innerHTML = '<div class="nbx-formbox"><label class="nbx-muted" for="nbx-id-t">هر ایده‌ای که به ذهنت رسید اینجا بایگانی کن؛ بدون هیچ دفترچه و محدودیتی، ده خط یا صد خط.</label>' +
+        '<input class="nbx-in" id="nbx-id-t" type="text" placeholder="عنوان ایده (اختیاری)">' +
+        '<textarea class="nbx-in" id="nbx-id-x" placeholder="ایده‌ات را بنویس..." style="min-height:120px;width:100%"></textarea>' +
+        '<div class="nbx-row"><button type="button" class="nbx-btn primary" id="nbx-id-add">💡 به بایگانی ایده‌ها اضافه کن</button></div></div>' +
+        '<div class="nbx-row" style="margin:10px 0 2px"><input class="nbx-in" id="nbx-id-q" type="search" placeholder="🔍 جستجو بین ایده‌ها" aria-label="جستجو بین ایده‌ها" style="flex:1;min-width:150px;max-width:280px"><span class="nbx-muted" id="nbx-id-cnt"></span></div><div id="nbx-id-list"></div>';
+    var tx = $('#nbx-id-x'); tx.oninput = function () { autoGrow(tx); };
+    $('#nbx-id-add').onclick = function () {
+        var t = $('#nbx-id-t').value.trim(), x = tx.value.trim();
+        if (!t && !x) { toast('یک عنوان یا متن برای ایده بنویس.'); return; }
+        var l = getIdeas(); l.unshift({ id: uid(), t: t, x: tx.value, d: dateKey() });
+        if (!setIdeas(l)) return;
+        $('#nbx-id-t').value = ''; tx.value = ''; autoGrow(tx); toast('ایده بایگانی شد ✓'); paint();
+    };
+    $('#nbx-id-q').oninput = function (e) { q = e.target.value.trim().toLowerCase(); paint(); };
+    function paint() {
+        var all = getIdeas(), host = $('#nbx-id-list'); host.innerHTML = '';
+        $('#nbx-id-cnt').textContent = all.length ? fa(all.length) + ' ایده در بایگانی' : '';
+        var list = all.filter(function (i) { return !q || ((i.t || '') + ' ' + (i.x || '')).toLowerCase().indexOf(q) > -1; });
+        if (!all.length) { host.innerHTML = '<div class="nbx-empty">بایگانی ایده‌هایت خالی است؛ اولین ایده‌ات را بالا بنویس.</div>'; return; }
+        if (!list.length) { host.innerHTML = '<div class="nbx-empty">ایده‌ای با این جستجو پیدا نشد.</div>'; return; }
+        list.forEach(function (it) {
+            var c = el('div', { 'class': 'nbx-book' });
+            c.innerHTML = '<div class="nbx-book-top"><input class="nbx-in id-t" type="text" placeholder="بدون عنوان" aria-label="عنوان ایده" style="flex:1;min-width:140px;font-weight:700"><span class="nbx-muted">' + esc(persianDate(it.d)) + '</span></div>' +
+                '<textarea class="nbx-in id-x" aria-label="متن ایده" style="margin-top:8px;width:100%;min-height:90px"></textarea>' +
+                '<div class="nbx-row" style="margin-top:8px"><button type="button" class="nbx-mini del" style="margin-right:auto" aria-label="حذف ایده">🗑</button></div>';
+            var t = $('.id-t', c), x = $('.id-x', c); t.value = it.t || ''; x.value = it.x || ''; setTimeout(function () { autoGrow(x); }, 0);
+            function save() { var l = getIdeas(), z = l.filter(function (k) { return k.id === it.id; })[0]; if (z) { z.t = t.value; z.x = x.value; setIdeas(l); } }
+            t.oninput = save; x.oninput = function () { autoGrow(x); save(); };
+            $('.del', c).onclick = function () { if (!confirm('این ایده برای همیشه حذف شود؟')) return; setIdeas(getIdeas().filter(function (k) { return k.id !== it.id; })); paint(); };
+            host.appendChild(c);
+        });
+    }
+    paint();
+}
 function buildWorksPage() {
     var host = $('#lib-root'); if (!host) return;
-    host.innerHTML = '<div id="lib-stats"></div><div class="nbx-mbody lib-pane" id="lib-pane"></div>';
-    worksListInto($('#lib-pane'));
+    host.innerHTML = backupBarHtml() + '<div id="lib-stats"></div><div class="nbx-seg" id="lib-seg" role="tablist" aria-label="بخش‌های آثار من"></div><div class="nbx-mbody lib-pane" id="lib-pane"></div>';
+    wireBackupBar(); var seg = $('#lib-seg'), pane = $('#lib-pane'), stats = $('#lib-stats');
+    var tabs = [['works', '📚 آثار من', function (p) { stats.style.display = ''; worksListInto(p); }], ['ideas', '💡 بایگانی ایده‌ها', function (p) { stats.style.display = 'none'; ideasInto(p); }]];
+    function show(id) {
+        if (!tabs.some(function (t) { return t[0] === id; })) id = 'works';
+        $$('button', seg).forEach(function (b) { var on = b.getAttribute('data-id') === id; b.setAttribute('aria-pressed', String(on)); b.setAttribute('aria-selected', String(on)); });
+        pane.innerHTML = ''; tabs.filter(function (t) { return t[0] === id; })[0][2](pane);
+        try { history.replaceState(null, '', '#' + id); } catch (e) {}
+    }
+    tabs.forEach(function (t) { var b = el('button', { 'class': 'nbx-chip', type: 'button', role: 'tab', 'data-id': t[0] }, t[1]); b.onclick = function () { show(t[0]); }; seg.appendChild(b); });
+    window.addEventListener('hashchange', function () { show(location.hash.replace('#', '')); });
+    show(location.hash.replace('#', '') || 'works');
+    function again() { if (document.visibilityState === 'hidden') return; var on = $('#lib-seg button[aria-pressed="true"]'); if (on && on.getAttribute('data-id') === 'works' && !(document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName))) show('works'); }
+    document.addEventListener('visibilitychange', again); window.addEventListener('pageshow', function (ev) { if (ev.persisted) again(); });
 }
 
 /* ======================================================================
@@ -1719,11 +2010,11 @@ function charEd(data) {
     });
     ed.innerHTML = h;
     $$('textarea', ed).forEach(function (t) { t.value = data[t.getAttribute('data-k')] || ''; });
-    var any = false;
-    $$('details', ed).forEach(function (d, i) {
-        var filled = $$('textarea', d).some(function (t) { return t.value.trim(); });
-        if (filled || i === 0) d.open = true;
-        any = any || filled;
+    var stOpen = openState();
+    $$('details', ed).forEach(function (d) {
+        var k = 'chars|' + d.getAttribute('data-layer');
+        d.open = !!stOpen[k];
+        d.addEventListener('toggle', function () { var o = openState(); o[k] = d.open ? 1 : 0; lsSet(OPEN_KEY, JSON.stringify(o)); });
     });
     return ed;
 }
@@ -1935,6 +2226,7 @@ function buildHubTab() {
 }
 window.nbxReveal = function (t) {
     try {
+        var cc = t.closest && t.closest('.layer-card.nbx-coll'); if (cc && !cc.classList.contains('nbx-open')) setCardOpen(cc, true, false);
         var ed = t.closest && t.closest('.nbx-char-ed');
         if (ed) { showChar(ed.getAttribute('data-id')); var det = t.closest('details'); if (det) det.open = true; }
         var pane = t.closest && t.closest('.nbx-pane');
@@ -2031,7 +2323,7 @@ function buildLearnTab() {
     var tab = el('div', { id: 'tab-learn', 'class': 'tab-content' });
     var h = '<div class="layer-card"><h3>📚 مینی‌آموزش</h3><p class="nbx-muted" style="margin:0">سه درس کوتاه، هر کدام چند نکته و یک تمرین پنج‌دقیقه‌ای. این بخش فقط خواندنی است و در خروجی PDF نمی‌آید.</p></div>';
     LEARN.forEach(function (l, i) {
-        h += '<details class="layer-card nbx-layer nbx-learn"' + (i === 0 ? ' open' : '') + '><summary><h3>' + l.icon + ' ' + esc(l.title) + '</h3></summary><ul class="nbx-tips">' +
+        h += '<details class="layer-card nbx-layer nbx-learn"><summary><h3>' + l.icon + ' ' + esc(l.title) + '</h3></summary><ul class="nbx-tips">' +
             l.tips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul><div class="nbx-ex"><b>✍️ تمرین:</b> ' + esc(l.ex) + '</div></details>';
     });
     tab.innerHTML = h;
@@ -2159,7 +2451,7 @@ async function refreshStickies() {
 }
 
 /* ---------- استایل بخش‌های جدید ---------- */
-document.head.appendChild(el('style', { id: 'nbx-css2' }, [
+document.head.appendChild(el('style', { id: 'nbx-css3' }, [
     '.nbx-in,.nbx-formbox select,.nbx-formbox textarea{width:100%;box-sizing:border-box;padding:9px 11px;border-radius:10px;border:1.5px solid var(--nbx-bd);background:var(--nbx-in)!important;color:var(--nbx-tx)!important;font:inherit;font-size:.9rem}',
     '.nbx-formbox{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:12px;background:var(--nbx-in);border:1px dashed var(--nbx-bd)}',
     '.nbx-formbox textarea{min-height:84px}',
@@ -2190,6 +2482,23 @@ document.head.appendChild(el('style', { id: 'nbx-css2' }, [
     'html.nbx-writer:not(.nb-dark)[data-tab="7"]{--pt:#fff0c8}html.nbx-writer:not(.nb-dark)[data-tab="8"]{--pt:#dbe9f8}',
     'html.nbx-writer.nb-dark body nav .nav-link:not(.active):nth-child(8){background:#5a4a1f!important}html.nbx-writer.nb-dark body nav .nav-link:not(.active):nth-child(9){background:#2f435c!important}',
     'html.nbx-writer.nb-dark[data-tab="7"]{--accd:#e8c86a}html.nbx-writer.nb-dark[data-tab="8"]{--accd:#9cc4ec}',
+    /* رنگ پاستلی تب‌های ۱۰ تا ۱۳ نویسنده */
+    'html.nbx-writer:not(.nb-dark) body nav .nav-link:not(.active):nth-child(10){background:#d9ecc2!important}',
+    'html.nbx-writer[data-tab="9"]{--tint:#d9ecc2;--acc:#9bc25c;--accd:#567a1f;--ml:rgba(155,194,92,.6)}',
+    'html.nbx-writer:not(.nb-dark)[data-tab="9"]{--pt:#eaf5da}',
+    'html.nbx-writer.nb-dark body nav .nav-link:not(.active):nth-child(10){background:#3f4d2a!important}html.nbx-writer.nb-dark[data-tab="9"]{--accd:#b6d98a}',
+    'html.nbx-writer:not(.nb-dark) body nav .nav-link:not(.active):nth-child(11){background:#ecc9e8!important}',
+    'html.nbx-writer[data-tab="10"]{--tint:#ecc9e8;--acc:#cf8fc2;--accd:#8e4a82;--ml:rgba(207,143,194,.6)}',
+    'html.nbx-writer:not(.nb-dark)[data-tab="10"]{--pt:#f8e6f5}',
+    'html.nbx-writer.nb-dark body nav .nav-link:not(.active):nth-child(11){background:#54395a!important}html.nbx-writer.nb-dark[data-tab="10"]{--accd:#e5a8da}',
+    'html.nbx-writer:not(.nb-dark) body nav .nav-link:not(.active):nth-child(12){background:#c2ece2!important}',
+    'html.nbx-writer[data-tab="11"]{--tint:#c2ece2;--acc:#5fc0ad;--accd:#2a7c6b;--ml:rgba(95,192,173,.6)}',
+    'html.nbx-writer:not(.nb-dark)[data-tab="11"]{--pt:#e0f5f0}',
+    'html.nbx-writer.nb-dark body nav .nav-link:not(.active):nth-child(12){background:#2b4a45!important}html.nbx-writer.nb-dark[data-tab="11"]{--accd:#8fdcc9}',
+    'html.nbx-writer:not(.nb-dark) body nav .nav-link:not(.active):nth-child(13){background:#cfd4f6!important}',
+    'html.nbx-writer[data-tab="12"]{--tint:#cfd4f6;--acc:#8a96e0;--accd:#4650a8;--ml:rgba(138,150,224,.6)}',
+    'html.nbx-writer:not(.nb-dark)[data-tab="12"]{--pt:#e6e9fa}',
+    'html.nbx-writer.nb-dark body nav .nav-link:not(.active):nth-child(13){background:#373c66!important}html.nbx-writer.nb-dark[data-tab="12"]{--accd:#aab4f0}',
     'html.nbx-reader:not(.nb-dark) body nav .nav-link:not(.active):nth-child(9){background:#fdd9c4!important}',
     'html.nbx-reader[data-tab="8"]{--tint:#fdd9c4;--acc:#ee9a74;--accd:#a8532e;--ml:rgba(238,154,116,.6)}',
     'html.nbx-reader:not(.nb-dark)[data-tab="8"]{--pt:#fde2d0}',
@@ -2200,7 +2509,7 @@ document.head.appendChild(el('style', { id: 'nbx-css2' }, [
     '.nbx-av{flex:none;width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--av,#e58fa8);color:#2a1d2e;font-weight:800;font-size:.85rem;border:1.5px solid rgba(58,42,63,.35)}',
     '.nbx-av-lg{width:44px;height:44px;font-size:1.2rem}',
     '.nbx-char-ed[hidden],.nbx-pane[hidden]{display:none}',
-    '.nbx-btn.sm{padding:4px 11px;font-size:.78rem;border-radius:8px}',
+    '.nbx-btn.sm{padding:4px 11px;font-size:.78rem;border-radius:8px}.nbx-addsticky{min-height:40px}',
     '.nbx-lk{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}',
     '.nbx-lk-box{padding-top:8px;border-top:1px dashed var(--nbx-bd)}',
     '.nbx-lk-t{font-size:.8rem;color:var(--nbx-mut)}',
@@ -2229,6 +2538,14 @@ document.head.appendChild(el('style', { id: 'nbx-css2' }, [
     '.nbx-layer[open]>summary{margin-bottom:12px}',
     '.nbx-layer>summary:focus-visible{outline:2px solid var(--nbx-acd);outline-offset:3px;border-radius:6px}',
     '.nbx-fill{color:var(--nbx-mut);font-size:.8rem}',
+    '.layer-card.nbx-coll>h3{cursor:pointer;display:flex;align-items:center;gap:10px;user-select:none;-webkit-tap-highlight-color:transparent}',
+    '.layer-card.nbx-coll>h3::after{content:"▾";font-size:1.1rem;opacity:.7;transition:transform .2s;flex:none}',
+    '.layer-card.nbx-coll:not(.nbx-open)>h3::after{transform:rotate(90deg)}',
+    '.layer-card.nbx-coll:not(.nbx-open)>h3{margin-bottom:0!important;padding-bottom:0!important;border-bottom:0!important}',
+    '.layer-card.nbx-coll:not(.nbx-open)>:not(h3){display:none!important}',
+    '.layer-card.nbx-coll>h3:focus-visible{outline:2px solid var(--nbx-acd);outline-offset:3px;border-radius:6px}',
+    '.nbx-fill2{flex:1;text-align:end;color:var(--nbx-mut);font-size:.75rem;font-weight:400;white-space:nowrap}',
+    '@media print{.layer-card.nbx-coll:not(.nbx-open)>:not(h3){display:revert!important}.layer-card.nbx-coll>h3::after{display:none}}',
     '@media(max-width:600px){.nbx-ch-meta{grid-template-columns:1fr}.nbx-ch-acts .nbx-btn{flex:1 1 auto}}',
     '.nbx-time-seg{padding:0 0 12px;flex-wrap:wrap;white-space:normal}',
     '.nbx-rhy-bar{display:flex;flex-wrap:wrap;gap:4px;align-items:center;padding:10px;border-radius:12px;background:var(--nbx-in);border:1px solid var(--nbx-bd)}',
@@ -2398,7 +2715,7 @@ function buildNotesTab() {
             NOTES = NOTES.filter(function (x) { return x.id !== id; }); if (noteEditing === id) endEdit(); saveNotes(); renderNotes();
         } else if (act === 'edit') {
             noteEditing = id; ta.value = n.t; pg.value = n.p || ''; addB.textContent = '💾 ذخیرهٔ تغییر'; canB.hidden = false;
-            ta.focus(); try { tab.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {}
+            window.nbxReveal(ta); ta.focus(); try { tab.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (x) {}
         } else if (act === 'card') openShareCard(n.t, '«' + activeName() + '»' + (n.p ? '، صفحهٔ ' + n.p : ''));
         else if (act === 'star') {
             await patchData(activeId(), function (d) {
@@ -2439,6 +2756,7 @@ async function refreshNotes() {
 async function refreshAll() {
     await flushSavers();
     await Promise.all([refreshGenre(), isWriter ? refreshStructure() : 0, isWriter ? refreshChars() : 0, (isReader || isWriter) ? refreshMetaBox() : 0, isReader ? refreshNotes() : 0, (isReader || isWriter) ? updateLibSummary() : 0, refreshStickies()].concat(CTABS.map(function (t) { return t.refresh(); })));
+    refreshDice();
     if (isWriter) { refreshRhythm(); renderSpine(); refreshLinks(); }
 }
 function hookProjectManager() {
@@ -2446,6 +2764,69 @@ function hookProjectManager() {
         var orig = pm[k]; if (typeof orig !== 'function') return;
         pm[k] = async function () { await flushSavers(); var r = await orig.apply(this, arguments); await refreshAll(); return r; };
     });
+}
+
+/* ======================================================================
+   🗂️ کارت‌های تب‌ها مثل بخش شخصیت‌ها: لیست جمع‌وجور که با کلیک باز می‌شود
+   ====================================================================== */
+var OPEN_KEY = 'nbx-open-' + NS;
+function openState() { try { var o = JSON.parse(lsGet(OPEN_KEY, '{}')); return (o && typeof o === 'object') ? o : {}; } catch (e) { return {}; } }
+function cardEligible(c) {
+    if (!c || c.tagName !== 'DIV') return false;
+    var cl = c.classList;
+    if (cl.contains('nbx-meta') || cl.contains('nbx-ch-head') || cl.contains('nbx-ch-top')) return false;
+    if (c.closest('.nbx-chars')) return false;
+    if (c.parentElement && c.parentElement.closest('.layer-card')) return false;
+    var h = c.firstElementChild;
+    return !!(h && h.tagName === 'H3');
+}
+function setCardOpen(card, on, persist) {
+    card.classList.toggle('nbx-open', !!on);
+    var h = card.firstElementChild; if (h) h.setAttribute('aria-expanded', String(!!on));
+    if (persist) { var st = openState(); st[card.getAttribute('data-nbx-key')] = on ? 1 : 0; lsSet(OPEN_KEY, JSON.stringify(st)); }
+}
+function enhanceCards() {
+    var st = openState();
+    $$('.tab-content').forEach(function (tab) {
+        $$('.layer-card', tab).forEach(function (c) {
+            if (c.classList.contains('nbx-coll')) return;
+            if (!cardEligible(c)) return;
+            var h = c.firstElementChild, key = tab.id + '|' + h.textContent.trim().replace(/\s+/g, ' ').slice(0, 60);
+            c.classList.add('nbx-coll'); c.setAttribute('data-nbx-key', key);
+            h.setAttribute('role', 'button'); h.setAttribute('tabindex', '0');
+            var sp = el('span', { 'class': 'nbx-fill2' }); h.appendChild(sp);
+            var on = (key in st) ? !!st[key] : false;
+            setCardOpen(c, on, false);
+        });
+    });
+    updateFillCounts();
+}
+function updateFillCounts() {
+    $$('.layer-card.nbx-coll').forEach(function (c) {
+        var sp = c.firstElementChild && c.firstElementChild.querySelector('.nbx-fill2'); if (!sp) return;
+        var all = $$('textarea, input[type="text"], input:not([type])', c).filter(function (f) { return !f.closest('.nbx-lk'); });
+        var n = all.filter(function (f) { return String(f.value || '').trim(); }).length;
+        var txt = (all.length && all.length <= 14 && n) ? fa(n) + ' از ' + fa(all.length) : '';
+        if (sp.textContent !== txt) sp.textContent = txt;
+    });
+}
+function setupCollapsibleCards() {
+    enhanceCards();
+    var t = 0, again = function () { clearTimeout(t); t = setTimeout(enhanceCards, 150); };
+    var mo = new MutationObserver(function (muts) {
+        for (var i = 0; i < muts.length; i++) { if (muts[i].target.closest && muts[i].target.closest('.nbx-fill2')) continue; if (muts[i].addedNodes.length) { again(); return; } }
+    });
+    $$('.tab-content').forEach(function (tab) { mo.observe(tab, { childList: true, subtree: true }); });
+    function toggleFrom(e) {
+        var h = e.target.closest && e.target.closest('h3'); if (!h) return;
+        var card = h.parentElement; if (!card || !card.classList.contains('nbx-coll') || card.firstElementChild !== h) return;
+        if (e.target.closest('button, a, input, select, textarea, label') && e.target !== h) return;
+        e.preventDefault(); setCardOpen(card, !card.classList.contains('nbx-open'), true);
+    }
+    document.addEventListener('click', toggleFrom);
+    document.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.tagName === 'H3') toggleFrom(e); });
+    document.addEventListener('input', debounce(updateFillCounts, 300));
+    setInterval(function () { if (document.visibilityState !== 'hidden') updateFillCounts(); }, 1500);
 }
 async function init() {
     try { localStorage.removeItem('nbx-mood'); } catch (e) {} root.removeAttribute('data-nbx-mood'); root.style.removeProperty('--nbx-mood');
@@ -2460,10 +2841,9 @@ async function init() {
     if (isWriter) buildRoadTab();
     if (isWriter) buildLearnTab();
     if (isReader || isWriter) buildMetaBox();
+    if (isReader || isWriter) setupCollapsibleCards();
     var tb = $('.project-toolbar');
     if (tb) {
-        if (isReader) tb.appendChild(el('a', { 'class': 'btn-toolbar nbx-liblink', href: 'library.html' }, '📚 کتابخانهٔ من'));
-        if (isWriter) tb.appendChild(el('a', { 'class': 'btn-toolbar nbx-liblink', href: 'works.html' }, '✍️ آثار من'));
         var cb = el('button', { 'class': 'btn-toolbar', type: 'button' }, SHARE.icon + ' ' + SHARE.name); cb.onclick = function () { openShareCard('', '«' + activeName() + '»'); }; tb.appendChild(cb);
     }
     buildToolbarMenu();

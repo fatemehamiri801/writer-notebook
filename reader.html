@@ -33,9 +33,13 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
+html {
     overflow-x: hidden;
+}
+
+body {
+    min-height: 100%;
+    overflow-x: clip;
 }
 
 body {
@@ -803,6 +807,9 @@ html[data-tab="6"]{--tint:#d5c8f0;--acc:#9d85d6;--accd:#5e45a3;--ml:rgba(157,133
 html:not(.nb-dark)[data-tab="6"]{--pt:#f7f3fd}
 html[data-tab="7"]{--tint:#ecc6e4;--acc:#cf8fc2;--accd:#8e4a82;--ml:rgba(207,143,194,.6)}
 html:not(.nb-dark)[data-tab="7"]{--pt:#fdf3fb}
+html[data-tab="9"]{--tint:#f3d9a6;--acc:#e0a24a;--accd:#8a5a10;--ml:rgba(224,162,74,.6)}
+html:not(.nb-dark)[data-tab="9"]{--pt:#fff5e2}
+html.nb-dark[data-tab="9"]{--accd:#f0c070}
 html body nav .nav-link:nth-child(1){background:#f6c3d0!important}
 html body nav .nav-link:nth-child(2){background:#f9cdb5!important}
 html body nav .nav-link:nth-child(3){background:#f9e3a3!important}
@@ -978,8 +985,8 @@ html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(2
     <button class="nav-link" onclick="openTab(event, 'tab3')">👤 شخصیت‌ها</button>
     <button class="nav-link" onclick="openTab(event, 'tab4')">🌍 جهان و سبک</button>
     <button class="nav-link" onclick="openTab(event, 'tab5')">🔍 تحلیل و معما</button>
-    <button class="nav-link" onclick="openTab(event, 'tab6')">✍️ نگاه نویسنده</button>
     <button class="nav-link" onclick="openTab(event, 'tab7')">💎 گنجینه</button>
+    <button class="nav-link" onclick="openTab(event, 'tab6')">✍️ نگاه نویسنده</button>
     <button class="nav-link" onclick="openTab(event, 'tab8')">🎬 اقتباس و پایان</button>
 </nav>
 </div>
@@ -1082,23 +1089,6 @@ html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(2
             placeholder="ابهام‌ها، پایان باز یا سؤال‌هایی که کتاب برایت باقی گذاشت..."></textarea>
     </div>
 </div>
-	<!-- تب ۶: نگاه نویسنده -->
-<div id="tab6" class="tab-content">
-    <div class="layer-card">
-        <h3>✍️ کارگاه نویسنده</h3>
-
-        <label>📖 از این نویسنده چه چیزی یاد گرفتی؟</label>
-        <textarea id="read-lessons-detail" placeholder="مثلاً شخصیت‌پردازی، دیالوگ، تعلیق، روایت، فضاسازی یا هر تکنیکی که از این کتاب آموختی..."></textarea>
-
-        <label>🎯 دوست داری چه چیزی را در نوشته‌های خودت استفاده کنی؟</label>
-        <textarea id="read-my-ideas-detail" placeholder="سبک، تکنیک یا ایده‌ای که می‌خواهی در آثار خودت به کار ببری..."></textarea>
-
-        <label>💡 این کتاب چه ایده‌هایی به ذهنت رساند؟</label>
-        <textarea id="read-writing-ideas" placeholder="ایده‌ی داستان، شخصیت، صحنه، جهان‌سازی یا هر جرقه‌ای که موقع خواندن به ذهنت رسید..."></textarea>
-    </div>
-</div>
-
-
 <!-- تب ۷: گنجینه -->
 <div id="tab7" class="tab-content">
     <div class="layer-card">
@@ -1120,6 +1110,23 @@ html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(2
         <label>❤️ احساسی که این کتاب در تو بیدار کرد</label>
         <textarea id="read-memory-feeling" placeholder="چه احساسی داشتی؟"></textarea>
 
+    </div>
+</div>
+
+
+	<!-- تب ۶: نگاه نویسنده -->
+<div id="tab6" class="tab-content">
+    <div class="layer-card">
+        <h3>✍️ کارگاه نویسنده</h3>
+
+        <label>📖 از این نویسنده چه چیزی یاد گرفتی؟</label>
+        <textarea id="read-lessons-detail" placeholder="مثلاً شخصیت‌پردازی، دیالوگ، تعلیق، روایت، فضاسازی یا هر تکنیکی که از این کتاب آموختی..."></textarea>
+
+        <label>🎯 دوست داری چه چیزی را در نوشته‌های خودت استفاده کنی؟</label>
+        <textarea id="read-my-ideas-detail" placeholder="سبک، تکنیک یا ایده‌ای که می‌خواهی در آثار خودت به کار ببری..."></textarea>
+
+        <label>💡 این کتاب چه ایده‌هایی به ذهنت رساند؟</label>
+        <textarea id="read-writing-ideas" placeholder="ایده‌ی داستان، شخصیت، صحنه، جهان‌سازی یا هر جرقه‌ای که موقع خواندن به ذهنت رسید..."></textarea>
     </div>
 </div>
 
@@ -1548,8 +1555,8 @@ function printAllTabs(){
         {id:"tab3", title:"👤 شخصیت‌ها"},
         {id:"tab4", title:"🌍 جهان و سبک"},
         {id:"tab5", title:"🔍 تحلیل و معما"},
-        {id:"tab6", title:"✍️ نگاه نویسنده"},
         {id:"tab7", title:"💎 گنجینه"},
+        {id:"tab6", title:"✍️ نگاه نویسنده"},
         {id:"tab8", title:"🎬 اقتباس و پایان"}
 
     ];
@@ -2046,6 +2053,6 @@ function openTab(evt, tabName) {
 <script>
 (function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var t;document.addEventListener('input',function(e){var el=e.target;if(!el.matches||!el.matches('textarea'))return;clearTimeout(t);t=setTimeout(function(){var r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var d=document.createElement('i');d.className='nb-ink';d.style.left=(r.left+14)+'px';d.style.top=Math.min(r.bottom-24,innerHeight-30)+'px';document.body.appendChild(d);setTimeout(function(){d.remove()},950)},1200)})})();
 </script>
-<script src="extras.js?v=15"></script>
+<script src="extras.js?v=27"></script>
 </body>
 </html>

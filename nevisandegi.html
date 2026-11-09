@@ -33,9 +33,13 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
+html {
     overflow-x: hidden;
+}
+
+body {
+    min-height: 100%;
+    overflow-x: clip;
 }
 
 body {
@@ -2217,7 +2221,7 @@ printWindow.onload = function(){
 <script>
 (function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var t;document.addEventListener('input',function(e){var el=e.target;if(!el.matches||!el.matches('textarea'))return;clearTimeout(t);t=setTimeout(function(){var r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var d=document.createElement('i');d.className='nb-ink';d.style.left=(r.left+14)+'px';d.style.top=Math.min(r.bottom-24,innerHeight-30)+'px';document.body.appendChild(d);setTimeout(function(){d.remove()},950)},1200)})})();
 </script>
-<script src="extras.js?v=15"></script>
+<script src="extras.js?v=27"></script>
 </body>
 
 </html>

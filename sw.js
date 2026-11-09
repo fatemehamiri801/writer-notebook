@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-notebook-v96";
+const CACHE_NAME = "my-notebook-v115";
 // اپدیت های سرویس ورکر
 const ASSETS = [
     "./",
@@ -13,6 +13,8 @@ const ASSETS = [
     "./manifest.json",
     "./icon-192.png",
     "./icon-512.png",
+    "./icon-maskable-192.png",
+    "./icon-maskable-512.png",
     "./fonts.css"
 ];
 
@@ -47,7 +49,28 @@ self.addEventListener("activate", (event) => {
     );
 });
 
+// فونت وزیرمتن از CDN: بار اول که اینترنت هست توی کش ذخیره می‌شه
+// تا بعدش (حتی آفلاین) هم فونت درست نشون داده بشه و نیازی به
+// گذاشتن فایل‌های فونت توی پوشه‌ی fonts نباشه.
+const FONT_CDN = "https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn";
+
 self.addEventListener("fetch", (event) => {
+    if (event.request.url.startsWith(FONT_CDN)) {
+        event.respondWith(
+            caches.match(event.request).then((cached) => {
+                if (cached) return cached;
+                return fetch(event.request).then((networkResponse) => {
+                    if (networkResponse.status === 200) {
+                        const copy = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+                    }
+                    return networkResponse;
+                });
+            })
+        );
+        return;
+    }
+
     // جلوگیری از کش کردن درخواست‌های غیر ضروری (مانند اکستنشن‌ها)
     if (!event.request.url.startsWith(self.location.origin)) return;
 

@@ -25,7 +25,8 @@ if (isReader) root.classList.add('nbx-reader');
 /* ---------- ابزارهای کوچک ---------- */
 function $(s, r) { return (r || document).querySelector(s); }
 function $$(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
-function fa(n) { return Number(n).toLocaleString('fa-IR'); }
+var FA_CACHE = {}, FA_N = 0;
+function fa(n) { var k = String(n), v = FA_CACHE[k]; if (v !== undefined) return v; v = Number(n).toLocaleString('fa-IR'); if (FA_N < 4000) { FA_CACHE[k] = v; FA_N++; } return v; }
 function el(tag, attrs, html) {
     var e = document.createElement(tag);
     if (attrs) for (var k in attrs) { if (k === 'class') e.className = attrs[k]; else e.setAttribute(k, attrs[k]); }
@@ -40,6 +41,13 @@ function lsGet(k, d) { try { var v = localStorage.getItem(k); return v == null ?
 function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 function uid() { return 'c' + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36); }
 function grow(t) { t.style.height = 'auto'; t.style.height = Math.max(t.scrollHeight, 56) + 'px'; }
+/* نسخهٔ دسته‌ای: اول همه را auto می‌کند، بعد همه را می‌خواند، بعد می‌نویسد؛ فقط یک بار چیدمان محاسبه می‌شود */
+function growAll(list) {
+    list = Array.prototype.slice.call(list);
+    list.forEach(function (t) { t.style.height = 'auto'; });
+    var hs = list.map(function (t) { return Math.max(t.scrollHeight, 56); });
+    list.forEach(function (t, i) { t.style.height = hs[i] + 'px'; });
+}
 function debounce(fn, ms) { var t; return function () { var a = arguments, c = this; clearTimeout(t); t = setTimeout(function () { fn.apply(c, a); }, ms); }; }
 
 function toast(msg) {
@@ -278,10 +286,9 @@ async function setData(id, d) {
     if (ok) { try { localStorage.removeItem(dataKey(id)); } catch (e) {} }
     else { lsSet(dataKey(id), JSON.stringify(d)); }
 }
-var queue = Promise.resolve();
+window.nbSerial = window.nbSerial || (function () { var q = Promise.resolve(); return function (fn) { var r = q.then(fn); q = r.catch(function () {}); return r; }; })();
 function patchData(id, fn) {
-    queue = queue.then(async function () { var d = await getData(id); fn(d); await setData(id, d); return d; }).catch(function () {});
-    return queue;
+    return window.nbSerial(async function () { var d = await getData(id); fn(d); await setData(id, d); return d; }).catch(function () {});
 }
 var SAVERS = [];
 /* ذخیرهٔ تأخیری که پروژه‌ی مقصد را هنگام ویرایش ثبت می‌کند (نه هنگام اجرا) و پیش از عوض شدن پروژه یا بستن صفحه فوراً ذخیره می‌کند */
@@ -1023,13 +1030,14 @@ function addCard(type, data, silent) {
     return c;
 }
 function afterChange() {
-    var ch = 0, sc = 0;
+    var ch = 0, sc = 0, notes = [];
     $$('#nbx-cards .nbx-card').forEach(function (c) {
         var b = $('.nbx-badge', c);
         if (c.getAttribute('data-type') === 'chapter') { ch++; sc = 0; b.textContent = 'فصل ' + fa(ch); }
         else { sc++; b.textContent = 'صحنه ' + fa(ch || 1) + '.' + fa(sc); }
-        var n = $('.nbx-note', c); n.setAttribute('data-keep', n.value); grow(n);
+        var n = $('.nbx-note', c); if (n.getAttribute('data-keep') !== n.value || !n.style.height) notes.push(n); n.setAttribute('data-keep', n.value);
     });
+    growAll(notes);
     var all = $$('#nbx-cards .nbx-card');
     var chapters = all.filter(function (c) { return c.getAttribute('data-type') === 'chapter'; }).length;
     var done = all.filter(function (c) { return $('.nbx-status', c).value === 'done'; }).length;
@@ -2158,7 +2166,7 @@ function readEd(ed) {
 function collectChars() { return chHost ? $$('.nbx-char-ed', chHost).map(readEd) : []; }
 var saveChars = makeSaver('__chars', collectChars);
 function charRoleLabel(v) { var o = v && TYPES.filter(function (x) { return x.id === v; })[0]; return o ? (o.label || o.name) : ''; }
-function charEd(data) {
+function charEd(data, hints) {
     var ed = el('div', { 'class': 'nbx-char-ed', 'data-id': data.id || uid(), hidden: '' });
     var cid = ed.getAttribute('data-id');
     var h = '<div class="layer-card nbx-ch-head">' +
@@ -2178,6 +2186,12 @@ function charEd(data) {
     });
     ed.innerHTML = h;
     $$('textarea', ed).forEach(function (t) { t.value = data[t.getAttribute('data-k')] || ''; });
+    /* نمونهٔ راهنمای کهن‌الگو فقط به‌صورت متن کم‌رنگ (placeholder) نشان داده می‌شود: ذخیره نمی‌شود، در PDF و پشتیبان نمی‌آید و با اولین حرف ناپدید می‌شود */
+    if (hints) Object.keys(hints).forEach(function (k) {
+        if (!hints[k]) return;
+        var f = $('[data-k="' + k + '"]', ed);
+        if (f && f.type !== 'hidden' && !f.value) f.setAttribute('placeholder', 'نمونه: ' + hints[k]);
+    });
     var stOpen = openState();
     $$('details', ed).forEach(function (d) {
         var k = 'chars|' + d.getAttribute('data-layer');
@@ -2223,7 +2237,7 @@ function showChar(id) {
     eds.forEach(function (ed) {
         var on = ed.getAttribute('data-id') === id;
         if (on) ed.removeAttribute('hidden'); else ed.setAttribute('hidden', '');
-        if (on) { $$('textarea', ed).forEach(grow); fillCount(ed); }
+        if (on) { growAll($$('textarea', ed)); fillCount(ed); }
     });
     renderStrip();
 }
@@ -2246,10 +2260,10 @@ function buildCharacters() {
     /* یک دکمه برای همه‌چیز: نقش، کهن‌الگو، تیپ ادبی یا شخصیت انحصاری */
     $('.nbx-ch-add', chHost).onclick = function () {
         openTypePicker(false, function (t) {
-            var ed = charEd(t ? { id: uid(), title: t.start ? t.name : '', role: t.id, line: t.line || '', want: t.want || '', fear: t.fear || '', secret: t.secret || '', arc: t.arc || '' } : { id: uid() });
+            var ed = charEd(t ? { id: uid(), role: t.id } : { id: uid() }, t && t.start ? { line: t.line, want: t.want, fear: t.fear, secret: t.secret, arc: t.arc } : null);
             insertEd(ed); renderStrip(); showChar(ed.getAttribute('data-id')); saveChars(); refreshLinks();
             var ti = $('[data-k="title"]', ed); if (ti) { ti.focus(); if (ti.value) ti.select(); }
-            toast(!t ? 'کارت خالی ساخته شد؛ هر چه می‌خواهی بنویس' : t.start ? 'کارت «' + t.name + '» ساخته شد؛ متن‌ها فقط نقطهٔ شروع‌اند، عوضشان کن' : 'کارت ساخته شد؛ نقش: ' + charRoleLabel(t.id));
+            toast(!t ? 'کارت خالی ساخته شد؛ هر چه می‌خواهی بنویس' : t.start ? 'کارت «' + t.name + '» ساخته شد؛ نمونه‌ها فقط متن کم‌رنگ‌اند و با نوشتن ناپدید می‌شوند' : 'کارت ساخته شد؛ نقش: ' + charRoleLabel(t.id));
         });
     };
     $('.nbx-char-strip', chHost).addEventListener('click', function (e) {
@@ -2267,7 +2281,7 @@ function buildCharacters() {
         if (f.getAttribute('data-k') === 'role') renderStrip();
         saveChars();
     });
-    chHost.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) { $$('textarea', d).forEach(grow); } }, true);
+    chHost.addEventListener('toggle', function (e) { var d = e.target; if (d && d.tagName === 'DETAILS' && d.open) { growAll($$('textarea', d)); } }, true);
     chHost.addEventListener('click', async function (e) {
         var b = e.target.closest('[data-act]'); if (!b) return;
         var ed = b.closest('.nbx-char-ed'), act = b.getAttribute('data-act'); if (!ed) return;
@@ -2381,7 +2395,7 @@ function bindPanes(tab, segSel, first) {
     function showPane(name) {
         btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-pane') === name)); });
         $$('.nbx-pane', tab).forEach(function (p) { if (p.getAttribute('data-pane') === name) p.removeAttribute('hidden'); else p.setAttribute('hidden', ''); });
-        $$('.nbx-pane:not([hidden]) textarea', tab).forEach(grow);
+        growAll($$('.nbx-pane:not([hidden]) textarea', tab));
     }
     btns.forEach(function (b) { b.onclick = function () { showPane(b.getAttribute('data-pane')); }; });
     PANE_SHOW[tab.id] = showPane;
@@ -2444,7 +2458,7 @@ var TYPE_GROUPS = [
 /* انتخاب‌گر: همان یک پنجره برای ساخت شخصیت و برای عوض‌کردن نقش کارت. cb(null) = شخصیت انحصاری / بدون نقش */
 function openTypePicker(changeOnly, cb) {
     var body = el('div', { 'class': 'nbx-mbody' });
-    var h = '<p class="nbx-muted" style="margin:0 0 10px">' + (changeOnly ? 'فقط نقش و نوع کارت عوض می‌شود؛ متن‌هایی که نوشته‌ای دست‌نخورده می‌مانند.' : 'یکی را انتخاب کن تا کارتش ساخته شود. متن‌های اولیهٔ کهن‌الگوها و تیپ‌ها فقط نقطهٔ شروع‌اند و همه‌شان قابل‌تغییرند.') + '</p>';
+    var h = '<p class="nbx-muted" style="margin:0 0 10px">' + (changeOnly ? 'فقط نقش و نوع کارت عوض می‌شود؛ متن‌هایی که نوشته‌ای دست‌نخورده می‌مانند.' : 'یکی را انتخاب کن تا کارتش ساخته شود. برای کهن‌الگوها و تیپ‌ها نمونه‌های راهنما به‌صورت متن کم‌رنگ در کادرها دیده می‌شود؛ با شروع نوشتن ناپدید می‌شوند و چیزی برای پاک‌کردن نیست.') + '</p>';
     h += '<div class="nbx-arch-grid"><button type="button" class="nbx-arch-card nbx-pk-own" data-pick="" style="grid-column:1/-1"><span class="ic">✍️</span><b>' + (changeOnly ? 'بدون نقش' : 'شخصیت انحصاری') + '</b><small>' + (changeOnly ? 'برچسب نقش برداشته شود.' : 'در هیچ قالبی نمی‌گنجد؛ کارت خالی، همه‌چیز را خودت می‌نویسی.') + '</small></button></div>';
     TYPE_GROUPS.forEach(function (G) {
         h += '<h4 class="nbx-pk-h">' + esc(G.title) + '</h4><p class="nbx-muted nbx-pk-s">' + esc(G.sub) + '</p><div class="nbx-arch-grid">';
@@ -2800,15 +2814,21 @@ function ruleList() {
     return t ? t.cards().map(function (r) { return { id: r.id, name: (r.title || '').trim() || 'بدون عنوان', sub: ruleKindLabel(r.kind) }; }) : [];
 }
 function scenesOf(kind, id) { return structCards().filter(function (c) { return getLinks(c, kind).indexOf(id) > -1; }); }
-function renderCardLinks(c) {
+function linkIndex() {
+    var ix = { chars: {}, rules: {} };
+    structCards().forEach(function (c) { ['chars', 'rules'].forEach(function (k) { getLinks(c, k).forEach(function (id) { (ix[k][id] = ix[k][id] || []).push(c); }); }); });
+    return ix;
+}
+function renderCardLinks(c, ch, ru) {
     var box = $('.nbx-lk-chips', c); if (!box) return;
-    var ch = charList(), ru = ruleList(), h = '';
+    ch = Array.isArray(ch) ? ch : charList(); ru = Array.isArray(ru) ? ru : ruleList(); var h = '';
     getLinks(c, 'chars').forEach(function (id) { var x = ch.filter(function (y) { return y.id === id; })[0]; if (x) h += '<span class="nbx-lk-chip">👤 ' + esc(x.name) + '</span>'; });
     getLinks(c, 'rules').forEach(function (id) { var x = ru.filter(function (y) { return y.id === id; })[0]; if (x) h += '<span class="nbx-lk-chip">📌 ' + esc(x.name) + '</span>'; });
     box.innerHTML = h;
 }
-function renderEntityScenes(box) {
-    var kind = box.getAttribute('data-kind'), id = box.getAttribute('data-eid'), sc = scenesOf(kind, id), chars = kind === 'chars';
+function renderEntityScenes(box, ix) {
+    var kind = box.getAttribute('data-kind'), id = box.getAttribute('data-eid'), chars = kind === 'chars';
+    var sc = (ix && ix.chars) ? ((ix[kind] || {})[id] || []) : scenesOf(kind, id);
     var h = '<b class="nbx-lk-t">🎬 ' + (chars ? 'حضور در صحنه‌ها' : 'به‌کار رفته در') + '</b>';
     if (!sc.length) h += '<span class="nbx-lk-warn">⚠️ هنوز در هیچ صحنه‌ای ' + (chars ? 'نیامده' : 'به کار نرفته') + '</span>';
     else sc.forEach(function (c) { h += '<button type="button" class="nbx-lk-chip" data-go="' + esc(c.getAttribute('data-id')) + '" title="رفتن به این صحنه در «ساختار»">' + esc(cardLabel(c)) + '</button>'; });
@@ -2816,8 +2836,9 @@ function renderEntityScenes(box) {
     box.innerHTML = h;
 }
 function refreshLinks() {
-    structCards().forEach(renderCardLinks);
-    $$('.nbx-lk-box').forEach(renderEntityScenes);
+    var ch = charList(), ru = ruleList(), ix = linkIndex();
+    structCards().forEach(function (c) { renderCardLinks(c, ch, ru); });
+    $$('.nbx-lk-box').forEach(function (b) { renderEntityScenes(b, ix); });
 }
 var refreshLinksSoon = debounce(function () { refreshLinks(); }, 150);
 function unlinkEntity(kind, id) {

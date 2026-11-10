@@ -732,7 +732,7 @@ select:focus-visible,
 }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet"></noscript><link rel="preload" as="script" href="extras.js?v=28">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet"></noscript><link rel="preload" as="script" href="extras.js?v=29">
 <style id="nb-notebook-theme">
 @media screen{
 :root{--tex:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nLjgnIG51bU9jdGF2ZXM9JzInIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48ZmVDb2xvck1hdHJpeCB2YWx1ZXM9JzAgMCAwIDAgLjQ1IDAgMCAwIDAgLjM4IDAgMCAwIDAgLjI1IDAgMCAwIC4wOSAwJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+");--hand:'Aref Ruqaa','Vazirmatn',serif;--ink:#2a1560;--gold:#c99a3e;--pp:#fbf6e9;--cd:#fffdf7;--straw:#f1e2bd;--acc:#c0587f;--accd:#9b3f64;--t1:#fbe4ec;--t2:#f6d5e1;--t3:#fdeef3;--ml:rgba(192,88,127,.42)}
@@ -1293,6 +1293,8 @@ html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(2
 </div>
 
 <script>
+window.nbSerial = window.nbSerial || (function () { var q = Promise.resolve(); return function (fn) { var r = q.then(fn); q = r.catch(function () {}); return r; }; })();
+
 /* ======================================================
    کدهای مشترک بین صفحات سایت «دفترچه من»
    (قبلاً این توابع توی چند فایل جدا کپی شده بودن)
@@ -1634,9 +1636,13 @@ function createProjectManager(cfg) {
 
     async function saveActiveProjectField(textarea) {
         const id = getActiveId();
-        const data = await getProjectData(id);
-        data[textarea.id] = textarea.value;
-        await setProjectData(id, data);
+        const key = textarea.id;
+        /* صف مشترک با extras.js: نوشتن‌ها پشت‌سرهم انجام می‌شوند تا هیچ ذخیره‌ای روی ذخیرهٔ دیگر نیفتد */
+        return window.nbSerial(async function () {
+            const data = await getProjectData(id);
+            data[key] = textarea.value;
+            await setProjectData(id, data);
+        });
     }
 
     async function backupCurrentProject() {
@@ -2224,7 +2230,7 @@ printWindow.onload = function(){
 <script>
 (function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var t;document.addEventListener('input',function(e){var el=e.target;if(!el.matches||!el.matches('textarea'))return;clearTimeout(t);t=setTimeout(function(){var r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var d=document.createElement('i');d.className='nb-ink';d.style.left=(r.left+14)+'px';d.style.top=Math.min(r.bottom-24,innerHeight-30)+'px';document.body.appendChild(d);setTimeout(function(){d.remove()},950)},1200)})})();
 </script>
-<script src="extras.js?v=28"></script>
+<script src="extras.js?v=29"></script>
 </body>
 
 </html>

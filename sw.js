@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-notebook-v117";
+const CACHE_NAME = "my-notebook-v118";
 // اپدیت های سرویس ورکر
 const ASSETS = [
     "./",
@@ -87,7 +87,7 @@ self.addEventListener("fetch", (event) => {
                     }
                     return networkResponse;
                 })
-                .catch(() => caches.match(event.request))
+                .catch(() => caches.match(event.request, { ignoreSearch: true }))
         );
         return;
     }

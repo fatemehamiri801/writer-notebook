@@ -23,7 +23,7 @@
 
 <title>آثار من | دفترچه من</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet"></noscript>
 <style>
 /* فونت فارسی Vazirmatn (همان فونت بقیهٔ صفحه‌ها) */
 @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
@@ -154,6 +154,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 if ('serviceWorker' in navigator) { addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); }); }
 </script>
-<script src="extras.js?v=27"></script>
+<script src="extras.js?v=28"></script>
 </body>
 </html>

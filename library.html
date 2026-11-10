@@ -23,7 +23,7 @@
 
 <title>کتابخانهٔ من | دفترچه من</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet"></noscript>
 <style>
 /* فونت فارسی Vazirmatn (همان فونت بقیهٔ صفحه‌ها) */
 @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
@@ -32,13 +32,13 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{
-    /* هویت بصری مشترک سایت: کاغذ دفترچه، جوهر، طلایی؛ رنگ شاخص کتابخانه: نعنایی */
+    /* هویت بصری مشترک سایت: کاغذ دفترچه، جوهر، طلایی؛ رنگ شاخص کتابخانه: آبی پاستلی */
     --hand:'Aref Ruqaa','Vazirmatn',serif;
     --ink:#3a2a3f;--gold:#c99a3e;--pp:#fbf6e9;--cd:#fffdf7;--line:#e3d8bd;
-    --tint:#bfe3d0;--acc:#6fbf9b;--accd:#2f7a5a;--ml:rgba(111,191,155,.6);
+    --tint:#cfe0f5;--acc:#9bbbe6;--accd:#4a6fa5;--ml:rgba(155,187,230,.6);
     --muted:#7a6a7f;
 }
-html.nb-dark{--ink:#eadfc6;--pp:#241e17;--cd:#2c251d;--line:#4a3e30;--accd:#8fd1b0;--muted:#a99c82;color-scheme:dark}
+html.nb-dark{--ink:#eadfc6;--pp:#241e17;--cd:#2c251d;--line:#4a3e30;--accd:#9cc4ec;--muted:#a99c82;color-scheme:dark}
 body{
     min-height:100vh;font-family:'Vazirmatn','Segoe UI',Tahoma,Geneva,Verdana,sans-serif;color:var(--ink);line-height:1.8;
     background:radial-gradient(rgba(150,100,130,.14) 1.3px,transparent 1.4px),radial-gradient(circle at 20% 15%,#fbdde6,transparent 55%),radial-gradient(circle at 85% 85%,#d6e4f8,transparent 55%),#f3e4ee;
@@ -89,26 +89,36 @@ noscript .lib-intro{color:#c0392b}
 .lib-sheet .nbx-book::before,.lib-sheet .nbx-formbox::before{content:'';position:absolute;top:-14px;right:50%;margin-right:-42px;width:84px;height:24px;background:var(--ca) repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 6px,transparent 6px 12px);opacity:.88;transform:rotate(-2deg);clip-path:polygon(0 0,4% 20%,0 40%,4% 60%,0 80%,0 100%,100% 100%,96% 80%,100% 60%,96% 40%,100% 20%,100% 0);pointer-events:none}
 .lib-sheet .nbx-book::after,.lib-sheet .nbx-formbox::after{content:'';position:absolute;top:-10px;right:22px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 33% 28%,rgba(255,255,255,.85) 0 11%,transparent 12%),radial-gradient(circle at 50% 50%,rgba(255,255,255,.25) 0 55%,transparent 56%),var(--ca);box-shadow:inset -4px -5px 0 rgba(0,0,0,.16),3px 6px 5px rgba(0,0,0,.28);pointer-events:none}
 .lib-sheet .nbx-book:nth-child(8n+1),.lib-sheet .nbx-formbox:nth-child(8n+1){--ca:#e58fa8}
-.lib-sheet .nbx-book:nth-child(8n+2),.lib-sheet .nbx-formbox:nth-child(8n+2){--ca:#6fbf9b}
+.lib-sheet .nbx-book:nth-child(8n+2),.lib-sheet .nbx-formbox:nth-child(8n+2){--ca:#9bbbe6}
 .lib-sheet .nbx-book:nth-child(8n+3),.lib-sheet .nbx-formbox:nth-child(8n+3){--ca:#e3b93f}
 .lib-sheet .nbx-book:nth-child(8n+4),.lib-sheet .nbx-formbox:nth-child(8n+4){--ca:#6fa6da}
 .lib-sheet .nbx-book:nth-child(8n+5),.lib-sheet .nbx-formbox:nth-child(8n+5){--ca:#9d85d6}
 .lib-sheet .nbx-book:nth-child(8n+6),.lib-sheet .nbx-formbox:nth-child(8n+6){--ca:#ee9a74}
-.lib-sheet .nbx-book:nth-child(8n+7),.lib-sheet .nbx-formbox:nth-child(8n+7){--ca:#9bc25c}
+.lib-sheet .nbx-book:nth-child(8n+7),.lib-sheet .nbx-formbox:nth-child(8n+7){--ca:#e8d98a}
 .lib-sheet .nbx-book:nth-child(8n+8),.lib-sheet .nbx-formbox:nth-child(8n+8){--ca:#cf8fc2}
 .lib-sheet .nbx-formbox{border-style:solid;border-width:1px;border-top-width:5px}
-.lib-sheet .nbx-sum div{background:color-mix(in srgb,var(--c,#6fbf9b) 24%,var(--cd));border:1.5px solid color-mix(in srgb,var(--c,#6fbf9b) 60%,var(--line));border-radius:12px}
-.lib-sheet .nbx-sum div:nth-child(2){--c:#e58fa8}.lib-sheet .nbx-sum div:nth-child(3){--c:#6fbf9b}.lib-sheet .nbx-sum div:nth-child(4){--c:#e3b93f}.lib-sheet .nbx-sum div:nth-child(5){--c:#6fa6da}.lib-sheet .nbx-sum div:nth-child(6){--c:#9d85d6}
+.lib-sheet .nbx-sum div{background:color-mix(in srgb,var(--c,#9bbbe6) 24%,var(--cd));border:1.5px solid color-mix(in srgb,var(--c,#9bbbe6) 60%,var(--line));border-radius:12px}
+.lib-sheet .nbx-sum div:nth-child(2){--c:#e58fa8}.lib-sheet .nbx-sum div:nth-child(3){--c:#9bbbe6}.lib-sheet .nbx-sum div:nth-child(4){--c:#e3b93f}.lib-sheet .nbx-sum div:nth-child(5){--c:#6fa6da}.lib-sheet .nbx-sum div:nth-child(6){--c:#9d85d6}
 .lib-sheet .nbx-sum .big{background:var(--accd);border-color:var(--accd)}
-.lib-sheet .nbx-chip{background:color-mix(in srgb,var(--c,#6fbf9b) 26%,var(--cd));border-color:color-mix(in srgb,var(--c,#6fbf9b) 70%,var(--line))}
-.lib-sheet .nbx-chip:nth-child(6n+1){--c:#e58fa8}.lib-sheet .nbx-chip:nth-child(6n+2){--c:#6fbf9b}.lib-sheet .nbx-chip:nth-child(6n+3){--c:#e3b93f}.lib-sheet .nbx-chip:nth-child(6n+4){--c:#6fa6da}.lib-sheet .nbx-chip:nth-child(6n+5){--c:#9d85d6}.lib-sheet .nbx-chip:nth-child(6n+6){--c:#ee9a74}
+.lib-sheet .nbx-chip{background:color-mix(in srgb,var(--c,#9bbbe6) 26%,var(--cd));border-color:color-mix(in srgb,var(--c,#9bbbe6) 70%,var(--line))}
+.lib-sheet .nbx-chip:nth-child(6n+1){--c:#e58fa8}.lib-sheet .nbx-chip:nth-child(6n+2){--c:#9bbbe6}.lib-sheet .nbx-chip:nth-child(6n+3){--c:#e3b93f}.lib-sheet .nbx-chip:nth-child(6n+4){--c:#6fa6da}.lib-sheet .nbx-chip:nth-child(6n+5){--c:#9d85d6}.lib-sheet .nbx-chip:nth-child(6n+6){--c:#ee9a74}
 .lib-sheet .nbx-chip[aria-pressed="true"]{background:var(--c);color:#3a2a3f;box-shadow:0 3px 0 rgba(0,0,0,.18)}
 .lib-sheet .nbx-empty{background:color-mix(in srgb,var(--acc) 14%,var(--cd))}
 html.nb-dark .lib-sheet .nbx-book,html.nb-dark .lib-sheet .nbx-formbox{background:color-mix(in srgb,var(--ca) 14%,#2c251d);border-color:#4a3e30;border-top-color:var(--ca);box-shadow:2px 3px 0 #1a1510,0 8px 18px rgba(0,0,0,.45)}
-html.nb-dark .lib-sheet .nbx-sum div{background:color-mix(in srgb,var(--c,#6fbf9b) 16%,#2c251d);border-color:#4a3e30}
+html.nb-dark .lib-sheet .nbx-sum div{background:color-mix(in srgb,var(--c,#9bbbe6) 16%,#2c251d);border-color:#4a3e30}
 html.nb-dark .lib-sheet .nbx-sum .big{background:#4d3f22;border-color:#a87b3c}
-html.nb-dark .lib-sheet .nbx-chip{background:color-mix(in srgb,var(--c,#6fbf9b) 16%,#2c251d)}
+html.nb-dark .lib-sheet .nbx-chip{background:color-mix(in srgb,var(--c,#9bbbe6) 16%,#2c251d)}
 html.nb-dark .lib-sheet .nbx-chip[aria-pressed="true"]{background:color-mix(in srgb,var(--c) 55%,#2c251d);color:#fff}
+
+/* کتابخانه: رنگ‌های ملایم و پاستلی، بدون سبز تند */
+.lib-head a.back{background:#cfe0f5;border-color:#9bbbe6;color:#2f4a73}
+html.nb-dark .lib-head a.back{background:#3a4658;border-color:#9cc4ec;color:#dbe9fa}
+.lib-sheet .nbx-sum .big{background:#d9e7f8;border-color:#9bbbe6;color:#4a5a73}
+.lib-sheet .nbx-sum .big b{color:#2f4a73}
+html.nb-dark .lib-sheet .nbx-sum .big{background:#3a4658;border-color:#9cc4ec;color:#dbe9fa}
+html.nb-dark .lib-sheet .nbx-sum .big b{color:#dbe9fa}
+.lib-sheet .nbx-btn.primary{background:#cfe0f5;border-color:#9bbbe6;color:#2f4a73}
+html.nb-dark .lib-sheet .nbx-btn.primary{background:#3a4658;border-color:#9cc4ec;color:#dbe9fa}
 </style>
 </head>
 <body>
@@ -146,6 +156,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 if ('serviceWorker' in navigator) { addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); }); }
 </script>
-<script src="extras.js?v=27"></script>
+<script src="extras.js?v=28"></script>
 </body>
 </html>

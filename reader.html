@@ -745,7 +745,7 @@ select:focus-visible,
 }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet"></noscript><link rel="preload" as="script" href="extras.js?v=28">
 <style id="nb-notebook-theme">
 @media screen{
 :root{--tex:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxNjAnIGhlaWdodD0nMTYwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nLjgnIG51bU9jdGF2ZXM9JzInIHN0aXRjaFRpbGVzPSdzdGl0Y2gnLz48ZmVDb2xvck1hdHJpeCB2YWx1ZXM9JzAgMCAwIDAgLjQ1IDAgMCAwIDAgLjM4IDAgMCAwIDAgLjI1IDAgMCAwIC4wOSAwJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEwMCUnIGhlaWdodD0nMTAwJScgZmlsdGVyPSd1cmwoI24pJy8+PC9zdmc+");--hand:'Aref Ruqaa','Vazirmatn',serif;--ink:#2a1560;--gold:#c99a3e;--pp:#fbf6e9;--cd:#fffdf7;--straw:#f1e2bd;--acc:#4a7bb5;--accd:#2f5d96;--t1:#e1ecf9;--t2:#d2e3f5;--t3:#edf4fc;--ml:rgba(74,123,181,.42)}
@@ -821,6 +821,10 @@ html body nav .nav-link:nth-child(5){background:#bfe3d0!important}
 html body nav .nav-link:nth-child(6){background:#c3dbf3!important}
 html body nav .nav-link:nth-child(7){background:#d5c8f0!important}
 html body nav .nav-link:nth-child(8){background:#ecc6e4!important}
+html body nav .nav-link:nth-child(9){background:#fdd9c4!important}
+html body nav .nav-link:nth-child(10){background:#e9efb4!important}
+html body nav .nav-link:nth-child(11){background:#f7d0dc!important}
+html body nav .nav-link:nth-child(12){background:#c4e8ea!important}
 html body nav .nav-link.active{background:var(--pt,var(--pp))!important;border-top:5px solid var(--acc)!important;font-weight:700;transform:translateY(-3px)}
 html body nav .nav-link{color:#3a2a3f!important;font-weight:700}
 html body .main-wrapper{background-color:var(--pt,var(--pp));background-image:radial-gradient(var(--acc) 1.3px,transparent 1.5px);background-size:24px 24px!important;background-position:0 0}
@@ -830,15 +834,7 @@ html body>header .header-btns button{background:#3a2a3f!important}
 .layer-card::before{top:-12px!important;right:50%!important;margin-right:-46px;width:92px!important;height:26px!important;border:0!important;border-radius:0!important;background:var(--ca) repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 6px,transparent 6px 12px)!important;opacity:.88;transform:rotate(-2deg);clip-path:polygon(0 0,4% 20%,0 40%,4% 60%,0 80%,0 100%,100% 100%,96% 80%,100% 60%,96% 40%,100% 20%,100% 0)}
 .layer-card::after{content:"";position:absolute;top:-10px;right:30px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 33% 28%,rgba(255,255,255,.85) 0 11%,transparent 12%),radial-gradient(circle at 50% 50%,rgba(255,255,255,.25) 0 55%,transparent 56%),var(--ca);box-shadow:inset -4px -5px 0 rgba(0,0,0,.16),3px 6px 5px rgba(0,0,0,.28);pointer-events:none;z-index:2}
 html body .layer-card{border-top:5px solid var(--ca)!important}
-.layer-card{--ca:#e58fa8}
-.layer-card:nth-of-type(8n+1){--ca:#e58fa8}
-.layer-card:nth-of-type(8n+2){--ca:#6fbf9b}
-.layer-card:nth-of-type(8n+3){--ca:#e3b93f}
-.layer-card:nth-of-type(8n+4){--ca:#6fa6da}
-.layer-card:nth-of-type(8n+5){--ca:#9d85d6}
-.layer-card:nth-of-type(8n+6){--ca:#ee9a74}
-.layer-card:nth-of-type(8n+7){--ca:#9bc25c}
-.layer-card:nth-of-type(8n+8){--ca:#cf8fc2}
+.layer-card{--ca:var(--acc,#e58fa8)}
 html:not(.nb-dark) body{background-color:#f7eedf!important;background-image:radial-gradient(rgba(150,120,90,.16) 1.3px,transparent 1.4px)!important;background-size:22px 22px}
 html body .layer-card{transform:rotate(-.3deg);box-shadow:3px 5px 0 rgba(150,120,90,.25),0 10px 22px rgba(60,40,10,.16)!important}
 html body .layer-card:nth-of-type(even){transform:rotate(.3deg)}
@@ -2056,6 +2052,6 @@ function openTab(evt, tabName) {
 <script>
 (function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var t;document.addEventListener('input',function(e){var el=e.target;if(!el.matches||!el.matches('textarea'))return;clearTimeout(t);t=setTimeout(function(){var r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var d=document.createElement('i');d.className='nb-ink';d.style.left=(r.left+14)+'px';d.style.top=Math.min(r.bottom-24,innerHeight-30)+'px';document.body.appendChild(d);setTimeout(function(){d.remove()},950)},1200)})})();
 </script>
-<script src="extras.js?v=27"></script>
+<script src="extras.js?v=28"></script>
 </body>
 </html>

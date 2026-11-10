@@ -175,7 +175,7 @@ var css2 = [
 'html body .nav-wrapper nav .nav-link{flex:1 1 auto!important;padding:12px 14px!important;min-height:46px;font-size:1rem!important;border-radius:12px!important;margin:0!important;border-bottom-width:2px!important;text-align:center}',
 '.nbx-navbar,.nbx-navbar.on{display:none!important}',
 '}',
-'.nbx-guide{margin-bottom:12px}.nbx-road-st h3 small{font-weight:400;font-size:.8rem}',
+'.nbx-guide{margin-bottom:12px}.nbx-guide>summary h3,.nbx-learn>summary h3{border-bottom:0!important;padding-bottom:0!important;margin-bottom:0!important}.nbx-hub-seg{margin-bottom:28px}.nbx-road-st h3 small{font-weight:400;font-size:.8rem}',
 '.nbx-road-it{display:flex;gap:8px;align-items:flex-start;padding:3px 0;cursor:pointer;font-size:.9rem;line-height:1.8}.nbx-road-it input{margin-top:6px;width:18px;height:18px;flex:none}.nbx-road-it.on span{opacity:.6;text-decoration:line-through}',
 '.nbx-pr{padding:8px 12px;margin:8px 0;border-radius:10px;border:1px solid var(--nbx-bd);background:var(--nbx-in)}.nbx-pr b{display:block}.nbx-pr p{margin:2px 0 0;font-size:.88rem;line-height:1.9}',
 '.nbx-arch>summary{cursor:pointer;list-style:none}.nbx-arch>summary h3{display:inline}.nbx-arch>summary small{display:block;opacity:.75;margin-top:2px}',
@@ -874,7 +874,6 @@ function buildStructure() {
     $('#nbx-tpl-freytag').onclick = function () { applyTpl(TPL_FREYTAG, 'قالب هرم فرایتاگ'); };
     $('#nbx-tpl-eight').onclick = function () { applyTpl(TPL_EIGHT, 'قالب هشت‌توالی'); };
     $('#nbx-tpl-kisho').onclick = function () { applyTpl(TPL_KISHO, 'قالب کی‌شو‌تن‌کتسو'); };
-    buildGuide(tab);
     $('#nbx-tpl-stc').onclick = function () { applyTpl(TPL_STC, 'قالب نجات گربه (۱۵ ضرب‌آهنگ)'); };
 
     // انتخاب، ویرایش و حذف
@@ -947,7 +946,23 @@ var PRINCIPLES = [
     ['اطلاعات را عقب بینداز', 'پاسخ را زود نده؛ پرسش را زنده نگه دار تا خواننده بماند.'],
     ['قانون‌های جهان را بی‌هزینه نشکن', 'اگر قانون جهان باید شکسته شود، شکستنش باید بهایی داشته باشد.'],
     ['پایان از دل آغاز می‌آید', 'هر چیز مهم که در شروع می‌کاری باید در پایان معنایی بگیرد.'],
-    ['اول بنویس، بعد ویرایش کن', 'ویرایش هم‌زمان با نوشتن، پیش‌نویس را متوقف می‌کند؛ بگذار اول بد باشد.']
+    ['اول بنویس، بعد ویرایش کن', 'ویرایش هم‌زمان با نوشتن، پیش‌نویس را متوقف می‌کند؛ بگذار اول بد باشد.'],
+    ['ریسک را بالا ببر', 'در هر پرده بپرس «اگر شکست بخورد چه از دست می‌دهد؟» و جواب را بزرگ‌تر کن.'],
+    ['ساعت شنی', 'برای تعلیق، یک محدودیت زمانی یا برگشت‌ناپذیر بگذار: مهلت، رازی که لو می‌رود، فرصتی که می‌سوزد.'],
+    ['نقطهٔ بی‌بازگشت', 'یک لحظه بساز که شخصیت دیگر نمی‌تواند به دنیای قبل برگردد.'],
+    ['از آخر به اول فکر کن', 'وقتی پایان را بدانی، کاشتن سرنخ‌ها و چیدن صحنه‌ها آسان‌تر می‌شود.'],
+    ['تناقض بده', 'آدم‌ها همیشه با خودشان یکی نیستند؛ شخصیتی که چیزی می‌گوید و کار دیگری می‌کند زنده‌تر است.'],
+    ['نقص باورپذیر', 'شخصیت اصلی عیبی داشته باشد که مستقیم در مسیرش مانع بسازد.'],
+    ['ضدقهرمان هم منطق دارد', 'او هم خودش را آدم خوبِ داستان می‌داند؛ دلیل‌هایش را جدی بنویس.'],
+    ['خواستهٔ آگاهانه در برابر نیاز ناخودآگاه', 'چیزی که شخصیت دنبالش است با چیزی که واقعاً لازم دارد فرق دارد؛ قوس شخصیت از همین فاصله ساخته می‌شود.'],
+    ['جزئیات خاص', 'یک جزئیات دقیق و غیرمنتظره از ده توصیف کلی بهتر است.'],
+    ['حواس پنج‌گانه', 'هر صحنه حداقل یک حس غیر از دیدن داشته باشد: بو، صدا، لمس یا مزه.'],
+    ['فعل قوی به‌جای قید', '«دوید» بهتر از «سریع رفت»؛ به‌جای تقویت جمله با قید، فعل دقیق‌تر پیدا کن.'],
+    ['تکرار هدفمند', 'تکرار یک تصویر یا جمله باید معنایی بسازد، نه نتیجهٔ بی‌دقتی باشد.'],
+    ['صدای راوی ثابت بماند', 'لحن و زاویهٔ دید را بی‌دلیل و وسط صحنه عوض نکن.'],
+    ['بازنویسی بدون ترحم', 'صحنه‌ای که دوستش داری ولی به داستان خدمت نمی‌کند باید برود.'],
+    ['بلند بخوان', 'ریتم لنگ و دیالوگ‌های ساختگی را با گوش راحت‌تر می‌شود پیدا کرد.'],
+    ['کنار بگذار و برگرد', 'چند روز فاصله از پیش‌نویس، چشم را برای ویرایش تازه می‌کند.']
 ];
 var ROAD = {};
 var saveRoad = makeSaver('__roadmap', function () { return ROAD; });
@@ -963,8 +978,8 @@ function paintRoad() {
 }
 function buildGuide(tab) {
     if (!tab || $('.nbx-guide', tab)) return;
-    var pr = el('details', { 'class': 'layer-card nbx-arch nbx-guide' });
-    pr.innerHTML = '<summary><h3>📜 اصول نوشتن</h3><small>چند اصل آزموده‌شده برای طرح و بازنویسی؛ قانون نیستند، ابزارند.</small></summary>' +
+    var pr = el('details', { 'class': 'layer-card nbx-layer nbx-arch nbx-guide' });
+    pr.innerHTML = '<summary><div style="flex:1"><h3>📜 اصول نوشتن</h3><small>چند اصل آزموده‌شده برای طرح و بازنویسی؛ قانون نیستند، ابزارند.</small></div></summary>' +
         PRINCIPLES.map(function (x) { return '<div class="nbx-pr"><b>' + esc(x[0]) + '</b><p>' + esc(x[1]) + '</p></div>'; }).join('');
     tab.insertBefore(pr, tab.firstChild);
 }
@@ -1507,6 +1522,157 @@ async function authorsInto(pane, m) {
     });
 }
 /* ======================================================================
+   🖨️ خروجی PDF برای «کتابخانهٔ من» و «آثار من»
+   ====================================================================== */
+var PDF_ORDER_W = ['done', 'revising', 'writing', 'idea', 'dropped', ''];
+var PDF_ORDER_L = ['done', 'reading', 'want', 'dropped', ''];
+function pdfStatusLabel(v) {
+    var f = BSTATUS.filter(function (x) { return x[0] === (v || ''); })[0];
+    return (f && f[0]) ? f[1] : 'بدون وضعیت';
+}
+function pdfStars(r) { return r > 0 ? '★'.repeat(r) + '☆'.repeat(5 - r) : ''; }
+function pdfGroup(rows, order) {
+    var out = [];
+    order.forEach(function (st) {
+        var g = rows.filter(function (r) { var v = r.meta.status || ''; return (order.indexOf(v) > -1 ? v : '') === st; });
+        if (!g.length) return;
+        if (st === 'done') g.sort(function (a, b) { return (b.meta.finished || '').localeCompare(a.meta.finished || ''); });
+        out.push({ head: pdfStatusLabel(st) + ' (' + fa(g.length) + ')' });
+        g.forEach(function (r) { out.push({ r: r }); });
+    });
+    return out;
+}
+async function collectListPdf() {
+    var secs = [], stats = [], rows, s;
+    if (isWorks) {
+        rows = await loadWorkRows(); s = libSummary(rows);
+        var gname = {}; GENRES_W.forEach(function (g) { gname[g.id] = g.icon + ' ' + g.name; });
+        stats = [fa(s.total) + ' اثر', fa(s.done) + ' تمام‌شده', fa(s.writing + s.revising) + ' در حال نوشتن و بازنویسی', fa(s.idea) + ' ایده'];
+        secs.push({ id: 'works', title: '📚 آثار من', color: PALETTE[1], count: rows.length, unit: 'اثر',
+            lines: pdfGroup(rows, PDF_ORDER_W).map(function (x) {
+                if (x.head) return { head: x.head };
+                var r = x.r, m = r.meta || {};
+                var gs = (m.genres || []).map(function (g) { return gname[g]; }).filter(Boolean).join(' · ');
+                var sub = [gs, m.finished ? 'تمام‌شده در ' + persianDate(m.finished) : ''].filter(Boolean).join(' · ');
+                return { t: r.name, sub: sub, notes: [r.ext ? r.note : m.summary] };
+            }) });
+        var ideas = getIdeas();
+        secs.push({ id: 'ideas', title: '💡 بایگانی ایده‌ها', color: PALETTE[2], count: ideas.length, unit: 'ایده',
+            cards: ideas.map(function (i) { return { title: (i.t || '').trim() || 'بدون عنوان', items: [{ label: persianDate(i.d) || 'ایده', value: (i.x || '').trim() || '—' }] }; }) });
+        return { name: 'آثار من', kind: '✍️ دفترچه نویسندگی', stats: stats, secs: secs };
+    }
+    rows = await loadRows(); s = libSummary(rows);
+    stats = [fa(s.total) + ' کتاب', fa(s.done) + ' تمام‌شده', fa(s.thisYear) + ' کتاب در سال ' + s.yr, fa(s.reading) + ' در حال خواندن', fa(s.want) + ' در صف'];
+    if (s.avg) stats.push('میانگین امتیاز ' + fa(s.avg.toFixed(1)));
+    secs.push({ id: 'list', title: '📚 قفسهٔ کتاب‌ها', color: PALETTE[1], count: rows.length, unit: 'کتاب',
+        lines: pdfGroup(rows, PDF_ORDER_L).map(function (x) {
+            if (x.head) return { head: x.head };
+            var m = x.r.meta || {};
+            return { t: x.r.name, sub: [pdfStars(m.rating), m.finished ? 'تمام‌شده در ' + persianDate(m.finished) : ''].filter(Boolean).join(' · '), notes: [] };
+        }) });
+    var projects = PM().getProjects(), qCards = [], qn = 0;
+    for (var i = 0; i < projects.length; i++) {
+        if (!projects[i] || !projects[i].id) continue;
+        var d = await getData(projects[i].id), qs = (d.__quotes || []).filter(function (q) { return q && typeof q.t === 'string' && q.t.trim(); });
+        if (!qs.length) continue;
+        qn += qs.length;
+        qCards.push({ title: '«' + projects[i].name + '»', items: qs.map(function (q) { return { label: q.p ? 'صفحهٔ ' + q.p : 'جمله', value: q.t.trim() }; }) });
+    }
+    secs.push({ id: 'quotes', title: '✨ جمله‌های ماندگار', color: PALETTE[2], count: qn, unit: 'جمله', cards: qCards });
+    var nx = getNext();
+    secs.push({ id: 'next', title: '🔖 صف خواندن', color: PALETTE[3], count: nx.length, unit: 'کتاب',
+        lines: nx.map(function (b, k) { return { t: fa(k + 1) + '. ' + b.t, sub: '', notes: [b.w ? 'چون: ' + b.w : ''] }; }) });
+    var by = getBuy(), bl = [], sum = 0;
+    BUY_PRI.forEach(function (pr) {
+        var g = by.filter(function (b) { return (BUY_PRI.some(function (o) { return o[0] === b.p; }) ? b.p : '2') === pr[0]; });
+        if (!g.length) return;
+        bl.push({ head: pr[1] + ' (' + fa(g.length) + ')' });
+        g.forEach(function (b) { var pc = priceOf(b); sum += pc; bl.push({ t: b.t + (b.a ? ' — ' + b.a : ''), sub: pc ? money(pc) + ' تومان' : '', notes: [b.w ? 'چرا: ' + b.w : ''] }); });
+    });
+    secs.push({ id: 'buy', title: '🛒 فهرست خرید', color: PALETTE[4], count: by.length, unit: 'کتاب', lines: bl, foot: sum ? 'جمع قیمت‌های واردشده: ' + money(sum) + ' تومان' : '' });
+    var au = getAuth();
+    secs.push({ id: 'authors', title: '🖋️ نویسنده‌های مورد علاقه‌ام', color: PALETTE[5], count: au.length, unit: 'نویسنده',
+        lines: au.map(function (a) { return { t: a.n, sub: '', notes: [a.w ? 'چرا دوستش دارم: ' + a.w : '', a.f ? 'کتاب‌های محبوب: ' + a.f : ''] }; }) });
+    return { name: 'کتابخانهٔ من', kind: '📖 دفترچه کتاب‌خوان', stats: stats, secs: secs };
+}
+function buildListPdfHtml(data, ids, mono) {
+    var secs = data.secs.filter(function (x) { return ids.indexOf(x.id) > -1 && x.count > 0; });
+    var date = new Date().toLocaleDateString('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' });
+    var ink = mono ? '#222' : '';
+    var out = '<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><title>' + esc(data.name) + '</title>' +
+        '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"><style>' +
+        '@page{size:A4;margin:18mm 15mm 20mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}' +
+        'body{font-family:Vazirmatn,Tahoma,sans-serif;direction:rtl;color:#2a2230;line-height:2;margin:0;padding:18px;font-size:14px;background:#fff}' +
+        '.bar{text-align:center;margin-bottom:20px}.bar button{background:#5b21b6;color:#fff;border:0;padding:10px 24px;border-radius:10px;font:700 14px Vazirmatn,Tahoma;cursor:pointer;margin:0 4px}' +
+        '.cover{text-align:center;padding:34px 16px 26px;margin-bottom:26px;border-radius:16px;background:linear-gradient(160deg,' + (mono ? '#f2f2f2,#e6e6e6' : '#fde6ee,#e5eefb') + ');border:2px solid ' + (mono ? '#999' : '#e9c9d6') + '}' +
+        '.cover .k{font-size:15px;color:#6b5a70}.cover h1{margin:6px 0 10px;font-size:30px;color:' + (ink || '#4c1d95') + '}.cover .m{font-size:13px;color:#6b5a70}' +
+        '.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0 4px}.stats span{padding:2px 12px;border-radius:99px;font-size:12.5px;background:' + (mono ? '#fff' : 'rgba(255,255,255,.75)') + ';border:1px solid ' + (mono ? '#aaa' : '#e3c6d4') + '}' +
+        '.toc{margin:16px auto 0;max-width:420px;text-align:right;font-size:13px}.toc div{display:flex;justify-content:space-between;border-bottom:1px dotted #bbb;padding:2px 0}' +
+        '.sec{margin-top:26px}.sec>h2{margin:0 0 12px;padding:8px 16px;font-size:20px;border-radius:10px;break-after:avoid;color:#2a2230;border-right:8px solid var(--c)}' +
+        '.sec>h2{background:' + (mono ? '#eee' : 'color-mix(in srgb,var(--c) 22%,#fff)') + '}' +
+        '.card{break-inside:avoid-page}.card>h3{margin:18px 0 8px;font-size:16px;color:' + (ink || 'color-mix(in srgb,var(--c) 55%,#2a2230)') + ';break-after:avoid}' +
+        '.it{margin:0 0 12px;padding:10px 14px;border-right:4px solid ' + (mono ? '#888' : 'var(--c)') + ';border-radius:8px;background:' + (mono ? '#f6f6f6' : 'color-mix(in srgb,var(--c) 8%,#fff)') + '}' +
+        '.lb{font-weight:700;font-size:13px;color:' + (ink || 'color-mix(in srgb,var(--c) 55%,#2a2230)') + ';margin-bottom:2px;break-after:avoid}' +
+        '.vl{overflow-wrap:anywhere;word-break:break-word}' +
+        '.gh{margin:14px 0 6px;font-weight:700;font-size:13px;color:#6b5a70;border-bottom:1px dashed #bbb;break-after:avoid}' +
+        '.sc{margin:0 0 8px;padding:6px 14px;border-radius:8px;border-right:4px solid var(--c);break-inside:avoid;overflow-wrap:anywhere;background:' + (mono ? '#f6f6f6' : 'color-mix(in srgb,var(--c) 8%,#fff)') + '}' +
+        '.sc small{color:#6b5a70;font-weight:400}.sc .nt{font-size:13px;color:#4a3d50}.sc b{font-weight:700}' +
+        '.fo{margin-top:8px;font-weight:700;font-size:13px;text-align:left;color:#6b5a70}' +
+        '.ft{position:fixed;bottom:6px;left:0;right:0;text-align:center;font-size:11px;color:#888}' +
+        '@media print{.bar{display:none!important}body{padding:0}}</style></head><body>' +
+        '<div class="bar"><button onclick="window.print()">🖨️ چاپ / ذخیره PDF</button><button onclick="window.close()" style="background:#888">✕ بستن</button></div>' +
+        '<div class="cover"><div class="k">' + esc(data.kind) + '</div><h1>' + esc(data.name) + '</h1><div class="m">' + esc(date) + '</div>' +
+        '<div class="stats">' + data.stats.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' +
+        '<div class="toc">' + secs.map(function (x) { return '<div><span>' + esc(x.title) + '</span><span>' + fa(x.count) + ' ' + esc(x.unit) + '</span></div>'; }).join('') + '</div></div>';
+    secs.forEach(function (x) {
+        out += '<div class="sec" style="--c:' + (mono ? '#666' : x.color) + '"><h2>' + esc(x.title) + '</h2>';
+        (x.lines || []).forEach(function (l) {
+            if (l.head) { out += '<div class="gh">' + esc(l.head) + '</div>'; return; }
+            out += '<div class="sc"><b>' + esc(l.t) + '</b>' + (l.sub ? ' <small>· ' + esc(l.sub) + '</small>' : '') +
+                (l.notes || []).filter(function (n) { return n && String(n).trim(); }).map(function (n) { return '<div class="nt">' + h(String(n).trim()) + '</div>'; }).join('') + '</div>';
+        });
+        (x.cards || []).forEach(function (c) {
+            out += '<div class="card"><h3>' + esc(c.title) + '</h3>';
+            c.items.forEach(function (it) { out += '<div class="it"><div class="lb">' + esc(it.label) + '</div><div class="vl">' + h(it.value) + '</div></div>'; });
+            out += '</div>';
+        });
+        if (x.foot) out += '<div class="fo">' + esc(x.foot) + '</div>';
+        out += '</div>';
+    });
+    if (!secs.length) out += '<p style="text-align:center;color:#888">بخش انتخاب‌شده هنوز چیزی ندارد.</p>';
+    out += '<div class="ft">' + esc(data.kind) + ' · ' + esc(data.name) + '</div></body></html>';
+    return out;
+}
+async function openListPdfPicker() {
+    var btn = $('#nbx-pdf-btn'); if (btn) btn.disabled = true;
+    var data;
+    try { data = await collectListPdf(); }
+    catch (e) { try { console.error(e); } catch (_) {} toast('⚠️ آماده‌سازی PDF انجام نشد؛ صفحه را تازه کن و دوباره امتحان کن.'); if (btn) btn.disabled = false; return; }
+    if (btn) btn.disabled = false;
+    var body = el('div', { 'class': 'nbx-mbody' });
+    body.innerHTML = '<p class="nbx-muted" style="margin:0">بخش‌هایی را که می‌خواهی در PDF باشند علامت بزن. بخش‌های خالی چاپ نمی‌شوند.</p>' +
+        '<div class="nbx-row" style="margin:10px 0"><button type="button" class="nbx-btn" id="nbx-p-all">انتخاب همه</button><button type="button" class="nbx-btn" id="nbx-p-none">هیچ‌کدام</button><button type="button" class="nbx-btn" id="nbx-p-filled">فقط پرشده‌ها</button></div>' +
+        '<div class="nbx-pick" id="nbx-p-list">' + data.secs.map(function (x) {
+            return '<label><input type="checkbox" value="' + esc(x.id) + '"' + (x.count ? ' checked' : '') + '> ' + esc(x.title) + '<small>' + (x.count ? fa(x.count) + ' ' + esc(x.unit) : 'خالی') + '</small></label>';
+        }).join('') + '</div>' +
+        '<label class="nbx-row" style="gap:8px;margin:8px 0"><input type="checkbox" id="nbx-p-mono" style="width:20px;height:20px"> <span>نسخهٔ ساده و کم‌رنگ (مناسب پرینتر سیاه‌وسفید)</span></label>' +
+        '<div class="nbx-row" style="margin-top:10px"><button type="button" class="nbx-btn primary" id="nbx-p-go">🖨️ ساخت PDF</button></div>';
+    var m = openModal('🖨️ خروجی PDF', body);
+    var boxes = $$('#nbx-p-list input');
+    $('#nbx-p-all').onclick = function () { boxes.forEach(function (b) { b.checked = true; }); };
+    $('#nbx-p-none').onclick = function () { boxes.forEach(function (b) { b.checked = false; }); };
+    $('#nbx-p-filled').onclick = function () { boxes.forEach(function (b, i) { b.checked = data.secs[i].count > 0; }); };
+    $('#nbx-p-go').onclick = function () {
+        var ids = boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
+        if (!ids.length) { toast('حداقل یک بخش را انتخاب کن.'); return; }
+        var w = window.open('', '_blank');
+        if (!w) { toast('مرورگر اجازهٔ باز شدن پنجرهٔ جدید را نداد.'); return; }
+        w.document.open(); w.document.write(buildListPdfHtml(data, ids, $('#nbx-p-mono').checked)); w.document.close();
+        m.close();
+        w.onload = function () { w.focus(); setTimeout(function () { try { w.print(); } catch (e) {} }, 600); };
+    };
+}
+/* ======================================================================
    💾 پشتیبان‌گیری و بازیابی کل صفحه (کتابخانهٔ من / آثار من)
    ====================================================================== */
 var BK_APP = isWorks ? 'nvsdg-works' : 'reader-library';
@@ -1515,6 +1681,7 @@ function backupBarHtml() {
     return '<div class="nbx-row nbx-bkbar" style="margin-bottom:10px;gap:8px">' +
         '<button type="button" class="nbx-btn" id="nbx-bk-save" title="همهٔ ' + (isWorks ? 'آثار، خلاصه‌ها و بایگانی ایده‌ها' : 'کتاب‌ها، جمله‌ها، صف خواندن، فهرست خرید و نویسنده‌ها') + ' را در یک فایل ذخیره کن">💾 پشتیبان‌گیری از همه‌چیز</button>' +
         '<button type="button" class="nbx-btn" id="nbx-bk-load" title="فایل پشتیبان را بارگذاری کن">📂 بازیابی از فایل</button>' +
+        '<button type="button" class="nbx-btn" id="nbx-pdf-btn" title="' + (isWorks ? 'آثار و ایده‌هایت را' : 'کتابخانه، جمله‌ها، صف خواندن و فهرست خرید را') + ' به‌صورت PDF بگیر">🖨️ خروجی PDF</button>' +
         '<input type="file" id="nbx-bk-file" accept="application/json,.json" style="display:none"></div>';
 }
 function bkAsk(msg) { return (typeof window.nbConfirm === 'function') ? window.nbConfirm(msg, true) : Promise.resolve(confirm(msg)); }
@@ -1532,7 +1699,7 @@ async function fullBackup() {
         a.href = url; a.download = (isWorks ? 'works' : 'library') + '-backup-' + dateKey() + '.json';
         document.body.appendChild(a); a.click(); a.remove();
         setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
-        toast('فایل پشتیبان ذخیره شد ✓');
+        toast('فایل پشتیبان ذخیره شد ✓'); nudgeMarkBackup();
     } catch (e) { try { console.error(e); } catch (_) {} toast('⚠️ پشتیبان‌گیری انجام نشد.'); }
 }
 async function fullRestore(file) {
@@ -1570,6 +1737,7 @@ async function fullRestore(file) {
 function wireBackupBar() {
     var sv = $('#nbx-bk-save'), ld = $('#nbx-bk-load'), fi = $('#nbx-bk-file'); if (!sv || !ld || !fi) return;
     sv.onclick = fullBackup;
+    var pb = $('#nbx-pdf-btn'); if (pb) pb.onclick = openListPdfPicker;
     ld.onclick = function () { fi.click(); };
     fi.onchange = function () { var f = fi.files && fi.files[0]; fi.value = ''; fullRestore(f); };
 }
@@ -2315,18 +2483,70 @@ var LEARN = [
         'صدا و لحن را از جملهٔ اول مشخص کن؛ خواننده باید بفهمد با چه کسی طرف است.',
         'یک جزئیات خاص از ده جزئیات عمومی بهتر است.',
         'بعد از تمام‌شدن کتاب شروع را دوباره بخوان؛ گاهی شروع واقعی، پاراگراف دوم یا سوم است.'],
-      ex: 'یک صحنهٔ آغازین را سه بار بنویس: با یک دیالوگ، با یک عمل، با یک جزئیات عجیب. کدام قلاب بهتری دارد؟' }
+      ex: 'یک صحنهٔ آغازین را سه بار بنویس: با یک دیالوگ، با یک عمل، با یک جزئیات عجیب. کدام قلاب بهتری دارد؟' },
+    { icon: '🏁', title: 'پایان‌بندی', tips: [
+        'پایان خوب هم غافلگیرکننده است و هم اجتناب‌ناپذیر؛ خواننده بعدش بگوید «معلوم بود، ولی نمی‌دیدمش».',
+        'چیزهایی که در شروع کاشته‌ای در پایان باید معنا بگیرند؛ پایان از دل آغاز می‌آید.',
+        'پرسش محوری داستان را جواب بده، حتی اگر جواب تلخ باشد.',
+        'بعد از اوج زیاد کش نیا؛ چند صحنهٔ کوتاه برای فرود کافی است.',
+        'پایان باز هم باید حس تمام‌شدن بدهد؛ سؤال را باز بگذار، نه تصمیمی را که نویسنده باید می‌گرفت.',
+        'آخرین تصویر یا جمله را با دقت انتخاب کن؛ همان چیزی است که در ذهن خواننده می‌ماند.'],
+      ex: 'پایان داستانت را در سه نسخه بنویس: تلخ، امیدوار و باز. کدام یک به تم اصلی نزدیک‌تر است؟' },
+    { icon: '🎭', title: 'زاویهٔ دید و راوی', tips: [
+        'اول‌شخص صمیمی و محدود است؛ سوم‌شخص محدود فاصلهٔ بیشتری می‌دهد؛ دانای کل دید وسیع می‌دهد ولی تعلیق را کم می‌کند.',
+        'راوی فقط چیزی را می‌داند که شخصیتِ زاویهٔ دید می‌تواند بداند؛ از دانستنِ بی‌دلیل بپرهیز.',
+        'لحن راوی را با شخصیتِ زاویهٔ دید هماهنگ کن؛ هر کس جهان را جور دیگری می‌بیند.',
+        'راوی غیرقابل‌اعتماد ابزار قدرتمندی است ولی باید سرنخ‌هایی بگذاری که خواننده بتواند دروغ را بفهمد.',
+        'تغییر زاویهٔ دید را با فصل یا صحنهٔ تازه انجام بده، نه وسط یک پاراگراف.'],
+      ex: 'یک صحنهٔ دعوا را یک بار از دید یکی و یک بار از دید دیگری بنویس. چه چیزهایی تغییر کرد؟' },
+    { icon: '🌆', title: 'توصیف و فضاسازی', tips: [
+        'فقط چیزی را توصیف کن که به حس صحنه یا به داستان کمک می‌کند؛ بقیه را حذف کن.',
+        'از حواس پنج‌گانه استفاده کن، نه فقط دیدن: بو، صدا، لمس و مزه فضا را زنده می‌کنند.',
+        'توصیف را از چشم شخصیت بنویس؛ چیزی که او می‌بیند حال و اندیشهٔ او را هم نشان می‌دهد.',
+        'یک جزئیات خاص و غیرمنتظره از ده صفت کلی بهتر است.',
+        'توصیف را لابه‌لای حرکت بنویس، نه در یک بلوک طولانی که داستان را متوقف می‌کند.'],
+      ex: 'یک اتاق را از دید کسی بنویس که همین حالا خبر بدی شنیده. از کلمهٔ «غمگین» استفاده نکن.' },
+    { icon: '🕰️', title: 'ریتم و تعلیق', tips: [
+        'جمله‌ها و صحنه‌های کوتاه سرعت می‌دهند؛ جمله‌های بلند مکث و تأمل می‌سازند.',
+        'تعلیق از فاصلهٔ بین پرسش و پاسخ ساخته می‌شود؛ پاسخ را عقب بینداز.',
+        'اگر خواننده چیزی بداند که شخصیت نمی‌داند، نگرانی ساخته می‌شود؛ این از غافلگیری قوی‌تر است.',
+        'بعد از یک صحنهٔ پرتنش، یک صحنهٔ آرام بگذار تا تنش بعدی اثر بگیرد.',
+        'ریتم یک‌نواخت، حتی اگر همه‌اش هیجان باشد، خسته‌کننده می‌شود.'],
+      ex: 'یک صحنهٔ تعقیب را دو بار بنویس: یک بار با جمله‌های کوتاه و تند، یک بار با جمله‌های بلند و کند. کدام ترسناک‌تر است؟' },
+    { icon: '💭', title: 'درون‌نگری و افکار شخصیت', tips: [
+        'افکار شخصیت را وقتی نشان بده که تصمیم یا تضادی در کار است، نه برای توضیح چیزهایی که از عمل معلوم است.',
+        'فکر باید جدید بگوید؛ اگر فقط حرف یا کار شخصیت را تکرار می‌کند، حذفش کن.',
+        'تضاد میان فکر و عمل شخصیت را جذاب می‌کند: آنچه فکر می‌کند، آنچه می‌گوید و آنچه انجام می‌دهد.',
+        'درون‌نگری را کوتاه و در لحظهٔ درست بگذار؛ نه وسط اوج صحنه.',
+        'گاهی بهترین درون‌نگری یک عمل کوچک و گویا است.'],
+      ex: 'یک تصمیم سخت را فقط با عمل و بدون هیچ فکر یا توضیحی نشان بده. خواننده چه چیزی را می‌فهمد؟' },
+    { icon: '✂️', title: 'ویرایش و بازنویسی', tips: [
+        'اول ساختار را اصلاح کن (صحنه‌ها، ترتیب، قوس شخصیت)، بعد جمله‌ها را.',
+        'هر صحنه را بپرس: چه چیزی عوض می‌شود؟ اگر هیچ، شاید لازم نباشد.',
+        'جمله‌های زائد، تکرارها و قیدهای بی‌کاربرد را حذف کن.',
+        'کلیشه‌ها را پیدا کن و جایشان جزئیات خودت را بگذار.',
+        'متن را بلند بخوان؛ ریتم لنگ و دیالوگ ساختگی را گوش راحت‌تر پیدا می‌کند.',
+        'چند روز از متن فاصله بگیر و دوباره برگرد؛ چشم تازه خطاها را بهتر می‌بیند.'],
+      ex: 'یک پاراگراف خودت را به نصف کوتاه کن، بی‌آنکه چیزی از معنا کم شود.' },
+    { icon: '🧪', title: 'شخصیت زنده', tips: [
+        'شخصیت یعنی خواسته + مانع؛ بدون این دو داستان حرکت نمی‌کند.',
+        'میان خواستهٔ آگاهانه و نیاز ناخودآگاه فاصله بگذار؛ قوس شخصیت از همین فاصله ساخته می‌شود.',
+        'تناقض بده: آدم‌ها همیشه با خودشان یکی نیستند.',
+        'عادت‌ها و رفتارهای ریز (مثل جویدن لب یا کج‌کردن سر) شخصیت را باورپذیر می‌کنند.',
+        'ضدقهرمان هم خودش را آدم خوبِ داستان می‌داند؛ دلیل‌هایش را جدی بنویس.'],
+      ex: 'یک شخصیت را فقط با سه عادت کوچک معرفی کن، بدون هیچ توصیف مستقیمی از شخصیتش.' }
 ];
 function buildLearnTab() {
     var nav = $('nav');
     if (!nav || !$('.tab-content') || $('#tab-learn')) return;
     var tab = el('div', { id: 'tab-learn', 'class': 'tab-content' });
-    var h = '<div class="layer-card"><h3>📚 مینی‌آموزش</h3><p class="nbx-muted" style="margin:0">سه درس کوتاه، هر کدام چند نکته و یک تمرین پنج‌دقیقه‌ای. این بخش فقط خواندنی است و در خروجی PDF نمی‌آید.</p></div>';
+    var h = '';
     LEARN.forEach(function (l, i) {
         h += '<details class="layer-card nbx-layer nbx-learn"><summary><h3>' + l.icon + ' ' + esc(l.title) + '</h3></summary><ul class="nbx-tips">' +
             l.tips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul><div class="nbx-ex"><b>✍️ تمرین:</b> ' + esc(l.ex) + '</div></details>';
     });
     tab.innerHTML = h;
+    buildGuide(tab);
     placeTab(tab);
     nav.appendChild(el('button', { 'class': 'nav-link', onclick: "openTab(event, 'tab-learn')" }, '📚 ' + fa($$('nav .nav-link').length + 1) + '. مینی‌آموزش'));
 }
@@ -2679,7 +2899,7 @@ function buildNotesTab() {
     tab.innerHTML = '<div class="layer-card"><h3>📝 یادداشت حین خواندن</h3>' +
         '<div class="nbx-nt-in"><label class="nbx-nt-pg"><span>صفحه</span><input class="nbx-in nbx-nt-page" type="text" inputmode="numeric" aria-label="شمارهٔ صفحه"></label>' +
         '<textarea class="nbx-skip nbx-nt-text" aria-label="متن یادداشت"></textarea></div>' +
-        '<div class="nbx-row" style="margin-top:8px"><button type="button" class="nbx-btn primary nbx-nt-add">➕ ثبت</button><button type="button" class="nbx-btn nbx-nt-cancel" hidden>انصراف از ویرایش</button><span class="nbx-muted" style="font-size:.78rem">Enter: ثبت · Shift+Enter: خط تازه</span></div></div>' +
+        '<div class="nbx-row" style="margin-top:8px"><button type="button" class="nbx-btn primary nbx-nt-add">➕ ثبت</button><button type="button" class="nbx-btn nbx-nt-cancel" hidden>انصراف از ویرایش</button></div></div>' +
     '<div class="layer-card"><div class="nbx-row nbx-nt-bar"><button type="button" class="nbx-btn sm nbx-nt-sort"></button></div><p class="nbx-muted nbx-nt-sum" style="margin:8px 0"></p><div class="nbx-nt-list"></div></div>';
     /* درست بعد از «پیش‌شروع»، همان‌جا که خواندن شروع می‌شود */
     var t2 = $('#tab2'); if (t2 && t2.parentNode) t2.parentNode.insertBefore(tab, t2.nextSibling); else placeTab(tab);
@@ -2868,5 +3088,120 @@ async function init() {
     await refreshAll();
     setTimeout(refreshAll, 1500); // اگر بارگذاری اصلیِ صفحه دیرتر تمام شد، دوباره هماهنگ می‌شویم
 }
+
+/* ======================================================================
+   🔔 یادآورهای آرام: نصب اپ و پشتیبان‌گیری
+   قاعده‌ها:
+   • هر پیام فقط وقتی می‌آید که واقعاً به درد کاربر بخورد، در هر بازدید حداکثر یکی، و خودش بعد از چند ثانیه می‌رود.
+   • نصب: فقط یک بار در عمر، از بازدید روز دوم به بعد، و فقط اگر اپ نصب نشده باشد.
+   • پشتیبان: وقتی کاربر دست‌کم ۲ روز مختلف سر زده و حدود ۱۵۰۰ نویسه نوشتهٔ واقعی دارد.
+     اگر هرگز پشتیبان نگرفته یا از آخرین پشتیبان/یادآوری نوشتهٔ تازهٔ زیادی اضافه شده
+     (حداقل ۱۵۰۰ نویسه و ۴۰٪ بیشتر) و ۳۰ روز از آخرین یادآوری گذشته باشد، دوباره یادآوری می‌شود.
+     هر بار پشتیبان بگیرد (با یادآور یا از دکمهٔ خود صفحه)، شمارش از نو شروع می‌شود.
+   ====================================================================== */
+var NUDGE_KEY = 'nb-nudge', NUDGE_DAY = 86400000;
+var nudgeShownNow = false, nudgeInstallEvt = null;
+function nudgeState() { try { return JSON.parse(lsGet(NUDGE_KEY, '{}')) || {}; } catch (e) { return {}; } }
+function nudgeSave(st) { lsSet(NUDGE_KEY, JSON.stringify(st)); }
+function nudgeStandalone() { try { return (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true; } catch (e) { return false; } }
+function nudgeTextLen(v) {
+    if (v == null) return 0;
+    if (typeof v === 'string') return (v.indexOf('data:') === 0 || v.length > 20000) ? 0 : v.length;
+    if (Array.isArray(v)) return v.reduce(function (a, x) { return a + nudgeTextLen(x); }, 0);
+    if (typeof v === 'object') return Object.keys(v).reduce(function (a, k) { return a + nudgeTextLen(v[k]); }, 0);
+    return 0;
+}
+async function nudgeContentSize() {
+    var n = 0;
+    try {
+        var ps = PM().getProjects() || [];
+        for (var i = 0; i < ps.length; i++) { if (ps[i] && ps[i].id) n += nudgeTextLen(await getData(ps[i].id)); }
+    } catch (e) {}
+    if (isLibrary || isWorks) {
+        bkKeys().forEach(function (k) { try { n += nudgeTextLen(JSON.parse(lsGet(k, 'null'))); } catch (e) {} });
+    }
+    return n;
+}
+async function nudgeMarkBackup() {
+    var st = nudgeState(); st.bkLast = Date.now(); st.bkSize = await nudgeContentSize(); nudgeSave(st);
+}
+function nudgeShow(text, buttons) {
+    nudgeShownNow = true;
+    var box = el('div', { 'class': 'nbx-nudge', role: 'status' }, '<p>' + esc(text) + '</p><div class="nbx-nudge-row"></div>');
+    var row = $('.nbx-nudge-row', box), done = false;
+    function hide() { if (done) return; done = true; box.classList.remove('show'); setTimeout(function () { box.remove(); }, 350); }
+    buttons.forEach(function (b) {
+        var btn = el('button', { type: 'button', 'class': 'nbx-nudge-btn' + (b.primary ? ' primary' : '') }, esc(b.t));
+        btn.onclick = function () { hide(); if (b.fn) b.fn(); };
+        row.appendChild(btn);
+    });
+    document.body.appendChild(box);
+    requestAnimationFrame(function () { requestAnimationFrame(function () { box.classList.add('show'); }); });
+    setTimeout(hide, 22000);
+}
+function nudgeTryInstall() {
+    var st = nudgeState();
+    if (st.inst || lsGet('nb-install-dismissed', null) || nudgeStandalone() || (st.n || 0) < 2) return false;
+    var ios = /iphone|ipad|ipod/i.test(navigator.userAgent || '');
+    if (nudgeInstallEvt) {
+        st.inst = Date.now(); nudgeSave(st); lsSet('nb-install-dismissed', '1');
+        var evt = nudgeInstallEvt;
+        nudgeShow('📲 دفترچه را مثل یک اپ نصب کن؛ سریع‌تر باز می‌شود و بدون اینترنت هم کار می‌کند.', [
+            { t: 'نصب', primary: true, fn: function () { try { evt.prompt(); } catch (e) {} } },
+            { t: 'نه، ممنون' }
+        ]);
+        return true;
+    }
+    if (ios) {
+        st.inst = Date.now(); nudgeSave(st); lsSet('nb-install-dismissed', '1');
+        nudgeShow('📲 برای نصب روی گوشی: دکمهٔ اشتراک‌گذاری (مربع با فلش) را بزن و «Add to Home Screen» را انتخاب کن.', [{ t: 'فهمیدم', primary: true }]);
+        return true;
+    }
+    return false;
+}
+async function nudgeTryBackup() {
+    var st = nudgeState(), now = Date.now();
+    if ((st.n || 0) < 2) return false;
+    if (st.bkShown && now - st.bkShown < 30 * NUDGE_DAY) return false;
+    var size = await nudgeContentSize();
+    var base = Math.max(st.bkSize || 0, st.bkSeen || 0);
+    var need = base ? Math.max(1500, base * 0.4) : 1500;
+    if (size - base < need) return false;
+    st = nudgeState(); st.bkShown = now; st.bkSeen = size; nudgeSave(st);
+    var again = !!st.bkLast;
+    nudgeShow(again ? '💾 از آخرین پشتیبانت نوشتهٔ تازه‌ای اضافه شده. یک نسخهٔ جدید بگیر تا چیزی از دست نرود.' : '💾 نوشته‌هایت خیلی شده! یک نسخهٔ پشتیبان بگیر تا اگر حافظهٔ مرورگر پاک شد چیزی از دست نرود.', [
+        { t: 'پشتیبان بگیر', primary: true, fn: function () {
+            if (isLibrary || isWorks) fullBackup(); else { var r = PM().backupCurrentProject(); if (r && r.then) r.then(nudgeMarkBackup); else nudgeMarkBackup(); }
+        } },
+        { t: 'بعداً' }
+    ]);
+    return true;
+}
+function setupNudges() {
+    addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); nudgeInstallEvt = e; });
+    addEventListener('appinstalled', function () { var st = nudgeState(); st.inst = Date.now(); nudgeSave(st); lsSet('nb-install-dismissed', '1'); });
+    var st = nudgeState(), today = dateKey();
+    if (st.d !== today) { st.d = today; st.n = (st.n || 0) + 1; nudgeSave(st); }
+    // هر وقت کاربر خودش پشتیبان بگیرد، شمارش از نو شروع می‌شود
+    try {
+        var P = PM();
+        if (P && P.backupCurrentProject && !P.__nudgeWrapped) {
+            var orig = P.backupCurrentProject; P.__nudgeWrapped = true;
+            P.backupCurrentProject = function () { var r = orig.apply(this, arguments); if (r && r.then) r.then(nudgeMarkBackup); else nudgeMarkBackup(); return r; };
+        }
+    } catch (e) {}
+    document.head.appendChild(el('style', { id: 'nbx-css-nudge' },
+        '.nbx-nudge{position:fixed;left:12px;right:12px;bottom:14px;max-width:460px;margin:0 auto;z-index:2900;padding:14px 16px;border-radius:14px;background:#fffaf0;color:#3a2a3f;border:1.5px solid #e3d8bd;box-shadow:0 10px 26px rgba(60,40,10,.22);transform:translateY(30px);opacity:0;transition:all .35s;font-family:Vazirmatn,Tahoma,sans-serif}' +
+        '.nbx-nudge.show{transform:none;opacity:1}.nbx-nudge p{margin:0 0 10px;font-size:.9rem;line-height:1.9}' +
+        '.nbx-nudge-row{display:flex;gap:8px;justify-content:flex-start}' +
+        '.nbx-nudge-btn{padding:8px 14px;border-radius:10px;border:1.5px solid #d8c9a0;background:transparent;color:inherit;font:700 .85rem Vazirmatn,Tahoma,sans-serif;cursor:pointer}' +
+        '.nbx-nudge-btn.primary{background:#cfe0f5;border-color:#9bbbe6;color:#2f4a73}' +
+        'html.nb-dark .nbx-nudge{background:#2c251d;color:#eadfc6;border-color:#4a3e30}html.nb-dark .nbx-nudge-btn{border-color:#54483a}html.nb-dark .nbx-nudge-btn.primary{background:#3a4658;border-color:#9cc4ec;color:#dbe9fa}' +
+        '@media(prefers-reduced-motion:reduce){.nbx-nudge{transition:none}}'));
+    setTimeout(function () { if (!nudgeShownNow && document.visibilityState !== 'hidden') nudgeTryInstall(); }, 8000);
+    setTimeout(function () { if (!nudgeShownNow && document.visibilityState !== 'hidden') nudgeTryBackup(); }, 25000);
+}
+
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+setupNudges();
 })();

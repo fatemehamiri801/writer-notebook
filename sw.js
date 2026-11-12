@@ -1,4 +1,4 @@
-const CACHE_NAME = "my-notebook-v131";
+const CACHE_NAME = "my-notebook-v136";
 // اپدیت های سرویس ورکر
 const ASSETS = [
     "./",
@@ -9,12 +9,19 @@ const ASSETS = [
     "./about.html",
     "./library.html",
     "./works.html",
-    "./extras.js",
+    "./extras.nevisandegi.js",
+    "./extras.reader.js",
+    "./extras.library.js",
+    "./extras.works.js",
+    "./extras.about.js",
+    "./a11y.js",
     "./manifest.json",
     "./icon-192.png",
     "./icon-512.png",
     "./icon-maskable-192.png",
     "./icon-maskable-512.png",
+    "./style.css",
+    "./theme-day.css",
     "./fonts.css"
 ];
 

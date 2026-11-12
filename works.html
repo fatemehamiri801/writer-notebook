@@ -121,7 +121,7 @@ html.nb-dark .lib-sheet .nbx-chip[aria-pressed="true"]{background:color-mix(in s
 </head>
 <body>
 
-<button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز" aria-label="حالت شب/روز">🌙</button>
+<button id="dark-mode-toggle" data-click="toggleDarkMode" title="حالت شب/روز" aria-label="حالت شب/روز">🌙</button>
 
 <header class="lib-head">
     <h1>✍️ آثار من</h1>
@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 if ('serviceWorker' in navigator) { addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); }); }
 </script>
-<script src="extras.js?v=36"></script>
+<script src="extras.works.js?v=37"></script>
+<script src="a11y.js" defer></script>
 </body>
 </html>

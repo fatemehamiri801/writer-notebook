@@ -267,7 +267,7 @@ html:not(.nb-dark) .leaf{background:linear-gradient(90deg,#f0d6d2,#fde6e2 30%)}
  <div class="leaf" aria-hidden="true"></div>
 </div></main>
 <div class="glow" aria-hidden="true"></div>
-<div id="install-banner"><img src="icon-192.png" alt="" width="48" height="48"><span>📲 می‌خوای این سایت رو مثل یک اپ نصب کنی؟</span><button class="install-yes" onclick="doInstallPrompt()">نصب کن</button><button class="install-no" onclick="dismissInstallBanner()">فعلاً نه</button></div>
+<div id="install-banner"><img src="icon-192.png" alt="" width="48" height="48"><span>📲 می‌خوای این سایت رو مثل یک اپ نصب کنی؟</span><button class="install-yes" data-click="doInstallPrompt">نصب کن</button><button class="install-no" data-click="dismissInstallBanner">فعلاً نه</button></div>
 <script>
 (function(){
 const $=s=>document.querySelector(s),root=document.documentElement,b=$('#book'),btn=$('#open'),L=$('#pl'),T=$('#pt'),lamp=$('#lamp');
@@ -288,5 +288,6 @@ function doInstallPrompt(){localStorage.setItem('nb-install-dismissed','1');docu
 function dismissInstallBanner(){document.getElementById('install-banner').style.display='none';localStorage.setItem('nb-install-dismissed','1')}
 if('serviceWorker' in navigator){addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').then(reg=>{reg.addEventListener('updatefound',()=>{const w=reg.installing;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)location.reload()})})}).catch(err=>console.log('SW registration failed: ',err))})}
 </script>
+<script src="a11y.js" defer></script>
 </body>
 </html>

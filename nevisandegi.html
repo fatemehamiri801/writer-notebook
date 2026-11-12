@@ -877,31 +877,11 @@ html.nb-dark .nav-wrapper::after{background:linear-gradient(to left,rgba(36,30,2
 html.nb-dark[data-tab="0"]{--accd:#f0a3b8}html.nb-dark[data-tab="1"]{--accd:#8fd1b0}html.nb-dark[data-tab="2"]{--accd:#e3c26d}html.nb-dark[data-tab="3"]{--accd:#9cc4ec}html.nb-dark[data-tab="4"]{--accd:#c3b2ee}html.nb-dark[data-tab="5"]{--accd:#9cc4ec}html.nb-dark[data-tab="6"]{--accd:#c3b2ee}html.nb-dark[data-tab="7"]{--accd:#e5a8da}
 }
 </style>
-<style id="nb-day">
-/* ===== nb-day v2: روز پاستلی رنگی، بدون سفید ===== */
-@media screen{
-html:not(.nb-dark){--pp:#fbe6df;--cd:#fbefdc;--straw:#f6dca6}
-html:not(.nb-dark)[data-tab="0"]{--pt:#fbdbe5}
-html:not(.nb-dark)[data-tab="1"]{--pt:#d6eee2}
-html:not(.nb-dark)[data-tab="2"]{--pt:#fbecb8}
-html:not(.nb-dark)[data-tab="3"]{--pt:#d3e5f7}
-html:not(.nb-dark)[data-tab="4"]{--pt:#e5d9f8}
-html:not(.nb-dark)[data-tab="5"]{--pt:#d3e5f7}
-html:not(.nb-dark)[data-tab="6"]{--pt:#e5d9f8}
-html:not(.nb-dark)[data-tab="7"]{--pt:#f8d9ee}
-html:not(.nb-dark) body{background-color:#f6dfe4!important;background-image:radial-gradient(rgba(150,100,130,.16) 1.3px,transparent 1.4px),linear-gradient(160deg,color-mix(in srgb,var(--tint) 50%,#fbeee2),color-mix(in srgb,var(--tint) 22%,#efe4f6))!important;background-size:22px 22px,auto!important}
-html:not(.nb-dark) body>header{background:repeating-linear-gradient(transparent 0 31px,rgba(90,70,160,.12) 31px 32px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),color-mix(in srgb,var(--tint) 55%,#fbeee2)!important;border-bottom-color:var(--acc)!important}
-html:not(.nb-dark) body .project-toolbar{background:color-mix(in srgb,var(--tint) 38%,#fbf0e0)!important;border-bottom-color:var(--acc)!important}
-html:not(.nb-dark) body .btn-toolbar.btn-toolbar{background:color-mix(in srgb,var(--tint) 30%,#fbf0e0)!important}
-html:not(.nb-dark) body .layer-card{background:color-mix(in srgb,var(--ca) 20%,#fbf0dc)!important;border:1px solid color-mix(in srgb,var(--ca) 50%,#f0e2cc)!important}
-html:not(.nb-dark) textarea,html:not(.nb-dark) input,html:not(.nb-dark) select{background:color-mix(in srgb,var(--ca,var(--tint)) 12%,#fbf3e2)!important;border-color:color-mix(in srgb,var(--ca,var(--acc)) 65%,#d9c9b0)!important}
-html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(255,255,255,0),color-mix(in srgb,var(--tint) 40%,#fbeee2) 85%)!important}
-}
-</style>
+<link rel="stylesheet" href="theme-day.css?v=1">
 </head>
 <body>
 
-<button id="dark-mode-toggle" onclick="toggleDarkMode()" title="حالت شب/روز">🌙</button>
+<button id="dark-mode-toggle" data-click="toggleDarkMode" title="حالت شب/روز" aria-label="حالت شب/روز">🌙</button>
 
  <header style="background-color: #5b21b6; color: #ffffff; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(88, 28, 135, 0.2); width: 100%; box-sizing: border-box; margin: 0; position: relative; left: 0; top: 0;">
 
@@ -910,7 +890,7 @@ html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(2
             🏠 بازگشت
         </a>
 
-        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" title="منو" aria-label="باز کردن منو">☰</button>
+        <button class="mobile-menu-toggle" data-click="toggleMobileMenu" title="منو" aria-label="باز کردن منو">☰</button>
 
         <h1 class="page-title" style="margin: 0; padding-right: 10px; font-size: 2.2rem; font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 900; color: #facc15; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); letter-spacing: 1px; transform: rotate(-1deg); cursor: default;">
             ✍️ دفترچه نویسندگی
@@ -928,16 +908,16 @@ html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(2
         <label for="project-select" style="font-weight:bold; color:#4c1d95; font-size:0.9rem;">📚 پروژه:</label>
         <select id="project-select" onchange="switchProject(this.value)" style="padding:8px 12px; border-radius:8px; border:1px solid #a78bfa; font-family:inherit; font-size:0.9rem; background:#fff;"></select>
     </div>
-    <button onclick="createNewProject()" class="btn-toolbar">➕ پروژه جدید</button>
-    <button onclick="renameCurrentProject()" class="btn-toolbar">✏️ تغییر نام</button>
-    <button onclick="deleteCurrentProject()" class="btn-toolbar-danger">🗑️ حذف پروژه</button>
-    <button onclick="backupCurrentProject()" class="btn-toolbar" title="فایل بک‌آپ رو ذخیره کن تا بعداً بتونی همین‌جا ادامه‌ی ویرایشش رو بدی">💾 بک‌آپ پروژه (برای ادامه‌ی ویرایش بعداً)</button>
-    <button onclick="triggerRestoreFilePicker()" class="btn-toolbar" title="یه فایل بک‌آپ رو به‌عنوان پروژه‌ی جدید بارگذاری کن">📂 بارگذاری بک‌آپ</button>
+    <button data-click="createNewProject" class="btn-toolbar">➕ پروژه جدید</button>
+    <button data-click="renameCurrentProject" class="btn-toolbar">✏️ تغییر نام</button>
+    <button data-click="deleteCurrentProject" class="btn-toolbar-danger">🗑️ حذف پروژه</button>
+    <button data-click="backupCurrentProject" class="btn-toolbar" title="فایل بک‌آپ رو ذخیره کن تا بعداً بتونی همین‌جا ادامه‌ی ویرایشش رو بدی">💾 بک‌آپ پروژه (برای ادامه‌ی ویرایش بعداً)</button>
+    <button data-click="triggerRestoreFilePicker" class="btn-toolbar" title="یه فایل بک‌آپ رو به‌عنوان پروژه‌ی جدید بارگذاری کن">📂 بارگذاری بک‌آپ</button>
     <input type="file" id="restore-file-input" accept="application/json" style="display:none" onchange="restoreProjectFromFile(this.files[0]); this.value='';">
 
     <div style="display:flex; align-items:center; gap:6px; margin-right:auto;">
         <input id="search-box" type="text" placeholder="🔍 جستجو در این پروژه..." style="padding:8px 12px; border-radius:8px; border:1px solid #a78bfa; font-family:inherit; font-size:0.85rem; min-width:180px;">
-        <button onclick="searchNotebook()" class="btn-toolbar">جستجو</button>
+        <button data-click="searchNotebook" class="btn-toolbar">جستجو</button>
     </div>
 </div>
 
@@ -952,11 +932,11 @@ html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(2
 
 <div class="nav-wrapper">
 <nav style="display: flex; gap: 10px; padding: 10px; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; justify-content: flex-start;">
-    <button class="nav-link active" onclick="openTab(event, 'tab-chars')">👥 ۱. شخصیت‌ها</button>
-    <button class="nav-link" onclick="openTab(event, 'tab-world')">🌍 ۲. جهان‌سازی</button>
-    <button class="nav-link" onclick="openTab(event, 'tab-story')">📖 ۳. داستان و ماجرا</button>
-    <button class="nav-link" onclick="openTab(event, 'tab-time')">⏳ ۴. زمان و ریتم</button>
-    <button class="nav-link" onclick="openTab(event, 'tab-hub')">🎬 ۵. پشت صحنه اثر</button>
+    <button class="nav-link active" data-open-tab="tab-chars">👥 ۱. شخصیت‌ها</button>
+    <button class="nav-link" data-open-tab="tab-world">🌍 ۲. جهان‌سازی</button>
+    <button class="nav-link" data-open-tab="tab-story">📖 ۳. داستان و ماجرا</button>
+    <button class="nav-link" data-open-tab="tab-time">⏳ ۴. زمان و ریتم</button>
+    <button class="nav-link" data-open-tab="tab-hub">🎬 ۵. پشت صحنه اثر</button>
 </nav>
 </div>
 <div class="main-wrapper">
@@ -2037,7 +2017,7 @@ margin-bottom:40px;
 
 <div id="closePrintBox" class="no-print back-print-btn">
 
-<button onclick="window.close()">
+<button data-click="closeWindow">
 
 ❌ بستن صفحه چاپ
 
@@ -2230,7 +2210,8 @@ printWindow.onload = function(){
 <script>
 (function(){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var t;document.addEventListener('input',function(e){var el=e.target;if(!el.matches||!el.matches('textarea'))return;clearTimeout(t);t=setTimeout(function(){var r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;var d=document.createElement('i');d.className='nb-ink';d.style.left=(r.left+14)+'px';d.style.top=Math.min(r.bottom-24,innerHeight-30)+'px';document.body.appendChild(d);setTimeout(function(){d.remove()},950)},1200)})})();
 </script>
-<script src="extras.js?v=36"></script>
+<script src="extras.nevisandegi.js?v=37"></script>
+<script src="a11y.js" defer></script>
 </body>
 
 </html>

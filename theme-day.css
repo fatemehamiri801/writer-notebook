@@ -1,0 +1,19 @@
+/* ===== nb-day v2: روز پاستلی رنگی، بدون سفید ===== */
+@media screen{
+html:not(.nb-dark){--pp:#fbe6df;--cd:#fbefdc;--straw:#f6dca6}
+html:not(.nb-dark)[data-tab="0"]{--pt:#fbdbe5}
+html:not(.nb-dark)[data-tab="1"]{--pt:#d6eee2}
+html:not(.nb-dark)[data-tab="2"]{--pt:#fbecb8}
+html:not(.nb-dark)[data-tab="3"]{--pt:#d3e5f7}
+html:not(.nb-dark)[data-tab="4"]{--pt:#e5d9f8}
+html:not(.nb-dark)[data-tab="5"]{--pt:#d3e5f7}
+html:not(.nb-dark)[data-tab="6"]{--pt:#e5d9f8}
+html:not(.nb-dark)[data-tab="7"]{--pt:#f8d9ee}
+html:not(.nb-dark) body{background-color:#f6dfe4!important;background-image:radial-gradient(rgba(150,100,130,.16) 1.3px,transparent 1.4px),linear-gradient(160deg,color-mix(in srgb,var(--tint) 50%,#fbeee2),color-mix(in srgb,var(--tint) 22%,#efe4f6))!important;background-size:22px 22px,auto!important}
+html:not(.nb-dark) body>header{background:repeating-linear-gradient(transparent 0 31px,rgba(90,70,160,.12) 31px 32px),linear-gradient(to left,transparent 46px,var(--ml) 46px 47px,transparent 47px),color-mix(in srgb,var(--tint) 55%,#fbeee2)!important;border-bottom-color:var(--acc)!important}
+html:not(.nb-dark) body .project-toolbar{background:color-mix(in srgb,var(--tint) 38%,#fbf0e0)!important;border-bottom-color:var(--acc)!important}
+html:not(.nb-dark) body .btn-toolbar.btn-toolbar{background:color-mix(in srgb,var(--tint) 30%,#fbf0e0)!important}
+html:not(.nb-dark) body .layer-card{background:color-mix(in srgb,var(--ca) 20%,#fbf0dc)!important;border:1px solid color-mix(in srgb,var(--ca) 50%,#f0e2cc)!important}
+html:not(.nb-dark) textarea,html:not(.nb-dark) input,html:not(.nb-dark) select{background:color-mix(in srgb,var(--ca,var(--tint)) 12%,#fbf3e2)!important;border-color:color-mix(in srgb,var(--ca,var(--acc)) 65%,#d9c9b0)!important}
+html:not(.nb-dark) .nav-wrapper::after{background:linear-gradient(to left,rgba(255,255,255,0),color-mix(in srgb,var(--tint) 40%,#fbeee2) 85%)!important}
+}

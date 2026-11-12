@@ -1353,6 +1353,7 @@ html.nb-dark body .cell{background:linear-gradient(145deg,#3a3d2a,#2f3224);borde
 html.nb-dark body .cell.selected,html.nb-dark body .cell.gold-book,html.nb-dark body .book-item.unlocked{background:linear-gradient(135deg,#7a6320,#a88a32);border-color:#e3c26d}
 html.nb-dark body .book-item{background:#2f3224;border-color:#4a4a30}
 html.nb-dark body .help-box,html.nb-dark body .collection{background:#2c251d;color:#eadfc6}
+html.nb-dark body .help-box p,html.nb-dark body .help-box b,html.nb-dark body .help-box summary,html.nb-dark body .help-box li{color:#eadfc6!important}
 html.nb-dark body #message{color:#cfe08a}
 </style>
 <style id="nb-day">
@@ -1619,7 +1620,7 @@ function createProjectManager(cfg) {
             setActiveId(id);
             await setProjectData(id, legacyData);
         } else if (!localStorage.getItem(MIGRATED_FLAG)) {
-            // انتقال یک‌بارهٔ داده‌های قدیمی از localStorage به IndexedDB
+            // انتقال یک‌باره‌ی داده‌های قدیمی از localStorage به IndexedDB
             for (const p of projects) {
                 const raw = localStorage.getItem(projDataKey(p.id));
                 if (raw) {

@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet"></noscript>
 <style>
-/* فونت فارسی Vazirmatn (همان فونت بقیهٔ صفحه‌ها) */
+/* فونت فارسی Vazirmatn (همان فونت بقیه‌ی صفحه‌ها) */
 @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Regular.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Medium.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'Vazirmatn';src:url('fonts/Vazirmatn-Bold.woff2') format('woff2'), url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}
@@ -46,7 +46,7 @@ body{
 }
 html.nb-dark body{background:repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0 2px,transparent 2px 9px),radial-gradient(ellipse at 50% 30%,#1d1510,#0c0806 78%)}
 
-/* دکمهٔ شب/روز (مثل بقیهٔ صفحه‌ها) */
+/* دکمه‌ی شب/روز (مثل بقیه‌ی صفحه‌ها) */
 #dark-mode-toggle{position:fixed;top:15px;left:15px;z-index:1000;width:44px;height:44px;border-radius:50%;background:var(--ink);border:1.5px dashed #e3c26d;color:#e3c26d;font-size:20px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25);transition:transform .15s}
 html.nb-dark #dark-mode-toggle{background:#2b2118;border-color:#a87b3c}
 #dark-mode-toggle:hover{transform:scale(1.06)}
@@ -68,7 +68,7 @@ html.nb-dark .lib-head a.back{color:#1c1712}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2.5px solid var(--gold);outline-offset:2px}
 @media(max-width:600px){.lib-head{padding:58px 14px 14px}.lib-head h1{font-size:1.6rem}.lib-sheet{background:repeating-linear-gradient(transparent 0 35px,rgba(90,70,160,.10) 35px 36px),var(--cd)}}
 
-/* بدنهٔ صفحه: کاغذ خط‌دار */
+/* بدنه‌ی صفحه: کاغذ خط‌دار */
 .lib-main{max-width:940px;margin:22px auto 70px;padding:0 14px}
 .lib-sheet{
     position:relative;border-radius:8px;border:1px solid var(--line);padding:22px 18px 24px;
@@ -84,7 +84,7 @@ noscript .lib-intro{color:#c0392b}
 html{--tint:#ecc6e4;--acc:#cf8fc2;--accd:#8e4a82;--ml:rgba(207,143,194,.6)}
 html.nb-dark{--accd:#e3a6d8}
 
-/* ===== پاستلی و رنگارنگ: چسب کاغذی، پونز و کارت‌های رنگی (مثل بقیهٔ دفترچه) ===== */
+/* ===== پاستلی و رنگارنگ: چسب کاغذی، پونز و کارت‌های رنگی (مثل بقیه‌ی دفترچه) ===== */
 .lib-sheet{overflow:visible}
 .lib-sheet::before{content:'';position:absolute;top:-13px;right:50%;margin-right:-52px;width:104px;height:28px;background:#f9e3a3 repeating-linear-gradient(45deg,rgba(255,255,255,.55) 0 6px,transparent 6px 12px);opacity:.92;transform:rotate(-2deg);clip-path:polygon(0 0,4% 20%,0 40%,4% 60%,0 80%,0 100%,100% 100%,96% 80%,100% 60%,96% 40%,100% 20%,100% 0);pointer-events:none;z-index:2}
 .lib-sheet .nbx-book,.lib-sheet .nbx-formbox{--ca:#e58fa8;position:relative;margin:22px 0 14px;padding:16px 14px 12px;border-radius:6px;background:color-mix(in srgb,var(--ca) 20%,var(--cd));border:1px solid color-mix(in srgb,var(--ca) 50%,var(--line));border-top:5px solid var(--ca);border-right:1px solid color-mix(in srgb,var(--ca) 50%,var(--line));box-shadow:3px 5px 0 rgba(150,120,90,.22),0 8px 16px rgba(60,40,10,.12)}
@@ -153,6 +153,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 if ('serviceWorker' in navigator) { addEventListener('load', function () { navigator.serviceWorker.register('./sw.js').catch(function () {}); }); }
 </script>
-<script src="extras.js?v=30"></script>
+<script src="extras.js?v=36"></script>
 </body>
 </html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fatemehamiri801.github.io/writer-notebook/sitemap.xml

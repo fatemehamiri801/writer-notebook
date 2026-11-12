@@ -2686,7 +2686,7 @@ function buildToolbarMenu() {
     var kids = Array.prototype.slice.call(tb.children).filter(function (c) { return !c.querySelector || !c.querySelector('#project-select'); });
     var core = [], extra = [];
     kids.forEach(function (k) {
-        var oc = (k.getAttribute && k.getAttribute('onclick')) || '';
+        var oc = (k.getAttribute && ((k.getAttribute('onclick') || '') + ' ' + (k.getAttribute('data-click') || ''))) || '';
         if (/createNewProject|renameCurrentProject|deleteCurrentProject|backupCurrentProject|triggerRestoreFilePicker/.test(oc) || k.id === 'restore-file-input') core.push(k); else extra.push(k);
     });
     var wrap = el('div', { 'class': 'nbx-tb-wrap' });

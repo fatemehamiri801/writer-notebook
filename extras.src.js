@@ -2156,7 +2156,7 @@ function buildCardTab(cfg) {
         '<p class="nbx-muted nbx-ct-sum" style="margin:10px 0 0"></p><div class="nbx-ct-list"></div><div class="nbx-empty nbx-ct-empty">' + cfg.empty + '</div></div>';
     if (!mounted) {
         placeTab(tab);
-        nav.appendChild(el('button', { 'class': 'nav-link', 'data-open-tab': '" + cfg.id + "' }, cfg.nav));
+        nav.appendChild(el('button', { 'class': 'nav-link', 'data-open-tab': cfg.id }, cfg.nav));
     }
     var list = $('.nbx-ct-list', tab);
     var save0 = makeSaver(cfg.key, collect);
